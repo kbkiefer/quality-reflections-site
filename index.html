@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Reflections Glasswork | Variation 3.1 - Enhanced Animations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-black': '#010E2F',
+                        'navy': '#012A89',
+                        'navy-dark': '#011B5A',
+                        'glass-blue': '#4A90D9',
+                        'steel': '#8A919A',
+                        'silver': '#D1D5DB',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'none': '0',
+                        DEFAULT: '0',
+                        'md': '0',
+                        'lg': '0',
+                        'xl': '0',
+                        '2xl': '0',
+                        '3xl': '0',
+                        'full': '0',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        *, *::before, *::after {
+            border-radius: 0 !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #010E2F;
+            color: #D1D5DB;
+            overflow-x: hidden;
+            /* === HYBRID CURSOR: Construction Reticle SVG (from cursor_de_1) === */
+            /* 32x32 SVG: 24px arms, 1px stroke, 3px center dot, tick marks at midpoints */
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cline x1='16' y1='2' x2='16' y2='14' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='16' y1='18' x2='16' y2='30' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='2' y1='16' x2='14' y2='16' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='18' y1='16' x2='30' y2='16' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='14' y1='8' x2='18' y2='8' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='14' y1='24' x2='18' y2='24' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='8' y1='14' x2='8' y2='18' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='24' y1='14' x2='24' y2='18' stroke='%234A90D9' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='1.5' fill='%234A90D9'/%3E%3C/svg%3E") 16 16, crosshair;
+        }
+
+        /* === POINTER/HOVER CURSOR: Crosshair + arrow indicator + "SEL" label === */
+        a, button, [role="button"], input[type="submit"], input[type="button"],
+        .btn-blueprint, .nav-tab, .scroll-arrow, [onclick] {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cline x1='16' y1='2' x2='16' y2='14' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='16' y1='18' x2='16' y2='30' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='2' y1='16' x2='14' y2='16' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='18' y1='16' x2='30' y2='16' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='14' y1='8' x2='18' y2='8' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='14' y1='24' x2='18' y2='24' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='8' y1='14' x2='8' y2='18' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='24' y1='14' x2='24' y2='18' stroke='%234A90D9' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='1.5' fill='%234A90D9'/%3E%3Cpolygon points='24,22 32,30 26,30 24,34 24,22' fill='%234A90D9' opacity='0.9'/%3E%3Ctext x='27' y='22' font-family='Inter,sans-serif' font-size='6' font-weight='600' fill='%234A90D9'%3ESEL%3C/text%3E%3C/svg%3E") 16 16, pointer;
+        }
+
+        /* === ACTIVE/CLICK CURSOR: Contracted crosshair, white center === */
+        a:active, button:active, [role="button"]:active,
+        .btn-blueprint:active, .nav-tab:active {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cline x1='16' y1='6' x2='16' y2='14' stroke='%234A90D9' stroke-width='1.5'/%3E%3Cline x1='16' y1='18' x2='16' y2='26' stroke='%234A90D9' stroke-width='1.5'/%3E%3Cline x1='6' y1='16' x2='14' y2='16' stroke='%234A90D9' stroke-width='1.5'/%3E%3Cline x1='18' y1='16' x2='26' y2='16' stroke='%234A90D9' stroke-width='1.5'/%3E%3Cline x1='14' y1='10' x2='18' y2='10' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='14' y1='22' x2='18' y2='22' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='10' y1='14' x2='10' y2='18' stroke='%234A90D9' stroke-width='1'/%3E%3Cline x1='22' y1='14' x2='22' y2='18' stroke='%234A90D9' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23FFFFFF'/%3E%3C/svg%3E") 16 16, crosshair;
+        }
+
+        /* === GUIDELINE HAIRLINES (from cursor_de_3) === */
+        #hairline-h {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(74, 144, 217, 0.08);
+            pointer-events: none;
+            z-index: 30;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        #hairline-v {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background: rgba(74, 144, 217, 0.08);
+            pointer-events: none;
+            z-index: 30;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        /* Disable custom cursor and hairlines on touch devices */
+        @media (hover: none) {
+            body {
+                cursor: auto !important;
+            }
+            a, button, [role="button"], input[type="submit"], input[type="button"],
+            .btn-blueprint, .nav-tab, .scroll-arrow, [onclick] {
+                cursor: auto !important;
+            }
+            #hairline-h, #hairline-v {
+                display: none !important;
+            }
+        }
+
+        /* ========================
+           BLUEPRINT GRID PATTERNS
+           ======================== */
+
+        .blueprint-grid {
+            background-image:
+                linear-gradient(rgba(74, 144, 217, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.04) 1px, transparent 1px),
+                linear-gradient(rgba(74, 144, 217, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.02) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        }
+
+        .blueprint-grid-dense {
+            background-image:
+                linear-gradient(rgba(74, 144, 217, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.06) 1px, transparent 1px),
+                linear-gradient(rgba(74, 144, 217, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+        }
+
+        .blueprint-grid-hero {
+            background-image:
+                linear-gradient(rgba(74, 144, 217, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.07) 1px, transparent 1px),
+                linear-gradient(rgba(74, 144, 217, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.035) 1px, transparent 1px);
+            background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+        }
+
+        /* ========================
+           GLASS CARD
+           ======================== */
+
+        .glass-card {
+            background: rgba(1, 42, 137, 0.15);
+            border: 1px solid rgba(74, 144, 217, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .glass-card-strong {
+            background: rgba(1, 42, 137, 0.25);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: relative;
+        }
+
+        /* ========================
+           CORNER BRACKETS
+           ======================== */
+
+        .corner-brackets {
+            position: relative;
+        }
+
+        .corner-brackets::before,
+        .corner-brackets::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-color: rgba(74, 144, 217, 0.5);
+            pointer-events: none;
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+        }
+
+        .corner-brackets::before {
+            top: -1px;
+            left: -1px;
+            border-top: 2px solid;
+            border-left: 2px solid;
+            border-color: rgba(74, 144, 217, 0.5);
+        }
+
+        .corner-brackets::after {
+            bottom: -1px;
+            right: -1px;
+            border-bottom: 2px solid;
+            border-right: 2px solid;
+            border-color: rgba(74, 144, 217, 0.5);
+        }
+
+        /* Card hover glow bracket extension */
+        .corner-brackets:hover::before,
+        .corner-brackets:hover::after {
+            width: 24px;
+            height: 24px;
+            border-color: rgba(74, 144, 217, 0.9);
+        }
+
+        .corner-brackets-all {
+            position: relative;
+        }
+
+        .corner-brackets-all::before,
+        .corner-brackets-all::after,
+        .corner-brackets-all .bracket-tr::before,
+        .corner-brackets-all .bracket-bl::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            pointer-events: none;
+        }
+
+        .corner-brackets-all::before {
+            top: -1px;
+            left: -1px;
+            border-top: 2px solid rgba(74, 144, 217, 0.4);
+            border-left: 2px solid rgba(74, 144, 217, 0.4);
+        }
+
+        .corner-brackets-all::after {
+            bottom: -1px;
+            right: -1px;
+            border-bottom: 2px solid rgba(74, 144, 217, 0.4);
+            border-right: 2px solid rgba(74, 144, 217, 0.4);
+        }
+
+        /* ========================
+           SECTION MARKER
+           ======================== */
+
+        .section-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .section-marker .marker-number {
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(74, 144, 217, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(74, 144, 217, 0.7);
+            letter-spacing: 0.05em;
+        }
+
+        .section-marker .marker-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(74, 144, 217, 0.4);
+            margin-top: 16px;
+        }
+
+        .section-marker .marker-line {
+            flex: 1;
+            width: 1px;
+            background: linear-gradient(to bottom, rgba(74, 144, 217, 0.3), transparent);
+            margin-top: 16px;
+        }
+
+        @media (max-width: 1023px) {
+            .section-marker {
+                position: relative;
+                flex-direction: row;
+                width: auto;
+                padding-top: 0;
+                margin-bottom: 24px;
+                gap: 12px;
+            }
+            .section-marker .marker-label {
+                writing-mode: horizontal-tb;
+                transform: none;
+                margin-top: 0;
+            }
+            .section-marker .marker-line {
+                flex: 1;
+                height: 1px;
+                width: auto;
+                background: linear-gradient(to right, rgba(74, 144, 217, 0.3), transparent);
+                margin-top: 0;
+            }
+        }
+
+        /* ========================
+           SECTION CUT LINE
+           ======================== */
+
+        .section-cut {
+            position: relative;
+            height: 32px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-cut .cut-line {
+            flex: 1;
+            height: 2px;
+            background: rgba(74, 144, 217, 0.3);
+            position: relative;
+            transform: scaleX(0);
+            transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transform-origin: center;
+        }
+
+        .section-cut.cut-visible .cut-line {
+            transform: scaleX(1);
+        }
+
+        .section-cut .cut-line::before,
+        .section-cut .cut-line::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid rgba(74, 144, 217, 0.4);
+        }
+
+        .section-cut .cut-line::before {
+            left: 20%;
+        }
+
+        .section-cut .cut-line::after {
+            right: 20%;
+        }
+
+        .section-cut .cut-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #010E2F;
+            padding: 0 16px;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(74, 144, 217, 0.5);
+            font-weight: 500;
+        }
+
+        /* ========================
+           DIMENSION LINE
+           ======================== */
+
+        .dimension-line {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .dimension-line .dim-end {
+            width: 1px;
+            height: 12px;
+            background: rgba(74, 144, 217, 0.3);
+        }
+
+        .dimension-line .dim-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(74, 144, 217, 0.3);
+        }
+
+        .dimension-line .dim-label {
+            padding: 0 12px;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(74, 144, 217, 0.5);
+            white-space: nowrap;
+        }
+
+        /* ========================
+           LEADER LINE (CSS only)
+           ======================== */
+
+        .leader-line-dot {
+            position: absolute;
+            top: 8px;
+            right: -8px;
+            width: 6px;
+            height: 6px;
+            background: rgba(74, 144, 217, 0.5);
+        }
+
+        /* ========================
+           GRID COORDINATE
+           ======================== */
+
+        .grid-coord {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(74, 144, 217, 0.6);
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
+
+        /* ========================
+           NAV TAB STYLE
+           ======================== */
+
+        .nav-tab {
+            position: relative;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #8A919A;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-tab:hover {
+            color: #D1D5DB;
+            border-bottom-color: rgba(74, 144, 217, 0.4);
+        }
+
+        .nav-tab::before {
+            content: attr(data-tab);
+            position: absolute;
+            top: -2px;
+            left: 4px;
+            font-size: 8px;
+            color: rgba(74, 144, 217, 0.3);
+            font-weight: 400;
+        }
+
+        /* ========================
+           STENCIL TEXT
+           ======================== */
+
+        .stencil-text {
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+        }
+
+        /* ========================
+           HORIZONTAL SCROLL
+           ======================== */
+
+        .scroll-gallery {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(74, 144, 217, 0.3) transparent;
+        }
+
+        .scroll-gallery::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .scroll-gallery::-webkit-scrollbar-track {
+            background: rgba(74, 144, 217, 0.05);
+        }
+
+        .scroll-gallery::-webkit-scrollbar-thumb {
+            background: rgba(74, 144, 217, 0.3);
+        }
+
+        .scroll-gallery > * {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        /* ========================
+           TITLE BLOCK (Footer)
+           ======================== */
+
+        .title-block {
+            border: 2px solid rgba(74, 144, 217, 0.3);
+        }
+
+        .title-block .tb-row {
+            display: flex;
+            border-bottom: 1px solid rgba(74, 144, 217, 0.2);
+        }
+
+        .title-block .tb-row:last-child {
+            border-bottom: none;
+        }
+
+        .title-block .tb-cell {
+            padding: 8px 12px;
+            font-size: 11px;
+            border-right: 1px solid rgba(74, 144, 217, 0.2);
+        }
+
+        .title-block .tb-cell:last-child {
+            border-right: none;
+        }
+
+        .title-block .tb-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(74, 144, 217, 0.5);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* ========================
+           HEADER GLASS
+           ======================== */
+
+        .header-glass {
+            background: rgba(1, 14, 47, 0.8);
+            border-bottom: 1px solid rgba(74, 144, 217, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* ========================
+           BLUEPRINT SVG BG
+           ======================== */
+
+        .hero-blueprint-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero-blueprint-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ========================
+           SCROLL ARROW
+           ======================== */
+
+        .scroll-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: rgba(74, 144, 217, 0.5);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .scroll-arrow svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ========================
+           SMOOTH SCROLL
+           ======================== */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ========================
+           CONNECTING LINES
+           ======================== */
+
+        .connecting-line-h {
+            position: relative;
+        }
+
+        .connecting-line-h::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            width: 24px;
+            height: 1px;
+            background: rgba(74, 144, 217, 0.2);
+        }
+
+        .connecting-line-h:last-child::after {
+            display: none;
+        }
+
+        /* ========================
+           TIMELINE CONNECTOR
+           ======================== */
+
+        .timeline-connector {
+            position: relative;
+        }
+
+        .timeline-connector::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -32px;
+            width: 32px;
+            height: 1px;
+            background: linear-gradient(to right, rgba(74, 144, 217, 0.3), rgba(74, 144, 217, 0.1));
+        }
+
+        .timeline-connector:last-child::after {
+            display: none;
+        }
+
+        /* ========================
+           TESTIMONIAL NOTE STYLE
+           ======================== */
+
+        .testimonial-note {
+            position: relative;
+            border-left: 2px solid rgba(74, 144, 217, 0.3);
+        }
+
+        .testimonial-note::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: -6px;
+            width: 10px;
+            height: 10px;
+            background: rgba(74, 144, 217, 0.4);
+            transform: rotate(45deg);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* Button hover */
+        .btn-blueprint {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-blueprint::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(74, 144, 217, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-blueprint:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-blueprint:hover {
+            border-color: rgba(74, 144, 217, 0.6);
+            color: white;
+        }
+
+        /* ========================
+           BENTO GRID
+           ======================== */
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .bento-featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        @media (max-width: 1023px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .bento-featured {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-featured {
+                grid-column: span 1;
+            }
+        }
+
+        /* ========================
+           ANIMATION 1: CURSOR-REACTIVE BLUEPRINT REVEAL
+           ======================== */
+
+        #cursor-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 40;
+            --cx: -200px;
+            --cy: -200px;
+        }
+
+        #cursor-overlay .cursor-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(74, 144, 217, 0.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.10) 1px, transparent 1px),
+                linear-gradient(rgba(74, 144, 217, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 217, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+            -webkit-mask-image: radial-gradient(circle 300px at var(--cx) var(--cy), rgba(0,0,0,0.6) 0%, transparent 100%);
+            mask-image: radial-gradient(circle 300px at var(--cx) var(--cy), rgba(0,0,0,0.6) 0%, transparent 100%);
+        }
+
+        #cursor-overlay .cursor-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle 200px at var(--cx) var(--cy), rgba(74,144,217,0.06), transparent);
+        }
+
+        #cursor-overlay .cursor-crosshair-h {
+            position: absolute;
+            top: var(--cy);
+            left: calc(var(--cx) - 80px);
+            width: 160px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(74,144,217,0.15) 30%, rgba(74,144,217,0.15) 70%, transparent);
+            transform: translateY(-0.5px);
+        }
+
+        #cursor-overlay .cursor-crosshair-v {
+            position: absolute;
+            left: var(--cx);
+            top: calc(var(--cy) - 80px);
+            width: 1px;
+            height: 160px;
+            background: linear-gradient(180deg, transparent, rgba(74,144,217,0.15) 30%, rgba(74,144,217,0.15) 70%, transparent);
+            transform: translateX(-0.5px);
+        }
+
+        @media (hover: none) {
+            #cursor-overlay { display: none; }
+        }
+
+        /* ========================
+           ANIMATION 2: HERO SVG DRAW
+           ======================== */
+
+        .hero-blueprint-bg svg .draw-group {
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+        }
+
+        .hero-blueprint-bg svg .draw-buildings {
+            animation: svgDraw 2s ease forwards 0s;
+        }
+
+        .hero-blueprint-bg svg .draw-grid {
+            animation: svgDraw 2s ease forwards 0.5s;
+        }
+
+        .hero-blueprint-bg svg .draw-dims {
+            animation: svgDraw 1.5s ease forwards 1.2s;
+        }
+
+        .hero-blueprint-bg svg .draw-callouts {
+            animation: svgDraw 1.5s ease forwards 1.8s;
+        }
+
+        @keyframes svgDraw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes shimmerRect {
+            0%, 100% { fill-opacity: 0; }
+            50% { fill-opacity: 0.08; }
+        }
+
+        .shimmer-rect {
+            fill: #4A90D9;
+            fill-opacity: 0;
+        }
+
+        @keyframes annotationFade {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+        }
+
+        .svg-annotation {
+            opacity: 0;
+            fill: #4A90D9;
+            font-family: 'Inter', sans-serif;
+            font-size: 8px;
+        }
+
+        /* ========================
+           ANIMATION 3: PARALLAX TILT
+           ======================== */
+
+        .hero-tilt-container {
+            transition: transform 0.15s ease-out;
+            will-change: transform;
+        }
+
+        /* ========================
+           ANIMATION 4: STAGGERED SCROLL REVEALS
+           ======================== */
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================
+           ANIMATION 5: CARD HOVER GLOW
+           ======================== */
+
+        .glass-card .card-glow-bg,
+        .glass-card-strong .card-glow-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            background: radial-gradient(circle 200px at var(--card-x, 50%) var(--card-y, 50%), rgba(74,144,217,0.08), transparent);
+        }
+
+        .glass-card:hover .card-glow-bg,
+        .glass-card-strong:hover .card-glow-bg {
+            opacity: 1;
+        }
+
+        /* ========================
+           ANIMATION 6: FLOATING PARTICLES
+           ======================== */
+
+        #particle-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-particle {
+            position: absolute;
+            background: #4A90D9;
+            border-radius: 0 !important;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(100vh) translateX(0px); }
+            to { transform: translateY(-20px) translateX(var(--drift-x)); }
+        }
+
+        /* ========================
+           ANIMATION 7: STAT COUNTER (handled by JS)
+           ======================== */
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ========================
+           ANIMATION 9: CAUSTIC LIGHT CTA
+           ======================== */
+
+        .caustic-light {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        @keyframes causticDrift1 {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, 60px); }
+            50% { transform: translate(200px, -40px); }
+            75% { transform: translate(50px, -80px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes causticDrift2 {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-80px, -50px); }
+            50% { transform: translate(-150px, 30px); }
+            75% { transform: translate(-40px, 70px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes causticDrift3 {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(60px, -60px); }
+            50% { transform: translate(-30px, -120px); }
+            75% { transform: translate(-80px, 40px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* ========================
+           ANIMATION 10: PLATFORM BACKBONE PULSE
+           ======================== */
+
+        .backbone-pulse {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .backbone-pulse::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            transform: translateY(-50%);
+            background: radial-gradient(circle, rgba(74,144,217,0.4) 0%, transparent 70%);
+            animation: backbonePulse 4s linear infinite;
+        }
+
+        @keyframes backbonePulse {
+            0% { left: 0%; }
+            100% { left: 100%; }
+        }
+
+        /* Fade in animation (base) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* ========================
+           HERO SCROLL PINNING
+           ======================== */
+        #hero-scroll-spacer {
+            position: relative;
+            height: 300vh; /* Tall spacer gives scroll room for build animation */
+        }
+        #hero-section {
+            position: sticky !important;
+            top: 0 !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
+        }
+
+        /* Scroll progress indicator */
+        #scroll-progress-bar {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 120px;
+            background: rgba(74,144,217,0.15);
+            z-index: 50;
+        }
+        #scroll-progress-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(74,144,217,0.6);
+            transition: height 0.1s linear;
+        }
+        #scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+        #scroll-hint span {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(74,144,217,0.5);
+            margin-bottom: 8px;
+        }
+        #scroll-hint .scroll-arrow {
+            width: 20px;
+            height: 20px;
+            margin: 0 auto;
+            border-right: 2px solid rgba(74,144,217,0.4);
+            border-bottom: 2px solid rgba(74,144,217,0.4);
+            transform: rotate(45deg);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+        @keyframes scrollBounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.4; }
+            50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
+        }
+
+        /* ========================
+           3D EXPLODED VIEW BACKGROUND
+           ======================== */
+
+        /* Background assembly layer — pushed to right side */
+        #assembly-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+            display: flex; align-items: center; justify-content: flex-end;
+            padding-right: 0;
+        }
+        /* Gradient mask to protect text on the left */
+        #assembly-layer::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+            background: linear-gradient(90deg, var(--navy-black) 40%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        #assembly-container {
+            perspective: 1400px;
+            width: 850px; height: 700px;
+            will-change: transform, opacity;
+        }
+        /* Text protection — ensures readability over animation */
+        #hero-section h1,
+        #hero-section p,
+        #hero-section .glass-card {
+            text-shadow: 0 0 30px var(--navy-black), 0 0 60px var(--navy-black);
+        }
+        #assembly-svg {
+            width: 100%; height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(12deg) rotateY(-20deg);
+            will-change: transform;
+            filter: drop-shadow(0 0 40px rgba(74,144,217,0.2));
+        }
+
+        /* Component SVG groups */
+        .component-group {
+            pointer-events: all; cursor: pointer;
+            transition: filter 0.4s ease, opacity 0.4s ease;
+        }
+        .component-group:hover { filter: drop-shadow(0 0 12px rgba(74,144,217,0.5)); }
+        .component-group .label-text { opacity: 0; transition: opacity 0.3s ease; }
+        .component-group:hover .label-text { opacity: 1; }
+
+        /* Assembly Tooltip */
+        #assembly-tooltip {
+            position: fixed; z-index: 100; pointer-events: none;
+            background: rgba(1,14,47,0.92); border: 1px solid rgba(74,144,217,0.3);
+            backdrop-filter: blur(12px); padding: 8px 14px;
+            font-size: 12px; color: #4A90D9; opacity: 0;
+            transition: opacity 0.2s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        #assembly-tooltip.visible { opacity: 1; }
+
+        /* Assembly Detail panel */
+        #assembly-detail-panel {
+            position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
+            z-index: 60; background: rgba(1,14,47,0.94);
+            border-left: 1px solid rgba(74,144,217,0.2);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            transition: right 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto; padding: 80px 28px 40px;
+        }
+        #assembly-detail-panel.open { right: 0; }
+        #assembly-detail-panel .close-btn {
+            position: absolute; top: 24px; right: 24px;
+            width: 32px; height: 32px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(74,144,217,0.25); color: #4A90D9;
+            transition: background 0.2s;
+        }
+        #assembly-detail-panel .close-btn:hover { background: rgba(74,144,217,0.1); }
+
+        /* Spec table */
+        .spec-table td { padding: 6px 0; border-bottom: 1px solid rgba(74,144,217,0.08); font-size: 13px; }
+        .spec-table td:first-child { color: #8A919A; padding-right: 16px; white-space: nowrap; }
+
+        /* Font mono for assembly elements */
+        .font-mono-assembly { font-family: 'JetBrains Mono', monospace; }
+
+        /* ========================
+           RESPONSIVE — Build Animation
+           ======================== */
+
+        /* Tablet: 768–1023px — assembly shrinks, stays right */
+        @media (max-width: 1023px) {
+            #assembly-container {
+                width: 500px; height: 420px;
+            }
+            #assembly-layer::before {
+                width: 55%;
+            }
+            #hero-scroll-spacer {
+                height: 250vh;
+            }
+            #assembly-detail-panel {
+                width: 100%; right: -100%;
+            }
+            #assembly-detail-panel.open { right: 0; }
+        }
+
+        /* Narrow screens: below 900px — assembly becomes ambient background */
+        @media (max-width: 899px) {
+            #assembly-layer {
+                justify-content: center;
+                align-items: center;
+            }
+            #assembly-container {
+                width: 90vw; height: 70vw;
+                max-width: 500px; max-height: 400px;
+                opacity: 0.15 !important;
+            }
+            /* Full overlay so text always readable */
+            #assembly-layer::before {
+                width: 100%; height: 100%;
+                top: 0; left: 0;
+                background: radial-gradient(ellipse at center, transparent 20%, var(--navy-black) 75%);
+            }
+            /* Hide labels — too small to read */
+            .component-group .label-text {
+                display: none !important;
+            }
+            #assembly-tooltip {
+                display: none !important;
+            }
+        }
+
+        /* Mobile: below 768px */
+        @media (max-width: 767px) {
+            #hero-scroll-spacer {
+                height: 200vh;
+            }
+            #scroll-progress-bar {
+                right: 12px;
+                height: 80px;
+            }
+            #scroll-hint span {
+                font-size: 9px;
+                letter-spacing: 1.5px;
+            }
+            #assembly-detail-panel {
+                width: 100%; right: -100%;
+                padding: 60px 20px 30px;
+            }
+            #assembly-detail-panel.open { right: 0; }
+        }
+
+        /* Small mobile: below 480px */
+        @media (max-width: 479px) {
+            #hero-scroll-spacer {
+                height: 180vh;
+            }
+            #assembly-container {
+                opacity: 0.1 !important;
+            }
+        }
+
+    </style>
+</head>
+<body class="font-inter antialiased">
+
+    <!-- Assembly Tooltip (fixed overlay, stays at body level) -->
+    <div id="assembly-tooltip"></div>
+
+    <!-- Assembly Detail Panel (fixed overlay, stays at body level) -->
+    <div id="assembly-detail-panel">
+        <div class="close-btn" onclick="closeAssemblyPanel()" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div id="assembly-panel-content"></div>
+    </div>
+
+    <!-- =============================================
+         HYBRID CURSOR: Guideline Hairlines (z-index 30, behind cursor-overlay at 40)
+         ============================================= -->
+    <div id="hairline-h"></div>
+    <div id="hairline-v"></div>
+
+    <!-- =============================================
+         ANIMATION 1: CURSOR-REACTIVE BLUEPRINT REVEAL
+         ============================================= -->
+    <div id="cursor-overlay">
+        <div class="cursor-grid"></div>
+        <div class="cursor-glow"></div>
+        <div class="cursor-crosshair-h"></div>
+        <div class="cursor-crosshair-v"></div>
+    </div>
+
+    <!-- =============================================
+         ANIMATION 6: FLOATING PARTICLES
+         ============================================= -->
+    <div id="particle-container"></div>
+
+    <!-- =============================================
+         HEADER - Fixed, Glass Effect, Drawing Tabs
+         ============================================= -->
+    <header class="header-glass fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo + Grid Coordinate -->
+                <div class="flex items-center gap-3">
+                    <span class="grid-coord">A1</span>
+                    <svg viewBox="0 0 447.89 233.99" xmlns="http://www.w3.org/2000/svg" style="height:24px;width:auto;"><path fill="white" fill-rule="evenodd" d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z"/></svg>
+                    <a href="#" class="text-white font-bold text-lg tracking-wide">
+                        QUALITY REFLECTIONS
+                    </a>
+                </div>
+
+                <!-- Nav Tabs (Desktop) -->
+                <nav class="hidden lg:flex items-center gap-1">
+                    <a href="#services" class="nav-tab" data-tab="A2">Services</a>
+                    <a href="#projects" class="nav-tab" data-tab="A3">Projects</a>
+                    <a href="#platforms" class="nav-tab" data-tab="A4">Platforms</a>
+                    <a href="#partnership" class="nav-tab" data-tab="A5">Partnership</a>
+                    <a href="#certifications" class="nav-tab" data-tab="A6">Certifications</a>
+                    <a href="#testimonials" class="nav-tab" data-tab="A7">Testimonials</a>
+                    <a href="#contact" class="nav-tab" data-tab="A8" style="color: #4A90D9; border-bottom-color: rgba(74,144,217,0.3);">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden text-silver p-2" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu flex-col lg:hidden border-t border-glass-blue/10 bg-navy-black/95 backdrop-blur-xl">
+            <a href="#services" class="block px-6 py-3 text-sm text-silver hover:text-white uppercase tracking-wider border-b border-glass-blue/10">Services</a>
+            <a href="#projects" class="block px-6 py-3 text-sm text-silver hover:text-white uppercase tracking-wider border-b border-glass-blue/10">Projects</a>
+            <a href="#platforms" class="block px-6 py-3 text-sm text-silver hover:text-white uppercase tracking-wider border-b border-glass-blue/10">Platforms</a>
+            <a href="#partnership" class="block px-6 py-3 text-sm text-silver hover:text-white uppercase tracking-wider border-b border-glass-blue/10">Partnership</a>
+            <a href="#certifications" class="block px-6 py-3 text-sm text-silver hover:text-white uppercase tracking-wider border-b border-glass-blue/10">Certifications</a>
+            <a href="#testimonials" class="block px-6 py-3 text-sm text-silver hover:text-white uppercase tracking-wider border-b border-glass-blue/10">Testimonials</a>
+            <a href="#contact" class="block px-6 py-3 text-sm text-glass-blue uppercase tracking-wider">Contact</a>
+        </div>
+    </header>
+
+    <!-- =============================================
+         HERO - Scroll-pinned with build animation
+         ============================================= -->
+    <div id="hero-scroll-spacer">
+    <section id="hero-section" class="relative flex items-center bg-navy-black blueprint-grid-hero pt-16" style="position:relative; z-index:10; overflow: hidden;">
+        <!-- 3D Assembly Layer (moved into hero) -->
+        <div id="assembly-layer">
+            <div id="assembly-container">
+                <svg id="assembly-svg" viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Layer 9: Floor Slab (backmost) -->
+                    <g class="component-group" data-layer="9" data-name="Floor Slab" data-desc="Structural concrete floor slab providing the foundational support for the entire curtain wall system. Transfers dead and live loads to the building frame." data-why="The slab edge condition determines anchorage capacity. Proper detailing prevents thermal bridging and water infiltration at the critical wall-to-floor junction." data-spec-type="Reinforced Concrete" data-spec-thickness="200mm" data-spec-strength="40 MPa" data-spec-finish="Formed Edge">
+                        <rect x="80" y="520" width="580" height="60" fill="rgba(138,145,154,0.06)" stroke="rgba(138,145,154,0.35)" stroke-width="1"/>
+                        <polygon points="80,520 120,490 700,490 660,520" fill="rgba(138,145,154,0.03)" stroke="rgba(138,145,154,0.25)" stroke-width="0.7"/>
+                        <polygon points="660,520 700,490 700,550 660,580" fill="rgba(138,145,154,0.04)" stroke="rgba(138,145,154,0.2)" stroke-width="0.7"/>
+                        <line x1="120" y1="535" x2="200" y2="555" stroke="rgba(138,145,154,0.12)" stroke-width="0.5"/>
+                        <line x1="180" y1="525" x2="260" y2="560" stroke="rgba(138,145,154,0.12)" stroke-width="0.5"/>
+                        <line x1="280" y1="525" x2="360" y2="560" stroke="rgba(138,145,154,0.12)" stroke-width="0.5"/>
+                        <line x1="380" y1="525" x2="460" y2="560" stroke="rgba(138,145,154,0.12)" stroke-width="0.5"/>
+                        <line x1="480" y1="525" x2="560" y2="560" stroke="rgba(138,145,154,0.12)" stroke-width="0.5"/>
+                        <line x1="140" y1="560" x2="220" y2="530" stroke="rgba(138,145,154,0.08)" stroke-width="0.5"/>
+                        <line x1="300" y1="560" x2="380" y2="530" stroke="rgba(138,145,154,0.08)" stroke-width="0.5"/>
+                        <line x1="460" y1="560" x2="540" y2="530" stroke="rgba(138,145,154,0.08)" stroke-width="0.5"/>
+                        <text class="label-text" x="370" y="600" text-anchor="middle" fill="#8A919A" font-size="10" font-family="JetBrains Mono">FLOOR SLAB</text>
+                    </g>
+
+                    <!-- Layer 8: Structural Anchor -->
+                    <g class="component-group" data-layer="8" data-name="Structural Anchor" data-desc="Steel L-bracket anchors connecting the curtain wall framework to the building's structural slab. Accommodates thermal movement and construction tolerances." data-why="Anchors must absorb building movement, seismic loads, and thermal expansion without transferring stress to the glass. Slotted holes allow ±25mm adjustment in three axes." data-spec-type="316 Stainless Steel" data-spec-thickness="8mm plate" data-spec-capacity="12 kN dead / 8 kN live" data-spec-finish="Mill Finish">
+                        <polygon points="160,470 160,510 180,510 180,485 210,485 210,470" fill="rgba(138,145,154,0.05)" stroke="rgba(138,145,154,0.4)" stroke-width="1"/>
+                        <polygon points="160,470 175,458 225,458 210,470" fill="rgba(138,145,154,0.03)" stroke="rgba(138,145,154,0.25)" stroke-width="0.7"/>
+                        <circle cx="190" cy="478" r="4" fill="none" stroke="rgba(138,145,154,0.3)" stroke-width="0.8"/>
+                        <circle cx="175" cy="500" r="3" fill="none" stroke="rgba(138,145,154,0.25)" stroke-width="0.7"/>
+                        <polygon points="480,470 480,510 500,510 500,485 530,485 530,470" fill="rgba(138,145,154,0.05)" stroke="rgba(138,145,154,0.4)" stroke-width="1"/>
+                        <polygon points="480,470 495,458 545,458 530,470" fill="rgba(138,145,154,0.03)" stroke="rgba(138,145,154,0.25)" stroke-width="0.7"/>
+                        <circle cx="510" cy="478" r="4" fill="none" stroke="rgba(138,145,154,0.3)" stroke-width="0.8"/>
+                        <circle cx="495" cy="500" r="3" fill="none" stroke="rgba(138,145,154,0.25)" stroke-width="0.7"/>
+                        <polygon points="320,470 320,510 340,510 340,485 370,485 370,470" fill="rgba(138,145,154,0.05)" stroke="rgba(138,145,154,0.4)" stroke-width="1"/>
+                        <polygon points="320,470 335,458 385,458 370,470" fill="rgba(138,145,154,0.03)" stroke="rgba(138,145,154,0.25)" stroke-width="0.7"/>
+                        <circle cx="350" cy="478" r="4" fill="none" stroke="rgba(138,145,154,0.3)" stroke-width="0.8"/>
+                        <text class="label-text" x="370" y="525" text-anchor="middle" fill="#8A919A" font-size="10" font-family="JetBrains Mono">STRUCTURAL ANCHOR</text>
+                    </g>
+
+                    <!-- Layer 7: Interior Seal -->
+                    <g class="component-group" data-layer="7" data-name="Interior Seal" data-desc="Secondary air and vapor barrier on the interior side of the curtain wall. Forms the warm-side seal essential for condensation resistance and energy performance." data-why="The interior seal completes the rain-screen principle. Without it, warm moist interior air penetrates the assembly, condensing on cold surfaces and causing long-term damage." data-spec-type="Silicone Gasket" data-spec-width="12mm" data-spec-durability="ASTM C1193" data-spec-finish="Black">
+                        <line x1="180" y1="130" x2="180" y2="430" stroke="rgba(138,145,154,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="380" y1="130" x2="380" y2="430" stroke="rgba(138,145,154,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="560" y1="130" x2="560" y2="430" stroke="rgba(138,145,154,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="180" y1="130" x2="560" y2="130" stroke="rgba(138,145,154,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="180" y1="280" x2="560" y2="280" stroke="rgba(138,145,154,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="180" y1="430" x2="560" y2="430" stroke="rgba(138,145,154,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <text class="label-text" x="620" y="280" fill="#8A919A" font-size="10" font-family="JetBrains Mono">INT. SEAL</text>
+                    </g>
+
+                    <!-- Layer 6: Thermal Break -->
+                    <g class="component-group" data-layer="6" data-name="Thermal Break" data-desc="Polyamide (PA66) strips reinforced with glass fiber, inserted into the aluminum frame to interrupt the thermal path between exterior and interior." data-why="Aluminum conducts heat 1000x faster than glass. Without thermal breaks, frames become condensation magnets and energy hemorrhages. Breaks improve U-value by up to 60%." data-spec-type="PA66 + 25% Glass Fiber" data-spec-width="24mm" data-spec-conductivity="0.3 W/mK" data-spec-finish="Structural Insert">
+                        <rect x="190" y="135" width="8" height="290" fill="rgba(217,160,74,0.04)" stroke="rgba(217,160,74,0.25)" stroke-width="0.8"/>
+                        <rect x="374" y="135" width="8" height="290" fill="rgba(217,160,74,0.04)" stroke="rgba(217,160,74,0.25)" stroke-width="0.8"/>
+                        <rect x="554" y="135" width="8" height="290" fill="rgba(217,160,74,0.04)" stroke="rgba(217,160,74,0.25)" stroke-width="0.8"/>
+                        <line x1="190" y1="150" x2="198" y2="158" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="170" x2="198" y2="178" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="190" x2="198" y2="198" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="210" x2="198" y2="218" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="250" x2="198" y2="258" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="310" x2="198" y2="318" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="350" x2="198" y2="358" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <line x1="190" y1="390" x2="198" y2="398" stroke="rgba(217,160,74,0.15)" stroke-width="0.5"/>
+                        <rect x="185" y="276" width="370" height="6" fill="rgba(217,160,74,0.04)" stroke="rgba(217,160,74,0.2)" stroke-width="0.7"/>
+                        <rect x="185" y="126" width="370" height="6" fill="rgba(217,160,74,0.04)" stroke="rgba(217,160,74,0.2)" stroke-width="0.7"/>
+                        <text class="label-text" x="620" y="210" fill="rgba(217,160,74,0.7)" font-size="10" font-family="JetBrains Mono">THERMAL BREAK</text>
+                    </g>
+
+                    <!-- Layer 5: Horizontal Rail -->
+                    <g class="component-group" data-layer="5" data-name="Horizontal Rail" data-desc="Extruded aluminum horizontal members spanning between vertical mullions. Carries glass dead load and transfers wind loads laterally to mullions." data-why="Rails include weep systems for draining infiltrated water. Pressure-equalized design prevents water from being pushed inward by wind. Proper slope ensures drainage." data-spec-type="6063-T6 Aluminum" data-spec-depth="65mm" data-spec-moment="45 kNm" data-spec-finish="Anodized Clear">
+                        <rect x="175" y="118" width="400" height="14" fill="rgba(138,145,154,0.05)" stroke="rgba(74,144,217,0.3)" stroke-width="1"/>
+                        <polygon points="175,118 185,108 585,108 575,118" fill="rgba(138,145,154,0.03)" stroke="rgba(74,144,217,0.2)" stroke-width="0.7"/>
+                        <polygon points="575,118 585,108 585,122 575,132" fill="rgba(138,145,154,0.025)" stroke="rgba(74,144,217,0.15)" stroke-width="0.6"/>
+                        <rect x="260" y="129" width="12" height="3" fill="none" stroke="rgba(74,144,217,0.2)" stroke-width="0.5"/>
+                        <rect x="420" y="129" width="12" height="3" fill="none" stroke="rgba(74,144,217,0.2)" stroke-width="0.5"/>
+                        <rect x="175" y="272" width="400" height="14" fill="rgba(138,145,154,0.05)" stroke="rgba(74,144,217,0.3)" stroke-width="1"/>
+                        <polygon points="175,272 185,262 585,262 575,272" fill="rgba(138,145,154,0.03)" stroke="rgba(74,144,217,0.2)" stroke-width="0.7"/>
+                        <polygon points="575,272 585,262 585,276 575,286" fill="rgba(138,145,154,0.025)" stroke="rgba(74,144,217,0.15)" stroke-width="0.6"/>
+                        <rect x="260" y="283" width="12" height="3" fill="none" stroke="rgba(74,144,217,0.2)" stroke-width="0.5"/>
+                        <rect x="420" y="283" width="12" height="3" fill="none" stroke="rgba(74,144,217,0.2)" stroke-width="0.5"/>
+                        <rect x="175" y="425" width="400" height="14" fill="rgba(138,145,154,0.05)" stroke="rgba(74,144,217,0.3)" stroke-width="1"/>
+                        <polygon points="175,425 185,415 585,415 575,425" fill="rgba(138,145,154,0.03)" stroke="rgba(74,144,217,0.2)" stroke-width="0.7"/>
+                        <text class="label-text" x="620" y="130" fill="#4A90D9" font-size="10" font-family="JetBrains Mono">HORIZ. RAIL</text>
+                    </g>
+
+                    <!-- Layer 4: Vertical Mullion -->
+                    <g class="component-group" data-layer="4" data-name="Vertical Mullion" data-desc="Primary structural vertical extrusions spanning floor-to-floor. Resists wind loads in bending and transfers all gravity loads to structural anchors." data-why="Mullions are the backbone of the curtain wall. Their moment of inertia determines deflection under wind load — critical for glass retention and occupant comfort." data-spec-type="6063-T6 Aluminum" data-spec-depth="178mm" data-spec-moment="85 kNm" data-spec-finish="Class I Anodized">
+                        <rect x="170" y="110" width="18" height="340" fill="rgba(138,145,154,0.05)" stroke="rgba(74,144,217,0.35)" stroke-width="1.2"/>
+                        <polygon points="170,110 180,98 198,98 188,110" fill="rgba(138,145,154,0.03)" stroke="rgba(74,144,217,0.2)" stroke-width="0.7"/>
+                        <polygon points="188,110 198,98 198,438 188,450" fill="rgba(138,145,154,0.025)" stroke="rgba(74,144,217,0.18)" stroke-width="0.6"/>
+                        <line x1="192" y1="115" x2="192" y2="445" stroke="rgba(74,144,217,0.1)" stroke-width="0.4"/>
+                        <rect x="362" y="110" width="18" height="340" fill="rgba(138,145,154,0.05)" stroke="rgba(74,144,217,0.35)" stroke-width="1.2"/>
+                        <polygon points="362,110 372,98 390,98 380,110" fill="rgba(138,145,154,0.03)" stroke="rgba(74,144,217,0.2)" stroke-width="0.7"/>
+                        <polygon points="380,110 390,98 390,438 380,450" fill="rgba(138,145,154,0.025)" stroke="rgba(74,144,217,0.18)" stroke-width="0.6"/>
+                        <line x1="384" y1="115" x2="384" y2="445" stroke="rgba(74,144,217,0.1)" stroke-width="0.4"/>
+                        <rect x="552" y="110" width="18" height="340" fill="rgba(138,145,154,0.05)" stroke="rgba(74,144,217,0.35)" stroke-width="1.2"/>
+                        <polygon points="552,110 562,98 580,98 570,110" fill="rgba(138,145,154,0.03)" stroke="rgba(74,144,217,0.2)" stroke-width="0.7"/>
+                        <polygon points="570,110 580,98 580,438 570,450" fill="rgba(138,145,154,0.025)" stroke="rgba(74,144,217,0.18)" stroke-width="0.6"/>
+                        <line x1="574" y1="115" x2="574" y2="445" stroke="rgba(74,144,217,0.1)" stroke-width="0.4"/>
+                        <text class="label-text" x="130" y="280" text-anchor="end" fill="#4A90D9" font-size="10" font-family="JetBrains Mono">VERT. MULLION</text>
+                    </g>
+
+                    <!-- Layer 3: Glazing Cap -->
+                    <g class="component-group" data-layer="3" data-name="Glazing Cap" data-desc="Exterior pressure plates clamping glass units against gaskets. Secured with stainless steel screws at regular intervals to ensure uniform compression." data-why="Uniform gasket compression is critical for weather performance. Under-compressed seals leak; over-compressed seals deform and fail prematurely. Torque specs matter." data-spec-type="6063-T6 Aluminum" data-spec-width="52mm" data-spec-screws="M6 @ 300mm o.c." data-spec-finish="Color-Matched Anodized">
+                        <rect x="168" y="135" width="6" height="135" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.8"/>
+                        <rect x="168" y="290" width="6" height="135" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.8"/>
+                        <rect x="360" y="135" width="6" height="135" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.8"/>
+                        <rect x="360" y="290" width="6" height="135" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.8"/>
+                        <rect x="550" y="135" width="6" height="135" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.8"/>
+                        <rect x="550" y="290" width="6" height="135" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.8"/>
+                        <circle cx="171" cy="170" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="171" cy="220" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="171" cy="330" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="171" cy="380" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="363" cy="170" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="363" cy="330" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="553" cy="170" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <circle cx="553" cy="330" r="1.5" fill="rgba(74,144,217,0.2)"/>
+                        <rect x="190" y="116" width="168" height="5" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.7"/>
+                        <rect x="385" y="116" width="165" height="5" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.7"/>
+                        <rect x="190" y="270" width="168" height="5" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.7"/>
+                        <rect x="385" y="270" width="165" height="5" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.3)" stroke-width="0.7"/>
+                        <text class="label-text" x="130" y="170" text-anchor="end" fill="#4A90D9" font-size="10" font-family="JetBrains Mono">GLAZING CAP</text>
+                    </g>
+
+                    <!-- Layer 2: Perimeter Seal -->
+                    <g class="component-group" data-layer="2" data-name="Perimeter Seal" data-desc="Continuous EPDM or silicone gasket forming the primary weather barrier between glass and frame. Dual-durometer design with soft lip and rigid base." data-why="Seals are the first defense against water and air infiltration. They must accommodate glass thermal movement (±3mm) while maintaining compression. UV resistance is critical." data-spec-type="EPDM 60A Shore" data-spec-width="15mm wedge" data-spec-rating="AAMA 501.1" data-spec-finish="Black">
+                        <rect x="193" y="138" width="163" height="128" fill="none" stroke="rgba(138,145,154,0.25)" stroke-width="2" stroke-dasharray="4,3"/>
+                        <rect x="388" y="138" width="158" height="128" fill="none" stroke="rgba(138,145,154,0.25)" stroke-width="2" stroke-dasharray="4,3"/>
+                        <rect x="193" y="293" width="163" height="128" fill="none" stroke="rgba(138,145,154,0.25)" stroke-width="2" stroke-dasharray="4,3"/>
+                        <rect x="388" y="293" width="158" height="128" fill="none" stroke="rgba(138,145,154,0.25)" stroke-width="2" stroke-dasharray="4,3"/>
+                        <text class="label-text" x="130" y="390" text-anchor="end" fill="#8A919A" font-size="10" font-family="JetBrains Mono">PERIMETER SEAL</text>
+                    </g>
+
+                    <!-- Layer 1: Insulated Glass Unit (frontmost) -->
+                    <g class="component-group" data-layer="1" data-name="Insulated Glass Unit" data-desc="Double-pane insulated unit with Low-E coating and argon gas fill. Laminated inner lite for safety, tempered outer lite for impact resistance." data-why="The IGU is the performance heart of the wall. Low-E coatings reject solar heat gain while maximizing visible light. Argon fill reduces conductive heat transfer by 30% vs. air." data-spec-type="1&quot; IGU (6mm/12mm/6mm)" data-spec-coating="Low-E 366" data-spec-shgc="0.27" data-spec-finish="Clear / Argon Fill">
+                        <rect x="196" y="141" width="157" height="122" fill="rgba(74,144,217,0.04)" stroke="rgba(74,144,217,0.2)" stroke-width="0.8"/>
+                        <polygon points="196,141 204,133 361,133 353,141" fill="rgba(74,144,217,0.02)" stroke="rgba(74,144,217,0.12)" stroke-width="0.5"/>
+                        <polygon points="353,141 361,133 361,255 353,263" fill="rgba(74,144,217,0.025)" stroke="rgba(74,144,217,0.1)" stroke-width="0.5"/>
+                        <line x1="220" y1="240" x2="330" y2="155" stroke="rgba(74,144,217,0.06)" stroke-width="1"/>
+                        <rect x="391" y="141" width="152" height="122" fill="rgba(74,144,217,0.04)" stroke="rgba(74,144,217,0.2)" stroke-width="0.8"/>
+                        <polygon points="391,141 399,133 551,133 543,141" fill="rgba(74,144,217,0.02)" stroke="rgba(74,144,217,0.12)" stroke-width="0.5"/>
+                        <polygon points="543,141 551,133 551,255 543,263" fill="rgba(74,144,217,0.025)" stroke="rgba(74,144,217,0.1)" stroke-width="0.5"/>
+                        <line x1="415" y1="240" x2="520" y2="155" stroke="rgba(74,144,217,0.06)" stroke-width="1"/>
+                        <rect x="196" y="296" width="157" height="122" fill="rgba(74,144,217,0.04)" stroke="rgba(74,144,217,0.2)" stroke-width="0.8"/>
+                        <polygon points="196,296 204,288 361,288 353,296" fill="rgba(74,144,217,0.02)" stroke="rgba(74,144,217,0.12)" stroke-width="0.5"/>
+                        <polygon points="353,296 361,288 361,410 353,418" fill="rgba(74,144,217,0.025)" stroke="rgba(74,144,217,0.1)" stroke-width="0.5"/>
+                        <line x1="220" y1="395" x2="330" y2="310" stroke="rgba(74,144,217,0.06)" stroke-width="1"/>
+                        <rect x="391" y="296" width="152" height="122" fill="rgba(74,144,217,0.04)" stroke="rgba(74,144,217,0.2)" stroke-width="0.8"/>
+                        <polygon points="391,296 399,288 551,288 543,296" fill="rgba(74,144,217,0.02)" stroke="rgba(74,144,217,0.12)" stroke-width="0.5"/>
+                        <polygon points="543,296 551,288 551,410 543,418" fill="rgba(74,144,217,0.025)" stroke="rgba(74,144,217,0.1)" stroke-width="0.5"/>
+                        <line x1="415" y1="395" x2="520" y2="310" stroke="rgba(74,144,217,0.06)" stroke-width="1"/>
+                        <text class="label-text" x="275" y="90" text-anchor="middle" fill="#4A90D9" font-size="10" font-family="JetBrains Mono">INSULATED GLASS UNIT</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Architectural Stamp Watermark - Full Logo (hidden, moved inline) -->
+        <div style="display:none;">
+            <svg viewBox="0 0 474.24 359.48" xmlns="http://www.w3.org/2000/svg" style="width:420px;height:auto;">
+                <!-- REFLECTIONS text -->
+                <path fill="#4A90D9" fill-rule="evenodd" d="M59.22,358.99h-9.07c-.41-.57-.71-1.31-.88-2.2-.15-.69-.37-1.37-.67-2.03-.3-.66-.81-1.22-1.54-1.66-.73-.44-1.81-.68-3.24-.71h-6.23v6.6h-9.6v-22.88h15.61c3.73,0,6.74.28,9.03.84,2.29.56,3.96,1.43,5.01,2.63,1.05,1.2,1.58,2.76,1.58,4.68,0,1.6-.36,2.95-1.09,4.05-.73,1.09-1.88,1.96-3.45,2.6,1.52.63,2.51,1.38,2.96,2.26.45.88.73,1.84.84,2.89.11.94.36,1.91.75,2.93ZM37.59,346.75l5.48-.02c1.53,0,2.74-.07,3.62-.21.88-.14,1.53-.33,1.95-.57.42-.24.69-.51.81-.8.12-.29.18-.59.18-.9s-.06-.61-.18-.91c-.12-.3-.39-.57-.81-.8-.42-.24-1.07-.43-1.95-.57-.88-.14-2.09-.21-3.62-.21h-5.48v4.97Z"/>
+                <path fill="#4A90D9" d="M99.05,358.99h-27.55v-22.88h26.29v5.66h-16.69v3.59h14.11v4.4h-14.11v3.57h17.95v5.66Z"/>
+                <path fill="#4A90D9" d="M120.93,358.99h-9.6v-22.88h26.29v5.66h-16.69v3.59h14.11v4.4h-14.11v9.23Z"/>
+                <path fill="#4A90D9" d="M176.61,358.99h-26.7v-22.88h9.6v17.22h17.11v5.66Z"/>
+                <path fill="#4A90D9" d="M215.8,358.99h-27.55v-22.88h26.29v5.66h-16.69v3.59h14.11v4.4h-14.11v3.57h17.95v5.66Z"/>
+                <path fill="#4A90D9" d="M241.55,359.48c-5.65,0-9.81-1.16-12.48-3.49-2.36-2.05-3.54-4.86-3.54-8.42s1.18-6.37,3.54-8.43c2.67-2.32,6.83-3.48,12.48-3.48,3.32,0,6.06.38,8.23,1.14,2.17.76,3.85,1.8,5.05,3.12,1.2,1.32,2,2.83,2.39,4.53h-10.09c-1.01-1.78-2.87-2.66-5.58-2.66-2.32,0-4.02.67-5.12,2.01-.87,1.06-1.31,2.32-1.31,3.78s.44,2.72,1.31,3.78c1.1,1.34,2.8,2.01,5.12,2.01,2.71,0,4.57-.89,5.58-2.68h10.09c-.39,1.71-1.19,3.23-2.39,4.54-1.2,1.32-2.89,2.36-5.05,3.12-2.17.76-4.91,1.14-8.23,1.14Z"/>
+                <path fill="#4A90D9" d="M285.19,358.99h-9.6v-17.22h-8.96v-5.66h27.52v5.66h-8.96v17.22Z"/>
+                <rect fill="#4A90D9" x="306.11" y="336.11" width="9.6" height="22.88"/>
+                <path fill="#4A90D9" fill-rule="evenodd" d="M344.02,359.48c-5.65,0-9.81-1.16-12.48-3.49-2.36-2.06-3.54-4.87-3.54-8.43s1.18-6.36,3.54-8.42c2.67-2.33,6.83-3.49,12.48-3.49s9.81,1.16,12.48,3.49c2.36,2.06,3.54,4.87,3.54,8.42s-1.18,6.37-3.54,8.43c-2.67,2.33-6.83,3.49-12.48,3.49ZM344.02,353.35c2.32,0,4.02-.66,5.1-1.99.87-1.07,1.31-2.34,1.31-3.79s-.44-2.72-1.31-3.78c-1.08-1.34-2.78-2.01-5.1-2.01s-4.02.67-5.12,2.01c-.87,1.06-1.31,2.32-1.31,3.78s.44,2.72,1.31,3.79c1.09,1.33,2.8,1.99,5.12,1.99Z"/>
+                <path fill="#4A90D9" d="M406.26,358.99h-11.41l-12.93-15.48v15.48h-9.6v-22.88h11.41l12.93,15.4v-15.4h9.6v22.88Z"/>
+                <path fill="#4A90D9" d="M432.38,359.48c-3.09,0-5.58-.33-7.47-1-1.89-.66-3.33-1.58-4.32-2.74-.99-1.16-1.66-2.51-1.99-4.03h10.19c.75,1.08,1.95,1.63,3.6,1.63s2.85-.54,3.61-1.63c.06-.11.09-.2.09-.29,0-.29-.38-.5-1.14-.65-.76-.14-1.9-.25-3.4-.33-1.9-.09-3.9-.29-5.99-.61-4.67-.72-7-2.6-7-5.63,0-.25.02-.53.05-.81.34-1.52,1-2.86,1.99-4.03.99-1.16,2.43-2.08,4.32-2.74s4.38-1,7.47-1,5.59.33,7.48,1,3.33,1.58,4.32,2.74c.99,1.16,1.65,2.51,1.99,4.03h-10.18c-.76-1.08-1.96-1.63-3.61-1.63s-2.85.54-3.6,1.63c-.05.09-.08.17-.08.24,0,.26.37.44,1.09.57.73.12,1.8.23,3.22.31,1.42.09,2.93.22,4.54.41,1.6.19,3.11.52,4.5,1s2.49,1.17,3.28,2.1c.62.71.92,1.62.92,2.71,0,.31-.03.63-.08.97-.34,1.52-1,2.86-1.99,4.03-.99,1.16-2.43,2.08-4.32,2.74-1.89.66-4.39,1-7.48,1Z"/>
+                <!-- QUALITY bar background -->
+                <path fill="#4A90D9" d="M474.24,263.38v49.51c0,3.94-3.2,7.14-7.14,7.14H7.14c-3.94,0-7.14-3.2-7.14-7.14v-49.51c0-3.94,3.2-7.14,7.14-7.14h459.97c3.94,0,7.14,3.2,7.14,7.14ZM413.62,308.53v-20.35l23.41-22.6h-19.96l-12.45,12.84-12.48-12.84h-19.96l23.43,22.6v20.35h18.02ZM353.11,308.53v-32.32h16.82v-10.62h-51.66v10.62h16.82v32.32h18.02ZM232.32,308.53l-27.47-42.92h-16.73l-27.47,42.92h18.26l4.04-7.03h27.08l4.04,7.03h18.26ZM203.95,290.88h-14.93l7.48-13.02,7.45,13.02ZM287.68,308.53v-10.62h-32.11v-32.32h-18.02v42.95h50.13ZM311.69,308.53v-42.95h-18.02v42.95h18.02ZM129.96,309.46c10.49,0,17.89-2.17,22.18-6.52,3.57-3.65,5.36-8.85,5.36-15.59v-21.73h-18.02v21.49c0,2.93-.51,5.3-1.53,7.09-1.44,2.49-4.1,3.74-7.99,3.74s-6.5-1.25-7.96-3.74c-1.02-1.74-1.53-4.1-1.53-7.09v-21.49h-18.02v21.49c0,6.9,1.8,12.18,5.39,15.83,4.27,4.35,11.64,6.52,22.12,6.52ZM82.02,311.62l10.65-4.76c-1.36-.4-2.79-1.16-4.31-2.27,6.01-3.91,9.01-9.77,9.01-17.57,0-6.66-2.21-11.93-6.64-15.8-5.01-4.37-12.82-6.55-23.43-6.55s-18.43,2.19-23.43,6.55c-4.43,3.87-6.64,9.14-6.64,15.8s2.21,11.96,6.64,15.83c5.01,4.37,12.82,6.55,23.43,6.55,3.77,0,7.13-.27,10.09-.81,1.4,1.58,2.94,2.58,4.64,3.02ZM67.29,297.88c-4.35,0-7.55-1.25-9.61-3.74-1.64-2-2.45-4.37-2.45-7.12s.82-5.1,2.45-7.09c2.05-2.49,5.26-3.74,9.61-3.74s7.54,1.25,9.58,3.74c1.64,2,2.45,4.36,2.45,7.09,0,2.89-.89,5.36-2.66,7.39-1.98-1.7-3.77-2.82-5.39-3.38l-5.21,2.99c1.3.88,2.52,2.12,3.68,3.71-.76.1-1.58.15-2.45.15Z"/>
+                <!-- Three arches -->
+                <path fill="#4A90D9" fill-rule="evenodd" d="M208.35,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM179.5,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM121.36,233.99H13.17L237.12,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 w-full">
+            <div class="max-w-3xl">
+                <!-- Drawing sheet reference -->
+                <div class="flex items-center gap-3 mb-8">
+                    <span class="grid-coord text-xs">B2</span>
+                    <div class="dimension-line flex-1 max-w-xs">
+                        <span class="dim-end"></span>
+                        <span class="dim-line"></span>
+                        <span class="dim-label">Sheet 01 of 08</span>
+                        <span class="dim-line"></span>
+                        <span class="dim-end"></span>
+                    </div>
+                </div>
+
+                <!-- Company Icon (arches only) with glass glow -->
+                <div style="margin-bottom:24px;" class="hero-icon-glow">
+                    <svg viewBox="0 0 447.89 233.99" xmlns="http://www.w3.org/2000/svg" style="width:140px;height:auto;">
+                        <defs>
+                            <filter id="glassGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+                                <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.29  0 0 0 0 0.56  0 0 0 0 0.85  0 0 0 0.6 0" result="glow"/>
+                                <feMerge>
+                                    <feMergeNode in="glow"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path filter="url(#glassGlow)" fill="#4A90D9" fill-opacity="0.5" fill-rule="evenodd" d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z"/>
+                    </svg>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.05] mb-6">
+                    Precision-Crafted<br>
+                    <span class="text-glass-blue">Architectural Glass</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-steel max-w-xl mb-10 leading-relaxed">
+                    Custom commercial glazing systems engineered to specification. Curtain walls, storefronts, and specialty glass installations built to exacting standards.
+                </p>
+
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-16">
+                    <a href="#contact" class="btn-blueprint inline-flex items-center justify-center px-8 py-4 bg-glass-blue/10 border-2 border-glass-blue text-white font-semibold text-sm uppercase tracking-widest hover:bg-glass-blue/20 transition-all">
+                        Request Consultation
+                    </a>
+                    <a href="#projects" class="btn-blueprint inline-flex items-center justify-center px-8 py-4 border border-steel/30 text-steel font-medium text-sm uppercase tracking-wider hover:text-white transition-all">
+                        View Portfolio
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Stats in glass cards with counter animation -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="glass-card corner-brackets p-5">
+                        <div class="card-glow-bg"></div>
+                        <div class="text-2xl sm:text-3xl font-bold text-white mb-1 stat-number" data-target="25" data-suffix="+">0</div>
+                        <div class="text-xs text-steel uppercase tracking-wider">Years Experience</div>
+                    </div>
+                    <div class="glass-card corner-brackets p-5">
+                        <div class="card-glow-bg"></div>
+                        <div class="text-2xl sm:text-3xl font-bold text-white mb-1 stat-number" data-target="500" data-suffix="+">0</div>
+                        <div class="text-xs text-steel uppercase tracking-wider">Projects Done</div>
+                    </div>
+                    <div class="glass-card corner-brackets p-5">
+                        <div class="card-glow-bg"></div>
+                        <div class="text-2xl sm:text-3xl font-bold text-white mb-1 stat-number" data-target="50" data-suffix="+">0</div>
+                        <div class="text-xs text-steel uppercase tracking-wider">Glazing Systems</div>
+                    </div>
+                    <div class="glass-card corner-brackets p-5">
+                        <div class="card-glow-bg"></div>
+                        <div class="text-2xl sm:text-3xl font-bold text-white mb-1 stat-number" data-target="100" data-suffix="%">0</div>
+                        <div class="text-xs text-steel uppercase tracking-wider">Code Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll progress indicator -->
+        <div id="scroll-progress-bar">
+            <div id="scroll-progress-fill" style="height:0%"></div>
+        </div>
+
+        <!-- Scroll hint -->
+        <div id="scroll-hint">
+            <span>Scroll to Assemble</span>
+            <div class="scroll-arrow"></div>
+        </div>
+
+        <!-- Section Cut Line -->
+        <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-6 lg:px-8">
+            <div class="section-cut" data-cut>
+                <div class="cut-line"></div>
+                <span class="cut-label">Section A-A</span>
+            </div>
+        </div>
+    </section>
+    </div><!-- /hero-scroll-spacer -->
+
+    <!-- =============================================
+         SERVICES - Navy Dark, Grid Pattern, Bento
+         ============================================= -->
+    <section id="services" class="relative bg-navy-dark blueprint-grid-dense py-24 lg:py-32" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">02</div>
+            <div class="marker-label">Capabilities</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">02</div>
+                <div class="marker-label">Capabilities</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <!-- Section Header -->
+            <div class="flex items-center gap-4 mb-4 scroll-reveal" data-reveal-delay="150">
+                <span class="grid-coord text-xs">C1</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white">Our Services</h2>
+            </div>
+            <p class="text-steel max-w-2xl mb-12 scroll-reveal" data-reveal-delay="300">
+                Full-spectrum commercial glazing from concept through installation. Every system engineered for performance, aesthetics, and longevity.
+            </p>
+
+            <!-- Bento Grid -->
+            <div class="bento-grid">
+                <!-- Featured Card (2x2) -->
+                <div class="bento-featured glass-card-strong corner-brackets p-8 flex flex-col justify-between min-h-[320px] lg:min-h-[400px] scroll-reveal" data-reveal-delay="400">
+                    <div class="card-glow-bg"></div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="grid-coord text-xs">C2</span>
+                            <span class="text-xs text-glass-blue uppercase tracking-widest font-medium">Primary Service</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">Curtain Wall Systems</h3>
+                        <p class="text-steel leading-relaxed">
+                            Complete curtain wall engineering and installation. Unitized and stick-built systems designed for thermal performance, structural integrity, and visual clarity. We handle everything from shop drawings to final inspection.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 mt-8">
+                        <div class="dimension-line flex-1">
+                            <span class="dim-end"></span>
+                            <span class="dim-line"></span>
+                            <span class="dim-label">Detail C2.1</span>
+                            <span class="dim-line"></span>
+                            <span class="dim-end"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="glass-card corner-brackets p-6 flex flex-col justify-between min-h-[180px] scroll-reveal" data-reveal-delay="500">
+                    <div class="card-glow-bg"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">C3</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Storefront Glazing</h3>
+                        <p class="text-sm text-steel leading-relaxed">Retail and commercial storefront systems with maximum visibility and weather performance.</p>
+                    </div>
+                    <div class="mt-4 text-xs text-glass-blue/50 uppercase tracking-wider">Detail C3.1</div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="glass-card corner-brackets p-6 flex flex-col justify-between min-h-[180px] scroll-reveal" data-reveal-delay="600">
+                    <div class="card-glow-bg"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">C4</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Window Systems</h3>
+                        <p class="text-sm text-steel leading-relaxed">High-performance window installations for commercial and institutional buildings.</p>
+                    </div>
+                    <div class="mt-4 text-xs text-glass-blue/50 uppercase tracking-wider">Detail C4.1</div>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="glass-card corner-brackets p-6 flex flex-col justify-between min-h-[180px] scroll-reveal" data-reveal-delay="700">
+                    <div class="card-glow-bg"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">C5</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Entrance Systems</h3>
+                        <p class="text-sm text-steel leading-relaxed">Architectural entrances, revolving doors, and automatic sliding systems for high-traffic buildings.</p>
+                    </div>
+                    <div class="mt-4 text-xs text-glass-blue/50 uppercase tracking-wider">Detail C5.1</div>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="glass-card corner-brackets p-6 flex flex-col justify-between min-h-[180px] scroll-reveal" data-reveal-delay="800">
+                    <div class="card-glow-bg"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">C6</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Glass Railings</h3>
+                        <p class="text-sm text-steel leading-relaxed">Interior and exterior glass railing systems meeting all safety codes and design requirements.</p>
+                    </div>
+                    <div class="mt-4 text-xs text-glass-blue/50 uppercase tracking-wider">Detail C6.1</div>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="glass-card corner-brackets p-6 flex flex-col justify-between min-h-[180px] scroll-reveal" data-reveal-delay="900">
+                    <div class="card-glow-bg"></div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">C7</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Skylight Systems</h3>
+                        <p class="text-sm text-steel leading-relaxed">Overhead glazing and skylight systems with proper drainage and thermal break engineering.</p>
+                    </div>
+                    <div class="mt-4 text-xs text-glass-blue/50 uppercase tracking-wider">Detail C7.1</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PROJECTS - Navy, Grid, Horizontal Scroll
+         ============================================= -->
+    <section id="projects" class="relative bg-navy blueprint-grid py-24 lg:py-32" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">03</div>
+            <div class="marker-label">Portfolio</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">03</div>
+                <div class="marker-label">Portfolio</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <!-- Section Header -->
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <div class="flex items-center gap-4 mb-4 scroll-reveal" data-reveal-delay="150">
+                        <span class="grid-coord text-xs">D1</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white">Featured Projects</h2>
+                    </div>
+                    <p class="text-steel max-w-xl scroll-reveal" data-reveal-delay="300">Select commercial installations showcasing our range of glazing expertise.</p>
+                </div>
+                <!-- Scroll Indicators -->
+                <div class="hidden sm:flex items-center gap-3 scroll-reveal" data-reveal-delay="300">
+                    <span class="scroll-arrow">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    </span>
+                    <span class="text-glass-blue/30 text-xs uppercase tracking-wider">Scroll</span>
+                    <span class="scroll-arrow">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Horizontal Scroll Gallery -->
+            <div class="scroll-gallery -mx-4 px-4">
+                <!-- Project Card 1 -->
+                <div class="w-[340px] sm:w-[400px] glass-card-strong corner-brackets scroll-reveal" data-reveal-delay="400">
+                    <div class="card-glow-bg"></div>
+                    <div class="h-56 border-b border-glass-blue/10 overflow-hidden">
+                        <img src="project-office-tower.png" alt="Metropolitan Office Tower - Glass curtain wall facade" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">D2</span>
+                            <span class="text-xs text-glass-blue/60 uppercase tracking-wider">Commercial</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Metropolitan Office Tower</h3>
+                        <p class="text-sm text-steel mb-4">Full curtain wall system, 32 floors of unitized glazing with integrated solar shading.</p>
+                        <a href="#" class="text-sm text-glass-blue hover:text-white transition-colors inline-flex items-center gap-2 uppercase tracking-wider font-medium">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="w-[340px] sm:w-[400px] glass-card-strong corner-brackets scroll-reveal" data-reveal-delay="500">
+                    <div class="card-glow-bg"></div>
+                    <div class="h-56 border-b border-glass-blue/10 overflow-hidden">
+                        <img src="project-medical-center.png" alt="Regional Medical Center - Commercial storefront glazing" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">D3</span>
+                            <span class="text-xs text-glass-blue/60 uppercase tracking-wider">Healthcare</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Regional Medical Center</h3>
+                        <p class="text-sm text-steel mb-4">Storefront and curtain wall systems with blast-resistant laminated glass throughout.</p>
+                        <a href="#" class="text-sm text-glass-blue hover:text-white transition-colors inline-flex items-center gap-2 uppercase tracking-wider font-medium">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="w-[340px] sm:w-[400px] glass-card-strong corner-brackets scroll-reveal" data-reveal-delay="600">
+                    <div class="card-glow-bg"></div>
+                    <div class="h-56 border-b border-glass-blue/10 overflow-hidden">
+                        <img src="project-university.png" alt="University Science Complex - Glass atrium and curtain walls" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">D4</span>
+                            <span class="text-xs text-glass-blue/60 uppercase tracking-wider">Education</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">University Science Complex</h3>
+                        <p class="text-sm text-steel mb-4">Skylights, curtain wall, and specialized lab-grade glazing for controlled environments.</p>
+                        <a href="#" class="text-sm text-glass-blue hover:text-white transition-colors inline-flex items-center gap-2 uppercase tracking-wider font-medium">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="w-[340px] sm:w-[400px] glass-card-strong corner-brackets scroll-reveal" data-reveal-delay="700">
+                    <div class="card-glow-bg"></div>
+                    <div class="h-56 border-b border-glass-blue/10 overflow-hidden">
+                        <img src="project-retail-pavilion.png" alt="Luxury Retail Pavilion - Frameless glass storefront" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">D5</span>
+                            <span class="text-xs text-glass-blue/60 uppercase tracking-wider">Retail</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Luxury Retail Pavilion</h3>
+                        <p class="text-sm text-steel mb-4">All-glass storefront with structural silicone glazing and frameless entrance system.</p>
+                        <a href="#" class="text-sm text-glass-blue hover:text-white transition-colors inline-flex items-center gap-2 uppercase tracking-wider font-medium">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="w-[340px] sm:w-[400px] glass-card-strong corner-brackets scroll-reveal" data-reveal-delay="800">
+                    <div class="card-glow-bg"></div>
+                    <div class="h-56 border-b border-glass-blue/10 overflow-hidden">
+                        <img src="project-courthouse.png" alt="Federal Courthouse - Impact-resistant glass curtain wall" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">D6</span>
+                            <span class="text-xs text-glass-blue/60 uppercase tracking-wider">Civic</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Federal Courthouse</h3>
+                        <p class="text-sm text-steel mb-4">Impact-resistant glazing with custom mullion profiles meeting federal security standards.</p>
+                        <a href="#" class="text-sm text-glass-blue hover:text-white transition-colors inline-flex items-center gap-2 uppercase tracking-wider font-medium">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PLATFORMS - Navy Dark, System Diagram
+         ============================================= -->
+    <section id="platforms" class="relative bg-navy-dark blueprint-grid-dense py-24 lg:py-32" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">04</div>
+            <div class="marker-label">Systems</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">04</div>
+                <div class="marker-label">Systems</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <!-- Section Header -->
+            <div class="flex items-center gap-4 mb-4 scroll-reveal" data-reveal-delay="150">
+                <span class="grid-coord text-xs">E1</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white">Glazing Platforms</h2>
+            </div>
+            <p class="text-steel max-w-2xl mb-16 scroll-reveal" data-reveal-delay="300">
+                We engineer with industry-leading systems, selecting the optimal platform for each project's performance requirements.
+            </p>
+
+            <!-- System Diagram Layout -->
+            <div class="relative">
+                <!-- Connecting backbone line with traveling pulse (desktop only) -->
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-glass-blue/15 -translate-y-1/2 backbone-pulse" data-cut></div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-4">
+                    <!-- Platform 1 -->
+                    <div class="relative glass-card p-6 text-center group hover:border-glass-blue/40 transition-all scroll-reveal" data-reveal-delay="400">
+                        <div class="card-glow-bg"></div>
+                        <div class="w-16 h-16 mx-auto mb-4 border border-glass-blue/20 flex items-center justify-center bg-navy-black/30 p-2">
+                            <img src="logos/kawneer.svg" alt="Kawneer" style="width:100%;height:auto;filter:brightness(0) invert(1);opacity:0.8;">
+                        </div>
+                        <div class="text-sm font-semibold text-white mb-1">Kawneer</div>
+                        <div class="text-xs text-steel">Curtain Wall</div>
+                        <!-- Vertical connector to backbone -->
+                        <div class="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-px h-4 bg-glass-blue/20"></div>
+                    </div>
+
+                    <!-- Platform 2 -->
+                    <div class="relative glass-card p-6 text-center group hover:border-glass-blue/40 transition-all scroll-reveal" data-reveal-delay="500">
+                        <div class="card-glow-bg"></div>
+                        <div class="w-16 h-16 mx-auto mb-4 border border-glass-blue/20 flex items-center justify-center bg-navy-black/30">
+                            <span class="text-xl font-bold text-glass-blue/60">YKK</span>
+                        </div>
+                        <div class="text-sm font-semibold text-white mb-1">YKK AP</div>
+                        <div class="text-xs text-steel">Window Wall</div>
+                        <div class="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-px h-4 bg-glass-blue/20"></div>
+                    </div>
+
+                    <!-- Platform 3 -->
+                    <div class="relative glass-card p-6 text-center group hover:border-glass-blue/40 transition-all scroll-reveal" data-reveal-delay="600">
+                        <div class="card-glow-bg"></div>
+                        <div class="w-16 h-16 mx-auto mb-4 border border-glass-blue/20 flex items-center justify-center bg-navy-black/30">
+                            <span class="text-xl font-bold text-glass-blue/60">OC</span>
+                        </div>
+                        <div class="text-sm font-semibold text-white mb-1">Oldcastle</div>
+                        <div class="text-xs text-steel">Storefront</div>
+                        <div class="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-px h-4 bg-glass-blue/20"></div>
+                    </div>
+
+                    <!-- Platform 4 -->
+                    <div class="relative glass-card p-6 text-center group hover:border-glass-blue/40 transition-all scroll-reveal" data-reveal-delay="700">
+                        <div class="card-glow-bg"></div>
+                        <div class="w-16 h-16 mx-auto mb-4 border border-glass-blue/20 flex items-center justify-center bg-navy-black/30">
+                            <span class="text-xl font-bold text-glass-blue/60">V</span>
+                        </div>
+                        <div class="text-sm font-semibold text-white mb-1">Viracon</div>
+                        <div class="text-xs text-steel">Glass Fabrication</div>
+                        <div class="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-px h-4 bg-glass-blue/20"></div>
+                    </div>
+
+                    <!-- Platform 5 -->
+                    <div class="relative glass-card p-6 text-center group hover:border-glass-blue/40 transition-all scroll-reveal" data-reveal-delay="800">
+                        <div class="card-glow-bg"></div>
+                        <div class="w-16 h-16 mx-auto mb-4 border border-glass-blue/20 flex items-center justify-center bg-navy-black/30">
+                            <span class="text-xl font-bold text-glass-blue/60">AG</span>
+                        </div>
+                        <div class="text-sm font-semibold text-white mb-1">AGC Glass</div>
+                        <div class="text-xs text-steel">Specialty Glass</div>
+                        <div class="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-px h-4 bg-glass-blue/20"></div>
+                    </div>
+
+                    <!-- Platform 6 -->
+                    <div class="relative glass-card p-6 text-center group hover:border-glass-blue/40 transition-all scroll-reveal" data-reveal-delay="900">
+                        <div class="card-glow-bg"></div>
+                        <div class="w-16 h-16 mx-auto mb-4 border border-glass-blue/20 flex items-center justify-center bg-navy-black/30">
+                            <span class="text-xl font-bold text-glass-blue/60">T</span>
+                        </div>
+                        <div class="text-sm font-semibold text-white mb-1">Tubelite</div>
+                        <div class="text-xs text-steel">Entrances</div>
+                        <div class="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-px h-4 bg-glass-blue/20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PARTNERSHIP - Navy Black, Construction Stencil
+         ============================================= -->
+    <section id="partnership" class="relative bg-navy-black blueprint-grid py-24 lg:py-32" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">05</div>
+            <div class="marker-label">Partnership</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">05</div>
+                <div class="marker-label">Partnership</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <!-- Large Centered Glass Card -->
+            <div class="max-w-4xl mx-auto glass-card-strong corner-brackets p-8 sm:p-12 lg:p-16 scroll-reveal" data-reveal-delay="150">
+                <div class="card-glow-bg"></div>
+                <div class="text-center mb-10">
+                    <!-- Kawneer Logo -->
+                    <div class="inline-flex items-center justify-center w-48 h-20 border-2 border-glass-blue/40 mb-6 bg-navy-dark/30 p-4">
+                        <img src="logos/kawneer.svg" alt="Kawneer" style="width:100%;height:auto;filter:brightness(0) invert(1);opacity:0.9;">
+                    </div>
+
+                    <div class="stencil-text text-glass-blue text-sm mb-4 tracking-[0.2em]">
+                        Authorized Dealer
+                    </div>
+
+                    <div class="dimension-line max-w-xs mx-auto mb-8">
+                        <span class="dim-end"></span>
+                        <span class="dim-line"></span>
+                        <span class="dim-label">Kawneer Co.</span>
+                        <span class="dim-line"></span>
+                        <span class="dim-end"></span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">
+                        Kawneer Authorized Dealer
+                    </h2>
+                    <p class="text-steel max-w-2xl mx-auto leading-relaxed mb-10">
+                        As an authorized Kawneer dealer, Quality Reflections has direct access to the full range of Kawneer architectural aluminum systems. This partnership ensures competitive pricing, technical support, and factory-direct fulfillment for every project.
+                    </p>
+                </div>
+
+                <!-- Bullet Points -->
+                <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 max-w-2xl mx-auto">
+                    <div class="flex items-start gap-3">
+                        <span class="w-2 h-2 bg-glass-blue/60 mt-2 flex-shrink-0"></span>
+                        <span class="text-sm text-silver">Direct factory ordering and fulfillment</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-2 h-2 bg-glass-blue/60 mt-2 flex-shrink-0"></span>
+                        <span class="text-sm text-silver">Full technical engineering support</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-2 h-2 bg-glass-blue/60 mt-2 flex-shrink-0"></span>
+                        <span class="text-sm text-silver">Competitive dealer pricing tiers</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-2 h-2 bg-glass-blue/60 mt-2 flex-shrink-0"></span>
+                        <span class="text-sm text-silver">Priority project scheduling</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-2 h-2 bg-glass-blue/60 mt-2 flex-shrink-0"></span>
+                        <span class="text-sm text-silver">Access to full product catalog</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="w-2 h-2 bg-glass-blue/60 mt-2 flex-shrink-0"></span>
+                        <span class="text-sm text-silver">Factory warranty coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         CERTIFICATIONS - Navy Dark, Timeline Process
+         ============================================= -->
+    <section id="certifications" class="relative bg-navy-dark blueprint-grid-dense py-24 lg:py-32" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">06</div>
+            <div class="marker-label">Credentials</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">06</div>
+                <div class="marker-label">Credentials</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <!-- Section Header -->
+            <div class="flex items-center gap-4 mb-4 scroll-reveal" data-reveal-delay="150">
+                <span class="grid-coord text-xs">G1</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white">Certifications</h2>
+            </div>
+            <p class="text-steel max-w-2xl mb-16 scroll-reveal" data-reveal-delay="300">
+                Industry certifications and qualifications that ensure every installation meets the highest standards.
+            </p>
+
+            <!-- Certification Timeline Row -->
+            <div class="relative">
+                <!-- Connecting line (desktop) -->
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-glass-blue/15 -translate-y-1/2" data-cut></div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-4">
+                    <!-- Cert 1: OSHA -->
+                    <div class="relative text-center scroll-reveal" data-reveal-delay="400">
+                        <div class="glass-card p-6 mb-3">
+                            <div class="card-glow-bg"></div>
+                            <div class="w-16 h-16 mx-auto border-2 border-glass-blue/30 flex items-center justify-center mb-4 p-2 bg-navy-black/30">
+                                <img src="logos/osha-dol.svg" alt="OSHA / Department of Labor" style="width:100%;height:100%;object-fit:contain;">
+                            </div>
+                            <div class="text-sm font-semibold text-white mb-1">OSHA 30-Hour</div>
+                            <div class="text-xs text-steel">Safety Certified Crews</div>
+                        </div>
+                        <div class="text-xs text-glass-blue/40 uppercase tracking-wider">G2.1</div>
+                    </div>
+
+                    <!-- Cert 2: NGA -->
+                    <div class="relative text-center scroll-reveal" data-reveal-delay="500">
+                        <div class="glass-card p-6 mb-3">
+                            <div class="card-glow-bg"></div>
+                            <div class="w-16 h-16 mx-auto border-2 border-glass-blue/30 flex items-center justify-center mb-4 p-2 bg-navy-black/30">
+                                <img src="logos/nga.png" alt="National Glass Association" style="width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:0.85;">
+                            </div>
+                            <div class="text-sm font-semibold text-white mb-1">NGA Member</div>
+                            <div class="text-xs text-steel">National Glass Assoc.</div>
+                        </div>
+                        <div class="text-xs text-glass-blue/40 uppercase tracking-wider">G2.2</div>
+                    </div>
+
+                    <!-- Cert 3: BBB -->
+                    <div class="relative text-center scroll-reveal" data-reveal-delay="600">
+                        <div class="glass-card p-6 mb-3">
+                            <div class="card-glow-bg"></div>
+                            <div class="w-16 h-16 mx-auto border-2 border-glass-blue/30 flex items-center justify-center mb-4 bg-navy-black/30">
+                                <span class="text-sm font-bold text-glass-blue/70">BBB</span>
+                            </div>
+                            <div class="text-sm font-semibold text-white mb-1">BBB A+ Rating</div>
+                            <div class="text-xs text-steel">Accredited Business</div>
+                        </div>
+                        <div class="text-xs text-glass-blue/40 uppercase tracking-wider">G2.3</div>
+                    </div>
+
+                    <!-- Cert 4: DOT -->
+                    <div class="relative text-center scroll-reveal" data-reveal-delay="700">
+                        <div class="glass-card p-6 mb-3">
+                            <div class="card-glow-bg"></div>
+                            <div class="w-16 h-16 mx-auto border-2 border-glass-blue/30 flex items-center justify-center mb-4 p-2 bg-navy-black/30">
+                                <img src="logos/dot-seal.svg" alt="Department of Transportation" style="width:100%;height:100%;object-fit:contain;">
+                            </div>
+                            <div class="text-sm font-semibold text-white mb-1">DOT Licensed</div>
+                            <div class="text-xs text-steel">Commercial Carrier</div>
+                        </div>
+                        <div class="text-xs text-glass-blue/40 uppercase tracking-wider">G2.4</div>
+                    </div>
+
+                    <!-- Cert 5: Bonded & Insured -->
+                    <div class="relative text-center scroll-reveal" data-reveal-delay="800">
+                        <div class="glass-card p-6 mb-3">
+                            <div class="card-glow-bg"></div>
+                            <div class="w-16 h-16 mx-auto border-2 border-glass-blue/30 flex items-center justify-center mb-4 bg-navy-black/30">
+                                <span class="text-lg font-bold text-glass-blue/70">B&I</span>
+                            </div>
+                            <div class="text-sm font-semibold text-white mb-1">Bonded & Insured</div>
+                            <div class="text-xs text-steel">Full Coverage</div>
+                        </div>
+                        <div class="text-xs text-glass-blue/40 uppercase tracking-wider">G2.5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         TESTIMONIALS - Navy, Blueprint Annotations
+         ============================================= -->
+    <section id="testimonials" class="relative bg-navy blueprint-grid py-24 lg:py-32 overflow-hidden" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">07</div>
+            <div class="marker-label">References</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <!-- Subtle building outline background -->
+        <div class="absolute inset-0 pointer-events-none opacity-[0.03]">
+            <svg class="w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect x="200" y="50" width="300" height="500" fill="none" stroke="#4A90D9" stroke-width="2"/>
+                <rect x="220" y="80" width="60" height="80" fill="none" stroke="#4A90D9" stroke-width="1"/>
+                <rect x="300" y="80" width="60" height="80" fill="none" stroke="#4A90D9" stroke-width="1"/>
+                <rect x="380" y="80" width="60" height="80" fill="none" stroke="#4A90D9" stroke-width="1"/>
+                <rect x="220" y="190" width="60" height="80" fill="none" stroke="#4A90D9" stroke-width="1"/>
+                <rect x="300" y="190" width="60" height="80" fill="none" stroke="#4A90D9" stroke-width="1"/>
+                <rect x="380" y="190" width="60" height="80" fill="none" stroke="#4A90D9" stroke-width="1"/>
+                <rect x="700" y="100" width="350" height="400" fill="none" stroke="#4A90D9" stroke-width="2"/>
+                <line x1="700" y1="200" x2="1050" y2="200" stroke="#4A90D9" stroke-width="1"/>
+                <line x1="700" y1="300" x2="1050" y2="300" stroke="#4A90D9" stroke-width="1"/>
+                <line x1="700" y1="400" x2="1050" y2="400" stroke="#4A90D9" stroke-width="1"/>
+                <line x1="800" y1="100" x2="800" y2="500" stroke="#4A90D9" stroke-width="1"/>
+                <line x1="900" y1="100" x2="900" y2="500" stroke="#4A90D9" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">07</div>
+                <div class="marker-label">References</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <!-- Section Header -->
+            <div class="flex items-center gap-4 mb-4 scroll-reveal" data-reveal-delay="150">
+                <span class="grid-coord text-xs">H1</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white">Client Testimonials</h2>
+            </div>
+            <p class="text-steel max-w-xl mb-16 scroll-reveal" data-reveal-delay="300">
+                Field notes from architects, general contractors, and building owners we have partnered with.
+            </p>
+
+            <!-- Testimonials as "notes" on a drawing -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-note glass-card p-6 pl-8 scroll-reveal" data-reveal-delay="400">
+                    <div class="card-glow-bg"></div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">H2</span>
+                        <span class="text-xs text-glass-blue/40 uppercase tracking-wider">Note</span>
+                    </div>
+                    <p class="text-silver text-sm leading-relaxed mb-6 italic">
+                        "Quality Reflections delivered a curtain wall installation that exceeded our engineering specifications. Their shop drawing process caught coordination issues that saved us weeks on the schedule."
+                    </p>
+                    <div class="border-t border-glass-blue/10 pt-4">
+                        <div class="text-sm font-semibold text-white">Robert Chen, AIA</div>
+                        <div class="text-xs text-steel">Principal Architect, Chen + Associates</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-note glass-card p-6 pl-8 md:mt-12 scroll-reveal" data-reveal-delay="500">
+                    <div class="card-glow-bg"></div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">H3</span>
+                        <span class="text-xs text-glass-blue/40 uppercase tracking-wider">Note</span>
+                    </div>
+                    <p class="text-silver text-sm leading-relaxed mb-6 italic">
+                        "We have used Quality Reflections on four consecutive projects. Their ability to manage complex storefront conditions and meet aggressive timelines makes them our first call for glazing."
+                    </p>
+                    <div class="border-t border-glass-blue/10 pt-4">
+                        <div class="text-sm font-semibold text-white">Maria Santos</div>
+                        <div class="text-xs text-steel">VP of Construction, Apex General Contractors</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-note glass-card p-6 pl-8 lg:mt-6 scroll-reveal" data-reveal-delay="600">
+                    <div class="card-glow-bg"></div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="grid-coord text-xs" style="width:22px; height:22px; font-size:9px;">H4</span>
+                        <span class="text-xs text-glass-blue/40 uppercase tracking-wider">Note</span>
+                    </div>
+                    <p class="text-silver text-sm leading-relaxed mb-6 italic">
+                        "The skylight system they installed has been leak-free for three years in one of our most demanding environments. Exceptional attention to waterproofing details and thermal performance."
+                    </p>
+                    <div class="border-t border-glass-blue/10 pt-4">
+                        <div class="text-sm font-semibold text-white">James Holloway</div>
+                        <div class="text-xs text-steel">Facilities Director, Meridian Properties</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         CTA - Navy Black, Revision Note / Title Block
+         ============================================= -->
+    <section id="contact" class="relative bg-navy-black blueprint-grid-hero py-24 lg:py-32 overflow-hidden" data-scroll-section style="position:relative; z-index:10;">
+        <!-- Caustic Light Effects -->
+        <div class="caustic-light" style="top: 20%; left: 20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(74,144,217,0.04), transparent 70%); animation: causticDrift1 20s ease-in-out infinite;"></div>
+        <div class="caustic-light" style="top: 40%; right: 15%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(74,144,217,0.03), transparent 70%); animation: causticDrift2 25s ease-in-out infinite;"></div>
+        <div class="caustic-light" style="bottom: 20%; left: 40%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,255,255,0.02), transparent 70%); animation: causticDrift3 30s ease-in-out infinite;"></div>
+
+        <!-- Section Marker -->
+        <div class="section-marker hidden lg:flex scroll-reveal" data-reveal-delay="0" style="left: 24px;">
+            <div class="marker-number">08</div>
+            <div class="marker-label">Contact</div>
+            <div class="marker-line"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-24">
+            <!-- Mobile Section Marker -->
+            <div class="section-marker lg:hidden scroll-reveal" data-reveal-delay="0">
+                <div class="marker-number">08</div>
+                <div class="marker-label">Contact</div>
+                <div class="marker-line"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Revision Note -->
+                <div class="inline-flex items-center gap-3 mb-8 px-4 py-2 border border-glass-blue/20 bg-glass-blue/5 scroll-reveal" data-reveal-delay="150">
+                    <span class="text-xs font-semibold text-glass-blue uppercase tracking-widest">Rev 03</span>
+                    <span class="w-px h-4 bg-glass-blue/20"></span>
+                    <span class="text-xs text-steel uppercase tracking-wider">Request for Quote</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 scroll-reveal" data-reveal-delay="300">
+                    Start Your Next Project
+                </h2>
+                <p class="text-lg text-steel max-w-2xl mx-auto mb-10 leading-relaxed scroll-reveal" data-reveal-delay="450">
+                    From initial consultation through final punch list, our team manages every detail of your commercial glazing project. Let us engineer your vision.
+                </p>
+
+                <!-- Glass CTA Button -->
+                <div class="scroll-reveal" data-reveal-delay="600">
+                    <a href="#" class="btn-blueprint inline-flex items-center justify-center px-10 py-5 bg-glass-blue/10 border-2 border-glass-blue text-white font-semibold text-sm uppercase tracking-widest hover:bg-glass-blue/20 transition-all mb-16">
+                        Request a Consultation
+                    </a>
+                </div>
+
+                <!-- Title Block Format Contact Info -->
+                <div class="title-block max-w-lg mx-auto text-left scroll-reveal" data-reveal-delay="700">
+                    <div class="tb-row">
+                        <div class="tb-cell flex-1">
+                            <span class="tb-label">Company</span>
+                            <span class="text-white font-semibold">Quality Reflections Glasswork</span>
+                        </div>
+                    </div>
+                    <div class="tb-row">
+                        <div class="tb-cell flex-1">
+                            <span class="tb-label">Phone</span>
+                            <span class="text-silver">(555) 234-5678</span>
+                        </div>
+                        <div class="tb-cell flex-1">
+                            <span class="tb-label">Email</span>
+                            <span class="text-silver">info@qualityreflections.com</span>
+                        </div>
+                    </div>
+                    <div class="tb-row">
+                        <div class="tb-cell flex-1">
+                            <span class="tb-label">Address</span>
+                            <span class="text-silver">1200 Industrial Pkwy, Suite 100</span>
+                        </div>
+                    </div>
+                    <div class="tb-row">
+                        <div class="tb-cell" style="width: 100px;">
+                            <span class="tb-label">Drawing</span>
+                            <span class="text-glass-blue/60 font-mono text-xs">QR-WEB-03</span>
+                        </div>
+                        <div class="tb-cell" style="width: 80px;">
+                            <span class="tb-label">Rev</span>
+                            <span class="text-glass-blue/60 font-mono text-xs">03</span>
+                        </div>
+                        <div class="tb-cell flex-1">
+                            <span class="tb-label">Date</span>
+                            <span class="text-glass-blue/60 font-mono text-xs">2026-01-28</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         FOOTER - Navy Black, Blueprint Sheet Bottom
+         ============================================= -->
+    <footer class="bg-navy-black border-t border-glass-blue/10 py-16" style="position:relative; z-index:10;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-12 lg:gap-8">
+
+                <!-- Left: Links Grid -->
+                <div class="lg:col-span-2">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                        <!-- Column 1 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="grid-coord text-xs" style="width:20px; height:20px; font-size:8px;">F1</span>
+                                <span class="text-xs text-glass-blue/40 uppercase tracking-wider font-semibold">Services</span>
+                            </div>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Curtain Walls</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Storefronts</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Window Systems</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Entrances</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Skylights</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Glass Railings</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="grid-coord text-xs" style="width:20px; height:20px; font-size:8px;">F2</span>
+                                <span class="text-xs text-glass-blue/40 uppercase tracking-wider font-semibold">Company</span>
+                            </div>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">About Us</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Projects</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Certifications</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Careers</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 3 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="grid-coord text-xs" style="width:20px; height:20px; font-size:8px;">F3</span>
+                                <span class="text-xs text-glass-blue/40 uppercase tracking-wider font-semibold">Resources</span>
+                            </div>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Product Specs</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Case Studies</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Technical Data</a></li>
+                                <li><a href="#" class="text-sm text-steel hover:text-white transition-colors">Warranty Info</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Title Block -->
+                <div class="lg:flex lg:justify-end">
+                    <div class="title-block w-full max-w-sm">
+                        <div class="tb-row">
+                            <div class="tb-cell flex-1 text-center" style="padding: 12px;">
+                                <svg viewBox="0 0 447.89 233.99" xmlns="http://www.w3.org/2000/svg" style="height:20px;width:auto;display:inline-block;margin-bottom:4px;"><path fill="#4A90D9" fill-rule="evenodd" d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z"/></svg>
+                                <span class="text-white font-bold tracking-wide text-sm">QUALITY REFLECTIONS</span>
+                                <span class="block text-xs text-steel mt-1">GLASSWORK</span>
+                            </div>
+                        </div>
+                        <div class="tb-row">
+                            <div class="tb-cell flex-1">
+                                <span class="tb-label">Drawing Number</span>
+                                <span class="text-glass-blue/60 font-mono text-xs">QR-WEB-2026-03</span>
+                            </div>
+                        </div>
+                        <div class="tb-row">
+                            <div class="tb-cell" style="width: 50%;">
+                                <span class="tb-label">Revision</span>
+                                <span class="text-glass-blue/60 font-mono text-xs">REV 03</span>
+                            </div>
+                            <div class="tb-cell" style="width: 50%;">
+                                <span class="tb-label">Date</span>
+                                <span class="text-glass-blue/60 font-mono text-xs">2026-01-28</span>
+                            </div>
+                        </div>
+                        <div class="tb-row">
+                            <div class="tb-cell" style="width: 50%;">
+                                <span class="tb-label">Scale</span>
+                                <span class="text-glass-blue/60 font-mono text-xs">NTS</span>
+                            </div>
+                            <div class="tb-cell" style="width: 50%;">
+                                <span class="tb-label">Sheet</span>
+                                <span class="text-glass-blue/60 font-mono text-xs">08 of 08</span>
+                            </div>
+                        </div>
+                        <div class="tb-row">
+                            <div class="tb-cell flex-1">
+                                <span class="tb-label">Drawn By</span>
+                                <span class="text-glass-blue/60 font-mono text-xs">QR DIGITAL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="mt-12 pt-8 border-t border-glass-blue/10">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-xs text-steel">
+                        &copy; 2026 Quality Reflections Glasswork. All rights reserved.
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="text-xs text-steel hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-xs text-steel hover:text-white transition-colors">Terms of Service</a>
+                        <span class="text-xs text-glass-blue/30 font-mono">QR-WEB-03</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =============================================
+         JAVASCRIPT - All Animation Systems
+         ============================================= -->
+    <script>
+        // ========================
+        // Mobile Menu Toggle
+        // ========================
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Header background on scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.style.borderBottomColor = 'rgba(74, 144, 217, 0.25)';
+                header.style.background = 'rgba(1, 14, 47, 0.95)';
+            } else {
+                header.style.borderBottomColor = 'rgba(74, 144, 217, 0.15)';
+                header.style.background = 'rgba(1, 14, 47, 0.8)';
+            }
+        });
+
+        // ========================
+        // ANIMATION 1: CURSOR-REACTIVE BLUEPRINT REVEAL
+        // ========================
+        const cursorOverlay = document.getElementById('cursor-overlay');
+        const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+        if (!isTouchDevice) {
+            document.addEventListener('mousemove', (e) => {
+                cursorOverlay.style.setProperty('--cx', e.clientX + 'px');
+                cursorOverlay.style.setProperty('--cy', e.clientY + 'px');
+            });
+        }
+
+        // ========================
+        // ANIMATION 2: HERO SVG AMBIENT MODE
+        // ========================
+        const shimmerRects = document.querySelectorAll('.shimmer-rect');
+        const annotations = document.querySelectorAll('.svg-annotation');
+
+        // Start ambient mode after draw completes
+        setTimeout(() => {
+            // Shimmer loop
+            function shimmerLoop() {
+                const count = 1 + Math.floor(Math.random() * 2);
+                const indices = [];
+                while (indices.length < count) {
+                    const idx = Math.floor(Math.random() * shimmerRects.length);
+                    if (!indices.includes(idx)) indices.push(idx);
+                }
+                indices.forEach(idx => {
+                    const rect = shimmerRects[idx];
+                    rect.style.animation = 'shimmerRect 1.5s ease-in-out';
+                    setTimeout(() => { rect.style.animation = ''; }, 1500);
+                });
+                setTimeout(shimmerLoop, 3000);
+            }
+            shimmerLoop();
+
+            // Annotation cycle
+            function annotationCycle() {
+                const idx = Math.floor(Math.random() * annotations.length);
+                const anno = annotations[idx];
+                anno.style.animation = 'annotationFade 2.5s ease-in-out';
+                setTimeout(() => { anno.style.animation = ''; }, 2500);
+                setTimeout(annotationCycle, 2000 + Math.random() * 2000);
+            }
+            annotationCycle();
+        }, 3500);
+
+        // ========================
+        // ANIMATION 3: PARALLAX TILT ON HERO
+        // ========================
+        const heroSection = document.getElementById('hero-section');
+        const tiltContainer = document.querySelector('.hero-tilt-container');
+
+        if (!isTouchDevice && heroSection && tiltContainer) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                const rotateX = (y - 0.5) * -2;
+                const rotateY = (x - 0.5) * 2.5;
+
+                requestAnimationFrame(() => {
+                    tiltContainer.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                tiltContainer.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+            });
+        }
+
+        // ========================
+        // ANIMATION 4: STAGGERED SCROLL REVEALS
+        // ========================
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.getAttribute('data-reveal-delay') || '0', 10);
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, delay);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '-60px'
+        });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ========================
+        // ANIMATION 5: CARD HOVER GLOW
+        // ========================
+        document.querySelectorAll('.glass-card, .glass-card-strong').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--card-x', x + 'px');
+                card.style.setProperty('--card-y', y + 'px');
+            });
+        });
+
+        // ========================
+        // ANIMATION 6: FLOATING PARTICLES
+        // ========================
+        const particleContainer = document.getElementById('particle-container');
+
+        for (let i = 0; i < 25; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('floating-particle');
+
+            const size = 1 + Math.random() * 2;
+            const xPos = Math.random() * 100;
+            const opacity = 0.1 + Math.random() * 0.2;
+            const duration = 30 + Math.random() * 50;
+            const delay = Math.random() * duration;
+            const driftX = (Math.random() * 60 - 30);
+
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = xPos + 'vw';
+            particle.style.bottom = '0';
+            particle.style.opacity = opacity;
+            particle.style.setProperty('--drift-x', driftX + 'px');
+            particle.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
+
+            particleContainer.appendChild(particle);
+        }
+
+        // ========================
+        // ANIMATION 7: STAT COUNTER ANIMATION
+        // ========================
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let statsAnimated = false;
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statsAnimated = true;
+                    statNumbers.forEach(el => {
+                        const target = parseInt(el.getAttribute('data-target'), 10);
+                        const suffix = el.getAttribute('data-suffix') || '';
+                        const duration = 2000;
+                        const start = performance.now();
+
+                        function updateCounter(timestamp) {
+                            const elapsed = timestamp - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            // Ease-out cubic
+                            const eased = 1 - Math.pow(1 - progress, 3);
+                            const current = Math.round(eased * target);
+                            el.textContent = current + suffix;
+
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            }
+                        }
+
+                        requestAnimationFrame(updateCounter);
+                    });
+                    statObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        statNumbers.forEach(el => statObserver.observe(el));
+
+        // ========================
+        // ANIMATION 8: SECTION CUT LINE DRAW
+        // ========================
+        const cutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('cut-visible');
+                    cutObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.section-cut').forEach(el => {
+            cutObserver.observe(el);
+        });
+
+        // Also observe the backbone-pulse lines for scale-in effect
+        document.querySelectorAll('[data-cut]').forEach(el => {
+            if (!el.classList.contains('section-cut')) {
+                // These are the connecting lines, already visible via CSS
+            }
+        });
+
+        // ========================
+        // Make hero elements visible immediately (override scroll-reveal for hero stats)
+        // ========================
+        document.querySelectorAll('header').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+
+        // Hero stat cards get revealed fast with stagger
+        const heroCards = document.querySelectorAll('#hero-section .glass-card');
+        heroCards.forEach((card, index) => {
+            card.classList.add('scroll-reveal');
+            card.setAttribute('data-reveal-delay', String(300 + index * 100));
+            revealObserver.observe(card);
+        });
+
+        // ========================
+        // HYBRID CURSOR: Live Coordinate Guideline Hairlines
+        // (from cursor_de_3 - full-viewport lines tracking mouse)
+        // ========================
+        (function() {
+            // Detect touch devices and bail out
+            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia('(hover: none)').matches;
+            if (isTouch) {
+                // Remove hairline elements on touch devices
+                const hLine = document.getElementById('hairline-h');
+                const vLine = document.getElementById('hairline-v');
+                if (hLine) hLine.remove();
+                if (vLine) vLine.remove();
+                // Also reset cursor to default on touch
+                document.body.style.cursor = 'auto';
+                return;
+            }
+
+            const hairlineH = document.getElementById('hairline-h');
+            const hairlineV = document.getElementById('hairline-v');
+
+            if (!hairlineH || !hairlineV) return;
+
+            let targetX = -100;
+            let targetY = -100;
+
+            function updateHairlines() {
+                hairlineH.style.top = targetY + 'px';
+                hairlineV.style.left = targetX + 'px';
+                requestAnimationFrame(updateHairlines);
+            }
+
+            requestAnimationFrame(updateHairlines);
+
+            // Track mouse position
+            document.addEventListener('mousemove', function(e) {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            });
+
+            // Show hairlines when mouse enters viewport
+            document.addEventListener('mouseenter', function() {
+                hairlineH.style.opacity = '1';
+                hairlineV.style.opacity = '1';
+            });
+
+            // Hide hairlines when mouse leaves viewport
+            document.addEventListener('mouseleave', function() {
+                hairlineH.style.opacity = '0';
+                hairlineV.style.opacity = '0';
+            });
+        })();
+    </script>
+
+    <!-- =============================================
+         3D EXPLODED VIEW BACKGROUND - Animation Script
+         ============================================= -->
+    <script>
+    (function() {
+        const assemblyLayer = document.getElementById('assembly-layer');
+        const assemblySvg = document.getElementById('assembly-svg');
+        const assemblyContainer = document.getElementById('assembly-container');
+        const tooltip = document.getElementById('assembly-tooltip');
+        const detailPanel = document.getElementById('assembly-detail-panel');
+        const panelContent = document.getElementById('assembly-panel-content');
+        const heroSection = document.getElementById('hero-section');
+        const heroSpacer = document.getElementById('hero-scroll-spacer');
+        const progressFill = document.getElementById('scroll-progress-fill');
+        const scrollHint = document.getElementById('scroll-hint');
+
+        const layers = Array.from(document.querySelectorAll('.component-group'));
+        let activeLayer = null;
+        let panelOpen = false;
+        let scrollProgress = 0;
+        let idleAngle = 0;
+        let lastTime = 0;
+
+        // Boost all SVG strokes for visibility
+        document.querySelectorAll('#assembly-svg rect, #assembly-svg polygon, #assembly-svg line, #assembly-svg circle').forEach(function(el) {
+            var stroke = el.getAttribute('stroke');
+            if (stroke) {
+                // Increase opacity in rgba values by 3x, cap at 1.0
+                var boosted = stroke.replace(/rgba\((\d+),(\d+),(\d+),([\d.]+)\)/g, function(m, r, g, b, a) {
+                    return 'rgba(' + r + ',' + g + ',' + b + ',' + Math.min(1, parseFloat(a) * 3) + ')';
+                });
+                el.setAttribute('stroke', boosted);
+            }
+            var sw = el.getAttribute('stroke-width');
+            if (sw) {
+                el.setAttribute('stroke-width', String(Math.max(parseFloat(sw) * 1.8, 1)));
+            }
+            var fill = el.getAttribute('fill');
+            if (fill && fill.indexOf('rgba') !== -1) {
+                var boostedFill = fill.replace(/rgba\((\d+),(\d+),(\d+),([\d.]+)\)/g, function(m, r, g, b, a) {
+                    return 'rgba(' + r + ',' + g + ',' + b + ',' + Math.min(0.3, parseFloat(a) * 4) + ')';
+                });
+                el.setAttribute('fill', boostedFill);
+            }
+        });
+
+        // Explosion offsets per layer — dramatic distances
+        const explosionConfig = {
+            1: { tx: -90, ty: -130, s: 1.12, startPct: 8, endPct: 28 },
+            2: { tx: -70, ty: -100, s: 1.09, startPct: 8, endPct: 28 },
+            3: { tx: -55, ty: -150, s: 1.07, startPct: 10, endPct: 32 },
+            4: { tx: -35, ty: 0, s: 1.00, startPct: 25, endPct: 45, spreadX: 50 },
+            5: { tx: 0, ty: 0, s: 1.00, startPct: 25, endPct: 45, spreadY: 40 },
+            6: { tx: -15, ty: 10, s: 1.00, startPct: 30, endPct: 48 },
+            7: { tx: 50, ty: 60, s: 0.95, startPct: 32, endPct: 52 },
+            8: { tx: 70, ty: 120, s: 0.92, startPct: 42, endPct: 60 },
+            9: { tx: 90, ty: 170, s: 0.88, startPct: 45, endPct: 65 },
+        };
+
+        function getAssemblyOpacity(p) {
+            if (p <= 5) return 0.5;
+            if (p <= 30) return 0.5 + (p - 5) / 25 * 0.3;
+            if (p <= 70) return 0.8;
+            if (p <= 100) return 0.8 - (p - 70) / 30 * 0.3;
+            return 0.5;
+        }
+
+        function getExplosionFactor(p, startPct, endPct) {
+            let factor = 0;
+            if (p >= startPct && p <= endPct) {
+                factor = (p - startPct) / (endPct - startPct);
+            } else if (p > endPct) {
+                factor = 1;
+            }
+            return Math.max(0, Math.min(1, factor));
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        var prevProgress = -1;
+
+        function resetAllLayers() {
+            layers.forEach(function(layer) {
+                layer.style.transform = 'translate(0px, 0px) scale(1)';
+                layer.style.filter = 'none';
+                layer.querySelectorAll('.label-text').forEach(function(l) { l.style.opacity = 0; });
+            });
+        }
+
+        function updateAssembly(timestamp) {
+            if (lastTime === 0) { lastTime = timestamp; }
+            const dt = Math.min(timestamp - lastTime, 100); // cap dt to avoid jumps
+            lastTime = timestamp;
+            idleAngle += (dt / 1000) * (360 / 12);
+            if (idleAngle > 360) idleAngle -= 360;
+            const idleOffset = Math.sin(idleAngle * Math.PI / 180) * 3;
+
+            // Spacer-based scroll progress (hero is sticky inside spacer)
+            const spacerRect = heroSpacer.getBoundingClientRect();
+            const scrollableDistance = heroSpacer.offsetHeight - window.innerHeight;
+            if (scrollableDistance > 0) {
+                scrollProgress = Math.max(0, Math.min(100, (-spacerRect.top / scrollableDistance) * 100));
+            } else {
+                scrollProgress = 0;
+            }
+
+            // Invert: start exploded (100), scroll assembles (→0)
+            var buildProgress = 100 - scrollProgress;
+
+            // Update progress bar
+            if (progressFill) progressFill.style.height = scrollProgress + '%';
+            // Fade out scroll hint as user starts scrolling
+            if (scrollHint) scrollHint.style.opacity = scrollProgress > 5 ? '0' : '1';
+
+            // Force full assembled state at bottom of scroll
+            if (scrollProgress >= 99.5) {
+                resetAllLayers();
+                assemblyContainer.style.opacity = 0.8;
+                assemblySvg.style.transform = 'rotateX(15deg) rotateY(' + (-25 + idleOffset) + 'deg)';
+                prevProgress = scrollProgress;
+                requestAnimationFrame(updateAssembly);
+                return;
+            }
+
+            const opacity = getAssemblyOpacity(buildProgress);
+            assemblyContainer.style.opacity = panelOpen ? 0.3 : opacity;
+
+            assemblySvg.style.transform = 'rotateX(15deg) rotateY(' + (-25 + idleOffset) + 'deg)';
+
+            layers.forEach(function(layer) {
+                const layerNum = parseInt(layer.dataset.layer);
+                const config = explosionConfig[layerNum];
+                if (!config) return;
+
+                // buildProgress drives explosion: 100 at top (exploded), 0 at bottom (assembled)
+                const rawFactor = getExplosionFactor(buildProgress, config.startPct, config.endPct);
+                const factor = easeInOutCubic(rawFactor);
+
+                var tx = config.tx * factor;
+                var ty = config.ty * factor;
+                const s = 1 + (config.s - 1) * factor;
+
+                if (config.spreadX) tx += config.spreadX * factor * (layerNum % 2 === 0 ? 1 : -1);
+                if (config.spreadY) ty += config.spreadY * factor * (layerNum % 2 === 0 ? 1 : -1);
+
+                layer.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + s + ')';
+
+                if (!layer.matches(':hover') && layer !== activeLayer) {
+                    if (layerNum === 6 && factor > 0.3) {
+                        const glowIntensity = Math.sin(timestamp / 800) * 0.15 + 0.15;
+                        layer.style.filter = 'drop-shadow(0 0 6px rgba(217,160,74,' + (glowIntensity * factor) + '))';
+                    } else {
+                        layer.style.filter = 'none';
+                    }
+                }
+
+                // Labels visible when exploded (top of scroll), fade as pieces assemble
+                const labels = layer.querySelectorAll('.label-text');
+                labels.forEach(function(l) {
+                    if (factor > 0.5 && buildProgress >= 50) {
+                        l.style.opacity = Math.min(1, (factor - 0.5) * 4) * 0.7;
+                    } else {
+                        l.style.opacity = 0;
+                    }
+                });
+            });
+
+            prevProgress = scrollProgress;
+            requestAnimationFrame(updateAssembly);
+        }
+
+        requestAnimationFrame(updateAssembly);
+
+        window.addEventListener('scroll', function() {}, { passive: true });
+
+        // Tooltip handling
+        layers.forEach(function(layer) {
+            layer.addEventListener('mouseenter', function(e) {
+                if (panelOpen) return;
+                tooltip.textContent = layer.dataset.name;
+                tooltip.classList.add('visible');
+                assemblyLayer.style.pointerEvents = 'auto';
+            });
+
+            layer.addEventListener('mousemove', function(e) {
+                tooltip.style.left = (e.clientX + 14) + 'px';
+                tooltip.style.top = (e.clientY - 30) + 'px';
+            });
+
+            layer.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('visible');
+            });
+
+            layer.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openAssemblyPanel(layer);
+            });
+        });
+
+        assemblyLayer.style.pointerEvents = 'none';
+        layers.forEach(function(l) { l.style.pointerEvents = 'auto'; });
+
+        function openAssemblyPanel(layer) {
+            activeLayer = layer;
+            panelOpen = true;
+            tooltip.classList.remove('visible');
+
+            var d = layer.dataset;
+            panelContent.innerHTML =
+                '<p class="font-mono-assembly" style="font-size:10px;color:rgba(74,144,217,0.5);letter-spacing:0.2em;margin-bottom:8px;">LAYER ' + d.layer + ' OF 9</p>' +
+                '<h3 style="font-size:24px;font-weight:bold;color:white;margin-bottom:16px;">' + d.name + '</h3>' +
+                '<p style="font-size:14px;color:#8A919A;line-height:1.6;margin-bottom:24px;">' + d.desc + '</p>' +
+                '<div style="border-top:1px solid rgba(74,144,217,0.12);padding-top:20px;margin-bottom:24px;">' +
+                    '<p class="font-mono-assembly" style="font-size:10px;color:#4A90D9;letter-spacing:0.2em;margin-bottom:12px;">WHY IT MATTERS</p>' +
+                    '<p style="font-size:14px;color:#C8CDD4;line-height:1.6;">' + d.why + '</p>' +
+                '</div>' +
+                '<div style="border-top:1px solid rgba(74,144,217,0.12);padding-top:20px;">' +
+                    '<p class="font-mono-assembly" style="font-size:10px;color:#4A90D9;letter-spacing:0.2em;margin-bottom:12px;">SPECIFICATIONS</p>' +
+                    '<table class="spec-table" style="width:100%;">' +
+                        '<tr><td class="font-mono-assembly" style="font-size:12px;">Type</td><td style="color:white;font-size:14px;">' + (d.specType || '—') + '</td></tr>' +
+                        '<tr><td class="font-mono-assembly" style="font-size:12px;">' + (d.specThickness ? 'Thickness' : d.specDepth ? 'Depth' : d.specWidth ? 'Width' : d.specCoating ? 'Coating' : 'Detail') + '</td><td style="color:white;font-size:14px;">' + (d.specThickness || d.specDepth || d.specWidth || d.specCoating || '—') + '</td></tr>' +
+                        '<tr><td class="font-mono-assembly" style="font-size:12px;">' + (d.specStrength ? 'Strength' : d.specMoment ? 'Moment' : d.specCapacity ? 'Capacity' : d.specRating ? 'Rating' : d.specScrews ? 'Fasteners' : d.specShgc ? 'SHGC' : d.specDurability ? 'Durability' : d.specConductivity ? 'Conductivity' : 'Rating') + '</td><td style="color:white;font-size:14px;">' + (d.specStrength || d.specMoment || d.specCapacity || d.specRating || d.specScrews || d.specShgc || d.specDurability || d.specConductivity || '—') + '</td></tr>' +
+                        '<tr><td class="font-mono-assembly" style="font-size:12px;">Finish</td><td style="color:white;font-size:14px;">' + (d.specFinish || '—') + '</td></tr>' +
+                    '</table>' +
+                '</div>';
+
+            layers.forEach(function(l) {
+                if (l === layer) {
+                    l.style.opacity = '0.6';
+                    l.style.filter = 'drop-shadow(0 0 16px rgba(74,144,217,0.6))';
+                } else {
+                    l.style.opacity = '0.03';
+                }
+            });
+
+            detailPanel.classList.add('open');
+        }
+
+        function closeAssemblyPanel() {
+            panelOpen = false;
+            activeLayer = null;
+            detailPanel.classList.remove('open');
+            layers.forEach(function(l) {
+                l.style.opacity = '';
+                l.style.filter = '';
+            });
+        }
+        window.closeAssemblyPanel = closeAssemblyPanel;
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && panelOpen) closeAssemblyPanel();
+        });
+
+        document.addEventListener('click', function(e) {
+            if (panelOpen && !detailPanel.contains(e.target)) {
+                closeAssemblyPanel();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
