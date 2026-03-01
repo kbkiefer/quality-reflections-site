@@ -71,7 +71,7 @@ const sections = [
     sectionEls.forEach((el) => observer.observe(el));
 
     // --- Fade in/out based on hero visibility ---
-    const hero = document.querySelector('#hero') || document.querySelector('section:first-of-type');
+    const hero = document.querySelector('#hero-scroll-spacer') || document.querySelector('#hero-section');
     if (hero) {
       const heroObserver = new IntersectionObserver(
         ([entry]) => {
