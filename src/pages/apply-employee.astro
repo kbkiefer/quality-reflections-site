@@ -1,0 +1,397 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Full-Time Employment | Quality Reflections Glasswork">
+  <Header />
+
+  <!-- Hero -->
+  <section class="apply-hero blueprint-grid-hero">
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+      <div class="inline-flex items-center justify-center w-16 h-16 border border-[rgba(74,144,217,0.3)] mb-6">
+        <svg class="w-8 h-8 text-[#4A90D9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-wider mb-4">FULL-TIME EMPLOYMENT</h1>
+      <p class="text-[#8A919A] text-base sm:text-lg max-w-xl mx-auto">Build your career with a team that values excellence, integrity, and professional growth.</p>
+    </div>
+  </section>
+
+  <!-- Benefits Bar -->
+  <section class="apply-benefits">
+    <div class="apply-benefits-grid">
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Health Benefits</div>
+        <div class="apply-benefit-desc">Medical, dental & vision</div>
+      </div>
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">401(k) Retirement</div>
+        <div class="apply-benefit-desc">Company matching available</div>
+      </div>
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="0" ry="0"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Paid Time Off</div>
+        <div class="apply-benefit-desc">Vacation & holidays</div>
+      </div>
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Career Growth</div>
+        <div class="apply-benefit-desc">Training & advancement</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section class="apply-form-section">
+    <div class="apply-form-wrapper">
+      <div class="text-center mb-10">
+        <h2 class="font-mono text-xl sm:text-2xl font-bold text-white tracking-wider mb-2">LET'S GET TO KNOW YOU</h2>
+        <p class="text-[#8A919A]">Help us understand your career goals and what you're looking for.</p>
+      </div>
+
+      <!-- Progress Steps -->
+      <div class="apply-progress" id="formProgress">
+        <div class="apply-progress-step active" data-step="1">
+          <span class="apply-progress-step-num">1</span>
+          <span>Background</span>
+        </div>
+        <div class="apply-progress-step" data-step="2">
+          <span class="apply-progress-step-num">2</span>
+          <span>Goals</span>
+        </div>
+        <div class="apply-progress-step" data-step="3">
+          <span class="apply-progress-step-num">3</span>
+          <span>Contact</span>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="apply-form-card">
+        <form id="employeeForm">
+
+          <!-- Step 1: Background -->
+          <div class="apply-form-step active" data-step="1">
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="0" ry="0"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+              Current employment status
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card">
+                <input type="radio" name="employment-status" value="employed">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Currently Employed</h4>
+                  <p>Looking for new opportunities</p>
+                </div>
+              </label>
+              <label class="apply-option-card">
+                <input type="radio" name="employment-status" value="unemployed">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Currently Unemployed</h4>
+                  <p>Actively job searching</p>
+                </div>
+              </label>
+              <label class="apply-option-card">
+                <input type="radio" name="employment-status" value="contractor">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Self-Employed / Contractor</h4>
+                  <p>Want stability of full-time</p>
+                </div>
+              </label>
+              <label class="apply-option-card">
+                <input type="radio" name="employment-status" value="student">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Student / Recent Graduate</h4>
+                  <p>Starting my career</p>
+                </div>
+              </label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Industry experience level
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card">
+                <input type="radio" name="experience" value="entry">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Entry Level (0-1 years)</h4>
+                  <p>New to the industry, eager to learn</p>
+                </div>
+              </label>
+              <label class="apply-option-card">
+                <input type="radio" name="experience" value="intermediate">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Intermediate (2-5 years)</h4>
+                  <p>Solid foundation, growing skills</p>
+                </div>
+              </label>
+              <label class="apply-option-card">
+                <input type="radio" name="experience" value="experienced">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Experienced (5-10 years)</h4>
+                  <p>Skilled professional</p>
+                </div>
+              </label>
+              <label class="apply-option-card">
+                <input type="radio" name="experience" value="expert">
+                <div class="apply-option-label">
+                  <span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <h4>Expert (10+ years)</h4>
+                  <p>Industry veteran, leadership ready</p>
+                </div>
+              </label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Roles of interest
+            </h3>
+            <div class="apply-skill-tags">
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="glazier"><span class="apply-skill-tag-label">Glazier</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="lead-installer"><span class="apply-skill-tag-label">Lead Installer</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="foreman"><span class="apply-skill-tag-label">Foreman</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="project-manager"><span class="apply-skill-tag-label">Project Manager</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="estimator"><span class="apply-skill-tag-label">Estimator</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="shop-fabrication"><span class="apply-skill-tag-label">Shop Fabrication</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="apprentice"><span class="apply-skill-tag-label">Apprentice</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="roles" value="other"><span class="apply-skill-tag-label">Other</span></label>
+            </div>
+
+            <div class="apply-form-nav">
+              <div></div>
+              <button type="button" class="btn-blueprint px-6 py-3 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm" onclick="nextStep(1)">
+                <span>Continue</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Goals -->
+          <div class="apply-form-step" data-step="2">
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+              </svg>
+              What matters most in a job? (Select top 3)
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="checkbox" name="priorities" value="salary"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Competitive Salary</h4><p>Top pay for my skills</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="priorities" value="benefits"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Benefits Package</h4><p>Health, retirement, PTO</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="priorities" value="growth"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Career Growth</h4><p>Advancement opportunities</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="priorities" value="work-life"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Work-Life Balance</h4><p>Predictable schedule</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="priorities" value="team"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Great Team</h4><p>Positive work environment</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="priorities" value="training"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Training & Development</h4><p>Learn new skills</p></div></label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+              Where do you see yourself in 5 years?
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="radio" name="career-goal" value="master-craft"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Master My Craft</h4><p>Become the best at what I do</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="career-goal" value="lead-team"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Lead a Team</h4><p>Supervise and mentor others</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="career-goal" value="management"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Move into Management</h4><p>Project or operations management</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="career-goal" value="stable"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Stable Long-Term Role</h4><p>Reliable work with a great team</p></div></label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="0" ry="0"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              How soon can you start?
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="radio" name="start-date" value="immediately"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Immediately</h4><p>Ready to start now</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="start-date" value="2-weeks"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>2 Weeks Notice</h4><p>Need to wrap up current role</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="start-date" value="1-month"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>1 Month</h4><p>Need time to transition</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="start-date" value="flexible"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Flexible</h4><p>Open to discussion</p></div></label>
+            </div>
+
+            <div class="apply-form-nav">
+              <button type="button" class="apply-btn-back" onclick="prevStep(2)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn-blueprint px-6 py-3 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm" onclick="nextStep(2)">
+                <span>Continue</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Contact -->
+          <div class="apply-form-step" data-step="3">
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              Your contact information
+            </h3>
+
+            <div class="apply-form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="apply-form-row">
+              <div class="apply-form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="apply-form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+              </div>
+            </div>
+            <div class="apply-form-row">
+              <div class="apply-form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city">
+              </div>
+              <div class="apply-form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" value="Texas">
+              </div>
+            </div>
+            <div class="apply-form-group">
+              <label for="linkedin">LinkedIn Profile (optional)</label>
+              <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+            </div>
+            <div class="apply-form-group">
+              <label for="message">Tell us about yourself</label>
+              <textarea id="message" name="message" rows="4" placeholder="Share your background, achievements, and what excites you about joining Quality Reflections..."></textarea>
+            </div>
+
+            <div class="apply-form-nav">
+              <button type="button" class="apply-btn-back" onclick="prevStep(3)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back
+              </button>
+              <button type="submit" class="btn-blueprint px-6 py-3 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm">
+                <span>Submit Application</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="apply-form-step" data-step="success">
+            <div class="apply-success">
+              <div class="apply-success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h3>APPLICATION SUBMITTED</h3>
+              <p>Thank you for your interest in joining Quality Reflections. Our HR team will review your application and reach out within 3-5 business days.</p>
+              <a href="/" class="btn-blueprint px-8 py-4 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm inline-block">
+                <span>Return to Home</span>
+              </a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  function nextStep(current: number) {
+    const currentEl = document.querySelector(`.apply-form-step[data-step="${current}"]`);
+    const nextEl = document.querySelector(`.apply-form-step[data-step="${current + 1}"]`);
+    const currentProg = document.querySelector(`.apply-progress-step[data-step="${current}"]`);
+    const nextProg = document.querySelector(`.apply-progress-step[data-step="${current + 1}"]`);
+    if (currentEl && nextEl) {
+      currentEl.classList.remove('active');
+      nextEl.classList.add('active');
+      currentProg?.classList.remove('active');
+      currentProg?.classList.add('completed');
+      nextProg?.classList.add('active');
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+  }
+
+  function prevStep(current: number) {
+    const currentEl = document.querySelector(`.apply-form-step[data-step="${current}"]`);
+    const prevEl = document.querySelector(`.apply-form-step[data-step="${current - 1}"]`);
+    const currentProg = document.querySelector(`.apply-progress-step[data-step="${current}"]`);
+    const prevProg = document.querySelector(`.apply-progress-step[data-step="${current - 1}"]`);
+    if (currentEl && prevEl) {
+      currentEl.classList.remove('active');
+      prevEl.classList.add('active');
+      currentProg?.classList.remove('active');
+      prevProg?.classList.remove('completed');
+      prevProg?.classList.add('active');
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+  }
+
+  (window as any).nextStep = nextStep;
+  (window as any).prevStep = prevStep;
+
+  document.getElementById('employeeForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data: Record<string, string | string[]> = {};
+    formData.forEach((value, key) => {
+      if (data[key]) {
+        if (Array.isArray(data[key])) {
+          (data[key] as string[]).push(value as string);
+        } else {
+          data[key] = [data[key] as string, value as string];
+        }
+      } else {
+        data[key] = value as string;
+      }
+    });
+    console.log('Employee application submitted:', data);
+    document.querySelector('.apply-form-step[data-step="3"]')?.classList.remove('active');
+    document.querySelector('.apply-form-step[data-step="success"]')?.classList.add('active');
+    document.querySelector('.apply-progress-step[data-step="3"]')?.classList.remove('active');
+    document.querySelector('.apply-progress-step[data-step="3"]')?.classList.add('completed');
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  });
+</script>

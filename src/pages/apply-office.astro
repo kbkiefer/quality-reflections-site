@@ -1,0 +1,417 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Office Positions | Quality Reflections Glasswork">
+  <Header />
+
+  <!-- Hero -->
+  <section class="apply-hero blueprint-grid-hero">
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+      <div class="inline-flex items-center justify-center w-16 h-16 border border-[rgba(74,144,217,0.3)] mb-6">
+        <svg class="w-8 h-8 text-[#4A90D9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="3" width="20" height="14" rx="0" ry="0"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <h1 class="font-mono text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-wider mb-4">OFFICE POSITIONS</h1>
+      <p class="text-[#8A919A] text-base sm:text-lg max-w-xl mx-auto">Support our operations with administrative, project coordination, and customer service excellence.</p>
+    </div>
+  </section>
+
+  <!-- Benefits Bar -->
+  <section class="apply-benefits">
+    <div class="apply-benefits-grid">
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Regular Hours</div>
+        <div class="apply-benefit-desc">Monday-Friday schedule</div>
+      </div>
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Modern Office</div>
+        <div class="apply-benefit-desc">Comfortable workspace</div>
+      </div>
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Team Environment</div>
+        <div class="apply-benefit-desc">Collaborative culture</div>
+      </div>
+      <div class="apply-benefit-item">
+        <div class="apply-benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div class="apply-benefit-title">Full Benefits</div>
+        <div class="apply-benefit-desc">Health, PTO & more</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section class="apply-form-section">
+    <div class="apply-form-wrapper">
+      <div class="text-center mb-10">
+        <h2 class="font-mono text-xl sm:text-2xl font-bold text-white tracking-wider mb-2">FIND YOUR ROLE</h2>
+        <p class="text-[#8A919A]">Tell us about your skills and interests so we can match you with the right opportunity.</p>
+      </div>
+
+      <!-- Progress Steps -->
+      <div class="apply-progress" id="formProgress">
+        <div class="apply-progress-step active" data-step="1">
+          <span class="apply-progress-step-num">1</span>
+          <span>Role</span>
+        </div>
+        <div class="apply-progress-step" data-step="2">
+          <span class="apply-progress-step-num">2</span>
+          <span>Skills</span>
+        </div>
+        <div class="apply-progress-step" data-step="3">
+          <span class="apply-progress-step-num">3</span>
+          <span>Contact</span>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="apply-form-card">
+        <form id="officeForm">
+
+          <!-- Step 1: Role -->
+          <div class="apply-form-step active" data-step="1">
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="0" ry="0"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+              What type of office role interests you?
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="radio" name="role-type" value="administrative"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Administrative Assistant</h4><p>Scheduling, filing, correspondence</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="role-type" value="customer-service"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Customer Service</h4><p>Client communication, quotes, support</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="role-type" value="project-coordinator"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Project Coordinator</h4><p>Scheduling crews, tracking projects</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="role-type" value="accounting"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Accounting / Bookkeeping</h4><p>Invoicing, payroll, financial records</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="role-type" value="hr"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Human Resources</h4><p>Hiring, onboarding, employee relations</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="role-type" value="estimator"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Estimator / Sales Support</h4><p>Preparing quotes, bid assistance</p></div></label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Office experience level
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="radio" name="experience" value="entry"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Entry Level (0-1 years)</h4><p>New to office work, quick learner</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="experience" value="some"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Some Experience (1-3 years)</h4><p>Familiar with office environments</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="experience" value="experienced"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Experienced (3-5 years)</h4><p>Strong professional background</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="experience" value="senior"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Senior (5+ years)</h4><p>Extensive experience, leadership ready</p></div></label>
+            </div>
+
+            <div class="apply-form-nav">
+              <div></div>
+              <button type="button" class="btn-blueprint px-6 py-3 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm" onclick="nextStep(1)"><span>Continue</span></button>
+            </div>
+          </div>
+
+          <!-- Step 2: Skills -->
+          <div class="apply-form-step" data-step="2">
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="0" ry="0"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+              Software proficiency (select all that apply)
+            </h3>
+            <div class="apply-skill-tags">
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="word"><span class="apply-skill-tag-label">Microsoft Word</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="excel"><span class="apply-skill-tag-label">Microsoft Excel</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="outlook"><span class="apply-skill-tag-label">Microsoft Outlook</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="google"><span class="apply-skill-tag-label">Google Workspace</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="quickbooks"><span class="apply-skill-tag-label">QuickBooks</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="adobe"><span class="apply-skill-tag-label">Adobe Suite</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="crm"><span class="apply-skill-tag-label">CRM Software</span></label>
+              <label class="apply-skill-tag"><input type="checkbox" name="software" value="pm-tools"><span class="apply-skill-tag-label">Project Mgmt Tools</span></label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Strongest skills (select top 3)
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="checkbox" name="strengths" value="organization"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Organization</h4><p>Keep everything in order</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="strengths" value="communication"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Communication</h4><p>Clear and professional</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="strengths" value="problem-solving"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Problem Solving</h4><p>Find solutions quickly</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="strengths" value="detail"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Attention to Detail</h4><p>Accuracy matters</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="strengths" value="multitasking"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Multitasking</h4><p>Handle multiple priorities</p></div></label>
+              <label class="apply-option-card"><input type="checkbox" name="strengths" value="customer-focus"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Customer Focus</h4><p>Client satisfaction first</p></div></label>
+            </div>
+
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              Are you bilingual?
+            </h3>
+            <div class="apply-option-grid">
+              <label class="apply-option-card"><input type="radio" name="bilingual" value="english-spanish"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>English & Spanish</h4><p>Fluent in both</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="bilingual" value="english-only"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>English Only</h4><p>Primary language</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="bilingual" value="spanish-primary"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Spanish Primary</h4><p>Learning English</p></div></label>
+              <label class="apply-option-card"><input type="radio" name="bilingual" value="other"><div class="apply-option-label"><span class="apply-option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span><h4>Other Languages</h4><p>Specify in comments</p></div></label>
+            </div>
+
+            <div class="apply-form-nav">
+              <button type="button" class="apply-btn-back" onclick="prevStep(2)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn-blueprint px-6 py-3 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm" onclick="nextStep(2)"><span>Continue</span></button>
+            </div>
+          </div>
+
+          <!-- Step 3: Contact -->
+          <div class="apply-form-step" data-step="3">
+            <h3 class="apply-step-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              Your contact information
+            </h3>
+
+            <div class="apply-form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="apply-form-row">
+              <div class="apply-form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="apply-form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+              </div>
+            </div>
+            <div class="apply-form-row">
+              <div class="apply-form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city">
+              </div>
+              <div class="apply-form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" value="Texas">
+              </div>
+            </div>
+            <div class="apply-form-group">
+              <label for="availability">Your availability</label>
+              <select id="availability" name="availability">
+                <option value="full-time">Full-Time (40 hours/week)</option>
+                <option value="part-time">Part-Time (20-30 hours/week)</option>
+                <option value="flexible">Flexible / Either</option>
+              </select>
+            </div>
+            <div class="apply-form-group">
+              <label for="startDate">When can you start?</label>
+              <select id="startDate" name="startDate">
+                <option value="immediately">Immediately</option>
+                <option value="1-week">Within 1 week</option>
+                <option value="2-weeks">Within 2 weeks</option>
+                <option value="1-month">Within 1 month</option>
+                <option value="flexible">Flexible</option>
+              </select>
+            </div>
+            <div class="apply-form-group">
+              <label for="resume">Upload Resume (PDF, DOC, DOCX — max 5MB)</label>
+              <div class="apply-upload-zone" id="uploadZone">
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" class="apply-upload-input">
+                <div class="apply-upload-content" id="uploadContent">
+                  <svg class="apply-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/>
+                  </svg>
+                  <span class="apply-upload-text">Drag & drop your resume or <span class="text-[#4A90D9]">browse files</span></span>
+                  <span class="apply-upload-hint">PDF, DOC, or DOCX up to 5MB</span>
+                </div>
+                <div class="apply-upload-file hidden" id="uploadFile">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                  <span class="apply-upload-filename" id="uploadFilename"></span>
+                  <button type="button" class="apply-upload-remove" id="uploadRemove" aria-label="Remove file">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="apply-form-group">
+              <label for="message">Tell us about yourself and your career goals</label>
+              <textarea id="message" name="message" rows="4" placeholder="Share your background, what interests you about this role, and any relevant experience..."></textarea>
+            </div>
+
+            <div class="apply-form-nav">
+              <button type="button" class="apply-btn-back" onclick="prevStep(3)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back
+              </button>
+              <button type="submit" class="btn-blueprint px-6 py-3 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm"><span>Submit Application</span></button>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="apply-form-step" data-step="success">
+            <div class="apply-success">
+              <div class="apply-success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h3>APPLICATION SUBMITTED</h3>
+              <p>Thank you for your interest in joining Quality Reflections. Our team will review your application and contact you within 3-5 business days.</p>
+              <a href="/" class="btn-blueprint px-8 py-4 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm inline-block"><span>Return to Home</span></a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  function nextStep(current: number) {
+    const currentEl = document.querySelector(`.apply-form-step[data-step="${current}"]`);
+    const nextEl = document.querySelector(`.apply-form-step[data-step="${current + 1}"]`);
+    const currentProg = document.querySelector(`.apply-progress-step[data-step="${current}"]`);
+    const nextProg = document.querySelector(`.apply-progress-step[data-step="${current + 1}"]`);
+    if (currentEl && nextEl) {
+      currentEl.classList.remove('active');
+      nextEl.classList.add('active');
+      currentProg?.classList.remove('active');
+      currentProg?.classList.add('completed');
+      nextProg?.classList.add('active');
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+  }
+
+  function prevStep(current: number) {
+    const currentEl = document.querySelector(`.apply-form-step[data-step="${current}"]`);
+    const prevEl = document.querySelector(`.apply-form-step[data-step="${current - 1}"]`);
+    const currentProg = document.querySelector(`.apply-progress-step[data-step="${current}"]`);
+    const prevProg = document.querySelector(`.apply-progress-step[data-step="${current - 1}"]`);
+    if (currentEl && prevEl) {
+      currentEl.classList.remove('active');
+      prevEl.classList.add('active');
+      currentProg?.classList.remove('active');
+      prevProg?.classList.remove('completed');
+      prevProg?.classList.add('active');
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+  }
+
+  // Make functions globally accessible for onclick handlers
+  (window as any).nextStep = nextStep;
+  (window as any).prevStep = prevStep;
+
+  // Resume upload handling
+  const uploadZone = document.getElementById('uploadZone');
+  const uploadInput = document.getElementById('resume') as HTMLInputElement;
+  const uploadContent = document.getElementById('uploadContent');
+  const uploadFile = document.getElementById('uploadFile');
+  const uploadFilename = document.getElementById('uploadFilename');
+  const uploadRemove = document.getElementById('uploadRemove');
+  const maxSize = 5 * 1024 * 1024; // 5MB
+  const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+
+  function showFile(file: File) {
+    if (!allowedTypes.includes(file.type)) {
+      alert('Please upload a PDF, DOC, or DOCX file.');
+      return;
+    }
+    if (file.size > maxSize) {
+      alert('File size must be under 5MB.');
+      return;
+    }
+    if (uploadContent && uploadFile && uploadFilename) {
+      uploadContent.classList.add('hidden');
+      uploadFile.classList.remove('hidden');
+      uploadFilename.textContent = file.name;
+      uploadZone?.classList.add('has-file');
+    }
+  }
+
+  function clearFile() {
+    if (uploadInput) uploadInput.value = '';
+    if (uploadContent && uploadFile) {
+      uploadContent.classList.remove('hidden');
+      uploadFile.classList.add('hidden');
+      uploadZone?.classList.remove('has-file');
+    }
+  }
+
+  uploadInput?.addEventListener('change', () => {
+    if (uploadInput.files?.[0]) showFile(uploadInput.files[0]);
+  });
+
+  uploadZone?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadZone.classList.add('dragover');
+  });
+
+  uploadZone?.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('dragover');
+  });
+
+  uploadZone?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('dragover');
+    const file = (e as DragEvent).dataTransfer?.files[0];
+    if (file) {
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      if (uploadInput) uploadInput.files = dt.files;
+      showFile(file);
+    }
+  });
+
+  uploadRemove?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    clearFile();
+  });
+
+  document.getElementById('officeForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data: Record<string, string | string[]> = {};
+    formData.forEach((value, key) => {
+      if (data[key]) {
+        if (Array.isArray(data[key])) {
+          (data[key] as string[]).push(value as string);
+        } else {
+          data[key] = [data[key] as string, value as string];
+        }
+      } else {
+        data[key] = value as string;
+      }
+    });
+    console.log('Office application submitted:', data);
+    document.querySelector('.apply-form-step[data-step="3"]')?.classList.remove('active');
+    document.querySelector('.apply-form-step[data-step="success"]')?.classList.add('active');
+    document.querySelector('.apply-progress-step[data-step="3"]')?.classList.remove('active');
+    document.querySelector('.apply-progress-step[data-step="3"]')?.classList.add('completed');
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  });
+</script>

@@ -395,7 +395,7 @@ export default function HeroAssembly() {
   useEffect(() => {
     if (!panelOpen) return;
     const handleClick = (e: MouseEvent) => {
-      const panel = document.getElementById('hero-assembly-panel');
+      const panel = document.getElementById('assembly-detail-panel');
       if (panel && !panel.contains(e.target as Node)) {
         closePanel();
       }
@@ -418,20 +418,20 @@ export default function HeroAssembly() {
       {/* Tooltip — fixed overlay at body level */}
       <div
         ref={tooltipRef}
-        className="assembly-tooltip"
+        id="assembly-tooltip"
         aria-hidden="true"
       />
 
       {/* Assembly container with perspective */}
       <div
         ref={containerRef}
-        className="assembly-container"
+        id="assembly-container"
       >
         <svg
           ref={svgRef}
           viewBox="0 0 800 700"
           xmlns="http://www.w3.org/2000/svg"
-          className="assembly-svg"
+          id="assembly-svg"
         >
           {/* ====== Layer 9: Floor Slab (backmost) ====== */}
           <g
@@ -963,8 +963,8 @@ export default function HeroAssembly() {
 
       {/* Detail Panel — slides in from the right */}
       <div
-        id="hero-assembly-panel"
-        className={`assembly-detail-panel${panelOpen ? ' open' : ''}`}
+        id="assembly-detail-panel"
+        className={panelOpen ? 'open' : ''}
       >
         <button
           className="assembly-panel-close"
