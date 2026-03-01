@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import PlatformsSection from '../components/PlatformsSection.astro';
+import PartnershipSection from '../components/PartnershipSection.astro';
+import CertificationsSection from '../components/CertificationsSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Footer from '../components/Footer.astro';
+import GlassCursor from '../components/react/GlassCursor';
+import ScrollTracker from '../components/ui/ScrollTracker.astro';
+---
+
+<Layout
+  title="Quality Reflections Glasswork | Commercial Glazing, Laredo TX"
+  description="Custom commercial glazing systems engineered to specification. Curtain walls, storefronts, and specialty glass installations in Laredo, Texas."
+>
+  <GlassCursor client:load />
+  <ScrollTracker />
+
+  <div id="hairline-h"></div>
+  <div id="hairline-v"></div>
+
+  <div id="cursor-overlay">
+    <div class="cursor-grid"></div>
+    <div class="cursor-glow"></div>
+    <div class="cursor-crosshair-h"></div>
+    <div class="cursor-crosshair-v"></div>
+  </div>
+
+  <div id="particle-container"></div>
+
+  <Header />
+  <HeroSection />
+  <ServicesSection />
+  <ProjectsSection />
+  <PlatformsSection />
+  <PartnershipSection />
+  <CertificationsSection />
+  <TestimonialsSection />
+  <ContactSection />
+  <Footer />
+</Layout>
+
+<script>
+  /**
+   * Page-level interactivity — cursor effects, scroll reveals,
+   * section cuts, hairline guides, and floating particles.
+   * Touch devices skip cursor-based effects.
+   */
+  (function () {
+    const isTouch = window.matchMedia('(hover: none)').matches;
+
+    // ─── 1. Cursor Overlay Tracking ───
+    const cursorOverlay = document.getElementById('cursor-overlay');
+    if (cursorOverlay && !isTouch) {
+      document.addEventListener('mousemove', (e) => {
+        cursorOverlay.style.left = e.clientX + 'px';
+        cursorOverlay.style.top = e.clientY + 'px';
+      }, { passive: true });
+    }
+
+    // ─── 2. Card Hover Glow ───
+    if (!isTouch) {
+      document.addEventListener('mousemove', (e) => {
+        const cards = document.querySelectorAll('.card-glow-bg');
+        cards.forEach((card) => {
+          const rect = (card as HTMLElement).getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          (card as HTMLElement).style.setProperty('--card-x', x + 'px');
+          (card as HTMLElement).style.setProperty('--card-y', y + 'px');
+        });
+      }, { passive: true });
+    }
+
+    // ─── 3. Scroll Reveal (IntersectionObserver) ───
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    if (revealElements.length > 0) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              const delay = parseInt(el.dataset.revealDelay || '0', 10);
+              setTimeout(() => {
+                el.classList.add('revealed');
+              }, delay);
+              revealObserver.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '-40px' }
+      );
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+    }
+
+    // ─── 4. Section Cut Line Draw ───
+    const sectionCuts = document.querySelectorAll('[data-cut]');
+    if (sectionCuts.length > 0) {
+      const cutObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('drawn');
+              cutObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      sectionCuts.forEach((cut) => cutObserver.observe(cut));
+    }
+
+    // ─── 5. Hairline Guides ───
+    const hairlineH = document.getElementById('hairline-h');
+    const hairlineV = document.getElementById('hairline-v');
+    if (hairlineH && hairlineV && !isTouch) {
+      document.addEventListener('mousemove', (e) => {
+        hairlineH.style.top = e.clientY + 'px';
+        hairlineV.style.left = e.clientX + 'px';
+      }, { passive: true });
+    }
+
+    // ─── 6. Floating Particles ───
+    const particleContainer = document.getElementById('particle-container');
+    if (particleContainer) {
+      particleContainer.style.position = 'fixed';
+      particleContainer.style.inset = '0';
+      particleContainer.style.pointerEvents = 'none';
+      particleContainer.style.zIndex = '1';
+      particleContainer.style.overflow = 'hidden';
+
+      for (let i = 0; i < 25; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('floating-particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDuration = (15 + Math.random() * 30) + 's';
+        particle.style.animationDelay = (Math.random() * 20) + 's';
+        particle.style.opacity = (0.1 + Math.random() * 0.3).toString();
+        particleContainer.appendChild(particle);
+      }
+    }
+
+    // ─── 7. Touch Device Detection ───
+    if (isTouch) {
+      // Hide cursor-based UI elements on touch devices
+      if (cursorOverlay) cursorOverlay.style.display = 'none';
+      if (hairlineH) hairlineH.style.display = 'none';
+      if (hairlineV) hairlineV.style.display = 'none';
+    }
+  })();
+</script>

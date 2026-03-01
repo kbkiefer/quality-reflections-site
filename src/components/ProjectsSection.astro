@@ -1,0 +1,244 @@
+---
+/**
+ * ProjectsSection — Horizontal scroll gallery with 5 project cards.
+ * Section 03/Portfolio. Static Astro with optimized project images.
+ */
+import { Image } from 'astro:assets';
+import officeTower from '../assets/images/project-office-tower.png';
+import medicalCenter from '../assets/images/project-medical-center.png';
+import university from '../assets/images/project-university.png';
+import retailPavilion from '../assets/images/project-retail-pavilion.png';
+import courthouse from '../assets/images/project-courthouse.png';
+---
+
+<section id="projects" class="relative bg-[#012A89] blueprint-grid py-20 sm:py-28 lg:py-32">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header with Scroll Arrows -->
+    <div class="flex items-end justify-between mb-10 scroll-reveal">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="grid-coord text-xs">D1</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Featured Projects</h2>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-2">
+        <button
+          id="scrollLeft"
+          class="w-10 h-10 border border-[rgba(74,144,217,0.25)] text-[#4A90D9] flex items-center justify-center hover:border-[#4A90D9] hover:bg-[rgba(74,144,217,0.1)] transition-all"
+          aria-label="Scroll gallery left"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="square" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          id="scrollRight"
+          class="w-10 h-10 border border-[rgba(74,144,217,0.25)] text-[#4A90D9] flex items-center justify-center hover:border-[#4A90D9] hover:bg-[rgba(74,144,217,0.1)] transition-all"
+          aria-label="Scroll gallery right"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="square" stroke-width="1.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Horizontal Scroll Gallery -->
+    <div id="projectGallery" class="scroll-gallery">
+
+      <!-- Project 1: Metropolitan Office Tower -->
+      <div class="glass-card-strong corner-brackets card-glow-bg w-[340px] sm:w-[400px] flex-shrink-0 scroll-reveal">
+        <div class="relative z-10">
+          <!-- Image Area -->
+          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
+            <Image
+              src={officeTower}
+              alt="Metropolitan Office Tower - 32-story curtain wall glazing system"
+              width={400}
+              height={224}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Info Area -->
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="grid-coord text-xs">D2</span>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Commercial</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Metropolitan Office Tower</h3>
+            <p class="text-[#8A919A] text-sm leading-relaxed mb-4">
+              Full curtain wall system, 32 floors of unitized glass and aluminum panels with integrated sunshades.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 font-mono text-xs text-[#4A90D9] uppercase tracking-wider hover:text-white transition-colors">
+              <span>View Details</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: Regional Medical Center -->
+      <div class="glass-card-strong corner-brackets card-glow-bg w-[340px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="100">
+        <div class="relative z-10">
+          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
+            <Image
+              src={medicalCenter}
+              alt="Regional Medical Center - blast-resistant storefront and curtain wall systems"
+              width={400}
+              height={224}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="grid-coord text-xs">D3</span>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Healthcare</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Regional Medical Center</h3>
+            <p class="text-[#8A919A] text-sm leading-relaxed mb-4">
+              Storefront and curtain wall systems with blast-resistant glazing and hurricane-rated assemblies.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 font-mono text-xs text-[#4A90D9] uppercase tracking-wider hover:text-white transition-colors">
+              <span>View Details</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: University Science Complex -->
+      <div class="glass-card-strong corner-brackets card-glow-bg w-[340px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="200">
+        <div class="relative z-10">
+          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
+            <Image
+              src={university}
+              alt="University Science Complex - skylights and specialized lab-grade glazing"
+              width={400}
+              height={224}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="grid-coord text-xs">D4</span>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Education</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">University Science Complex</h3>
+            <p class="text-[#8A919A] text-sm leading-relaxed mb-4">
+              Skylights, curtain wall, and specialized lab-grade glazing with integrated ventilation louvers.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 font-mono text-xs text-[#4A90D9] uppercase tracking-wider hover:text-white transition-colors">
+              <span>View Details</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: Luxury Retail Pavilion -->
+      <div class="glass-card-strong corner-brackets card-glow-bg w-[340px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="300">
+        <div class="relative z-10">
+          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
+            <Image
+              src={retailPavilion}
+              alt="Luxury Retail Pavilion - structural silicone glazing and frameless entrance"
+              width={400}
+              height={224}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="grid-coord text-xs">D5</span>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Retail</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Luxury Retail Pavilion</h3>
+            <p class="text-[#8A919A] text-sm leading-relaxed mb-4">
+              All-glass storefront with structural silicone glazing and frameless glass entrance system.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 font-mono text-xs text-[#4A90D9] uppercase tracking-wider hover:text-white transition-colors">
+              <span>View Details</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5: Federal Courthouse -->
+      <div class="glass-card-strong corner-brackets card-glow-bg w-[340px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="400">
+        <div class="relative z-10">
+          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
+            <Image
+              src={courthouse}
+              alt="Federal Courthouse - impact-resistant glazing with custom mullion profiles"
+              width={400}
+              height={224}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="grid-coord text-xs">D6</span>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Civic</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Federal Courthouse</h3>
+            <p class="text-[#8A919A] text-sm leading-relaxed mb-4">
+              Impact-resistant glazing with custom mullion profiles and blast-mitigation film assemblies.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 font-mono text-xs text-[#4A90D9] uppercase tracking-wider hover:text-white transition-colors">
+              <span>View Details</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Section Cut -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <div class="section-cut" data-cut>
+      <div class="cut-line"></div>
+      <span class="cut-label">Section C-C</span>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // Gallery scroll buttons
+  const gallery = document.getElementById('projectGallery');
+  const leftBtn = document.getElementById('scrollLeft');
+  const rightBtn = document.getElementById('scrollRight');
+
+  if (gallery && leftBtn && rightBtn) {
+    const scrollAmount = 420;
+
+    leftBtn.addEventListener('click', () => {
+      gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    rightBtn.addEventListener('click', () => {
+      gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+</script>

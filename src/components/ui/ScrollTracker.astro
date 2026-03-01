@@ -1,0 +1,98 @@
+---
+/**
+ * ScrollTracker — Fixed right-side scroll-spy navigation.
+ * Minimal dots connected by a thin line, labels on hover.
+ * Desktop only (hidden on mobile). Fades in after hero.
+ */
+const sections = [
+  { id: 'services', label: 'Services' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'platforms', label: 'Platforms' },
+  { id: 'partnership', label: 'Partnership' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'testimonials', label: 'Testimonials' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<nav
+  class="scroll-tracker hidden lg:flex"
+  aria-label="Section navigation"
+>
+  <div class="scroll-tracker-line" aria-hidden="true"></div>
+  <ol class="scroll-tracker-dots">
+    {sections.map(({ id, label }) => (
+      <li>
+        <a
+          href={`#${id}`}
+          class="scroll-tracker-dot"
+          data-section={id}
+          aria-label={`Scroll to ${label}`}
+        >
+          <span class="scroll-tracker-label">{label}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  (function () {
+    const tracker = document.querySelector('.scroll-tracker') as HTMLElement | null;
+    if (!tracker) return;
+
+    const dots = tracker.querySelectorAll<HTMLAnchorElement>('.scroll-tracker-dot');
+    const sectionIds = Array.from(dots).map((d) => d.dataset.section!);
+    const sectionEls = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (sectionEls.length === 0) return;
+
+    // --- Scroll-spy: highlight active dot ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.id;
+          const dot = tracker.querySelector(`[data-section="${id}"]`);
+          if (!dot) return;
+          if (entry.isIntersecting) {
+            dots.forEach((d) => d.classList.remove('active'));
+            dot.classList.add('active');
+          }
+        });
+      },
+      {
+        rootMargin: '-40% 0px -55% 0px',
+        threshold: 0,
+      }
+    );
+
+    sectionEls.forEach((el) => observer.observe(el));
+
+    // --- Fade in/out based on hero visibility ---
+    const hero = document.querySelector('#hero') || document.querySelector('section:first-of-type');
+    if (hero) {
+      const heroObserver = new IntersectionObserver(
+        ([entry]) => {
+          tracker.style.opacity = entry.isIntersecting && entry.intersectionRatio > 0.5 ? '0' : '1';
+          tracker.style.pointerEvents = entry.isIntersecting && entry.intersectionRatio > 0.5 ? 'none' : 'auto';
+        },
+        { threshold: [0, 0.5, 1] }
+      );
+      heroObserver.observe(hero);
+    }
+
+    // --- Smooth scroll on click ---
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = dot.dataset.section;
+        const target = id ? document.getElementById(id) : null;
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+</script>

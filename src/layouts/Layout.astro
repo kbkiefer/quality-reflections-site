@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Quality Reflections Glasswork — Commercial glazing, storefronts, curtain walls, and architectural glass installation in Laredo, TX and South Texas.",
+} = Astro.props;
+
+const siteUrl = Astro.url.href;
+const siteName = "Quality Reflections Glasswork";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "GlazingContractor",
+  name: "Quality Reflections Glasswork",
+  description,
+  url: "https://qualityreflectionsglasswork.com",
+  telephone: "+1-956-727-5000",
+  email: "info@qualityreflectionsglasswork.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Laredo",
+    addressLocality: "Laredo",
+    addressRegion: "TX",
+    postalCode: "78040",
+    addressCountry: "US",
+  },
+  areaServed: {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: 27.5036,
+      longitude: -99.5076,
+    },
+    geoRadius: "200",
+  },
+  sameAs: [],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:site_name" content={siteName} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#010E2F" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="font-sans antialiased bg-[#010E2F] text-[#D1D5DB] overflow-x-hidden">
+    <slot />
+  </body>
+</html>

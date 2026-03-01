@@ -1,0 +1,135 @@
+---
+/**
+ * HeroSection — Scroll-pinned hero with assembly animation,
+ * arch icon, headline, CTAs, and animated stat counters.
+ */
+import AnimatedStat from './react/AnimatedStat';
+import HeroAssembly from './react/HeroAssembly';
+---
+
+<div id="hero-scroll-spacer" style="height: 300vh;">
+  <section id="hero-section" class="sticky top-0 h-screen bg-[#010E2F] blueprint-grid-hero overflow-hidden">
+
+    <!-- Assembly Animation Layer -->
+    <div class="absolute inset-0 z-0">
+      <HeroAssembly client:load />
+    </div>
+
+    <!-- Content Layer -->
+    <div class="relative z-10 flex flex-col justify-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+
+      <!-- Grid Coord + Dimension -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="grid-coord text-xs">B2</span>
+        <div class="dimension-line flex-1 max-w-[200px]">
+          <span class="dim-cap"></span>
+          <span class="dim-line"></span>
+          <span class="dim-label">Sheet 01 of 08</span>
+          <span class="dim-line"></span>
+          <span class="dim-cap"></span>
+        </div>
+      </div>
+
+      <!-- Arch Icon with Glass Glow -->
+      <div class="mb-8">
+        <svg
+          viewBox="0 0 447.89 233.99"
+          class="w-[140px] h-auto"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="glassGlow">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <path
+            d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z"
+            fill="#4A90D9"
+            fill-opacity="0.5"
+            filter="url(#glassGlow)"
+          />
+        </svg>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6">
+        Precision-Crafted<br />
+        <span class="text-[#4A90D9]">Architectural Glass</span>
+      </h1>
+
+      <!-- Subtext -->
+      <p class="text-base sm:text-lg text-[#8A919A] max-w-2xl leading-relaxed mb-10 font-light">
+        Custom commercial glazing systems engineered to specification. Curtain walls,
+        storefronts, and specialty glass installations for South Texas and beyond.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap gap-4 mb-16">
+        <a
+          href="#contact"
+          class="btn-blueprint px-8 py-4 bg-[rgba(74,144,217,0.1)] border-2 border-[#4A90D9] text-white font-semibold text-sm"
+        >
+          <span>Request Consultation</span>
+        </a>
+        <a
+          href="#projects"
+          class="btn-blueprint px-8 py-4 border border-[rgba(138,145,154,0.3)] text-[#8A919A] font-medium text-sm tracking-wider"
+        >
+          <span>View Portfolio</span>
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="square" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
+        <div class="glass-card corner-brackets card-glow-bg p-4">
+          <div class="relative z-10">
+            <div class="stat-number text-2xl sm:text-3xl font-bold text-white mb-1">
+              <AnimatedStat client:visible value={25} suffix="+" />
+            </div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Years</div>
+          </div>
+        </div>
+        <div class="glass-card corner-brackets card-glow-bg p-4">
+          <div class="relative z-10">
+            <div class="stat-number text-2xl sm:text-3xl font-bold text-white mb-1">
+              <AnimatedStat client:visible value={500} suffix="+" />
+            </div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Projects</div>
+          </div>
+        </div>
+        <div class="glass-card corner-brackets card-glow-bg p-4">
+          <div class="relative z-10">
+            <div class="stat-number text-2xl sm:text-3xl font-bold text-white mb-1">
+              <AnimatedStat client:visible value={50} suffix="+" />
+            </div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Systems</div>
+          </div>
+        </div>
+        <div class="glass-card corner-brackets card-glow-bg p-4">
+          <div class="relative z-10">
+            <div class="stat-number text-2xl sm:text-3xl font-bold text-white mb-1">
+              <AnimatedStat client:visible value={100} suffix="%" />
+            </div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Compliant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Cut -->
+    <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-6 lg:px-8">
+      <div class="section-cut" data-cut>
+        <div class="cut-line"></div>
+        <span class="cut-label">Section A-A</span>
+      </div>
+    </div>
+
+  </section>
+</div>

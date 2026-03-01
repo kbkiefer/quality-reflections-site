@@ -1,0 +1,114 @@
+---
+/**
+ * CertificationsSection — Timeline row of credentials with connecting line.
+ * Section 06/Credentials. Horizontal timeline on desktop, stacked on mobile.
+ */
+---
+
+<section id="certifications" class="relative bg-[#011B5A] blueprint-grid-dense py-20 sm:py-28 lg:py-32">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="mb-16 scroll-reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="grid-coord text-xs">G1</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Certifications</h2>
+      </div>
+    </div>
+
+    <!-- Timeline Row -->
+    <div class="relative">
+
+      <!-- Connecting Line (desktop only) -->
+      <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-[1px] bg-[rgba(74,144,217,0.15)] -translate-y-1/2"></div>
+
+      <!-- Certification Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4">
+
+        <!-- OSHA 30-Hour -->
+        <div class="scroll-reveal" data-reveal-delay="0">
+          <div class="glass-card corner-brackets card-glow-bg p-5 text-center relative">
+            <div class="relative z-10">
+              <!-- Grid Coord -->
+              <span class="grid-coord text-xs absolute top-3 left-3">G2.1</span>
+              <!-- Logo Area -->
+              <div class="w-16 h-16 mx-auto mb-3 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] mt-4">
+                <span class="font-mono text-xs font-bold text-[#4A90D9]">OSHA</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mb-1">OSHA 30-Hour</h3>
+              <p class="font-mono text-[10px] text-[#8A919A] uppercase tracking-wider">Safety Certified Crews</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NGA Member -->
+        <div class="scroll-reveal" data-reveal-delay="100">
+          <div class="glass-card corner-brackets card-glow-bg p-5 text-center relative">
+            <div class="relative z-10">
+              <span class="grid-coord text-xs absolute top-3 left-3">G2.2</span>
+              <div class="w-16 h-16 mx-auto mb-3 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] mt-4">
+                <span class="font-mono text-xs font-bold text-[#4A90D9]">NGA</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mb-1">NGA Member</h3>
+              <p class="font-mono text-[10px] text-[#8A919A] uppercase tracking-wider">National Glass Assoc.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BBB A+ Rating -->
+        <div class="scroll-reveal" data-reveal-delay="200">
+          <div class="glass-card corner-brackets card-glow-bg p-5 text-center relative">
+            <div class="relative z-10">
+              <span class="grid-coord text-xs absolute top-3 left-3">G2.3</span>
+              <div class="w-16 h-16 mx-auto mb-3 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] mt-4">
+                <span class="font-mono text-xs font-bold text-[#4A90D9]">BBB</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mb-1">BBB A+ Rating</h3>
+              <p class="font-mono text-[10px] text-[#8A919A] uppercase tracking-wider">Accredited Business</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOT Licensed -->
+        <div class="scroll-reveal" data-reveal-delay="300">
+          <div class="glass-card corner-brackets card-glow-bg p-5 text-center relative">
+            <div class="relative z-10">
+              <span class="grid-coord text-xs absolute top-3 left-3">G2.4</span>
+              <div class="w-16 h-16 mx-auto mb-3 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] mt-4">
+                <span class="font-mono text-xs font-bold text-[#4A90D9]">DOT</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mb-1">DOT Licensed</h3>
+              <p class="font-mono text-[10px] text-[#8A919A] uppercase tracking-wider">Commercial Carrier</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bonded & Insured -->
+        <div class="scroll-reveal" data-reveal-delay="400">
+          <div class="glass-card corner-brackets card-glow-bg p-5 text-center relative">
+            <div class="relative z-10">
+              <span class="grid-coord text-xs absolute top-3 left-3">G2.5</span>
+              <div class="w-16 h-16 mx-auto mb-3 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] mt-4">
+                <span class="font-mono text-sm font-bold text-[#4A90D9]">B&I</span>
+              </div>
+              <h3 class="text-sm font-semibold text-white mb-1">Bonded & Insured</h3>
+              <p class="font-mono text-[10px] text-[#8A919A] uppercase tracking-wider">Full Coverage</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section Cut -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <div class="section-cut" data-cut>
+      <div class="cut-line"></div>
+      <span class="cut-label">Section F-F</span>
+    </div>
+  </div>
+
+</section>
