@@ -27,8 +27,7 @@ import ScrollTracker from '../components/ui/ScrollTracker.astro';
   <div id="cursor-overlay">
     <div class="cursor-grid"></div>
     <div class="cursor-glow"></div>
-    <div class="cursor-crosshair-h"></div>
-    <div class="cursor-crosshair-v"></div>
+    <div class="cursor-crosshairs"></div>
   </div>
 
   <div id="particle-container"></div>
@@ -65,9 +64,9 @@ import ScrollTracker from '../components/ui/ScrollTracker.astro';
 
     // ─── 2. Card Hover Glow ───
     if (!isTouch) {
+      const glowCards = document.querySelectorAll('.card-glow-bg');
       document.addEventListener('mousemove', (e) => {
-        const cards = document.querySelectorAll('.card-glow-bg');
-        cards.forEach((card) => {
+        glowCards.forEach((card) => {
           const rect = (card as HTMLElement).getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
