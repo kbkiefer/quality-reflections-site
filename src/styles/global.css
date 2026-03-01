@@ -4,6 +4,7 @@
    ============================================================ */
 
 /* --- Font Imports --- */
+@import "@fontsource/inter/300.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
@@ -49,6 +50,10 @@
 *::before,
 *::after {
   border-radius: 0 !important;
+}
+
+.scroll-tracker-dot {
+  border-radius: 50% !important;
 }
 
 html {
@@ -378,7 +383,7 @@ input[type="submit"]:active, .interactive:active,
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .scroll-tracker-line {
@@ -428,11 +433,9 @@ input[type="submit"]:active, .interactive:active,
 }
 
 .scroll-tracker-dot.active {
-  width: 8px;
-  height: 8px;
   border-color: var(--color-glass-blue);
   background: var(--color-glass-blue);
-  box-shadow: 0 0 6px rgba(74, 144, 217, 0.4);
+  box-shadow: 0 0 8px rgba(74, 144, 217, 0.5), 0 0 2px rgba(74, 144, 217, 0.8);
 }
 
 .scroll-tracker-label {
@@ -946,6 +949,10 @@ input[type="submit"]:active, .interactive:active,
 @media (max-width: 1024px) {
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-grid .bento-item.featured {
+    grid-column: span 2;
+    grid-row: span 1;
   }
 }
 
