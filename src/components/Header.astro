@@ -20,7 +20,7 @@
         >
           <path d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z" />
         </svg>
-        <span class="font-mono text-xs font-semibold tracking-[0.2em] text-white uppercase hidden sm:inline">
+        <span class="font-mono text-[10px] sm:text-xs font-semibold tracking-[0.2em] text-white uppercase">
           Quality Reflections
         </span>
       </a>
@@ -43,8 +43,11 @@
         aria-label="Toggle navigation menu"
         aria-expanded="false"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="square" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="square" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
         </svg>
       </button>
     </div>
@@ -62,49 +65,52 @@
       <a href="#contact" class="nav-tab w-full" data-tab="A8">Contact</a>
     </nav>
   </div>
+  <div id="menuBackdrop" class="fixed inset-0 bg-black/30 z-30 hidden lg:hidden" aria-hidden="true"></div>
 </header>
 
 <script>
-  // Mobile menu toggle
   const menuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('menuIconOpen');
+  const iconClose = document.getElementById('menuIconClose');
+  const backdrop = document.getElementById('menuBackdrop');
 
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
-      const isOpen = !mobileMenu.classList.contains('hidden');
-      if (isOpen) {
-        mobileMenu.classList.add('hidden');
-        mobileMenu.classList.remove('active');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      } else {
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.classList.add('active');
-        menuBtn.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    // Close mobile menu when a link is clicked
-    const mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        mobileMenu.classList.remove('active');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
+  function toggleMenu(open?: boolean) {
+    if (!menuBtn || !mobileMenu || !iconOpen || !iconClose || !backdrop) return;
+    const isOpen = open ?? mobileMenu.classList.contains('hidden');
+    if (isOpen) {
+      mobileMenu.classList.remove('hidden');
+      backdrop.classList.remove('hidden');
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileMenu.classList.add('hidden');
+      backdrop.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
   }
 
-  // Header background darken on scroll
-  const header = document.getElementById('site-header');
+  menuBtn?.addEventListener('click', () => toggleMenu());
+  backdrop?.addEventListener('click', () => toggleMenu(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      toggleMenu(false);
+    }
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  const header = document.querySelector('header');
   if (header) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.style.background = 'rgba(1, 14, 47, 0.95)';
-        header.style.borderBottomColor = 'rgba(74, 144, 217, 0.15)';
-      } else {
-        header.style.background = 'rgba(1, 14, 47, 0.8)';
-        header.style.borderBottomColor = 'rgba(74, 144, 217, 0.1)';
-      }
+      header.style.backgroundColor = window.scrollY > 50
+        ? 'rgba(1, 14, 47, 0.95)'
+        : 'rgba(1, 14, 47, 0.8)';
     }, { passive: true });
   }
 </script>
