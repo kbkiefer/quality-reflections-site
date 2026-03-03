@@ -36,20 +36,37 @@
         <a href="#contact" class="nav-tab" data-tab="A8">Contact</a>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobileMenuBtn"
-        class="lg:hidden flex items-center justify-center w-10 h-10 border border-[rgba(74,144,217,0.2)] text-[#4A90D9]"
-        aria-label="Toggle navigation menu"
-        aria-expanded="false"
-      >
-        <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="square" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="square" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
-        </svg>
-      </button>
+      <div class="flex items-center gap-2">
+        <!-- Theme Toggle -->
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          aria-label="Toggle light/dark theme"
+        >
+          <svg id="themeIconSun" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" stroke-width="1.5" />
+            <path stroke-linecap="square" stroke-width="1.5" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+          <svg id="themeIconMoon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="square" stroke-width="1.5" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobileMenuBtn"
+          class="lg:hidden flex items-center justify-center w-10 h-10 border border-[rgba(74,144,217,0.2)] text-[#4A90D9]"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="square" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="square" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -105,12 +122,54 @@
     link.addEventListener('click', () => toggleMenu(false));
   });
 
+  // --- Scroll-based header background (theme-aware) ---
   const header = document.querySelector('header');
+  function getHeaderBg(scrolled: boolean): string {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      return scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.85)';
+    }
+    return scrolled ? 'rgba(1, 14, 47, 0.95)' : 'rgba(1, 14, 47, 0.8)';
+  }
+
   if (header) {
     window.addEventListener('scroll', () => {
-      header.style.backgroundColor = window.scrollY > 50
-        ? 'rgba(1, 14, 47, 0.95)'
-        : 'rgba(1, 14, 47, 0.8)';
+      header.style.backgroundColor = getHeaderBg(window.scrollY > 50);
     }, { passive: true });
   }
+
+  // --- Theme Toggle ---
+  const themeToggle = document.getElementById('themeToggle');
+  const sunIcon = document.getElementById('themeIconSun');
+  const moonIcon = document.getElementById('themeIconMoon');
+  const metaTheme = document.getElementById('meta-theme-color');
+
+  function updateThemeIcons() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (sunIcon && moonIcon) {
+      sunIcon.classList.toggle('hidden', isLight);
+      moonIcon.classList.toggle('hidden', !isLight);
+    }
+    // Update header bg immediately
+    if (header) {
+      header.style.backgroundColor = getHeaderBg(window.scrollY > 50);
+    }
+  }
+
+  // Set initial icon state
+  updateThemeIcons();
+
+  themeToggle?.addEventListener('click', () => {
+    const isCurrentlyLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isCurrentlyLight) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('qr-theme', 'dark');
+      if (metaTheme) metaTheme.setAttribute('content', '#010E2F');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('qr-theme', 'light');
+      if (metaTheme) metaTheme.setAttribute('content', '#FFFFFF');
+    }
+    updateThemeIcons();
+  });
 </script>

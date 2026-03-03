@@ -43,6 +43,103 @@
 }
 
 /* ============================================================
+   THEME VARIABLES (semantic color roles)
+   Dark mode = default, light mode via [data-theme="light"]
+   ============================================================ */
+
+:root {
+  /* Page surfaces (3 depth levels for section rhythm) */
+  --surface-1: #010E2F;
+  --surface-2: #011B5A;
+  --surface-3: #012A89;
+
+  /* Typography */
+  --text-heading: #ffffff;
+  --text-body: #D1D5DB;
+  --text-muted: #8A919A;
+  --text-midtone: #A0A7B0;
+  --text-accent: #4A90D9;
+
+  /* Cards */
+  --card-bg: rgba(1, 42, 137, 0.2);
+  --card-bg-hover: rgba(1, 42, 137, 0.3);
+  --card-bg-strong: rgba(1, 42, 137, 0.35);
+  --card-bg-strong-hover: rgba(1, 42, 137, 0.45);
+  --card-border: rgba(74, 144, 217, 0.22);
+  --card-border-hover: rgba(74, 144, 217, 0.45);
+  --card-border-strong: rgba(74, 144, 217, 0.3);
+  --card-border-strong-hover: rgba(74, 144, 217, 0.55);
+
+  /* Header */
+  --header-bg: rgba(1, 14, 47, 0.8);
+  --header-bg-scroll: rgba(1, 14, 47, 0.95);
+  --header-border: rgba(74, 144, 217, 0.1);
+
+  /* Overlays / panels */
+  --overlay-bg: rgba(1, 14, 47, 0.95);
+
+  /* Coordinate badge */
+  --coord-bg: rgba(1, 42, 137, 0.1);
+
+  /* Section cut label punch-through */
+  --cut-label-bg: #010E2F;
+
+  /* Logo fill */
+  --logo-fill: white;
+
+  /* Bento grid items */
+  --bento-bg: rgba(1, 42, 137, 0.15);
+  --bento-bg-hover: rgba(1, 42, 137, 0.25);
+  --bento-border: rgba(74, 144, 217, 0.15);
+  --bento-border-hover: rgba(74, 144, 217, 0.35);
+
+  /* Form inputs */
+  --form-input-bg: rgba(1, 14, 47, 0.6);
+  --form-input-border: rgba(138, 145, 154, 0.2);
+}
+
+[data-theme="light"] {
+  --surface-1: #FFFFFF;
+  --surface-2: #F0F4F8;
+  --surface-3: #E2EAF3;
+
+  --text-heading: #0F172A;
+  --text-body: #475569;
+  --text-muted: #64748B;
+  --text-midtone: #64748B;
+  --text-accent: #1D6CC1;
+
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg-hover: rgba(255, 255, 255, 0.85);
+  --card-bg-strong: rgba(255, 255, 255, 0.8);
+  --card-bg-strong-hover: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(74, 144, 217, 0.2);
+  --card-border-hover: rgba(74, 144, 217, 0.4);
+  --card-border-strong: rgba(74, 144, 217, 0.25);
+  --card-border-strong-hover: rgba(74, 144, 217, 0.5);
+
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --header-bg-scroll: rgba(255, 255, 255, 0.95);
+  --header-border: rgba(74, 144, 217, 0.12);
+
+  --overlay-bg: rgba(255, 255, 255, 0.95);
+
+  --coord-bg: rgba(74, 144, 217, 0.08);
+
+  --cut-label-bg: #FFFFFF;
+
+  --logo-fill: #012A89;
+
+  --bento-bg: rgba(74, 144, 217, 0.05);
+  --bento-bg-hover: rgba(74, 144, 217, 0.1);
+  --bento-border: rgba(74, 144, 217, 0.12);
+  --bento-border-hover: rgba(74, 144, 217, 0.3);
+
+  --form-input-bg: rgba(255, 255, 255, 0.8);
+  --form-input-border: rgba(100, 116, 139, 0.25);
+}
+
+/* ============================================================
    BASE / RESET
    ============================================================ */
 
@@ -62,8 +159,8 @@ html {
 }
 
 body {
-  background-color: var(--color-navy-black);
-  color: var(--color-silver);
+  background-color: var(--surface-1);
+  color: var(--text-body);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -359,30 +456,30 @@ input[type="submit"]:active, .interactive:active,
    ============================================================ */
 
 .glass-card {
-  background: rgba(1, 42, 137, 0.2);
-  border: 1px solid rgba(74, 144, 217, 0.22);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(74, 144, 217, 0.45);
-  background: rgba(1, 42, 137, 0.3);
+  border-color: var(--card-border-hover);
+  background: var(--card-bg-hover);
   transform: translateY(-2px);
 }
 
 .glass-card-strong {
-  background: rgba(1, 42, 137, 0.35);
-  border: 1px solid rgba(74, 144, 217, 0.3);
+  background: var(--card-bg-strong);
+  border: 1px solid var(--card-border-strong);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .glass-card-strong:hover {
-  border-color: rgba(74, 144, 217, 0.55);
-  background: rgba(1, 42, 137, 0.45);
+  border-color: var(--card-border-strong-hover);
+  background: var(--card-bg-strong-hover);
   transform: translateY(-2px);
 }
 
@@ -619,8 +716,8 @@ input[type="submit"]:active, .interactive:active,
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--color-steel);
-  background: var(--color-navy-black);
+  color: var(--text-muted);
+  background: var(--cut-label-bg);
   padding: 0 1rem;
 }
 
@@ -670,8 +767,8 @@ input[type="submit"]:active, .interactive:active,
   font-family: var(--font-mono);
   font-size: 0.625rem;
   font-weight: 500;
-  color: var(--color-glass-blue);
-  background: rgba(1, 42, 137, 0.1);
+  color: var(--text-accent);
+  background: var(--coord-bg);
   flex-shrink: 0;
 }
 
@@ -689,7 +786,7 @@ input[type="submit"]:active, .interactive:active,
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-steel);
+  color: var(--text-muted);
   border: 1px solid transparent;
   transition: color 0.3s ease, border-color 0.3s ease;
   text-decoration: none;
@@ -711,12 +808,12 @@ input[type="submit"]:active, .interactive:active,
 
 .nav-tab:hover,
 .nav-tab.active {
-  color: var(--color-glass-blue);
+  color: var(--text-accent);
   border-color: rgba(74, 144, 217, 0.2);
 }
 
 .nav-tab.active {
-  border-bottom-color: var(--color-glass-blue);
+  border-bottom-color: var(--text-accent);
 }
 
 /* ============================================================
@@ -745,14 +842,14 @@ input[type="submit"]:active, .interactive:active,
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-steel);
-  background: rgba(1, 42, 137, 0.1);
+  color: var(--text-muted);
+  background: var(--coord-bg);
   white-space: nowrap;
 }
 
 .title-block .tb-value {
   font-weight: 500;
-  color: var(--color-silver);
+  color: var(--text-body);
 }
 
 /* ============================================================
@@ -813,9 +910,9 @@ input[type="submit"]:active, .interactive:active,
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-glass-blue);
+  color: var(--text-accent);
   border: 1px solid rgba(74, 144, 217, 0.3);
-  background: rgba(1, 42, 137, 0.1);
+  background: var(--coord-bg);
   overflow: hidden;
   transition: color 0.3s ease, border-color 0.3s ease;
   text-decoration: none;
@@ -874,10 +971,10 @@ input[type="submit"]:active, .interactive:active,
    ============================================================ */
 
 .header-glass {
-  background: rgba(1, 14, 47, 0.8);
+  background: var(--header-bg);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(74, 144, 217, 0.1);
+  border-bottom: 1px solid var(--header-border);
 }
 
 /* ============================================================
@@ -1012,15 +1109,15 @@ input[type="submit"]:active, .interactive:active,
 }
 
 .bento-grid .bento-item {
-  background: rgba(1, 42, 137, 0.15);
-  border: 1px solid rgba(74, 144, 217, 0.15);
+  background: var(--bento-bg);
+  border: 1px solid var(--bento-border);
   padding: 1.5rem;
   transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 .bento-grid .bento-item:hover {
-  background: rgba(1, 42, 137, 0.25);
-  border-color: rgba(74, 144, 217, 0.35);
+  background: var(--bento-bg-hover);
+  border-color: var(--bento-border-hover);
   transform: translateY(-2px);
 }
 
@@ -1109,7 +1206,7 @@ input[type="submit"]:active, .interactive:active,
   right: 0;
   width: 320px;
   height: 100%;
-  background: rgba(1, 14, 47, 0.95);
+  background: var(--overlay-bg);
   border-left: 1px solid rgba(74, 144, 217, 0.2);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -1129,11 +1226,11 @@ input[type="submit"]:active, .interactive:active,
   position: fixed;
   z-index: 100;
   padding: 0.5rem 0.75rem;
-  background: rgba(1, 14, 47, 0.95);
+  background: var(--overlay-bg);
   border: 1px solid rgba(74, 144, 217, 0.3);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--color-silver);
+  color: var(--text-body);
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
@@ -1202,7 +1299,7 @@ input[type="submit"]:active, .interactive:active,
 
 /* Hero section for apply pages */
 .apply-hero {
-  background: var(--color-navy-black);
+  background: var(--surface-1);
   padding: 140px 0 80px;
   position: relative;
   overflow: hidden;
@@ -1275,7 +1372,7 @@ input[type="submit"]:active, .interactive:active,
 /* Form section */
 .apply-form-section {
   padding: 4rem 0;
-  background: var(--color-navy-black);
+  background: var(--surface-1);
   position: relative;
 }
 
@@ -1343,8 +1440,8 @@ input[type="submit"]:active, .interactive:active,
 
 /* Form card */
 .apply-form-card {
-  border: 1px solid rgba(74, 144, 217, 0.15);
-  background: rgba(1, 42, 137, 0.06);
+  border: 1px solid var(--card-border);
+  background: var(--coord-bg);
   padding: 2rem;
 }
 
@@ -1397,8 +1494,8 @@ input[type="submit"]:active, .interactive:active,
 .apply-option-label {
   display: block;
   padding: 1rem;
-  background: rgba(1, 14, 47, 0.6);
-  border: 1px solid rgba(138, 145, 154, 0.2);
+  background: var(--form-input-bg);
+  border: 1px solid var(--form-input-border);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -1514,9 +1611,9 @@ input[type="submit"]:active, .interactive:active,
 .apply-form-group textarea {
   width: 100%;
   padding: 0.625rem 0.75rem;
-  background: rgba(1, 14, 47, 0.6);
-  border: 1px solid rgba(138, 145, 154, 0.2);
-  color: var(--color-silver);
+  background: var(--form-input-bg);
+  border: 1px solid var(--form-input-border);
+  color: var(--text-body);
   font-family: var(--font-sans);
   font-size: 0.875rem;
   transition: border-color 0.2s ease;
@@ -1719,7 +1816,7 @@ input[type="submit"]:active, .interactive:active,
   font-family: var(--font-mono);
   font-size: 1.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-heading);
   letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
 }
@@ -2001,6 +2098,193 @@ input[type="submit"]:active, .interactive:active,
   .title-block .tb-label {
     border-bottom: none;
   }
+}
+
+/* ============================================================
+   LIGHT THEME — Template-level overrides
+   These rules override hardcoded Tailwind JIT classes and inline
+   styles in Astro templates when [data-theme="light"] is set.
+   ============================================================ */
+
+/* --- Section backgrounds (by ID) --- */
+[data-theme="light"] #hero-section,
+[data-theme="light"] #partnership,
+[data-theme="light"] #careers,
+[data-theme="light"] #contact,
+[data-theme="light"] footer {
+  background-color: var(--surface-1) !important;
+}
+
+[data-theme="light"] #services,
+[data-theme="light"] #platforms,
+[data-theme="light"] #certifications {
+  background-color: var(--surface-2) !important;
+}
+
+[data-theme="light"] #projects,
+[data-theme="light"] #testimonials {
+  background-color: var(--surface-3) !important;
+}
+
+/* --- Heading text --- */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3 {
+  color: var(--text-heading) !important;
+}
+
+/* --- Generic text-white override (headings, card titles, stats, names) --- */
+[data-theme="light"] section .text-white,
+[data-theme="light"] footer .text-white,
+[data-theme="light"] header .text-white {
+  color: var(--text-heading) !important;
+}
+
+/* --- Muted / steel text --- */
+[data-theme="light"] .text-\[\#8A919A\] {
+  color: var(--text-muted) !important;
+}
+
+/* --- Body / silver text --- */
+[data-theme="light"] .text-\[\#D1D5DB\] {
+  color: var(--text-body) !important;
+}
+
+/* --- Mid-tone text --- */
+[data-theme="light"] .text-\[\#A0A7B0\] {
+  color: var(--text-midtone) !important;
+}
+
+/* --- Accent text --- */
+[data-theme="light"] .text-\[\#4A90D9\] {
+  color: var(--text-accent) !important;
+}
+
+/* --- Footer link colors --- */
+[data-theme="light"] footer a {
+  color: var(--text-muted) !important;
+}
+[data-theme="light"] footer a:hover {
+  color: var(--text-heading) !important;
+}
+
+/* --- Header logo SVG fill --- */
+[data-theme="light"] header svg[fill="white"] {
+  fill: var(--logo-fill);
+}
+
+/* --- Stat numbers --- */
+[data-theme="light"] .stat-number {
+  color: var(--text-heading) !important;
+}
+
+/* --- Button overrides --- */
+[data-theme="light"] .btn-blueprint.text-white,
+[data-theme="light"] a.btn-blueprint[class*="text-white"] {
+  color: var(--text-accent) !important;
+}
+[data-theme="light"] .btn-blueprint:hover {
+  color: #ffffff !important;
+}
+
+/* --- Partner/certification logo filters --- */
+[data-theme="light"] img[style*="brightness(0) invert(1)"] {
+  filter: none !important;
+  opacity: 0.9 !important;
+}
+
+/* --- Mobile menu --- */
+[data-theme="light"] #mobileMenu {
+  background: var(--overlay-bg) !important;
+  border-color: var(--header-border) !important;
+}
+[data-theme="light"] #menuBackdrop {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* --- Testimonial dividers --- */
+[data-theme="light"] .testimonial-note .border-t {
+  border-color: rgba(74, 144, 217, 0.12) !important;
+}
+
+/* --- Footer borders --- */
+[data-theme="light"] footer {
+  border-color: var(--header-border) !important;
+}
+[data-theme="light"] footer .border-t {
+  border-color: rgba(74, 144, 217, 0.08) !important;
+}
+
+/* --- Section-cut label adapts to parent surface ---
+   Each section's cut-label needs the surface color of that section */
+[data-theme="light"] #hero-section .cut-label,
+[data-theme="light"] #partnership .cut-label,
+[data-theme="light"] #careers .cut-label,
+[data-theme="light"] #contact .cut-label {
+  background: var(--surface-1) !important;
+}
+[data-theme="light"] #services .cut-label,
+[data-theme="light"] #platforms .cut-label,
+[data-theme="light"] #certifications .cut-label {
+  background: var(--surface-2) !important;
+}
+[data-theme="light"] #projects .cut-label,
+[data-theme="light"] #testimonials .cut-label {
+  background: var(--surface-3) !important;
+}
+
+/* --- Selection color --- */
+[data-theme="light"] ::selection {
+  background-color: rgba(74, 144, 217, 0.2);
+  color: #0F172A;
+}
+
+/* --- Floating particles --- */
+[data-theme="light"] .floating-particle {
+  background: rgba(74, 144, 217, 0.15) !important;
+}
+
+/* --- Scroll tracker --- */
+[data-theme="light"] .scroll-tracker-label {
+  color: var(--text-muted);
+}
+[data-theme="light"] .scroll-tracker-dot.active .scroll-tracker-label {
+  color: var(--text-accent);
+}
+
+/* --- Contact section title block border --- */
+[data-theme="light"] .title-block {
+  border-color: rgba(74, 144, 217, 0.15);
+}
+
+/* --- Dimension line text --- */
+[data-theme="light"] .dimension-line {
+  color: rgba(29, 108, 193, 0.5);
+}
+
+/* --- Inline rgba borders used in templates --- */
+[data-theme="light"] .border-\[rgba\(74\,144\,217\,0\.1\)\] {
+  border-color: rgba(74, 144, 217, 0.1) !important;
+}
+
+/* --- Theme toggle button --- */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(74, 144, 217, 0.2);
+  background: transparent;
+  color: var(--text-accent);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--text-accent);
+}
+.theme-toggle svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 /* ============================================================

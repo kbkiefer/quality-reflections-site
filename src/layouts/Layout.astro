@@ -64,15 +64,27 @@ const structuredData = {
     <meta name="twitter:description" content={description} />
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#010E2F" />
+    <meta name="theme-color" content="#010E2F" id="meta-theme-color" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <!-- Theme initialization (prevent flash) -->
+    <script is:inline>
+      (function() {
+        var saved = localStorage.getItem('qr-theme');
+        if (saved === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+          var meta = document.getElementById('meta-theme-color');
+          if (meta) meta.setAttribute('content', '#FFFFFF');
+        }
+      })();
+    </script>
   </head>
-  <body class="font-sans antialiased bg-[#010E2F] text-[#D1D5DB]">
+  <body class="font-sans antialiased">
     <slot />
   </body>
 </html>
