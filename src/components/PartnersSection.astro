@@ -1,0 +1,215 @@
+---
+/**
+ * PartnersSection — Interactive 3D dodecahedron showcasing partner manufacturers.
+ * Replaces the separate Glazing Platforms + Partnership sections.
+ * Section 04/Partners. Three.js React island for 3D visualization.
+ * Enhanced background with radial glows, animated grid, floating particles, scan effects.
+ */
+import PartnersDodecahedron from './react/PartnersDodecahedron';
+---
+
+<section id="partners" class="relative bg-[#010E2F] overflow-hidden py-20 sm:py-28 lg:py-36">
+
+  <!-- ═══ Background layers ═══ -->
+
+  <!-- Primary radial glow (large, centered) -->
+  <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+    <div class="partners-glow-primary"></div>
+  </div>
+
+  <!-- Secondary radial glow (offset, subtle) -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <div class="partners-glow-secondary"></div>
+  </div>
+
+  <!-- Blueprint grid -->
+  <div class="absolute inset-0 z-0 blueprint-grid-dense pointer-events-none" style="opacity: 0.6;"></div>
+
+  <!-- Animated scan lines -->
+  <div class="absolute inset-0 z-0 pointer-events-none partners-scanlines"></div>
+
+  <!-- Horizontal sweep line -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <div class="partners-sweep-line"></div>
+  </div>
+
+  <!-- Vertical sweep line -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <div class="partners-sweep-line-v"></div>
+  </div>
+
+  <!-- Corner brackets -->
+  <div class="absolute top-4 left-4 w-12 h-12 border-t border-l border-[rgba(74,144,217,0.12)] pointer-events-none"></div>
+  <div class="absolute top-4 right-4 w-12 h-12 border-t border-r border-[rgba(74,144,217,0.12)] pointer-events-none"></div>
+  <div class="absolute bottom-4 left-4 w-12 h-12 border-b border-l border-[rgba(74,144,217,0.12)] pointer-events-none"></div>
+  <div class="absolute bottom-4 right-4 w-12 h-12 border-b border-r border-[rgba(74,144,217,0.12)] pointer-events-none"></div>
+
+  <!-- Grid coordinate labels -->
+  <div class="absolute top-5 left-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.00</div>
+  <div class="absolute top-5 right-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.12</div>
+  <div class="absolute bottom-5 left-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.24</div>
+  <div class="absolute bottom-5 right-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.36</div>
+
+  <!-- ═══ Content ═══ -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="mb-6 scroll-reveal text-center">
+      <div class="flex items-center justify-center gap-3 mb-5">
+        <span class="grid-coord text-xs">E1</span>
+        <div class="dimension-line flex-1 max-w-xs">
+          <span class="dim-cap"></span>
+          <span class="dim-line"></span>
+          <span class="dim-label">Partners</span>
+          <span class="dim-line"></span>
+          <span class="dim-cap"></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <span class="font-mono text-[10px] uppercase tracking-widest text-[#D31111]">Authorized Dealer & Certified Installer</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5">OUR PARTNERS</h2>
+      <p class="text-[#8A919A] max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+        Direct relationships with 12 leading manufacturers — from aluminum extrusions to architectural glass.
+        Factory-direct ordering, engineering support, and competitive dealer pricing across every system.
+      </p>
+    </div>
+
+    <!-- 3D Dodecahedron -->
+    <div class="scroll-reveal" data-reveal-delay="200">
+      <PartnersDodecahedron client:visible />
+    </div>
+
+    <!-- Partner count badge -->
+    <div class="flex justify-center mt-2 scroll-reveal" data-reveal-delay="400">
+      <div class="inline-flex items-center gap-4 px-6 py-3 border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.7)]">
+        <div class="flex items-center gap-2">
+          <span class="w-1 h-1 bg-[#D31111]"></span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Manufacturer Partners</span>
+        </div>
+        <span class="w-px h-4 bg-[rgba(74,144,217,0.15)]"></span>
+        <span class="font-mono text-sm font-bold text-white">12</span>
+        <span class="w-px h-4 bg-[rgba(74,144,217,0.15)]"></span>
+        <div class="flex items-center gap-2">
+          <span class="w-1 h-1 bg-[#4A90D9]"></span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Direct Access</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section Cut -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <div class="section-cut" data-cut>
+      <div class="cut-line"></div>
+      <span class="cut-label">Section E-E</span>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* ── Primary glow ── */
+  .partners-glow-primary {
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(74, 144, 217, 0.1) 0%,
+      rgba(1, 42, 137, 0.06) 30%,
+      rgba(1, 14, 47, 0) 65%
+    );
+    filter: blur(60px);
+    animation: partners-pulse 8s ease-in-out infinite;
+  }
+
+  /* ── Secondary glow (offset) ── */
+  .partners-glow-secondary {
+    position: absolute;
+    top: 30%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(211, 17, 17, 0.03) 0%,
+      rgba(211, 17, 17, 0) 60%
+    );
+    filter: blur(80px);
+    animation: partners-pulse 12s ease-in-out infinite reverse;
+  }
+
+  @keyframes partners-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+
+  /* ── Horizontal sweep ── */
+  .partners-sweep-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(74, 144, 217, 0.15) 15%,
+      rgba(74, 144, 217, 0.5) 50%,
+      rgba(74, 144, 217, 0.15) 85%,
+      transparent 100%
+    );
+    animation: sweep-h 7s linear infinite;
+  }
+
+  @keyframes sweep-h {
+    0% { top: -1px; opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* ── Vertical sweep ── */
+  .partners-sweep-line-v {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(74, 144, 217, 0.1) 15%,
+      rgba(74, 144, 217, 0.3) 50%,
+      rgba(74, 144, 217, 0.1) 85%,
+      transparent 100%
+    );
+    animation: sweep-v 11s linear infinite;
+  }
+
+  @keyframes sweep-v {
+    0% { left: -1px; opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  /* ── Scan lines ── */
+  .partners-scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(74, 144, 217, 0.012) 2px,
+      rgba(74, 144, 217, 0.012) 3px
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partners-glow-primary,
+    .partners-glow-secondary { animation: none; }
+    .partners-sweep-line,
+    .partners-sweep-line-v { animation: none; opacity: 0; }
+  }
+</style>

@@ -4,19 +4,29 @@
 
 Commercial glazing contractor website for **Quality Reflections Glasswork** in Laredo, TX. Targets general contractors and construction project managers. Single-page site with scroll-based navigation and a premium blueprint/architectural aesthetic.
 
-**Migration:** From a single 2,985-line HTML file (Tailwind CDN) → Astro 5.x + React islands + Framer Motion + build-time Tailwind.
+**Live:** Deployed via FTP using `deploy.sh`
+**Repo:** https://github.com/kbkiefer/quality-reflections-site.git
 
 ## Tech Stack
 
 | Layer | Choice | Why |
 |-------|--------|-----|
-| Framework | Astro 5.x | Static-first, islands architecture, built-in image optimization |
-| UI Islands | React 19 + `@astrojs/react` | Reuse archived Framer Motion patterns |
-| Animations | Framer Motion 12.x | Spring physics for cursor, cubic-bezier for UI |
-| CSS | Tailwind 4.x (build-time) | ~10KB compiled vs 113KB runtime CDN |
+| Framework | Astro 5.5.0 | Static-first, islands architecture, built-in image optimization |
+| UI Islands | React 19 + `@astrojs/react` | Framer Motion patterns, interactive components |
+| Animations | Framer Motion 12.6.0 | Spring physics for cursor, cubic-bezier for UI entrances |
+| CSS | Tailwind 4.1.0 (build-time) | ~10KB compiled vs 113KB runtime CDN |
 | Fonts | Inter + JetBrains Mono (`@fontsource`, self-hosted) | No Google Fonts dependency |
 | Images | `astro:assets` | Auto WebP/AVIF, responsive srcset, lazy loading |
 | Deploy | FTP via `deploy.sh` | Builds to `dist/`, uploads via curl |
+
+## Commands
+
+```bash
+npm run dev          # Astro dev server (localhost:4321)
+npm run build        # Production build → dist/
+npm run preview      # Preview production build
+bash deploy.sh       # FTP upload dist/ to hosting (requires .env)
+```
 
 ## Design System
 
@@ -30,19 +40,21 @@ Commercial glazing contractor website for **Quality Reflections Glasswork** in L
 --silver:      #D1D5DB    (body text)
 ```
 
+Light/dark theme support via `data-theme` attribute on `<html>`. Theme stored in `localStorage` key `qr-theme`.
+
 ### Design Direction
-- **Construction-document aesthetic** — blueprint grids, crosshairs, architectural precision
-- **No rounded corners** — `border-radius: 0` everywhere. Reflects precision of glasswork
+- **Construction-document aesthetic** — blueprint grids, crosshairs, grid coordinates, dimension lines, section cuts
+- **No rounded corners** — `border-radius: 0` everywhere (exception: scroll tracker dots at 50%)
 - No gradients on UI elements (only in glass reflection effects)
 - Geometric, rectilinear, engineered
-- Fonts: Inter (400–800) for body, JetBrains Mono (300–500) for technical labels
+- Fonts: Inter (300–800) for body, JetBrains Mono (300–500) for technical labels/grid coords
 - Blueprint grid backgrounds on dark sections
 
 ### Animation Convention — NO SPRING, NO BOUNCE
 ```tsx
-const EASE = [0.25, 0.1, 0.25, 1] // cubic-bezier, used everywhere for UI entrances
+const EASE = [0.25, 0.1, 0.25, 1] // cubic-bezier for all UI entrances
 ```
-Spring physics used ONLY for damped cursor tracking (`GlassCursor`). Never for UI entrance animations.
+Spring physics ONLY for damped cursor tracking (`GlassCursor`). Never for UI entrance animations.
 
 ### Glass Reflection Effects (per-section)
 - **Hero**: Diagonal curtain wall light sweep
@@ -50,7 +62,7 @@ Spring physics used ONLY for damped cursor tracking (`GlassCursor`). Never for U
 - **Projects**: Cloud reflection on placeholder images
 - **Platforms**: Prismatic light refraction on hover
 - **Testimonials**: Frosted glass panel with edge light streaks
-- **CTA**: Caustic light blobs (Framer Motion infinite animations)
+- **Contact CTA**: Caustic light blobs (Framer Motion infinite animations)
 - **Certifications**: Glass edge glow on hover
 - **Global**: Curtain wall mullion grid follows cursor (GlassCursor island)
 
@@ -62,88 +74,81 @@ quality-reflections-site/
 ├── tailwind.config.mjs
 ├── tsconfig.json
 ├── package.json
-├── deploy.sh                     # FTP deploy script
+├── deploy.sh                     # FTP deploy (requires .env with FTP_HOST/USER/PASS/PATH)
+├── .env.example
 ├── public/
 │   ├── favicon.svg
-│   └── robots.txt
+│   ├── robots.txt
+│   └── logos/                    # Partner logos (kawneer, ykk, agc, oldcastle, tubelite, etc.)
 └── src/
     ├── layouts/
-    │   └── Layout.astro          # Base: fonts, meta, OG, JSON-LD, CSS vars
+    │   └── Layout.astro          # Base: fonts, meta, OG, JSON-LD, CSS vars, theme script
     ├── styles/
-    │   └── global.css            # CSS custom properties, blueprint grids, glass cards
+    │   └── global.css            # 2,329 lines: design tokens, grids, glass effects, animations
     ├── components/
-    │   ├── Header.astro          # Sticky nav, mobile menu (vanilla JS)
-    │   ├── HeroSection.astro     # Scroll-pinned hero wrapper
-    │   ├── ServicesSection.astro  # Bento grid
-    │   ├── ProjectsSection.astro # Gallery
-    │   ├── PlatformsSection.astro
-    │   ├── PartnershipSection.astro
-    │   ├── CertificationsSection.astro
-    │   ├── TestimonialsSection.astro
-    │   ├── ContactSection.astro
-    │   ├── Footer.astro
-    │   ├── ui/                   # Shared Astro atoms (zero JS shipped)
-    │   │   ├── GlassCard.astro
-    │   │   ├── SectionMarker.astro
-    │   │   ├── GridCoord.astro
-    │   │   ├── DimensionLine.astro
-    │   │   ├── SectionCut.astro
-    │   │   ├── BlueprintButton.astro
-    │   │   └── ArchIcon.astro
-    │   └── react/                # React islands (JS only where needed)
-    │       ├── GlassCursor.tsx       # client:load — cursor effect
-    │       ├── RevealSection.tsx     # client:visible — scroll reveal
-    │       ├── HeroAssembly.tsx      # client:load — scroll-driven assembly
-    │       ├── AnimatedStat.tsx      # client:visible — counter animation
-    │       ├── AssemblyPanel.tsx     # client:idle — detail panel
-    │       ├── ProjectsGrid.tsx     # client:visible — filterable portfolio
-    │       └── CausticLights.tsx    # client:visible — CTA decorative
+    │   ├── Header.astro          # Sticky nav, mobile menu, theme toggle
+    │   ├── HeroSection.astro     # Scroll-pinned hero with assembly animation + 4 stats
+    │   ├── ServicesSection.astro  # 7-service bento grid (featured items span 2x2)
+    │   ├── ProjectsSection.astro # Horizontal scroll gallery (5 projects)
+    │   ├── PlatformsSection.astro # 6-platform grid with backbone pulse line
+    │   ├── PartnershipSection.astro # Kawneer dealer showcase
+    │   ├── CertificationsSection.astro # 5 credentials on timeline connector
+    │   ├── TestimonialsSection.astro   # 3 testimonial cards (staggered)
+    │   ├── CareersSection.astro  # 2 opportunity cards (employees/office)
+    │   ├── ContactSection.astro  # CTA with caustic lights + title block
+    │   ├── Footer.astro          # 3-col link grid + drawing info block
+    │   ├── ui/
+    │   │   └── ScrollTracker.astro  # Fixed scroll-spy dots (7 sections)
+    │   └── react/
+    │       ├── GlassCursor.tsx      # client:load — mullion grid cursor reveal
+    │       ├── HeroAssembly.tsx     # client:load — 9-layer scroll-driven exploded view (1,011 lines)
+    │       ├── AnimatedStat.tsx     # client:visible — counter animation
+    │       └── CausticLights.tsx    # client:visible — 3 drifting radial blobs
     ├── scripts/
-    │   ├── hairlines.ts          # Cursor guideline followers
-    │   └── particles.ts          # Floating particles
+    │   ├── hairlines.ts          # Cursor guideline followers (inlined in index.astro)
+    │   └── particles.ts          # Floating particles (inlined in index.astro)
     ├── assets/
-    │   ├── images/               # Project photos (Astro optimizes)
-    │   └── logos/                 # Partner/cert SVGs
+    │   └── images/               # Project photos (Astro optimizes)
     └── pages/
-        └── index.astro           # Composes all sections
+        └── index.astro           # Composes all sections + inline JS (scroll reveal, card glow, etc.)
 ```
 
-## Commands
+## Page Sections (top to bottom)
 
-```bash
-npm run dev          # Astro dev server
-npm run build        # Production build → dist/
-npm run preview      # Preview production build
-bash deploy.sh       # FTP upload dist/ to hosting
-```
+| Section | Component | Grid Coord | Key Content |
+|---------|-----------|------------|-------------|
+| Hero | HeroSection | B2 | Assembly animation, headline, 2 CTAs, 4 animated stats |
+| Services | ServicesSection | C1-C7 | Curtain walls, storefronts, windows, entrances, railings, skylights, panels |
+| Projects | ProjectsSection | D1-D5 | Office tower, medical center, university, retail pavilion, courthouse |
+| Platforms | PlatformsSection | E1-E6 | Kawneer, YKK AP, Oldcastle, Viracon, AGC Glass, Tubelite |
+| Partnership | PartnershipSection | F1 | Kawneer authorized dealer showcase |
+| Certifications | CertificationsSection | G1-G5 | OSHA 30h, NGA member, BBB A+, DOT licensed, bonded/insured |
+| Testimonials | TestimonialsSection | H1-H4 | 3 client testimonials (placeholder content) |
+| Careers | CareersSection | H-series | 2 cards: employees, office positions |
+| Contact | ContactSection | I | CTA + caustic lights + title block |
+| Footer | Footer | J | 3-col links + drawing info block |
 
-## Content Context
+## Content Status
 
-- **Services**: Curtain walls, storefronts, window walls, glass handrails, aluminum panels, skylights, entrances, specialty glass
-- **Platforms**: Procore, ConstructConnect, GCPay, Bluebeam
-- **Partnership**: Authorized Kawneer dealer (1600/1620 curtain wall, Trifab storefront, 350/500 entrances, InLighten daylighting)
-- **Certifications**: NGA member, BBB A+ rating, OSHA 30-hour certified crews, licensed commercial carrier (DOT)
+Most content is **placeholder** — testimonials, project names, phone numbers, etc. are not real.
+`WEBSITE-CONTENT.md` (in parent directory) is the client worksheet for real data — mostly unchecked.
 
 ## Key Conventions
 
-- Astro components for static content (no JS shipped)
+- Astro components for static content (zero JS shipped)
 - React islands only where interactivity/animation requires it
 - `client:load` for above-fold interactive (cursor, hero assembly)
-- `client:visible` for below-fold animations (reveal, stats, projects)
-- `client:idle` for deferred interactivity (assembly panel)
-- All colors via CSS custom properties — never hardcoded
-- `RevealSection` wraps content needing scroll-triggered entrance
+- `client:visible` for below-fold animations (stats, caustic lights)
+- All colors via CSS custom properties — never hardcoded hex values
 - `prefers-reduced-motion` respected on ALL animations
 - Touch device detection hides cursor-based effects
 - Images in `src/assets/` for Astro optimization pipeline
+- Commit messages: imperative mood, concise ("add", "fix", "update")
 
-## Source Files
+## Known Issues (22 documented)
 
-| Source | Location | What to Port |
-|--------|----------|-------------|
-| Current site | `./index.html` (legacy) | All content, section structure, SVG assembly |
-| Archive React patterns | `../_archive/Orchestrator-Test/src/` | GlassCursor, RevealSection, hooks, CTA caustics, Projects grid |
-| Archive CSS system | `../_archive/Orchestrator-Test/src/index.css` | CSS custom properties, design tokens |
+See `docs/plans/2026-03-01-ui-ux-cleanup-design.md` for full list.
+Critical: scroll tracker dots render square, cursor crosshair class mismatch, card glow perf (60x/sec DOM queries).
 
 ## Do Not
 

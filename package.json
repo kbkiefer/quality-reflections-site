@@ -11,12 +11,17 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
+    "@fontsource/alumni-sans": "^5.2.8",
     "@fontsource/inter": "^5.1.1",
     "@fontsource/jetbrains-mono": "^5.1.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@types/three": "^0.183.1",
     "astro": "^5.5.0",
     "framer-motion": "^12.6.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
