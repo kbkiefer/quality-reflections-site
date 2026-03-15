@@ -1,8 +1,19 @@
 ---
 /**
- * ServicesSection — Bento grid layout of service offerings.
- * Section 02/Capabilities. All static Astro, no JS islands needed.
+ * ServicesSection — Uniform grid layout of service offerings
+ * with 3D Three.js models for each service type.
+ * Section 02/Capabilities.
  */
+import ServiceModel from './react/ServiceModel';
+
+const services = [
+  { type: 'curtain-wall', coord: 'C2', title: 'Curtain Wall Systems', desc: 'Engineered aluminum and glass curtain wall systems for high-rise and mid-rise commercial construction. Custom profiles, thermal breaks, and structural silicone glazing.', detail: 'C2.1', delay: '0' },
+  { type: 'storefront', coord: 'C3', title: 'Storefront Glazing', desc: 'Flush-glazed and captured storefront framing for retail, office, and institutional entries.', detail: 'C3.1', delay: '100' },
+  { type: 'window', coord: 'C4', title: 'Window Systems', desc: 'Projected, fixed, and operable window systems with high-performance thermal ratings.', detail: 'C4.1', delay: '200' },
+  { type: 'entrance', coord: 'C5', title: 'Entrance Systems', desc: 'Balanced doors, automatic operators, and all-glass entrances for high-traffic commercial applications.', detail: 'C5.1', delay: '300' },
+  { type: 'railing', coord: 'C6', title: 'Glass Railings', desc: 'Frameless and post-mounted glass railing systems for balconies, atriums, and interior applications.', detail: 'C6.1', delay: '400' },
+  { type: 'skylight', coord: 'C7', title: 'Skylight Systems', desc: 'Ridge, pyramid, and barrel-vault skylights engineered for daylighting and thermal performance.', detail: 'C7.1', delay: '500' },
+];
 ---
 
 <section id="services" class="relative bg-[#011B5A] blueprint-grid-dense py-20 sm:py-28 lg:py-32">
@@ -21,102 +32,36 @@
       </p>
     </div>
 
-    <!-- Bento Grid -->
-    <div class="bento-grid">
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {services.map((s) => (
+        <div class="glass-card corner-brackets card-glow-bg p-4 sm:p-6 scroll-reveal" data-reveal-delay={s.delay}>
+          <div class="relative z-10 flex flex-row sm:flex-col h-full gap-4 sm:gap-0">
 
-      <!-- Featured: Curtain Wall Systems (2x2) -->
-      <div class="bento-item featured glass-card-strong corner-brackets card-glow-bg p-6 sm:p-8 scroll-reveal">
-        <div class="relative z-10 h-full flex flex-col">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="grid-coord text-xs">C2</span>
-            <span class="font-mono text-[10px] uppercase tracking-widest text-[#D31111]">Primary Service</span>
-          </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-white mb-3">Curtain Wall Systems</h3>
-          <p class="text-[#8A919A] text-sm sm:text-base leading-relaxed flex-1">
-            Engineered aluminum and glass curtain wall systems for high-rise and mid-rise
-            commercial construction. Custom profiles, thermal breaks, and structural silicone
-            glazing to meet any design intent and performance specification.
-          </p>
-          <div class="dimension-line mt-6">
-            <span class="dim-cap"></span>
-            <span class="dim-line"></span>
-            <span class="dim-label">Detail C2.1</span>
-            <span class="dim-line"></span>
-            <span class="dim-cap"></span>
+            {/* 3D Model — left on mobile, top on sm+ */}
+            <div class="w-[140px] h-[140px] flex-shrink-0 sm:w-auto sm:h-[180px] sm:mb-4 sm:-mx-2">
+              <ServiceModel client:visible type={s.type} />
+            </div>
+
+            {/* Text content — right on mobile, below on sm+ */}
+            <div class="flex flex-col flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1 sm:mb-3">
+                <span class="grid-coord text-xs">{s.coord}</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2">{s.title}</h3>
+              <p class="text-[#8A919A] text-xs sm:text-sm leading-relaxed flex-1">{s.desc}</p>
+              <div class="dimension-line mt-3 sm:mt-4">
+                <span class="dim-cap"></span>
+                <span class="dim-line"></span>
+                <span class="dim-label">Detail {s.detail}</span>
+                <span class="dim-line"></span>
+                <span class="dim-cap"></span>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-
-      <!-- Storefront Glazing -->
-      <div class="bento-item glass-card corner-brackets card-glow-bg p-6 scroll-reveal" data-reveal-delay="100">
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="grid-coord text-xs">C3</span>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Storefront Glazing</h3>
-          <p class="text-[#8A919A] text-sm leading-relaxed">
-            Flush-glazed and captured storefront framing for retail, office, and institutional entries.
-          </p>
-          <span class="font-mono text-[9px] text-[rgba(74,144,217,0.4)] mt-3 block">Detail C3.1</span>
-        </div>
-      </div>
-
-      <!-- Window Systems -->
-      <div class="bento-item glass-card corner-brackets card-glow-bg p-6 scroll-reveal" data-reveal-delay="200">
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="grid-coord text-xs">C4</span>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Window Systems</h3>
-          <p class="text-[#8A919A] text-sm leading-relaxed">
-            Projected, fixed, and operable window systems with high-performance thermal ratings.
-          </p>
-          <span class="font-mono text-[9px] text-[rgba(74,144,217,0.4)] mt-3 block">Detail C4.1</span>
-        </div>
-      </div>
-
-      <!-- Entrance Systems -->
-      <div class="bento-item glass-card corner-brackets card-glow-bg p-6 scroll-reveal" data-reveal-delay="300">
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="grid-coord text-xs">C5</span>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Entrance Systems</h3>
-          <p class="text-[#8A919A] text-sm leading-relaxed">
-            Balanced doors, automatic operators, and all-glass entrances for high-traffic commercial applications.
-          </p>
-          <span class="font-mono text-[9px] text-[rgba(74,144,217,0.4)] mt-3 block">Detail C5.1</span>
-        </div>
-      </div>
-
-      <!-- Glass Railings -->
-      <div class="bento-item glass-card corner-brackets card-glow-bg p-6 scroll-reveal" data-reveal-delay="400">
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="grid-coord text-xs">C6</span>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Glass Railings</h3>
-          <p class="text-[#8A919A] text-sm leading-relaxed">
-            Frameless and post-mounted glass railing systems for balconies, atriums, and interior applications.
-          </p>
-          <span class="font-mono text-[9px] text-[rgba(74,144,217,0.4)] mt-3 block">Detail C6.1</span>
-        </div>
-      </div>
-
-      <!-- Skylight Systems -->
-      <div class="bento-item glass-card corner-brackets card-glow-bg p-6 scroll-reveal" data-reveal-delay="500">
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="grid-coord text-xs">C7</span>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Skylight Systems</h3>
-          <p class="text-[#8A919A] text-sm leading-relaxed">
-            Ridge, pyramid, and barrel-vault skylights engineered for daylighting and thermal performance.
-          </p>
-          <span class="font-mono text-[9px] text-[rgba(74,144,217,0.4)] mt-3 block">Detail C7.1</span>
-        </div>
-      </div>
-
+      ))}
     </div>
 
   </div>

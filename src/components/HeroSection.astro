@@ -1,24 +1,56 @@
 ---
 /**
- * HeroSection — Hero with auto-play assembly animation + 3D rotation,
+ * HeroSection — Hero with 3D dodecahedron partner showcase,
  * arch icon, headline, CTAs, and animated stat counters.
  */
 import AnimatedStat from './react/AnimatedStat';
-import HeroAssembly from './react/HeroAssembly';
+import PartnersDodecahedron from './react/PartnersDodecahedron';
 ---
 
-<section id="hero-section" class="relative h-screen bg-[#010E2F] blueprint-grid-hero overflow-hidden">
+<section id="hero-section" class="relative min-h-screen bg-[#010E2F] blueprint-grid-hero">
 
-    <!-- Assembly Animation Layer (right side, desktop only) -->
-    <div id="assembly-layer" class="absolute top-0 right-0 bottom-0 w-[50%] z-0 hidden md:flex items-center justify-center">
-      <HeroAssembly client:load />
+    <!-- 3D Dodecahedron — tablet & desktop (absolute, behind text) -->
+    <div class="absolute top-0 right-0 w-[60%] h-full z-[2] hidden sm:block"
+         id="hero-dodecahedron">
+      <PartnersDodecahedron client:load heroMode />
     </div>
 
     <!-- Content Layer -->
-    <div class="relative z-10 flex flex-col justify-start sm:justify-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-16 md:pr-[45%]">
+    <div class="relative z-[3] flex flex-col justify-start sm:justify-center min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-16 pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
+
+      <!-- Mobile partner logo marquee — above logo on mobile -->
+      <div class="sm:hidden mb-3 -mx-4 overflow-hidden" aria-label="Manufacturing partners">
+        <div class="flex items-center gap-10 logo-marquee">
+          <img src="/logos/kawneer.svg" alt="Kawneer" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/ykk-ap.png" alt="YKK AP" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/oldcastle.png" alt="Oldcastle" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/viracon.svg" alt="Viracon" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/agc.png" alt="AGC Glass" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/tubelite.png" alt="Tubelite" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/efco.svg" alt="EFCO" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/stanley.svg" alt="Stanley" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/ppg.svg" alt="PPG" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/guardian.png" alt="Guardian" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/arcadia.png" alt="Arcadia" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/atlas.png" alt="Atlas" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <!-- Duplicate set for seamless loop -->
+          <img src="/logos/kawneer.svg" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/ykk-ap.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/oldcastle.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/viracon.svg" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/agc.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/tubelite.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/efco.svg" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/stanley.svg" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/ppg.svg" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/guardian.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/arcadia.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/atlas.png" alt="" class="h-10 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+        </div>
+      </div>
 
       <!-- Grid Coord + Dimension -->
-      <div class="flex items-center gap-3 mb-6">
+      <div class="flex items-center gap-3 mb-3 sm:mb-6">
         <span class="grid-coord text-xs">B2</span>
         <div class="dimension-line flex-1 max-w-[200px]">
           <span class="dim-cap"></span>
@@ -29,11 +61,11 @@ import HeroAssembly from './react/HeroAssembly';
         </div>
       </div>
 
-      <!-- Arch Icon with Glass Glow -->
-      <div class="mb-8">
+      <!-- Arch Icon -->
+      <div class="mb-3 sm:mb-10 lg:mb-10">
         <svg
           viewBox="0 0 447.89 233.99"
-          class="w-[140px] h-auto"
+          class="w-[100px] sm:w-[160px] lg:w-[240px] h-auto"
           aria-hidden="true"
         >
           <defs>
@@ -55,13 +87,13 @@ import HeroAssembly from './react/HeroAssembly';
       </div>
 
       <!-- Headline -->
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white leading-[1.05] tracking-tight mb-4 sm:mb-8 sm:max-w-[55%]">
         Precision-Crafted<br />
         <span class="text-[#D31111]">Architectural Glass</span>
       </h1>
 
       <!-- Subtext -->
-      <p class="text-base sm:text-lg text-[#A0A7B0] max-w-2xl leading-relaxed mb-10 font-light">
+      <p class="text-base sm:text-xl text-[#A0A7B0] max-w-2xl leading-relaxed mb-6 sm:mb-12 font-light sm:max-w-[50%]">
         Custom commercial glazing systems engineered to specification. Curtain walls,
         storefronts, and specialty glass installations for South Texas and beyond.
       </p>
@@ -86,7 +118,7 @@ import HeroAssembly from './react/HeroAssembly';
       </div>
 
       <!-- Stat Cards -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:max-w-[55%] lg:max-w-3xl">
         <div class="glass-card corner-brackets card-glow-bg p-4">
           <div class="relative z-10">
             <div class="stat-number text-2xl sm:text-3xl font-bold text-white mb-1">
@@ -123,7 +155,7 @@ import HeroAssembly from './react/HeroAssembly';
     </div>
 
     <!-- Section Cut -->
-    <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-6 lg:px-8">
+    <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-6 lg:px-8 z-10">
       <div class="section-cut" data-cut>
         <div class="cut-line"></div>
         <span class="cut-label">Section B-B</span>

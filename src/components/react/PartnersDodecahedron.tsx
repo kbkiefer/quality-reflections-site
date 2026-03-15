@@ -15,18 +15,18 @@ interface Partner {
 }
 
 const PARTNERS: Partner[] = [
-  { name: 'KAWNEER', logo: '/logos/kawneer.svg', specialty: 'Curtain Walls & Entrances', description: 'Authorized dealer for architectural aluminum curtain wall, storefront, and entrance systems. Full engineering and technical support.' },
-  { name: 'YKK AP', logo: '/logos/ykk-ap.png', specialty: 'Window & Door Systems', description: 'Premium aluminum window and door systems for commercial and residential applications. Industry-leading thermal performance.' },
-  { name: 'OLDCASTLE', logo: '/logos/oldcastle.png', specialty: 'Building Envelope', description: 'North America\'s leading manufacturer of architectural glass and aluminum glazing systems. Complete building envelope solutions.' },
-  { name: 'VIRACON', logo: '/logos/viracon.svg', specialty: 'Architectural Glass', description: 'High-performance architectural glass fabrication. Custom coatings, insulating units, and specialty glass products.' },
-  { name: 'AGC GLASS', logo: '/logos/agc.png', specialty: 'Float & Specialty Glass', description: 'Global leader in flat glass manufacturing. Energy-efficient coated glass, decorative glass, and fire-rated solutions.' },
-  { name: 'TUBELITE', logo: '/logos/tubelite.png', specialty: 'Storefront & Framing', description: 'Architectural aluminum storefront, curtain wall, and entrance systems. Sustainable and thermally broken designs.' },
-  { name: 'ATLAS', logo: '/logos/atlas.png', specialty: 'Glazing Hardware', description: 'Precision glazing hardware and accessories for commercial curtain wall and window installations.' },
-  { name: 'EFCO', logo: '/logos/efco.svg', specialty: 'Windows & Curtain Wall', description: 'Commercial aluminum windows, curtain walls, storefronts, and entrances. Part of Apogee Enterprises.' },
-  { name: 'STANLEY', logo: '/logos/stanley.svg', specialty: 'Automatic Doors', description: 'Industry-leading automatic sliding, swinging, and revolving door systems for commercial entrances.' },
-  { name: 'GUARDIAN', logo: '/logos/guardian.png', specialty: 'Glass & Coatings', description: 'Flat glass and fabricated glass products with advanced coatings for commercial and residential construction.' },
-  { name: 'PPG', logo: '/logos/ppg.svg', specialty: 'Glass & Coatings', description: 'Flat glass, fabricated glass products, and high-performance coatings. Solarban and Starphire product lines.' },
-  { name: 'ARCADIA', logo: '/logos/arcadia.png', specialty: 'Custom Window Systems', description: 'Custom architectural window and door systems. Aluminum and steel frames for commercial projects.' },
+  { name: 'KAWNEER', logo: '/logos/kawneer.svg', specialty: 'Curtain Walls & Entrances', description: 'Our primary curtain wall partner. Kawneer\'s 1600 and 1700 series wall systems anchor the majority of our mid- and high-rise projects. As an authorized dealer, we get factory-direct pricing, dedicated engineering support, and priority lead times that independent installers can\'t match.' },
+  { name: 'YKK AP', logo: '/logos/ykk-ap.png', specialty: 'Window & Door Systems', description: 'YKK AP\'s thermally broken window and door systems deliver some of the highest U-values in commercial aluminum framing. We spec their ProTek and ThermaShade lines for projects requiring ENERGY STAR compliance without sacrificing sightlines.' },
+  { name: 'OLDCASTLE', logo: '/logos/oldcastle.png', specialty: 'Building Envelope', description: 'Oldcastle BuildingEnvelope gives us single-source access to both glass fabrication and aluminum framing under one roof. Their Reliance and CrystalBlue product lines let us consolidate suppliers and simplify coordination on complex building envelope projects.' },
+  { name: 'VIRACON', logo: '/logos/viracon.svg', specialty: 'Architectural Glass', description: 'When the spec calls for high-performance coated glass — low-e, solar control, bird-friendly — Viracon is our go-to fabricator. Their VRE and VNE coatings consistently meet the tightest energy code requirements across Texas climate zones.' },
+  { name: 'AGC GLASS', logo: '/logos/agc.png', specialty: 'Float & Specialty Glass', description: 'AGC supplies our float glass, fire-rated assemblies, and decorative glass needs. Their Pyrobel fire-rated glass and Lacobel back-painted panels give us options for specialty applications that most glazing contractors can\'t source directly.' },
+  { name: 'TUBELITE', logo: '/logos/tubelite.png', specialty: 'Storefront & Framing', description: 'Tubelite\'s T14000 storefront and 400 series curtain wall systems are our workhorses for retail, medical, and education projects. Thermally broken profiles, Cradle to Cradle certified aluminum, and fast turnaround from their Texas distribution.' },
+  { name: 'ATLAS', logo: '/logos/atlas.png', specialty: 'Metal & Glazing Systems', description: 'Atlas Wall Systems provides unitized curtain wall and panel systems for projects requiring factory-assembled modules. Their pre-glazed unitized approach reduces field labor and improves quality control on large-scale commercial facades.' },
+  { name: 'EFCO', logo: '/logos/efco.svg', specialty: 'Windows & Curtain Wall', description: 'EFCO\'s commercial window and curtain wall lines — part of the Apogee family alongside Tubelite and Wausau — give us access to projected, fixed, and operable window systems engineered for institutional and high-wind applications.' },
+  { name: 'STANLEY', logo: '/logos/stanley.svg', specialty: 'Automatic Entrances', description: 'Stanley Access Technologies handles our automatic entrance systems — sliding, swinging, revolving, and folding doors. We\'re certified installers for their Dura-Glide, Magnum, and All-Glass lines, covering everything from retail storefronts to hospital ICU entries.' },
+  { name: 'GUARDIAN', logo: '/logos/guardian.png', specialty: 'Glass Manufacturing', description: 'Guardian Glass provides float glass, coated glass, and fabricated insulating units. Their SunGuard solar control coatings and ClimaGuard low-e products are staples in our commercial and multi-family residential glazing projects.' },
+  { name: 'PPG', logo: '/logos/ppg.svg', specialty: 'Glass & Coatings', description: 'PPG\'s Solarban solar control glass and Starphire ultra-clear glass are specified by name on projects demanding peak optical clarity and energy performance. We order direct through PPG\'s IdeaScapes network for competitive dealer pricing.' },
+  { name: 'ARCADIA', logo: '/logos/arcadia.png', specialty: 'Custom Window Systems', description: 'Arcadia specializes in custom aluminum and steel window and door systems for architecturally demanding projects. Their steel-look thermally broken profiles give us the thin sightlines of historic steel with modern thermal performance.' },
 ];
 
 const GLASS_BLUE = '#4A90D9';
@@ -344,13 +344,116 @@ function ConnectionLines() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   Glowing halo effect for selected/hovered face
+   Multiple concentric scaled pentagon meshes with
+   additive blending create a soft bloom-like glow.
+   ═══════════════════════════════════════════════════════ */
+
+function FaceGlow({ faces, selectedFace, hoveredFace }: {
+  faces: FaceData[];
+  selectedFace: number | null;
+  hoveredFace: number | null;
+}) {
+  // For each face, create a ring of glow meshes (scaled-up copies of the face)
+  // Each layer is slightly larger and more transparent → soft bloom
+  const GLOW_LAYERS = 5;
+  const noopRaycast = () => {};
+
+  const glowData = useMemo(() => {
+    return faces.map((face) => {
+      const layers: { mesh: THREE.Mesh; mat: THREE.MeshBasicMaterial }[] = [];
+
+      for (let layer = 0; layer < GLOW_LAYERS; layer++) {
+        // Scale outward from face center + push along normal
+        const spread = 1.0 + (layer + 1) * 0.025; // 1.025, 1.05, 1.075, 1.1, 1.125
+        const normalOffset = 0.01 + layer * 0.005;
+
+        // Clone face geometry and scale vertices outward from face center
+        const srcPos = face.geometry.getAttribute('position');
+        const positions = new Float32Array(srcPos.count * 3);
+        for (let vi = 0; vi < srcPos.count; vi++) {
+          const v = new THREE.Vector3(srcPos.getX(vi), srcPos.getY(vi), srcPos.getZ(vi));
+          // Scale from face center
+          v.sub(face.center).multiplyScalar(spread).add(face.center);
+          // Offset along face normal
+          v.add(face.normal.clone().multiplyScalar(normalOffset));
+          positions[vi * 3] = v.x;
+          positions[vi * 3 + 1] = v.y;
+          positions[vi * 3 + 2] = v.z;
+        }
+
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        // Copy index if it exists
+        if (face.geometry.index) geo.setIndex(face.geometry.index.clone());
+
+        const mat = new THREE.MeshBasicMaterial({
+          color: GLASS_BLUE,
+          transparent: true,
+          opacity: 0,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          depthTest: false,
+        });
+
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.raycast = noopRaycast; // Don't intercept clicks
+        layers.push({ mesh, mat });
+      }
+
+      return layers;
+    });
+  }, [faces]);
+
+  useFrame(() => {
+    const t = Date.now() * 0.003;
+    const pulse = 0.5 + Math.sin(t) * 0.5;
+
+    glowData.forEach((layers, faceIdx) => {
+      const isSelected = faceIdx === selectedFace;
+      const isHovered = faceIdx === hoveredFace && selectedFace !== faceIdx;
+
+      layers.forEach(({ mat }, layerIdx) => {
+        if (isSelected) {
+          // Bright blue glow, inner layers brighter, outer layers softer
+          const baseOpacity = [0.35, 0.25, 0.15, 0.08, 0.04][layerIdx];
+          mat.color.setHex(layerIdx < 2 ? 0x4A90D9 : 0x6AB0FF);
+          mat.opacity = baseOpacity * (0.7 + pulse * 0.3);
+        } else if (isHovered) {
+          // Subtle lighter blue glow on hover
+          const baseOpacity = [0.2, 0.12, 0.06, 0.03, 0.015][layerIdx];
+          mat.color.setHex(layerIdx < 2 ? 0x6AB0FF : 0x8EC8FF);
+          mat.opacity = baseOpacity * (0.6 + pulse * 0.4);
+        } else {
+          mat.opacity = 0;
+        }
+      });
+    });
+  });
+
+  return (
+    <group>
+      {glowData.map((layers, faceIdx) => (
+        <group key={faceIdx}>
+          {layers.map(({ mesh }, layerIdx) => (
+            <primitive key={layerIdx} object={mesh} />
+          ))}
+        </group>
+      ))}
+    </group>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
    Main 3D scene
    ═══════════════════════════════════════════════════════ */
 
-function Scene({ onHover, onSelect, selectedFace }: {
+function Scene({ onHover, onSelect, selectedFace, scale = 1 }: {
   onHover: (idx: number | null) => void;
   onSelect: (idx: number | null) => void;
   selectedFace: number | null;
+  scale?: number;
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const [hoveredFace, setHoveredFace] = useState<number | null>(null);
@@ -425,7 +528,7 @@ function Scene({ onHover, onSelect, selectedFace }: {
       // Clicking the same face deselects
       onSelect(null);
       autoRotate.current = false;
-      resumeTimer.current = setTimeout(() => { autoRotate.current = true; }, 3000);
+      resumeTimer.current = setTimeout(() => { autoRotate.current = true; onSelect(null); }, 3000);
       return;
     }
 
@@ -433,6 +536,8 @@ function Scene({ onHover, onSelect, selectedFace }: {
     autoRotate.current = false;
     isAnimatingToFace.current = true;
     if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    // Auto-deselect and resume rotation after 5 seconds
+    resumeTimer.current = setTimeout(() => { autoRotate.current = true; onSelect(null); }, 5000);
 
     if (!groupRef.current) return;
 
@@ -488,7 +593,7 @@ function Scene({ onHover, onSelect, selectedFace }: {
     };
     const up = () => {
       isDragging.current = false;
-      resumeTimer.current = setTimeout(() => { autoRotate.current = true; }, 3000);
+      resumeTimer.current = setTimeout(() => { autoRotate.current = true; onSelect(null); }, 3000);
     };
     c.addEventListener('pointerdown', down);
     c.addEventListener('pointermove', move);
@@ -549,18 +654,21 @@ function Scene({ onHover, onSelect, selectedFace }: {
 
   return (
     <>
-      <group ref={groupRef}>
+      <group ref={groupRef} scale={scale}>
         {/* Textured faces */}
         {faces.map((face, i) => (
           <mesh
             key={i}
             geometry={face.geometry}
             material={materials[i]}
-            onPointerEnter={() => handleHover(i)}
+            onPointerEnter={(e) => { e.stopPropagation(); handleHover(i); }}
             onPointerLeave={() => handleHover(null)}
-            onClick={() => handleClick(i)}
+            onClick={(e) => { e.stopPropagation(); handleClick(i); }}
           />
         ))}
+
+        {/* Glowing edge outline on selected/hovered face */}
+        <FaceGlow faces={faces} selectedFace={selectedFace} hoveredFace={hoveredFace} />
 
         {/* Glass outer shell — raycast disabled so clicks pass through to faces */}
         <mesh raycast={() => null}>
@@ -624,44 +732,34 @@ function HoverLabel({ partner }: { partner: Partner | null }) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Detail panel — slides in when a face is selected
+   Detail panel — appears below the dodecahedron
    ═══════════════════════════════════════════════════════ */
 
 function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: () => void }) {
-  const visible = partner !== null;
-
   return (
-    <div
-      className="absolute right-0 top-0 bottom-0 z-30 flex items-center pointer-events-none"
-      style={{ width: '340px', maxWidth: '90vw' }}
-    >
-      <div
-        className="pointer-events-auto w-full mx-4"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateX(0)' : 'translateX(40px)',
-          transition: 'opacity 0.4s cubic-bezier(0.25,0.1,0.25,1), transform 0.4s cubic-bezier(0.25,0.1,0.25,1)',
-        }}
-      >
-        {partner && (
-          <div className="border border-[rgba(74,144,217,0.2)] bg-[rgba(1,14,47,0.92)] backdrop-blur-sm">
-            {/* Top accent line */}
-            <div className="h-px bg-gradient-to-r from-transparent via-[#4A90D9] to-transparent"></div>
+    <div className="w-full h-full px-4 lg:px-6 flex items-center">
+      {partner && (
+        <div className="w-full border border-[rgba(74,144,217,0.2)] bg-[rgba(1,14,47,0.92)] backdrop-blur-sm flex flex-col" style={{ height: '420px' }}>
+          {/* Top accent */}
+          <div className="h-px bg-gradient-to-r from-transparent via-[#D31111] to-transparent flex-shrink-0"></div>
 
-            <div className="p-5">
+          <div className="p-6 lg:p-8 flex flex-col flex-1 justify-between">
+            {/* Top section */}
+            <div>
               {/* Header */}
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-1.5 h-1.5 bg-[#D31111]"></span>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-[#D31111]">Partner</span>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-2 h-2 bg-[#D31111] flex-shrink-0"></span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D31111]">Manufacturing Partner</span>
                   </div>
-                  <h3 className="font-mono text-lg font-bold text-white tracking-wider">{partner.name}</h3>
+                  <h3 className="font-mono text-2xl lg:text-3xl font-bold text-white tracking-wider mb-2">{partner.name}</h3>
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#4A90D9]">{partner.specialty}</span>
                 </div>
                 <button
                   onClick={onClose}
-                  className="w-7 h-7 border border-[rgba(74,144,217,0.2)] flex items-center justify-center text-[#8A919A] hover:text-white hover:border-[rgba(74,144,217,0.4)] transition-colors"
-                  aria-label="Close detail panel"
+                  className="w-8 h-8 border border-[rgba(74,144,217,0.15)] flex items-center justify-center text-[#8A919A] hover:text-white hover:border-[rgba(74,144,217,0.4)] transition-colors flex-shrink-0"
+                  aria-label="Close"
                 >
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <line x1="1" y1="1" x2="9" y2="9" />
@@ -671,36 +769,33 @@ function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: (
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-[rgba(74,144,217,0.1)] mb-4"></div>
-
-              {/* Specialty */}
-              <div className="mb-4">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-[#4A90D9] block mb-1.5">Specialty</span>
-                <span className="text-sm text-[#D1D5DB] font-medium">{partner.specialty}</span>
-              </div>
+              <div className="h-px bg-[rgba(74,144,217,0.1)] mb-5"></div>
 
               {/* Description */}
-              <div className="mb-4">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-[#4A90D9] block mb-1.5">Overview</span>
-                <p className="text-sm text-[#8A919A] leading-relaxed">{partner.description}</p>
-              </div>
-
-              {/* Status indicator */}
-              <div className="flex items-center gap-3 pt-3 border-t border-[rgba(74,144,217,0.08)]">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-green-500 animate-pulse"></span>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Authorized Dealer</span>
-                </div>
-                <span className="w-px h-3 bg-[rgba(74,144,217,0.15)]"></span>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Direct Access</span>
-              </div>
+              <p className="text-sm lg:text-base text-[#8A919A] leading-relaxed">{partner.description}</p>
             </div>
 
-            {/* Bottom accent line */}
-            <div className="h-px bg-gradient-to-r from-transparent via-[#4A90D9] to-transparent"></div>
+            {/* Footer */}
+            <div className="flex items-center justify-between pt-4 border-t border-[rgba(74,144,217,0.06)]">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-green-500"></span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">Authorized Dealer</span>
+                </div>
+                <span className="w-px h-3 bg-[rgba(74,144,217,0.12)]"></span>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-[#4A90D9]"></span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">Factory Direct</span>
+                </div>
+              </div>
+              <span className="font-mono text-[9px] text-[rgba(74,144,217,0.3)] tracking-widest">QR—{String(PARTNERS.indexOf(partner) + 1).padStart(2, '0')}</span>
+            </div>
           </div>
-        )}
-      </div>
+
+          {/* Bottom accent */}
+          <div className="h-px bg-gradient-to-r from-transparent via-[#4A90D9] to-transparent flex-shrink-0"></div>
+        </div>
+      )}
     </div>
   );
 }
@@ -709,47 +804,171 @@ function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: (
    Exported component
    ═══════════════════════════════════════════════════════ */
 
-export default function PartnersDodecahedron() {
+export default function PartnersDodecahedron({ heroMode = false, compact = false }: { heroMode?: boolean; compact?: boolean }) {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
 
+  // Hero mode: 3D canvas filling its container with interactive face selection
+  if (heroMode) {
+    // compact = mobile inline (bigger model, closer camera)
+    // default = desktop absolute right half (original sizing)
+    const camZ = compact ? 5.5 : 7;
+    const camFov = compact ? 50 : 40;
+    const modelScale = compact ? 1.0 : 0.55;
+    const selectedPartner = selected !== null ? PARTNERS[selected] : null;
+
+    return (
+      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <div style={{ position: 'absolute', inset: 0 }}>
+          <Canvas
+            camera={{ position: [0, 0, camZ], fov: camFov }}
+            style={{ background: 'transparent', pointerEvents: 'auto' }}
+            gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
+            dpr={[1, 2]}
+          >
+            <ambientLight intensity={0.25} />
+            <directionalLight position={[5, 8, 5]} intensity={1} color="#ffffff" />
+            <directionalLight position={[-4, -2, -6]} intensity={0.5} color="#4A90D9" />
+            <pointLight position={[0, 4, 3]} intensity={0.6} color="#ffffff" distance={15} />
+            <pointLight position={[-3, -3, 2]} intensity={0.4} color="#4A90D9" distance={12} />
+            <pointLight position={[3, 0, -3]} intensity={0.3} color="#6AB0FF" distance={10} />
+            <Environment preset="city" environmentIntensity={0.2} />
+            <fog attach="fog" args={['#010E2F', 12, 24]} />
+
+            <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} scale={modelScale} />
+          </Canvas>
+        </div>
+
+        {/* Hover label — only when no face is selected */}
+        {!compact && selected === null && <HoverLabel partner={hovered !== null ? PARTNERS[hovered] : null} />}
+
+        {/* Selected face detail overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: compact ? '8px' : '24px',
+            left: compact ? '8px' : '16px',
+            right: compact ? '8px' : '16px',
+            opacity: selectedPartner ? 1 : 0,
+            transform: selectedPartner ? 'translate3d(0,0,0)' : 'translate3d(0,12px,0)',
+            transition: 'opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)',
+            pointerEvents: selectedPartner ? 'auto' : 'none',
+            zIndex: 30,
+          }}
+        >
+          {selectedPartner && (
+            <div
+              style={{
+                border: '1px solid rgba(74,144,217,0.25)',
+                background: 'rgba(1,14,47,0.92)',
+                backdropFilter: 'blur(12px)',
+                maxWidth: compact ? '100%' : '380px',
+              }}
+            >
+              {/* Top accent line */}
+              <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, #D31111, transparent)' }} />
+
+              <div style={{ padding: compact ? '12px 14px' : '16px 20px' }}>
+                {/* Header row */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                      <span style={{ width: '6px', height: '6px', background: '#D31111', flexShrink: 0 }} />
+                      <span style={{ fontFamily: 'monospace', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#D31111' }}>Partner</span>
+                    </div>
+                    <h4 style={{ fontFamily: 'monospace', fontSize: compact ? '16px' : '18px', fontWeight: 700, color: 'white', letterSpacing: '0.05em', margin: 0, lineHeight: 1.2 }}>{selectedPartner.name}</h4>
+                    <span style={{ fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#4A90D9' }}>{selectedPartner.specialty}</span>
+                  </div>
+                  <button
+                    onClick={() => setSelected(null)}
+                    style={{
+                      width: '24px', height: '24px', border: '1px solid rgba(74,144,217,0.2)',
+                      background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: '#8A919A', cursor: 'pointer', flexShrink: 0, padding: 0,
+                    }}
+                    aria-label="Close"
+                  >
+                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <line x1="1" y1="1" x2="9" y2="9" />
+                      <line x1="9" y1="1" x2="1" y2="9" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: '1px', background: 'rgba(74,144,217,0.1)', marginBottom: '8px' }} />
+
+                {/* Description */}
+                <p style={{
+                  fontSize: compact ? '11px' : '12px', color: '#8A919A', lineHeight: 1.6, margin: 0,
+                  display: '-webkit-box', WebkitLineClamp: compact ? 3 : 4, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                }}>
+                  {selectedPartner.description}
+                </p>
+              </div>
+
+              {/* Bottom accent */}
+              <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, #4A90D9, transparent)' }} />
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Partners section: full layout with detail panel
   return (
-    <div className="relative w-full" style={{ height: '650px' }}>
-      <Canvas
-        camera={{ position: [0, 0.3, 6.5], fov: 40 }}
-        style={{ background: 'transparent' }}
-        gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
-        dpr={[1, 2]}
+    <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-0" style={{ height: '550px' }}>
+      {/* Left: 3D Canvas — always 55% on desktop */}
+      <div className="relative w-full lg:w-[55%] h-full">
+        <Canvas
+          camera={{ position: [0, 0.3, 6.5], fov: 40 }}
+          style={{ background: 'transparent' }}
+          gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
+          dpr={[1, 2]}
+        >
+          <ambientLight intensity={0.25} />
+          <directionalLight position={[5, 8, 5]} intensity={1} color="#ffffff" />
+          <directionalLight position={[-4, -2, -6]} intensity={0.5} color="#4A90D9" />
+          <pointLight position={[0, 4, 3]} intensity={0.6} color="#ffffff" distance={15} />
+          <pointLight position={[-3, -3, 2]} intensity={0.4} color="#4A90D9" distance={12} />
+          <pointLight position={[3, 0, -3]} intensity={0.3} color="#6AB0FF" distance={10} />
+          <Environment preset="city" environmentIntensity={0.2} />
+          <fog attach="fog" args={['#010E2F', 8, 18]} />
+
+          <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} />
+        </Canvas>
+
+        {/* Hover label (hidden when detail panel is open) */}
+        {selected === null && (
+          <HoverLabel partner={hovered !== null ? PARTNERS[hovered] : null} />
+        )}
+
+        {/* Hint text */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3">
+          <div className="w-8 h-px bg-[rgba(74,144,217,0.2)]"></div>
+          <span className="font-mono text-[10px] text-[rgba(74,144,217,0.5)] uppercase tracking-widest">
+            {selected !== null ? 'Click face again to close' : 'Click a face · Drag to rotate'}
+          </span>
+          <div className="w-8 h-px bg-[rgba(74,144,217,0.2)]"></div>
+        </div>
+      </div>
+
+      {/* Right: Detail panel — always in DOM, GPU-only animation */}
+      <div
+        className="w-full lg:w-[45%] h-full will-change-transform"
+        style={{
+          opacity: selected !== null ? 1 : 0,
+          transform: selected !== null ? 'translate3d(0,0,0)' : 'translate3d(40px,0,0)',
+          transition: 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)',
+          pointerEvents: selected !== null ? 'auto' : 'none',
+          visibility: selected !== null ? 'visible' : 'hidden',
+        }}
       >
-        <ambientLight intensity={0.25} />
-        <directionalLight position={[5, 8, 5]} intensity={1} color="#ffffff" />
-        <directionalLight position={[-4, -2, -6]} intensity={0.5} color="#4A90D9" />
-        <pointLight position={[0, 4, 3]} intensity={0.6} color="#ffffff" distance={15} />
-        <pointLight position={[-3, -3, 2]} intensity={0.4} color="#4A90D9" distance={12} />
-        <pointLight position={[3, 0, -3]} intensity={0.3} color="#6AB0FF" distance={10} />
-        <Environment preset="city" environmentIntensity={0.2} />
-        <fog attach="fog" args={['#010E2F', 8, 18]} />
-
-        <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} />
-      </Canvas>
-
-      {/* Hover label (hidden when detail panel is open) */}
-      {selected === null && (
-        <HoverLabel partner={hovered !== null ? PARTNERS[hovered] : null} />
-      )}
-
-      {/* Detail panel */}
-      <DetailPanel
-        partner={selected !== null ? PARTNERS[selected] : null}
-        onClose={() => setSelected(null)}
-      />
-
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-3">
-        <div className="w-8 h-px bg-[rgba(74,144,217,0.2)]"></div>
-        <span className="font-mono text-[10px] text-[rgba(74,144,217,0.5)] uppercase tracking-widest">
-          {selected !== null ? 'Click face again to close' : 'Click a face · Drag to rotate'}
-        </span>
-        <div className="w-8 h-px bg-[rgba(74,144,217,0.2)]"></div>
+        <DetailPanel
+          partner={selected !== null ? PARTNERS[selected] : null}
+          onClose={() => setSelected(null)}
+        />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 /**
  * ProjectsSection — Horizontal scroll gallery with 5 project cards.
  * Section 03/Portfolio. Static Astro with optimized project images.
+ * Each card shows service badges linking to the services used.
  */
 import { Image } from 'astro:assets';
 import officeTower from '../assets/images/project-office-tower.png';
@@ -9,6 +10,68 @@ import medicalCenter from '../assets/images/project-medical-center.png';
 import university from '../assets/images/project-university.png';
 import retailPavilion from '../assets/images/project-retail-pavilion.png';
 import courthouse from '../assets/images/project-courthouse.png';
+
+const SERVICE_LABELS: Record<string, string> = {
+  'curtain-wall': 'Curtain Wall',
+  'storefront': 'Storefront',
+  'window': 'Windows',
+  'entrance': 'Entrances',
+  'railing': 'Railings',
+  'skylight': 'Skylights',
+};
+
+const projects = [
+  {
+    image: officeTower,
+    alt: 'Metropolitan Office Tower - 32-story curtain wall glazing system',
+    coord: 'D2',
+    category: 'Commercial',
+    title: 'Metropolitan Office Tower',
+    desc: 'Full curtain wall system, 32 floors of unitized glass and aluminum panels with integrated sunshades.',
+    services: ['curtain-wall', 'window', 'entrance'],
+    delay: '0',
+  },
+  {
+    image: medicalCenter,
+    alt: 'Regional Medical Center - blast-resistant storefront and curtain wall systems',
+    coord: 'D3',
+    category: 'Healthcare',
+    title: 'Regional Medical Center',
+    desc: 'Storefront and curtain wall systems with blast-resistant glazing and hurricane-rated assemblies.',
+    services: ['curtain-wall', 'storefront', 'window'],
+    delay: '100',
+  },
+  {
+    image: university,
+    alt: 'University Science Complex - skylights and specialized lab-grade glazing',
+    coord: 'D4',
+    category: 'Education',
+    title: 'University Science Complex',
+    desc: 'Skylights, curtain wall, and specialized lab-grade glazing with integrated ventilation louvers.',
+    services: ['skylight', 'curtain-wall', 'window'],
+    delay: '200',
+  },
+  {
+    image: retailPavilion,
+    alt: 'Luxury Retail Pavilion - structural silicone glazing and frameless entrance',
+    coord: 'D5',
+    category: 'Retail',
+    title: 'Luxury Retail Pavilion',
+    desc: 'All-glass storefront with structural silicone glazing and frameless glass entrance system.',
+    services: ['storefront', 'entrance', 'railing'],
+    delay: '300',
+  },
+  {
+    image: courthouse,
+    alt: 'Federal Courthouse - impact-resistant glazing with custom mullion profiles',
+    coord: 'D6',
+    category: 'Civic',
+    title: 'Federal Courthouse',
+    desc: 'Impact-resistant glazing with custom mullion profiles and blast-mitigation film assemblies.',
+    services: ['curtain-wall', 'window', 'entrance'],
+    delay: '400',
+  },
+];
 ---
 
 <section id="projects" class="relative bg-[#012A89] blueprint-grid py-20 sm:py-28 lg:py-32">
@@ -48,137 +111,37 @@ import courthouse from '../assets/images/project-courthouse.png';
     <!-- Horizontal Scroll Gallery -->
     <div id="projectGallery" class="scroll-gallery">
 
-      <!-- Project 1: Metropolitan Office Tower -->
-      <div class="glass-card-strong corner-brackets card-glow-bg w-[280px] sm:w-[400px] flex-shrink-0 scroll-reveal">
-        <div class="relative z-10">
-          <!-- Image Area -->
-          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
-            <Image
-              src={officeTower}
-              alt="Metropolitan Office Tower - 32-story curtain wall glazing system"
-              width={400}
-              height={224}
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <!-- Info Area -->
-          <div class="p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-xs">D2</span>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Commercial</span>
+      {projects.map((p) => (
+        <div class="glass-card-strong corner-brackets card-glow-bg w-[320px] sm:w-[480px] flex-shrink-0 scroll-reveal" data-reveal-delay={p.delay}>
+          <div class="relative z-10">
+            <div class="h-64 sm:h-72 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
+              <Image
+                src={p.image}
+                alt={p.alt}
+                width={480}
+                height={288}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
-            <h3 class="text-lg font-bold text-white mb-2">Metropolitan Office Tower</h3>
-            <p class="text-[#8A919A] text-sm leading-relaxed">
-              Full curtain wall system, 32 floors of unitized glass and aluminum panels with integrated sunshades.
-            </p>
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="grid-coord text-xs">{p.coord}</span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">{p.title}</h3>
+              <p class="text-[#8A919A] text-sm leading-relaxed mb-3">{p.desc}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {p.services.map((svc) => (
+                  <a href="#services" class="service-badge font-mono text-[9px] uppercase tracking-wider px-2 py-1 border border-[rgba(74,144,217,0.25)] text-[#4A90D9] hover:bg-[rgba(74,144,217,0.1)] hover:border-[#4A90D9] transition-all">
+                    {SERVICE_LABELS[svc]}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Project 2: Regional Medical Center -->
-      <div class="glass-card-strong corner-brackets card-glow-bg w-[280px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="100">
-        <div class="relative z-10">
-          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
-            <Image
-              src={medicalCenter}
-              alt="Regional Medical Center - blast-resistant storefront and curtain wall systems"
-              width={400}
-              height={224}
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-xs">D3</span>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Healthcare</span>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">Regional Medical Center</h3>
-            <p class="text-[#8A919A] text-sm leading-relaxed">
-              Storefront and curtain wall systems with blast-resistant glazing and hurricane-rated assemblies.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 3: University Science Complex -->
-      <div class="glass-card-strong corner-brackets card-glow-bg w-[280px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="200">
-        <div class="relative z-10">
-          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
-            <Image
-              src={university}
-              alt="University Science Complex - skylights and specialized lab-grade glazing"
-              width={400}
-              height={224}
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-xs">D4</span>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Education</span>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">University Science Complex</h3>
-            <p class="text-[#8A919A] text-sm leading-relaxed">
-              Skylights, curtain wall, and specialized lab-grade glazing with integrated ventilation louvers.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 4: Luxury Retail Pavilion -->
-      <div class="glass-card-strong corner-brackets card-glow-bg w-[280px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="300">
-        <div class="relative z-10">
-          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
-            <Image
-              src={retailPavilion}
-              alt="Luxury Retail Pavilion - structural silicone glazing and frameless entrance"
-              width={400}
-              height={224}
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-xs">D5</span>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Retail</span>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">Luxury Retail Pavilion</h3>
-            <p class="text-[#8A919A] text-sm leading-relaxed">
-              All-glass storefront with structural silicone glazing and frameless glass entrance system.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 5: Federal Courthouse -->
-      <div class="glass-card-strong corner-brackets card-glow-bg w-[280px] sm:w-[400px] flex-shrink-0 scroll-reveal" data-reveal-delay="400">
-        <div class="relative z-10">
-          <div class="h-56 border-b border-[rgba(74,144,217,0.1)] overflow-hidden">
-            <Image
-              src={courthouse}
-              alt="Federal Courthouse - impact-resistant glazing with custom mullion profiles"
-              width={400}
-              height={224}
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-xs">D6</span>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-[#4A90D9]">Civic</span>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-2">Federal Courthouse</h3>
-            <p class="text-[#8A919A] text-sm leading-relaxed">
-              Impact-resistant glazing with custom mullion profiles and blast-mitigation film assemblies.
-            </p>
-          </div>
-        </div>
-      </div>
+      ))}
 
     </div>
 

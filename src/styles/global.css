@@ -495,7 +495,6 @@ input[type="submit"]:active, .interactive:active,
 
 .card-glow-bg {
   position: relative;
-  overflow: hidden;
 }
 
 .card-glow-bg::before {
@@ -870,6 +869,30 @@ input[type="submit"]:active, .interactive:active,
 }
 
 /* ============================================================
+   LOGO MARQUEE
+   ============================================================ */
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.logo-marquee {
+  animation: marquee-scroll 30s linear infinite;
+  width: max-content;
+}
+
+.logo-marquee img {
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee {
+    animation: none;
+  }
+}
+
+/* ============================================================
    SCROLL GALLERY
    ============================================================ */
 
@@ -877,7 +900,9 @@ input[type="submit"]:active, .interactive:active,
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(74, 144, 217, 0.3) transparent;
@@ -1094,8 +1119,6 @@ input[type="submit"]:active, .interactive:active,
 
 #hero-section {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
 }
 
 /* ============================================================
