@@ -1089,17 +1089,11 @@ input[type="submit"]:active, .interactive:active,
 }
 
 /* ============================================================
-   HERO SCROLL PINNING
+   HERO SECTION
    ============================================================ */
 
-#hero-scroll-spacer {
-  height: 300vh;
-  position: relative;
-}
-
 #hero-section {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
   overflow: hidden;
 }
