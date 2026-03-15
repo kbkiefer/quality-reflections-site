@@ -954,21 +954,67 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
         </div>
       </div>
 
-      {/* Right: Detail panel — always in DOM, GPU-only animation */}
-      <div
-        className="w-full lg:w-[45%] h-full will-change-transform"
-        style={{
-          opacity: selected !== null ? 1 : 0,
-          transform: selected !== null ? 'translate3d(0,0,0)' : 'translate3d(40px,0,0)',
-          transition: 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)',
-          pointerEvents: selected !== null ? 'auto' : 'none',
-          visibility: selected !== null ? 'visible' : 'hidden',
-        }}
-      >
-        <DetailPanel
-          partner={selected !== null ? PARTNERS[selected] : null}
-          onClose={() => setSelected(null)}
-        />
+      {/* Right: Info panel — default intro or partner detail */}
+      <div className="w-full lg:w-[45%] h-full relative">
+        {/* Default intro — visible when no face selected */}
+        <div
+          className="absolute inset-0 will-change-transform"
+          style={{
+            opacity: selected === null ? 1 : 0,
+            transition: 'opacity 0.4s cubic-bezier(0.16,1,0.3,1)',
+            pointerEvents: selected === null ? 'auto' : 'none',
+          }}
+        >
+          <div className="w-full h-full px-4 lg:px-6 flex items-center">
+            <div className="w-full border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.6)]" style={{ height: '420px' }}>
+              <div className="h-px bg-gradient-to-r from-transparent via-[rgba(74,144,217,0.3)] to-transparent"></div>
+              <div className="p-6 lg:p-8 flex flex-col h-full justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-2 h-2 bg-[#4A90D9] flex-shrink-0"></span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90D9]">Manufacturing Network</span>
+                  </div>
+                  <h3 className="font-mono text-2xl lg:text-3xl font-bold text-white tracking-wider mb-4">Factory-Direct Partnerships</h3>
+                  <div className="h-px bg-[rgba(74,144,217,0.1)] mb-5"></div>
+                  <p className="text-sm lg:text-base text-[#8A919A] leading-relaxed mb-4">
+                    Quality Reflections maintains authorized dealer relationships with the industry's leading glass and aluminum manufacturers. These partnerships give us factory-direct pricing, priority lead times, and dedicated engineering support that independent installers can't access.
+                  </p>
+                  <p className="text-sm lg:text-base text-[#8A919A] leading-relaxed">
+                    Click any face on the dodecahedron to learn how we leverage each manufacturer's products across our commercial glazing projects.
+                  </p>
+                </div>
+                <div className="flex items-center gap-6 pt-4 border-t border-[rgba(74,144,217,0.06)]">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-2xl font-bold text-white">{PARTNERS.length}</span>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">Partners</span>
+                  </div>
+                  <span className="w-px h-4 bg-[rgba(74,144,217,0.12)]"></span>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-green-500"></span>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">All Active</span>
+                  </div>
+                </div>
+              </div>
+              <div className="h-px bg-gradient-to-r from-transparent via-[rgba(74,144,217,0.15)] to-transparent"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Partner detail — visible when a face is selected */}
+        <div
+          className="absolute inset-0 will-change-transform"
+          style={{
+            opacity: selected !== null ? 1 : 0,
+            transform: selected !== null ? 'translate3d(0,0,0)' : 'translate3d(40px,0,0)',
+            transition: 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)',
+            pointerEvents: selected !== null ? 'auto' : 'none',
+          }}
+        >
+          <DetailPanel
+            partner={selected !== null ? PARTNERS[selected] : null}
+            onClose={() => setSelected(null)}
+          />
+        </div>
       </div>
     </div>
   );
