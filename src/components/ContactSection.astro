@@ -33,18 +33,18 @@ import CausticLights from './react/CausticLights';
 
     <!-- Revision Note Badge -->
     <div class="inline-flex items-center gap-2 mb-8 scroll-reveal">
-      <span class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A] border border-[rgba(211,17,17,0.3)] px-3 py-1.5 bg-[rgba(211,17,17,0.05)]">
+      <span class="font-mono text-[13px] uppercase tracking-widest text-[#8A919A] border border-[rgba(211,17,17,0.3)] px-3 py-1.5 bg-[rgba(211,17,17,0.05)]" data-i18n="contact.badge">
         Rev 03 | Request for Quote
       </span>
     </div>
 
     <!-- Heading -->
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 scroll-reveal" data-reveal-delay="100">
-      Start Your <span class="text-[#D31111]">Next Project</span>
+      <span data-i18n="contact.heading.line1">Start Your</span> <span class="text-[#D31111]" data-i18n="contact.heading.line2">Next Project</span>
     </h2>
 
     <!-- Description -->
-    <p class="text-[#8A919A] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 scroll-reveal" data-reveal-delay="200">
+    <p class="text-[#8A919A] text-xl sm:text-xl leading-relaxed max-w-2xl mx-auto mb-10 scroll-reveal" data-reveal-delay="200" data-i18n="contact.body">
       Whether you need a complete curtain wall system or a storefront replacement,
       our team delivers precision-engineered glazing solutions on schedule and to specification.
       Let's discuss your next project.
@@ -55,15 +55,15 @@ import CausticLights from './react/CausticLights';
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="mailto:info@qualityreflections.com"
-          class="btn-blueprint px-10 py-5 bg-[rgba(211,17,17,0.1)] border-2 border-[#D31111] text-white font-semibold text-sm"
+          class="btn-blueprint px-10 py-5 bg-[rgba(211,17,17,0.1)] border-2 border-[#D31111] text-white font-semibold text-lg"
         >
-          <span>Request a Consultation</span>
+          <span data-i18n="contact.cta.email">Request a Consultation</span>
         </a>
         <a
           href="tel:+19567275000"
-          class="btn-blueprint px-10 py-5 border border-[rgba(138,145,154,0.3)] text-[#8A919A] font-medium text-sm tracking-wider"
+          class="btn-blueprint px-10 py-5 border border-[rgba(138,145,154,0.3)] text-[#8A919A] font-medium text-lg tracking-wider"
         >
-          <span>Call (956) 727-5000</span>
+          <span data-i18n="contact.cta.phone">Call (956) 727-5000</span>
         </a>
       </div>
     </div>

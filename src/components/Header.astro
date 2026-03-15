@@ -11,7 +11,7 @@
 
       <!-- Logo Area -->
       <a href="#" class="flex items-center gap-2 sm:gap-3 group min-w-0">
-        <span class="grid-coord text-xs shrink-0">A1</span>
+        <span class="grid-coord text-sm shrink-0">A1</span>
         <svg
           viewBox="0 0 447.89 233.99"
           fill="white"
@@ -21,22 +21,31 @@
           <path d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z" />
         </svg>
         <span class="flex flex-col leading-none">
-          <span class="font-[family-name:var(--font-brand)] text-sm sm:text-base lg:text-lg font-extrabold tracking-[0.15em] text-white uppercase">Quality Reflections</span>
-          <span class="font-[family-name:var(--font-brand)] text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.28em] text-[#D31111] uppercase">Glassworks</span>
+          <span class="font-[family-name:var(--font-brand)] text-base sm:text-lg lg:text-xl font-extrabold tracking-[0.15em] text-white uppercase">Quality Reflections</span>
+          <span class="font-[family-name:var(--font-brand)] text-[14px] sm:text-base lg:text-lg font-bold tracking-[0.28em] text-[#D31111] uppercase">Glassworks</span>
         </span>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center gap-1">
-        <a href="#services" class="nav-tab" data-tab="A2">Services</a>
-        <a href="#projects" class="nav-tab" data-tab="A3">Projects</a>
-        <a href="#partners" class="nav-tab" data-tab="A4">Partners</a>
-        <a href="#certifications" class="nav-tab" data-tab="A6">Certifications</a>
-        <a href="#testimonials" class="nav-tab" data-tab="A7">Testimonials</a>
-        <a href="#contact" class="nav-tab" data-tab="A8">Contact</a>
+        <a href="#services" class="nav-tab" data-tab="A2" data-i18n="nav.services">Services</a>
+        <a href="#projects" class="nav-tab" data-tab="A3" data-i18n="nav.projects">Projects</a>
+        <a href="#partners" class="nav-tab" data-tab="A4" data-i18n="nav.partners">Partners</a>
+        <a href="#certifications" class="nav-tab" data-tab="A6" data-i18n="nav.certifications">Certifications</a>
+        <a href="#testimonials" class="nav-tab" data-tab="A7" data-i18n="nav.testimonials">Testimonials</a>
+        <a href="#contact" class="nav-tab" data-tab="A8" data-i18n="nav.contact">Contact</a>
       </nav>
 
       <div class="flex items-center gap-2">
+        <!-- Language Toggle -->
+        <button
+          id="langToggle"
+          class="flex items-center justify-center h-10 px-2 border border-[rgba(74,144,217,0.2)] text-[#4A90D9] font-mono text-[13px] tracking-wider uppercase hover:border-[rgba(74,144,217,0.5)] hover:text-white transition-colors"
+          aria-label="Switch language"
+        >
+          <span id="langLabel">EN</span>
+        </button>
+
         <!-- Theme Toggle -->
         <button
           id="themeToggle"
@@ -73,12 +82,12 @@
   <!-- Mobile Menu Dropdown -->
   <div id="mobileMenu" class="lg:hidden hidden border-t border-[rgba(74,144,217,0.1)] bg-[rgba(1,14,47,0.95)] backdrop-blur-xl">
     <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-      <a href="#services" class="nav-tab w-full" data-tab="A2">Services</a>
-      <a href="#projects" class="nav-tab w-full" data-tab="A3">Projects</a>
-      <a href="#partners" class="nav-tab w-full" data-tab="A4">Partners</a>
-      <a href="#certifications" class="nav-tab w-full" data-tab="A6">Certifications</a>
-      <a href="#testimonials" class="nav-tab w-full" data-tab="A7">Testimonials</a>
-      <a href="#contact" class="nav-tab w-full" data-tab="A8">Contact</a>
+      <a href="#services" class="nav-tab w-full" data-tab="A2" data-i18n="nav.services">Services</a>
+      <a href="#projects" class="nav-tab w-full" data-tab="A3" data-i18n="nav.projects">Projects</a>
+      <a href="#partners" class="nav-tab w-full" data-tab="A4" data-i18n="nav.partners">Partners</a>
+      <a href="#certifications" class="nav-tab w-full" data-tab="A6" data-i18n="nav.certifications">Certifications</a>
+      <a href="#testimonials" class="nav-tab w-full" data-tab="A7" data-i18n="nav.testimonials">Testimonials</a>
+      <a href="#contact" class="nav-tab w-full" data-tab="A8" data-i18n="nav.contact">Contact</a>
     </nav>
   </div>
   <div id="menuBackdrop" class="fixed inset-0 bg-black/30 z-30 hidden lg:hidden" aria-hidden="true"></div>
@@ -170,5 +179,44 @@
       if (metaTheme) metaTheme.setAttribute('content', '#FFFFFF');
     }
     updateThemeIcons();
+  });
+
+  // --- Language Toggle ---
+  import { translations } from '../i18n/translations';
+
+  const langToggle = document.getElementById('langToggle');
+  const langLabel = document.getElementById('langLabel');
+
+  function applyLanguage(lang: 'en' | 'es') {
+    (window as any).__lang = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('qr-lang', lang);
+
+    // Update toggle button label
+    if (langLabel) langLabel.textContent = lang.toUpperCase();
+
+    // Update all data-i18n elements
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[key]) {
+        el.textContent = translations[key][lang];
+      }
+    });
+
+    // Dispatch event for React islands
+    window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+  }
+
+  // Set initial language
+  const savedLang = (localStorage.getItem('qr-lang') || 'en') as 'en' | 'es';
+  if (savedLang === 'es') {
+    applyLanguage('es');
+  } else if (langLabel) {
+    langLabel.textContent = 'EN';
+  }
+
+  langToggle?.addEventListener('click', () => {
+    const current = (window as any).__lang || 'en';
+    applyLanguage(current === 'en' ? 'es' : 'en');
   });
 </script>

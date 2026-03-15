@@ -8,7 +8,7 @@
 import PartnersDodecahedron from './react/PartnersDodecahedron';
 ---
 
-<section id="partners" class="relative bg-[#010E2F] overflow-hidden py-20 sm:py-28 lg:py-36">
+<section id="partners" class="relative bg-[#010E2F] overflow-hidden py-12 sm:py-28 lg:py-36">
 
   <!-- ═══ Background layers ═══ -->
 
@@ -45,18 +45,18 @@ import PartnersDodecahedron from './react/PartnersDodecahedron';
   <div class="absolute bottom-4 right-4 w-12 h-12 border-b border-r border-[rgba(74,144,217,0.12)] pointer-events-none"></div>
 
   <!-- Grid coordinate labels -->
-  <div class="absolute top-5 left-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.00</div>
-  <div class="absolute top-5 right-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.12</div>
-  <div class="absolute bottom-5 left-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.24</div>
-  <div class="absolute bottom-5 right-5 font-mono text-[9px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.36</div>
+  <div class="absolute top-5 left-5 font-mono text-[13px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.00</div>
+  <div class="absolute top-5 right-5 font-mono text-[13px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.12</div>
+  <div class="absolute bottom-5 left-5 font-mono text-[13px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.24</div>
+  <div class="absolute bottom-5 right-5 font-mono text-[13px] text-[rgba(74,144,217,0.2)] tracking-widest pointer-events-none">E.36</div>
 
   <!-- ═══ Content ═══ -->
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Section Header -->
-    <div class="mb-6 scroll-reveal text-center">
-      <div class="flex items-center justify-center gap-3 mb-5">
-        <span class="grid-coord text-xs">E1</span>
+    <div class="mb-10 sm:mb-14 scroll-reveal text-center">
+      <div class="flex items-center justify-center gap-3 mb-3 sm:mb-5">
+        <span class="grid-coord text-sm">E1</span>
         <div class="dimension-line flex-1 max-w-xs">
           <span class="dim-cap"></span>
           <span class="dim-line"></span>
@@ -65,12 +65,12 @@ import PartnersDodecahedron from './react/PartnersDodecahedron';
           <span class="dim-cap"></span>
         </div>
       </div>
-      <div class="mb-3">
-        <span class="font-mono text-[10px] uppercase tracking-widest text-[#D31111]">Authorized Dealer & Certified Installer</span>
+      <div class="mb-2 sm:mb-3">
+        <span class="font-mono text-[13px] uppercase tracking-widest text-[#D31111]" data-i18n="partners.badge">Authorized Dealer & Certified Installer</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5">OUR PARTNERS</h2>
-      <p class="text-[#8A919A] max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
-        Direct relationships with 12 leading manufacturers — from aluminum extrusions to architectural glass.
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-5" data-i18n="partners.heading">OUR PARTNERS</h2>
+      <p class="text-[#8A919A] max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed" data-i18n="partners.subtext">
+        Direct relationships with 12 leading manufacturers, from aluminum extrusions to architectural glass.
         Factory-direct ordering, engineering support, and competitive dealer pricing across every system.
       </p>
     </div>
@@ -80,27 +80,11 @@ import PartnersDodecahedron from './react/PartnersDodecahedron';
       <PartnersDodecahedron client:visible />
     </div>
 
-    <!-- Partner count badge -->
-    <div class="flex justify-center mt-2 scroll-reveal" data-reveal-delay="400">
-      <div class="inline-flex items-center gap-4 px-6 py-3 border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.7)]">
-        <div class="flex items-center gap-2">
-          <span class="w-1 h-1 bg-[#D31111]"></span>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Manufacturer Partners</span>
-        </div>
-        <span class="w-px h-4 bg-[rgba(74,144,217,0.15)]"></span>
-        <span class="font-mono text-sm font-bold text-white">12</span>
-        <span class="w-px h-4 bg-[rgba(74,144,217,0.15)]"></span>
-        <div class="flex items-center gap-2">
-          <span class="w-1 h-1 bg-[#4A90D9]"></span>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-[#8A919A]">Direct Access</span>
-        </div>
-      </div>
-    </div>
 
   </div>
 
   <!-- Section Cut -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 sm:mt-16">
     <div class="section-cut" data-cut>
       <div class="cut-line"></div>
       <span class="cut-label">Section E-E</span>

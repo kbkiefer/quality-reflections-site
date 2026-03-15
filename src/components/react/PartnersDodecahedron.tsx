@@ -2,6 +2,8 @@ import { useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
+import { t } from '../../i18n/translations';
+import { useLang } from '../../i18n/useLang';
 
 /* ═══════════════════════════════════════════════════════
    Partner data
@@ -18,15 +20,21 @@ const PARTNERS: Partner[] = [
   { name: 'KAWNEER', logo: '/logos/kawneer.svg', specialty: 'Curtain Walls & Entrances', description: 'Our primary curtain wall partner. Kawneer\'s 1600 and 1700 series wall systems anchor the majority of our mid- and high-rise projects. As an authorized dealer, we get factory-direct pricing, dedicated engineering support, and priority lead times that independent installers can\'t match.' },
   { name: 'YKK AP', logo: '/logos/ykk-ap.png', specialty: 'Window & Door Systems', description: 'YKK AP\'s thermally broken window and door systems deliver some of the highest U-values in commercial aluminum framing. We spec their ProTek and ThermaShade lines for projects requiring ENERGY STAR compliance without sacrificing sightlines.' },
   { name: 'OLDCASTLE', logo: '/logos/oldcastle.png', specialty: 'Building Envelope', description: 'Oldcastle BuildingEnvelope gives us single-source access to both glass fabrication and aluminum framing under one roof. Their Reliance and CrystalBlue product lines let us consolidate suppliers and simplify coordination on complex building envelope projects.' },
-  { name: 'VIRACON', logo: '/logos/viracon.svg', specialty: 'Architectural Glass', description: 'When the spec calls for high-performance coated glass — low-e, solar control, bird-friendly — Viracon is our go-to fabricator. Their VRE and VNE coatings consistently meet the tightest energy code requirements across Texas climate zones.' },
+  { name: 'VIRACON', logo: '/logos/viracon.svg', specialty: 'Architectural Glass', description: 'When the spec calls for high-performance coated glass, including low-e, solar control, and bird-friendly options, Viracon is our go-to fabricator. Their VRE and VNE coatings consistently meet the tightest energy code requirements across Texas climate zones.' },
   { name: 'AGC GLASS', logo: '/logos/agc.png', specialty: 'Float & Specialty Glass', description: 'AGC supplies our float glass, fire-rated assemblies, and decorative glass needs. Their Pyrobel fire-rated glass and Lacobel back-painted panels give us options for specialty applications that most glazing contractors can\'t source directly.' },
   { name: 'TUBELITE', logo: '/logos/tubelite.png', specialty: 'Storefront & Framing', description: 'Tubelite\'s T14000 storefront and 400 series curtain wall systems are our workhorses for retail, medical, and education projects. Thermally broken profiles, Cradle to Cradle certified aluminum, and fast turnaround from their Texas distribution.' },
   { name: 'ATLAS', logo: '/logos/atlas.png', specialty: 'Metal & Glazing Systems', description: 'Atlas Wall Systems provides unitized curtain wall and panel systems for projects requiring factory-assembled modules. Their pre-glazed unitized approach reduces field labor and improves quality control on large-scale commercial facades.' },
-  { name: 'EFCO', logo: '/logos/efco.svg', specialty: 'Windows & Curtain Wall', description: 'EFCO\'s commercial window and curtain wall lines — part of the Apogee family alongside Tubelite and Wausau — give us access to projected, fixed, and operable window systems engineered for institutional and high-wind applications.' },
-  { name: 'STANLEY', logo: '/logos/stanley.svg', specialty: 'Automatic Entrances', description: 'Stanley Access Technologies handles our automatic entrance systems — sliding, swinging, revolving, and folding doors. We\'re certified installers for their Dura-Glide, Magnum, and All-Glass lines, covering everything from retail storefronts to hospital ICU entries.' },
+  { name: 'EFCO', logo: '/logos/efco.svg', specialty: 'Windows & Curtain Wall', description: 'As part of the Apogee family alongside Tubelite and Wausau, EFCO\'s commercial window and curtain wall lines give us access to projected, fixed, and operable window systems engineered for institutional and high-wind applications.' },
+  { name: 'STANLEY', logo: '/logos/stanley.svg', specialty: 'Automatic Entrances', description: 'Stanley Access Technologies handles our automatic entrance systems, including sliding, swinging, revolving, and folding doors. We\'re certified installers for their Dura-Glide, Magnum, and All-Glass lines, covering everything from retail storefronts to hospital ICU entries.' },
   { name: 'GUARDIAN', logo: '/logos/guardian.png', specialty: 'Glass Manufacturing', description: 'Guardian Glass provides float glass, coated glass, and fabricated insulating units. Their SunGuard solar control coatings and ClimaGuard low-e products are staples in our commercial and multi-family residential glazing projects.' },
   { name: 'PPG', logo: '/logos/ppg.svg', specialty: 'Glass & Coatings', description: 'PPG\'s Solarban solar control glass and Starphire ultra-clear glass are specified by name on projects demanding peak optical clarity and energy performance. We order direct through PPG\'s IdeaScapes network for competitive dealer pricing.' },
   { name: 'ARCADIA', logo: '/logos/arcadia.png', specialty: 'Custom Window Systems', description: 'Arcadia specializes in custom aluminum and steel window and door systems for architecturally demanding projects. Their steel-look thermally broken profiles give us the thin sightlines of historic steel with modern thermal performance.' },
+];
+
+// Translation key mapping for each partner (by index)
+const PARTNER_KEYS = [
+  'kawneer', 'ykkAp', 'oldcastle', 'viracon', 'agcGlass', 'tubelite',
+  'atlas', 'efco', 'stanley', 'guardian', 'ppg', 'arcadia',
 ];
 
 const GLASS_BLUE = '#4A90D9';
@@ -722,7 +730,7 @@ function HoverLabel({ partner }: { partner: Partner | null }) {
       <div className="glass-card-strong corner-brackets px-6 py-3 text-center">
         <div className="relative z-10 flex items-center gap-3">
           <span className="w-2 h-2 bg-[#D31111] flex-shrink-0"></span>
-          <span className="font-mono text-sm text-white font-bold tracking-wider">
+          <span className="font-mono text-base text-white font-bold tracking-wider">
             {partner?.name ?? ''}
           </span>
         </div>
@@ -735,11 +743,12 @@ function HoverLabel({ partner }: { partner: Partner | null }) {
    Detail panel — appears below the dodecahedron
    ═══════════════════════════════════════════════════════ */
 
-function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: () => void }) {
+function DetailPanel({ partner, onClose, lang, partnerIndex }: { partner: Partner | null; onClose: () => void; lang: 'en' | 'es'; partnerIndex: number | null }) {
+  const pKey = partnerIndex !== null ? PARTNER_KEYS[partnerIndex] : null;
   return (
     <div className="w-full h-full px-4 lg:px-6 flex items-center">
       {partner && (
-        <div className="w-full border border-[rgba(74,144,217,0.2)] bg-[rgba(1,14,47,0.92)] backdrop-blur-sm flex flex-col" style={{ height: '420px' }}>
+        <div className="partner-info-panel w-full border border-[rgba(74,144,217,0.2)] bg-[rgba(1,14,47,0.92)] backdrop-blur-sm flex flex-col" style={{ minHeight: '320px' }}>
           {/* Top accent */}
           <div className="h-px bg-gradient-to-r from-transparent via-[#D31111] to-transparent flex-shrink-0"></div>
 
@@ -751,10 +760,10 @@ function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: (
                 <div>
                   <div className="flex items-center gap-2 mb-3">
                     <span className="w-2 h-2 bg-[#D31111] flex-shrink-0"></span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D31111]">Manufacturing Partner</span>
+                    <span className="font-mono text-[14px] uppercase tracking-[0.2em] text-[#D31111]">{t('partners.detail.badge', lang)}</span>
                   </div>
                   <h3 className="font-mono text-2xl lg:text-3xl font-bold text-white tracking-wider mb-2">{partner.name}</h3>
-                  <span className="font-mono text-xs uppercase tracking-widest text-[#4A90D9]">{partner.specialty}</span>
+                  <span className="font-mono text-base uppercase tracking-widest text-[#4A90D9]">{pKey ? t(`partners.${pKey}.specialty`, lang) : partner.specialty}</span>
                 </div>
                 <button
                   onClick={onClose}
@@ -772,7 +781,7 @@ function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: (
               <div className="h-px bg-[rgba(74,144,217,0.1)] mb-5"></div>
 
               {/* Description */}
-              <p className="text-sm lg:text-base text-[#8A919A] leading-relaxed">{partner.description}</p>
+              <p className="text-lg lg:text-xl text-[#8A919A] leading-relaxed">{pKey ? t(`partners.${pKey}.desc`, lang) : partner.description}</p>
             </div>
 
             {/* Footer */}
@@ -780,15 +789,15 @@ function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: (
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-green-500"></span>
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">Authorized Dealer</span>
+                  <span className="font-mono text-[13px] uppercase tracking-widest text-[#8A919A]">{t('partners.detail.authorizedDealer', lang)}</span>
                 </div>
                 <span className="w-px h-3 bg-[rgba(74,144,217,0.12)]"></span>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-[#4A90D9]"></span>
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">Factory Direct</span>
+                  <span className="font-mono text-[13px] uppercase tracking-widest text-[#8A919A]">{t('partners.detail.factoryDirect', lang)}</span>
                 </div>
               </div>
-              <span className="font-mono text-[9px] text-[rgba(74,144,217,0.3)] tracking-widest">QR—{String(PARTNERS.indexOf(partner) + 1).padStart(2, '0')}</span>
+              <span className="font-mono text-[13px] text-[rgba(74,144,217,0.3)] tracking-widest">QR-{String(PARTNERS.indexOf(partner) + 1).padStart(2, '0')}</span>
             </div>
           </div>
 
@@ -807,6 +816,7 @@ function DetailPanel({ partner, onClose }: { partner: Partner | null; onClose: (
 export default function PartnersDodecahedron({ heroMode = false, compact = false }: { heroMode?: boolean; compact?: boolean }) {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
+  const lang = useLang();
 
   // Hero mode: 3D canvas filling its container with interactive face selection
   if (heroMode) {
@@ -874,10 +884,10 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
                       <span style={{ width: '6px', height: '6px', background: '#D31111', flexShrink: 0 }} />
-                      <span style={{ fontFamily: 'monospace', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#D31111' }}>Partner</span>
+                      <span style={{ fontFamily: 'monospace', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.15em', color: '#D31111' }}>{t('partners.detail.badge', lang)}</span>
                     </div>
-                    <h4 style={{ fontFamily: 'monospace', fontSize: compact ? '16px' : '18px', fontWeight: 700, color: 'white', letterSpacing: '0.05em', margin: 0, lineHeight: 1.2 }}>{selectedPartner.name}</h4>
-                    <span style={{ fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#4A90D9' }}>{selectedPartner.specialty}</span>
+                    <h4 style={{ fontFamily: 'monospace', fontSize: compact ? '18px' : '20px', fontWeight: 700, color: 'white', letterSpacing: '0.05em', margin: 0, lineHeight: 1.2 }}>{selectedPartner.name}</h4>
+                    <span style={{ fontFamily: 'monospace', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#4A90D9' }}>{selected !== null ? t(`partners.${PARTNER_KEYS[selected]}.specialty`, lang) : selectedPartner.specialty}</span>
                   </div>
                   <button
                     onClick={() => setSelected(null)}
@@ -900,10 +910,10 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
 
                 {/* Description */}
                 <p style={{
-                  fontSize: compact ? '11px' : '12px', color: '#8A919A', lineHeight: 1.6, margin: 0,
+                  fontSize: compact ? '15px' : '16px', color: '#8A919A', lineHeight: 1.6, margin: 0,
                   display: '-webkit-box', WebkitLineClamp: compact ? 3 : 4, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                 }}>
-                  {selectedPartner.description}
+                  {selected !== null ? t(`partners.${PARTNER_KEYS[selected]}.desc`, lang) : selectedPartner.description}
                 </p>
               </div>
 
@@ -918,9 +928,9 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
 
   // Partners section: full layout with detail panel
   return (
-    <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-0" style={{ height: '550px' }}>
+    <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-0 lg:h-[550px]">
       {/* Left: 3D Canvas — always 55% on desktop */}
-      <div className="relative w-full lg:w-[55%] h-full">
+      <div className="relative w-full lg:w-[55%] h-[250px] sm:h-[300px] lg:h-full">
         <Canvas
           camera={{ position: [0, 0.3, 6.5], fov: 40 }}
           style={{ background: 'transparent' }}
@@ -944,54 +954,44 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
           <HoverLabel partner={hovered !== null ? PARTNERS[hovered] : null} />
         )}
 
-        {/* Hint text */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3">
-          <div className="w-8 h-px bg-[rgba(74,144,217,0.2)]"></div>
-          <span className="font-mono text-[10px] text-[rgba(74,144,217,0.5)] uppercase tracking-widest">
-            {selected !== null ? 'Click face again to close' : 'Click a face · Drag to rotate'}
-          </span>
-          <div className="w-8 h-px bg-[rgba(74,144,217,0.2)]"></div>
-        </div>
       </div>
 
       {/* Right: Info panel — default intro or partner detail */}
-      <div className="w-full lg:w-[45%] h-full relative">
+      <div className="w-full lg:w-[45%] lg:h-full relative" style={{ minHeight: '320px' }}>
         {/* Default intro — visible when no face selected */}
         <div
-          className="absolute inset-0 will-change-transform"
+          className="lg:absolute lg:inset-0 will-change-transform"
           style={{
             opacity: selected === null ? 1 : 0,
             transition: 'opacity 0.4s cubic-bezier(0.16,1,0.3,1)',
             pointerEvents: selected === null ? 'auto' : 'none',
+            ...(selected !== null ? { position: 'absolute', inset: 0 } : {}),
           }}
         >
           <div className="w-full h-full px-4 lg:px-6 flex items-center">
-            <div className="w-full border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.6)]" style={{ height: '420px' }}>
+            <div className="partner-info-panel w-full border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.6)]" style={{ minHeight: '320px' }}>
               <div className="h-px bg-gradient-to-r from-transparent via-[rgba(74,144,217,0.3)] to-transparent"></div>
               <div className="p-6 lg:p-8 flex flex-col h-full justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-2 h-2 bg-[#4A90D9] flex-shrink-0"></span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A90D9]">Manufacturing Network</span>
+                    <span className="font-mono text-[14px] uppercase tracking-[0.2em] text-[#4A90D9]">{t('partners.panel.badge', lang)}</span>
                   </div>
-                  <h3 className="font-mono text-2xl lg:text-3xl font-bold text-white tracking-wider mb-4">Factory-Direct Partnerships</h3>
+                  <h3 className="font-mono text-2xl lg:text-3xl font-bold text-white tracking-wider mb-4">{t('partners.panel.heading', lang)}</h3>
                   <div className="h-px bg-[rgba(74,144,217,0.1)] mb-5"></div>
-                  <p className="text-sm lg:text-base text-[#8A919A] leading-relaxed mb-4">
-                    Quality Reflections maintains authorized dealer relationships with the industry's leading glass and aluminum manufacturers. These partnerships give us factory-direct pricing, priority lead times, and dedicated engineering support that independent installers can't access.
-                  </p>
-                  <p className="text-sm lg:text-base text-[#8A919A] leading-relaxed">
-                    Click any face on the dodecahedron to learn how we leverage each manufacturer's products across our commercial glazing projects.
+                  <p className="text-lg lg:text-xl text-[#8A919A] leading-relaxed mb-4">
+                    {t('partners.panel.body1', lang)}
                   </p>
                 </div>
                 <div className="flex items-center gap-6 pt-4 border-t border-[rgba(74,144,217,0.06)]">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-2xl font-bold text-white">{PARTNERS.length}</span>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">Partners</span>
+                    <span className="font-mono text-[13px] uppercase tracking-widest text-[#8A919A]">{lang === 'es' ? 'Socios' : 'Partners'}</span>
                   </div>
                   <span className="w-px h-4 bg-[rgba(74,144,217,0.12)]"></span>
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-green-500"></span>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#8A919A]">All Active</span>
+                    <span className="font-mono text-[13px] uppercase tracking-widest text-[#8A919A]">{t('partners.panel.allActive', lang)}</span>
                   </div>
                 </div>
               </div>
@@ -1002,17 +1002,20 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
 
         {/* Partner detail — visible when a face is selected */}
         <div
-          className="absolute inset-0 will-change-transform"
+          className="lg:absolute lg:inset-0 will-change-transform"
           style={{
             opacity: selected !== null ? 1 : 0,
             transform: selected !== null ? 'translate3d(0,0,0)' : 'translate3d(40px,0,0)',
             transition: 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)',
             pointerEvents: selected !== null ? 'auto' : 'none',
+            ...(selected === null ? { position: 'absolute', inset: 0 } : {}),
           }}
         >
           <DetailPanel
             partner={selected !== null ? PARTNERS[selected] : null}
             onClose={() => setSelected(null)}
+            lang={lang}
+            partnerIndex={selected}
           />
         </div>
       </div>

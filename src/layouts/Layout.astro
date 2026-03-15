@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title,
-  description = "Quality Reflections Glasswork — Commercial glazing, storefronts, curtain walls, and architectural glass installation in Laredo, TX and South Texas.",
+  description = "Quality Reflections Glasswork | Commercial glazing, storefronts, curtain walls, and architectural glass installation in Laredo, TX and South Texas.",
 } = Astro.props;
 
 const siteUrl = Astro.url.href;
@@ -81,6 +81,15 @@ const structuredData = {
           var meta = document.getElementById('meta-theme-color');
           if (meta) meta.setAttribute('content', '#FFFFFF');
         }
+      })();
+    </script>
+
+    <!-- Language initialization (prevent flash) -->
+    <script is:inline>
+      (function() {
+        var lang = localStorage.getItem('qr-lang') || 'en';
+        document.documentElement.lang = lang;
+        window.__lang = lang;
       })();
     </script>
   </head>
