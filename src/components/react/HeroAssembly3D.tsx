@@ -1,5 +1,5 @@
-import { useRef, useState, useMemo, useCallback } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -374,9 +374,12 @@ function AssemblyScene({ onHover, onSelect, hoveredLayer, selectedLayer }: {
         </group>
       ))}
 
-      {/* Floating label anchored in 3D next to the selected layer */}
+      {/* Leader line to selected layer centroid */}
       {selectedLayer !== null && (
-        <FloatingLabel layerIdx={selectedLayer} onClose={() => onSelect(null)} />
+        <LeaderLine
+          from={[LAYER_CENTROIDS[selectedLayer][0], LAYER_CENTROIDS[selectedLayer][1], LAYER_CENTROIDS[selectedLayer][2]]}
+          to={[LAYER_CENTROIDS[selectedLayer][0], LAYER_CENTROIDS[selectedLayer][1] - 0.5, LAYER_CENTROIDS[selectedLayer][2]]}
+        />
       )}
     </group>
   );
@@ -502,6 +505,22 @@ function HoverLabel({ name }: { name: string | null }) {
 }
 
 /* ═══════════════════════════════════════════════════════
+   Responsive camera — widens FOV as container shrinks
+   ═══════════════════════════════════════════════════════ */
+
+function ResponsiveCamera() {
+  const { camera, size } = useThree();
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    // At 800px+ width → FOV 32, at 400px → FOV 48
+    const fov = THREE.MathUtils.clamp(32 + (800 - size.width) * 0.04, 32, 48);
+    cam.fov = fov;
+    cam.updateProjectionMatrix();
+  }, [camera, size.width]);
+  return null;
+}
+
+/* ═══════════════════════════════════════════════════════
    Exported component
    ═══════════════════════════════════════════════════════ */
 
@@ -513,28 +532,93 @@ export default function HeroAssembly3D() {
     setSelected((prev) => (prev === idx ? null : idx));
   }, []);
 
+  const selectedMeta = selected !== null ? LAYERS[selected] : null;
+
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <Canvas
-        camera={{ position: [0, 0.3, 6], fov: 28 }}
-        style={{ background: 'transparent' }}
-        gl={{ alpha: true, antialias: true }}
-        dpr={[1, 2]}
-      >
-        <ambientLight intensity={0.08} color="#4A90D9" />
-        <directionalLight position={[3, 5, 4]} intensity={0.15} color="#6AB0FF" />
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ position: 'relative', flex: 1, minHeight: 0 }}>
+        <Canvas
+          camera={{ position: [0, 0.3, 5], fov: 32 }}
+          style={{ background: 'transparent' }}
+          gl={{ alpha: true, antialias: true }}
+          dpr={[1, 2]}
+        >
+          <ResponsiveCamera />
+          <ambientLight intensity={0.08} color="#4A90D9" />
+          <directionalLight position={[3, 5, 4]} intensity={0.15} color="#6AB0FF" />
 
-        <AssemblyScene
-          onHover={setHovered}
-          onSelect={handleSelect}
-          hoveredLayer={hovered}
-          selectedLayer={selected}
-        />
-      </Canvas>
+          <AssemblyScene
+            onHover={setHovered}
+            onSelect={handleSelect}
+            hoveredLayer={hovered}
+            selectedLayer={selected}
+          />
+        </Canvas>
 
-      {selected === null && (
-        <HoverLabel name={hovered !== null ? LAYERS[hovered].name : null} />
-      )}
+        {selected === null && (
+          <HoverLabel name={hovered !== null ? LAYERS[hovered].name : null} />
+        )}
+      </div>
+
+      {/* Description panel below the 3D model — aligned right */}
+      <div style={{
+        opacity: selectedMeta ? 1 : 0,
+        transform: selectedMeta ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)',
+        pointerEvents: selectedMeta ? 'auto' : 'none',
+        padding: '0 4px',
+        marginLeft: 'auto',
+        maxWidth: '480px',
+      }}>
+        {selectedMeta && (
+          <div style={{
+            border: '1px solid rgba(74,144,217,0.18)',
+            background: 'rgba(1,14,47,0.92)',
+            backdropFilter: 'blur(12px)',
+          }}>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, #4A90D9, rgba(74,144,217,0.2), transparent)' }} />
+            <div style={{ padding: '14px 18px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{
+                    width: '26px', height: '26px',
+                    border: '1px solid rgba(74,144,217,0.2)',
+                    background: 'rgba(1,42,137,0.15)',
+                    color: '#4A90D9',
+                    fontFamily: '"JetBrains Mono", monospace',
+                    fontSize: '10px', fontWeight: 500,
+                    lineHeight: '26px', textAlign: 'center',
+                    display: 'inline-block', flexShrink: 0,
+                  }}>B{selected! + 1}</span>
+                  <span style={{
+                    fontFamily: '"JetBrains Mono", monospace',
+                    fontSize: '15px', fontWeight: 600,
+                    color: 'white', letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                  }}>{selectedMeta.name}</span>
+                </div>
+                <button onClick={() => setSelected(null)} style={{
+                  width: '24px', height: '24px',
+                  border: '1px solid rgba(74,144,217,0.15)',
+                  background: 'transparent',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#8A919A', cursor: 'pointer', padding: 0,
+                }} aria-label="Close">
+                  <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <line x1="1" y1="1" x2="9" y2="9" /><line x1="9" y1="1" x2="1" y2="9" />
+                  </svg>
+                </button>
+              </div>
+              <div style={{ height: '1px', background: 'rgba(74,144,217,0.1)', marginBottom: '8px' }} />
+              <p style={{
+                fontSize: '14px', color: '#A0A7B0', lineHeight: 1.65, margin: 0,
+                fontFamily: '"Inter", sans-serif',
+              }}>{selectedMeta.desc}</p>
+            </div>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, rgba(74,144,217,0.06), transparent)' }} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -928,11 +928,11 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
 
   // Partners section: full layout with detail panel
   return (
-    <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-0 lg:h-[550px]">
-      {/* Left: 3D Canvas — always 55% on desktop */}
-      <div className="relative w-full lg:w-[55%] h-[250px] sm:h-[300px] lg:h-full">
+    <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-0 lg:h-[900px]">
+      {/* Left: 3D Canvas */}
+      <div className="relative w-full lg:w-[65%] h-[350px] sm:h-[450px] lg:h-full">
         <Canvas
-          camera={{ position: [0, 0.3, 6.5], fov: 40 }}
+          camera={{ position: [0, 0.3, 9.5], fov: 36 }}
           style={{ background: 'transparent' }}
           gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
           dpr={[1, 2]}
@@ -944,7 +944,7 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
           <pointLight position={[-3, -3, 2]} intensity={0.4} color="#4A90D9" distance={12} />
           <pointLight position={[3, 0, -3]} intensity={0.3} color="#6AB0FF" distance={10} />
           <Environment preset="city" environmentIntensity={0.2} />
-          <fog attach="fog" args={['#010E2F', 8, 18]} />
+          <fog attach="fog" args={['#010E2F', 12, 22]} />
 
           <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} />
         </Canvas>
@@ -957,7 +957,7 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
       </div>
 
       {/* Right: Info panel — default intro or partner detail */}
-      <div className="w-full lg:w-[45%] lg:h-full relative" style={{ minHeight: '320px' }}>
+      <div className="w-full lg:w-[35%] lg:h-full relative" style={{ minHeight: '280px' }}>
         {/* Default intro — visible when no face selected */}
         <div
           className="lg:absolute lg:inset-0 will-change-transform"
@@ -969,17 +969,17 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
           }}
         >
           <div className="w-full h-full px-4 lg:px-6 flex items-center">
-            <div className="partner-info-panel w-full border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.6)]" style={{ minHeight: '320px' }}>
+            <div className="partner-info-panel w-full border border-[rgba(74,144,217,0.12)] bg-[rgba(1,14,47,0.6)]">
               <div className="h-px bg-gradient-to-r from-transparent via-[rgba(74,144,217,0.3)] to-transparent"></div>
-              <div className="p-6 lg:p-8 flex flex-col h-full justify-between">
+              <div className="p-4 sm:p-6 lg:p-8 flex flex-col h-full justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-2 mb-3 lg:mb-4">
                     <span className="w-2 h-2 bg-[#4A90D9] flex-shrink-0"></span>
-                    <span className="font-mono text-[14px] uppercase tracking-[0.2em] text-[#4A90D9]">{t('partners.panel.badge', lang)}</span>
+                    <span className="font-mono text-[12px] sm:text-[14px] uppercase tracking-[0.2em] text-[#4A90D9]">{t('partners.panel.badge', lang)}</span>
                   </div>
-                  <h3 className="font-mono text-2xl lg:text-3xl font-bold text-white tracking-wider mb-4">{t('partners.panel.heading', lang)}</h3>
-                  <div className="h-px bg-[rgba(74,144,217,0.1)] mb-5"></div>
-                  <p className="text-lg lg:text-xl text-[#8A919A] leading-relaxed mb-4">
+                  <h3 className="font-mono text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-wider mb-3 lg:mb-4">{t('partners.panel.heading', lang)}</h3>
+                  <div className="h-px bg-[rgba(74,144,217,0.1)] mb-3 lg:mb-5"></div>
+                  <p className="text-base sm:text-lg lg:text-xl text-[#8A919A] leading-relaxed mb-3 lg:mb-4">
                     {t('partners.panel.body1', lang)}
                   </p>
                 </div>

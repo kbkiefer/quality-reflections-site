@@ -7,13 +7,13 @@ import AnimatedStat from './react/AnimatedStat';
 import HeroAssembly3D from './react/HeroAssembly3D';
 ---
 
-<section id="hero-section" class="relative bg-[#010E2F] blueprint-grid-hero">
+<section id="hero-section" class="relative bg-[#010E2F] blueprint-grid-hero overflow-x-clip overflow-y-visible">
 
     <!-- Content Layer -->
-    <div class="relative z-[3] flex flex-col justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-16 sm:pb-20 pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
+    <div class="relative z-[3] flex flex-col justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-16 sm:pb-20 pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto overflow-visible">
 
       <!-- 3D Curtain wall assembly — floats right of text on md+ -->
-      <div class="absolute top-24 right-0 bottom-16 w-[45%] z-[2] hidden md:block pointer-events-auto"
+      <div class="absolute top-16 right-0 bottom-32 w-[55%] z-[2] hidden lg:block pointer-events-auto"
            id="hero-assembly">
         <HeroAssembly3D client:load />
       </div>
@@ -21,43 +21,31 @@ import HeroAssembly3D from './react/HeroAssembly3D';
       <!-- Partner logo marquee — full viewport width -->
       <div class="mb-3 sm:mb-6 overflow-hidden" style="margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;" aria-label="Manufacturing partners">
         <div class="flex items-center gap-10 sm:gap-16 logo-marquee">
-          <img src="/logos/kawneer.svg" alt="Kawneer" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/ykk-ap.png" alt="YKK AP" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/oldcastle.png" alt="Oldcastle" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/viracon.svg" alt="Viracon" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/agc.png" alt="AGC Glass" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/tubelite.png" alt="Tubelite" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/efco.svg" alt="EFCO" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/stanley.svg" alt="Stanley" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/ppg.svg" alt="PPG" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/guardian.png" alt="Guardian" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/arcadia.png" alt="Arcadia" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/atlas.png" alt="Atlas" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/kawneer.svg" alt="Kawneer" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/ykk-ap.png" alt="YKK AP" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/oldcastle.png" alt="Oldcastle" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/viracon.svg" alt="Viracon" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/agc.png" alt="AGC Glass" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/tubelite.png" alt="Tubelite" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/efco.svg" alt="EFCO" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/stanley.svg" alt="Stanley" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/ppg.svg" alt="PPG" class="h-20 sm:h-24 w-auto opacity-50" loading="lazy" />
+          <img src="/logos/guardian.png" alt="Guardian" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/arcadia.png" alt="Arcadia" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/atlas.png" alt="Atlas" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <!-- Duplicate set for seamless loop -->
-          <img src="/logos/kawneer.svg" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/ykk-ap.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/oldcastle.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/viracon.svg" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/agc.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/tubelite.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/efco.svg" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/stanley.svg" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/ppg.svg" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/guardian.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/arcadia.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/atlas.png" alt="" class="h-12 sm:h-16 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-        </div>
-      </div>
-
-      <!-- Grid Coord + Dimension -->
-      <div class="flex items-center gap-3 mb-3 sm:mb-6">
-        <span class="grid-coord text-sm">B2</span>
-        <div class="dimension-line flex-1 max-w-[200px]">
-          <span class="dim-cap"></span>
-          <span class="dim-line"></span>
-          <span class="dim-label">Sheet 01 of 08</span>
-          <span class="dim-line"></span>
-          <span class="dim-cap"></span>
+          <img src="/logos/kawneer.svg" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/ykk-ap.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/oldcastle.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/viracon.svg" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/agc.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/tubelite.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/efco.svg" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/stanley.svg" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/ppg.svg" alt="" class="h-20 sm:h-24 w-auto opacity-50" aria-hidden="true" loading="lazy" />
+          <img src="/logos/guardian.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/arcadia.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/atlas.png" alt="" class="h-20 sm:h-24 w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
         </div>
       </div>
 
@@ -65,7 +53,7 @@ import HeroAssembly3D from './react/HeroAssembly3D';
       <div class="mb-3 sm:mb-10 lg:mb-10">
         <svg
           viewBox="0 0 447.89 233.99"
-          class="w-[100px] sm:w-[160px] lg:w-[240px] h-auto"
+          class="w-[140px] sm:w-[220px] lg:w-[320px] h-auto"
           aria-hidden="true"
         >
           <defs>
@@ -87,16 +75,39 @@ import HeroAssembly3D from './react/HeroAssembly3D';
       </div>
 
       <!-- Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white leading-[1.05] tracking-tight mb-4 sm:mb-8 sm:max-w-[55%]">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white leading-[1.05] tracking-tight mb-4 sm:mb-8 lg:max-w-[50%]">
         <span class="whitespace-nowrap" data-i18n="hero.headline.line1">Precision-Crafted</span><br />
         <span class="text-[#D31111] whitespace-nowrap" data-i18n="hero.headline.line2">Architectural Glass</span>
       </h1>
 
-      <!-- Subtext -->
-      <p class="text-xl sm:text-2xl text-[#A0A7B0] max-w-2xl leading-relaxed mb-6 sm:mb-12 font-light sm:max-w-[50%]" data-i18n="hero.subtext">
-        Custom commercial glazing systems engineered to specification. Curtain walls,
-        storefronts, and specialty glass installations for South Texas and beyond.
-      </p>
+      <!-- Turnkey promise strip -->
+      <div class="mb-8 sm:mb-12 lg:max-w-[50%]">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-1.5 h-1.5 bg-[#D31111]"></div>
+          <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-[0.15em] text-[#D31111]" data-i18n="hero.turnkey.badge">Full-Service Glazing Partner</span>
+        </div>
+        <p class="text-lg sm:text-xl text-[#8A919A] leading-relaxed font-light" data-i18n="hero.turnkey.text">
+          One call. We handle engineering, procurement, fabrication coordination, installation, and warranty — so you can focus on building.
+        </p>
+        <div class="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
+            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item1">Engineering & Shop Drawings</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
+            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item2">Material Procurement</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
+            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item3">Certified Installation</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
+            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item4">Warranty & Support</span>
+          </div>
+        </div>
+      </div>
 
       <!-- CTA Buttons -->
       <div class="flex flex-wrap gap-4 mb-16">
