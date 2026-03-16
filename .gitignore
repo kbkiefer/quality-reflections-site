@@ -25,3 +25,10 @@ npm-debug.log*
 # Claude local files
 .claude/settings.local.json
 CLAUDE.local.md
+
+# Admin
+admin/node_modules/
+admin/dist/
+admin/data/*.db
+admin/uploads/
+admin/.env

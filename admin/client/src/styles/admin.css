@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #012A89;
+  --navy-dark: #011B5A;
+  --navy-black: #010E2F;
+  --glass-blue: #4A90D9;
+  --steel: #8A919A;
+  --silver: #D1D5DB;
+  --grid-line: rgba(74, 144, 217, 0.08);
+  --border: rgba(74, 144, 217, 0.15);
+  --surface: rgba(1, 14, 47, 0.6);
+}
+
+[data-theme="light"] {
+  --navy: #012A89;
+  --navy-dark: #E8ECF4;
+  --navy-black: #F5F7FA;
+  --glass-blue: #2A6FC0;
+  --steel: #5A6270;
+  --silver: #374151;
+  --grid-line: rgba(1, 42, 137, 0.06);
+  --border: rgba(1, 42, 137, 0.12);
+  --surface: rgba(255, 255, 255, 0.8);
+}
+
+* { border-radius: 0 !important; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--navy-black);
+  color: var(--silver);
+}
+
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
