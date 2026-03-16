@@ -965,6 +965,8 @@ input[type="submit"]:active, .interactive:active,
 
 .logo-marquee img {
   flex-shrink: 0;
+  object-fit: contain;
+  object-position: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1420,9 +1422,9 @@ input[type="submit"]:active, .interactive:active,
 
 .apply-benefits-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  max-width: 1280px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -1997,26 +1999,74 @@ input[type="submit"]:active, .interactive:active,
   }
 
   .apply-hero {
-    padding: 100px 0 40px;
+    padding: 70px 0 16px;
   }
 
   .apply-hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
   }
 
   .apply-hero p {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 
   .apply-form-section {
-    padding-top: 1.5rem;
-    padding-bottom: 2rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .apply-form-section .text-center.mb-10 {
+    margin-bottom: 1.25rem;
+  }
+
+  .apply-form-section .text-center h2 {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .apply-benefits {
+    padding: 1.25rem 0;
+  }
+
   .apply-benefits-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .apply-benefit-item {
+    padding: 0.5rem;
+  }
+
+  .apply-benefit-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.375rem;
+  }
+
+  .apply-benefit-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .apply-benefit-title {
+    font-size: 0.6875rem;
+    margin-bottom: 1px;
+  }
+
+  .apply-benefit-desc {
+    font-size: 0.6875rem;
+  }
+
+  .apply-hero .w-16 {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .apply-hero .w-8 {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 

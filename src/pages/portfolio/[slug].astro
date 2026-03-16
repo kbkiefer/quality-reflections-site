@@ -1,0 +1,583 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { projects, SERVICE_LABELS, SERVICE_DESCS } from '../../data/projects';
+import ServiceModel from '../../components/react/ServiceModel';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const p = project;
+
+// Prev/next navigation
+const idx = projects.findIndex((pr) => pr.slug === p.slug);
+const prev = idx > 0 ? projects[idx - 1] : null;
+const next = idx < projects.length - 1 ? projects[idx + 1] : null;
+---
+
+<Layout title={`${p.title} | Quality Reflections Glasswork`}>
+  <Header />
+
+  <section class="relative bg-[#010E2F] pt-20">
+
+    <!-- Back link -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4">
+      <a href="/#projects" class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm uppercase tracking-wider text-[#4A90D9] hover:text-white transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 19l-7-7 7-7" /></svg>
+        <span data-i18n="portfolio.backToProjects">Back to Projects</span>
+      </a>
+    </div>
+
+    <!-- Viewer Area -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="viewerWrapper">
+      <div class="relative overflow-hidden border border-[rgba(74,144,217,0.15)]">
+
+        {p.photos.map((photo, photoIdx) => (
+          <div id={`viewer-${photoIdx}`} class:list={['viewer-slide', { 'is-active': photoIdx === 0 }]}>
+            <div class="w-full h-[180px] sm:h-[400px] lg:h-[500px] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+              <div class="absolute inset-0">
+                <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
+                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
+              </div>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(74,144,217,0.25)" stroke-width="1" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" />
+                <line x1="3" y1="3" x2="21" y2="21" />
+                <line x1="21" y1="3" x2="3" y2="21" />
+              </svg>
+              <span class="font-mono text-sm sm:text-base text-[rgba(74,144,217,0.4)] uppercase tracking-widest relative z-10 text-center px-4">
+                {photo.label}
+              </span>
+              <div class="flex flex-wrap justify-center gap-1.5 relative z-10 px-4">
+                {photo.services.map((svc) => (
+                  <span class="font-mono text-[10px] sm:text-xs uppercase tracking-wider px-2 py-0.5 border border-[rgba(74,144,217,0.2)] text-[rgba(74,144,217,0.4)]">
+                    {SERVICE_LABELS[svc] || svc}
+                  </span>
+                ))}
+              </div>
+              <span class="font-mono text-xs text-[rgba(74,144,217,0.2)] relative z-10">
+                {p.coord}.{photoIdx + 1}
+              </span>
+            </div>
+          </div>
+        ))}
+
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#010E2F] to-transparent pointer-events-none"></div>
+      </div>
+    </div>
+
+    <!-- Project Header -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="grid-coord text-sm">{p.coord}</span>
+        <span class="font-mono text-sm uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-3">{p.title}</h1>
+      <p class="text-[#A0A7B0] text-sm sm:text-xl leading-relaxed max-w-3xl mb-4 sm:mb-8">{p.desc}</p>
+    </div>
+
+    <!-- Specs Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3 sm:mb-6">
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
+        {[
+          { label: 'Location', value: p.location, i18n: 'portfolio.spec.location' },
+          { label: 'Year', value: p.year, i18n: 'portfolio.spec.year' },
+          { label: 'Scope', value: p.sqft, i18n: 'portfolio.spec.scope' },
+          { label: 'Type', value: p.category, i18n: 'portfolio.spec.type' },
+          { label: 'Duration', value: 'TBD', i18n: 'portfolio.spec.duration' },
+          { label: 'Value', value: 'TBD', i18n: 'portfolio.spec.value' },
+        ].map((spec) => (
+          <div class="border border-[rgba(74,144,217,0.12)] bg-[rgba(1,42,137,0.06)] p-2 sm:p-4">
+            <div class="font-mono text-[9px] sm:text-[11px] uppercase tracking-widest text-[#8A919A] mb-0.5 sm:mb-1" data-i18n={spec.i18n}>{spec.label}</div>
+            <div class="text-white text-xs sm:text-lg font-medium">{spec.value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Systems Installed — compact centered row -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-12 flex justify-center">
+      <div class="inline-flex items-center gap-3 sm:gap-5 border border-[rgba(74,144,217,0.12)] bg-[rgba(1,42,137,0.06)] p-2 sm:p-3">
+        <span class="font-mono text-[9px] sm:text-[11px] uppercase tracking-widest text-[#8A919A] flex-shrink-0" data-i18n="portfolio.systemsInstalled">Systems</span>
+        <div class="h-4 w-px bg-[rgba(74,144,217,0.15)]"></div>
+        {p.services.map((svc: string) => (
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
+              <ServiceModel client:visible type={svc} />
+            </div>
+            <span class="font-mono text-[7px] sm:text-[10px] text-[#4A90D9] uppercase tracking-wider leading-tight">{SERVICE_LABELS[svc] || svc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Project Photos + Systems Installed -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-12">
+      <div class="flex items-center gap-3 mb-4 sm:mb-6">
+        <div class="h-px flex-1 bg-[rgba(74,144,217,0.15)]"></div>
+        <span class="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#4A90D9]" data-i18n="portfolio.gallery">Project Photos</span>
+        <div class="h-px flex-1 bg-[rgba(74,144,217,0.15)]"></div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+        {/* Photo cards */}
+        {p.photos.map((photo, photoIdx) => (
+          <button
+            class:list={['viewer-thumb border border-[rgba(74,144,217,0.12)] bg-[rgba(1,27,90,0.3)] hover:border-[rgba(74,144,217,0.35)] transition-all text-left cursor-pointer', { 'is-active': photoIdx === 0 }]}
+            data-viewer-target={`viewer-${photoIdx}`}
+          >
+            {/* Thumbnail placeholder */}
+            <div class="w-full aspect-[16/10] bg-[rgba(1,27,90,0.5)] border-b border-[rgba(74,144,217,0.08)] flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0">
+                <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.06)]"></div>
+                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.06)]"></div>
+              </div>
+              <span class="font-mono text-[10px] text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">
+                {p.coord}.{photoIdx + 1}
+              </span>
+            </div>
+            {/* Photo info */}
+            <div class="p-2 sm:p-3">
+              <p class="font-mono text-[10px] sm:text-xs text-[#A0A7B0] leading-snug mb-1.5">{photo.label}</p>
+              <div class="flex flex-wrap gap-1">
+                {photo.services.map((svc) => (
+                  <span class="font-mono text-[8px] sm:text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[rgba(74,144,217,0.2)] text-[#4A90D9]">
+                    {SERVICE_LABELS[svc] || svc}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </button>
+        ))}
+
+
+      </div>
+    </div>
+
+    <!-- Prev/Next Navigation -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-16">
+      <div class="flex items-center justify-between border-t border-[rgba(74,144,217,0.15)] pt-4 sm:pt-8">
+        {prev ? (
+          <a href={`/portfolio/${prev.slug}`} class="flex items-center gap-3 group">
+            <svg class="w-5 h-5 text-[#4A90D9] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 19l-7-7 7-7" /></svg>
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-widest text-[#8A919A]" data-i18n="portfolio.prev">Previous</div>
+              <div class="text-white text-sm sm:text-base font-medium group-hover:text-[#4A90D9] transition-colors">{prev.title}</div>
+            </div>
+          </a>
+        ) : <div />}
+        {next ? (
+          <a href={`/portfolio/${next.slug}`} class="flex items-center gap-3 text-right group">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-widest text-[#8A919A]" data-i18n="portfolio.next">Next</div>
+              <div class="text-white text-sm sm:text-base font-medium group-hover:text-[#4A90D9] transition-colors">{next.title}</div>
+            </div>
+            <svg class="w-5 h-5 text-[#4A90D9] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+        ) : <div />}
+      </div>
+    </div>
+
+    <!-- Section Cut -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="section-cut" data-cut>
+        <div class="cut-line"></div>
+        <span class="cut-label">Detail {p.coord}</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox__backdrop"></div>
+    <div class="lightbox__container">
+      <div class="lightbox__content" id="lightboxContent">
+        <!-- Cloned slide content goes here -->
+      </div>
+    </div>
+    <button id="lightboxClose" class="lightbox__close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="1" y1="1" x2="9" y2="9" /><line x1="9" y1="1" x2="1" y2="9" />
+      </svg>
+    </button>
+    <div class="lightbox__controls">
+      <button id="lightboxZoomIn" class="lightbox__btn" aria-label="Zoom in">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
+      </button>
+      <span id="lightboxZoomLevel" class="font-mono text-xs text-[#4A90D9]">100%</span>
+      <button id="lightboxZoomOut" class="lightbox__btn" aria-label="Zoom out">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
+      </button>
+    </div>
+    <div class="lightbox__hint font-mono text-[10px] sm:text-xs text-[rgba(74,144,217,0.5)] uppercase tracking-widest" id="lightboxHint">
+      Scroll or pinch to zoom — drag to pan
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .viewer-slide {
+    display: none;
+  }
+  .viewer-slide.is-active {
+    display: block;
+  }
+  .viewer-thumb.is-active {
+    border-color: rgba(74, 144, 217, 0.6);
+    background: rgba(1, 42, 137, 0.2);
+    box-shadow: 0 0 0 1px rgba(74, 144, 217, 0.3);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.25,0.1,0.25,1), visibility 0.3s;
+  }
+  .lightbox.is-open {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+  .lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(1, 14, 47, 0.92);
+    backdrop-filter: blur(20px);
+  }
+  .lightbox__container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+  }
+  .lightbox__container:active {
+    cursor: grabbing;
+  }
+  .lightbox__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+  .lightbox__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(74,144,217,0.2);
+    background: rgba(1,14,47,0.9);
+    color: #8A919A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .lightbox__close:hover {
+    border-color: #4A90D9;
+    color: white;
+  }
+  .lightbox__controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+    background: rgba(1,14,47,0.9);
+    border: 1px solid rgba(74,144,217,0.15);
+    padding: 6px 12px;
+  }
+  .lightbox__btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4A90D9;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.2s;
+  }
+  .lightbox__btn:hover {
+    color: white;
+  }
+  .lightbox__hint {
+    position: absolute;
+    bottom: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    transition: opacity 0.5s;
+  }
+  .lightbox__hint.is-hidden {
+    opacity: 0;
+  }
+
+  /* Double-tap cursor hint on viewer */
+  .viewer-slide {
+    cursor: zoom-in;
+  }
+</style>
+
+<script>
+  // === Viewer slide switching ===
+  const slides = document.querySelectorAll('.viewer-slide');
+  const thumbs = document.querySelectorAll('.viewer-thumb');
+  const wrapper = document.getElementById('viewerWrapper');
+
+  function showSlide(targetId: string) {
+    slides.forEach((s) => s.classList.remove('is-active'));
+    thumbs.forEach((t) => t.classList.remove('is-active'));
+
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.classList.add('is-active');
+      wrapper?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    thumbs.forEach((t) => {
+      if ((t as HTMLElement).dataset.viewerTarget === targetId) {
+        t.classList.add('is-active');
+      }
+    });
+  }
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const targetId = (thumb as HTMLElement).dataset.viewerTarget;
+      if (targetId) showSlide(targetId);
+    });
+  });
+
+  // === Lightbox ===
+  const lightbox = document.getElementById('lightbox')!;
+  const lightboxContent = document.getElementById('lightboxContent')!;
+  const lightboxClose = document.getElementById('lightboxClose')!;
+  const lightboxZoomIn = document.getElementById('lightboxZoomIn')!;
+  const lightboxZoomOut = document.getElementById('lightboxZoomOut')!;
+  const lightboxZoomLevel = document.getElementById('lightboxZoomLevel')!;
+  const lightboxHint = document.getElementById('lightboxHint')!;
+  const lightboxContainer = lightbox.querySelector('.lightbox__container') as HTMLElement;
+
+  let scale = 1;
+  let panX = 0;
+  let panY = 0;
+  let contentW = 0;
+  let contentH = 0;
+  const MIN_SCALE = 0.5;
+  const MAX_SCALE = 5;
+
+  function updateTransform() {
+    lightboxContent.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    lightboxZoomLevel.textContent = `${Math.round(scale * 100)}%`;
+  }
+
+  function openLightbox() {
+    const activeSlide = document.querySelector('.viewer-slide.is-active') as HTMLElement;
+    if (!activeSlide) return;
+
+    // Clone the slide content into the lightbox
+    const inner = activeSlide.querySelector('div') as HTMLElement;
+    if (!inner) return;
+
+    const clone = inner.cloneNode(true) as HTMLElement;
+    // Remove fixed height classes so it sizes naturally, then set explicit size
+    clone.className = '';
+    clone.style.cssText = '';
+    lightboxContent.innerHTML = '';
+    lightboxContent.appendChild(clone);
+
+    // Show lightbox first so we can measure
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Wait a frame for layout, then measure and center
+    requestAnimationFrame(() => {
+      const containerRect = lightboxContainer.getBoundingClientRect();
+      const vw = containerRect.width;
+      const vh = containerRect.height;
+
+      // Size the content to 90% of viewport width, 16:9 ratio
+      contentW = Math.min(vw * 0.9, 1200);
+      contentH = contentW * (9 / 16);
+
+      // If too tall, constrain by height instead
+      if (contentH > vh * 0.8) {
+        contentH = vh * 0.8;
+        contentW = contentH * (16 / 9);
+      }
+
+      clone.style.width = contentW + 'px';
+      clone.style.height = contentH + 'px';
+      clone.style.display = 'flex';
+      clone.style.flexDirection = 'column';
+      clone.style.alignItems = 'center';
+      clone.style.justifyContent = 'center';
+      clone.style.gap = '12px';
+      clone.style.position = 'relative';
+      clone.style.overflow = 'hidden';
+      clone.style.background = 'rgba(1, 27, 90, 0.4)';
+
+      // Center: panX/panY position the top-left corner of content
+      scale = 1;
+      panX = (vw - contentW) / 2;
+      panY = (vh - contentH) / 2;
+      updateTransform();
+    });
+
+    // Hide hint after 3s
+    lightboxHint.classList.remove('is-hidden');
+    setTimeout(() => lightboxHint.classList.add('is-hidden'), 3000);
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function zoomAt(delta: number, cx: number, cy: number) {
+    const oldScale = scale;
+    scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * (1 + delta)));
+    const ratio = scale / oldScale;
+    panX = cx - (cx - panX) * ratio;
+    panY = cy - (cy - panY) * ratio;
+    updateTransform();
+  }
+
+  // Double-click / double-tap on viewer to open lightbox
+  let lastTap = 0;
+  const viewerContainer = wrapper?.querySelector('.relative.overflow-hidden') as HTMLElement;
+
+  if (viewerContainer) {
+    viewerContainer.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      openLightbox();
+    });
+
+    viewerContainer.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTap < 300) {
+        e.preventDefault();
+        openLightbox();
+      }
+      lastTap = now;
+    });
+  }
+
+  // Close
+  lightboxClose.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+  // Zoom buttons
+  lightboxZoomIn.addEventListener('click', () => {
+    const rect = lightboxContainer.getBoundingClientRect();
+    zoomAt(0.3, rect.width / 2, rect.height / 2);
+  });
+  lightboxZoomOut.addEventListener('click', () => {
+    const rect = lightboxContainer.getBoundingClientRect();
+    zoomAt(-0.3, rect.width / 2, rect.height / 2);
+  });
+
+  // Scroll to zoom
+  lightboxContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    zoomAt(delta, e.clientX, e.clientY);
+  }, { passive: false });
+
+  // Drag to pan
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let panStartX = 0;
+  let panStartY = 0;
+
+  lightboxContainer.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return;
+    dragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    panStartX = panX;
+    panStartY = panY;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    panX = panStartX + (e.clientX - dragStartX);
+    panY = panStartY + (e.clientY - dragStartY);
+    updateTransform();
+  });
+
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  // Touch: drag + pinch zoom
+  let touches: Touch[] = [];
+  let pinchStartDist = 0;
+  let pinchStartScale = 1;
+
+  lightboxContainer.addEventListener('touchstart', (e) => {
+    touches = Array.from(e.touches);
+    if (touches.length === 1) {
+      dragging = true;
+      dragStartX = touches[0].clientX;
+      dragStartY = touches[0].clientY;
+      panStartX = panX;
+      panStartY = panY;
+    } else if (touches.length === 2) {
+      dragging = false;
+      pinchStartDist = Math.hypot(
+        touches[1].clientX - touches[0].clientX,
+        touches[1].clientY - touches[0].clientY
+      );
+      pinchStartScale = scale;
+    }
+  }, { passive: true });
+
+  lightboxContainer.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const t = Array.from(e.touches);
+
+    if (t.length === 1 && dragging) {
+      panX = panStartX + (t[0].clientX - dragStartX);
+      panY = panStartY + (t[0].clientY - dragStartY);
+      updateTransform();
+    } else if (t.length === 2) {
+      const dist = Math.hypot(t[1].clientX - t[0].clientX, t[1].clientY - t[0].clientY);
+      const cx = (t[0].clientX + t[1].clientX) / 2;
+      const cy = (t[0].clientY + t[1].clientY) / 2;
+      const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, pinchStartScale * (dist / pinchStartDist)));
+      const ratio = newScale / scale;
+      scale = newScale;
+      panX = cx - (cx - panX) * ratio;
+      panY = cy - (cy - panY) * ratio;
+      updateTransform();
+    }
+  }, { passive: false });
+
+  lightboxContainer.addEventListener('touchend', () => { dragging = false; });
+</script>

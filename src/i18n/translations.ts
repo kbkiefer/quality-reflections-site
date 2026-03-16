@@ -223,6 +223,20 @@ export const translations: Record<string, { en: string; es: string }> = {
     es: 'Arcadia se especializa en sistemas personalizados de ventanas y puertas de aluminio y acero para proyectos arquitectonicamente exigentes. Sus perfiles con rotura de puente termico y apariencia de acero nos dan las lineas de vision delgadas del acero historico con rendimiento termico moderno.',
   },
 
+  // === PORTFOLIO ===
+  'portfolio.backToProjects': { en: 'Back to Projects', es: 'Volver a Proyectos' },
+  'portfolio.spec.location': { en: 'Location', es: 'Ubicacion' },
+  'portfolio.spec.year': { en: 'Year', es: 'Año' },
+  'portfolio.spec.scope': { en: 'Scope', es: 'Alcance' },
+  'portfolio.spec.type': { en: 'Type', es: 'Tipo' },
+  'portfolio.spec.duration': { en: 'Duration', es: 'Duracion' },
+  'portfolio.spec.value': { en: 'Value', es: 'Valor' },
+  'portfolio.systemsInstalled': { en: 'Systems Installed', es: 'Sistemas Instalados' },
+  'portfolio.photoPlaceholder': { en: 'Photo Placeholder', es: 'Espacio para Foto' },
+  'portfolio.gallery': { en: 'Project Gallery', es: 'Galeria del Proyecto' },
+  'portfolio.prev': { en: 'Previous', es: 'Anterior' },
+  'portfolio.next': { en: 'Next', es: 'Siguiente' },
+
   // === CERTIFICATIONS ===
   'certs.heading': { en: 'Certifications', es: 'Certificaciones' },
   'certs.osha.title': { en: 'OSHA 30-Hour', es: 'OSHA 30 Horas' },

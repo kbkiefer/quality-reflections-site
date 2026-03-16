@@ -213,7 +213,7 @@ function FloatingLabel({ layerIdx, onClose }: { layerIdx: number; onClose: () =>
         zIndexRange={[20, 30]}
       >
         <div style={{
-          width: '240px',
+          width: 'min(240px, 50vw)',
           border: '1px solid rgba(74,144,217,0.22)',
           background: 'rgba(1,14,47,0.94)',
           backdropFilter: 'blur(16px)',
@@ -568,7 +568,9 @@ export default function HeroAssembly3D() {
         pointerEvents: selectedMeta ? 'auto' : 'none',
         padding: '0 4px',
         marginLeft: 'auto',
+        width: '100%',
         maxWidth: '480px',
+        boxSizing: 'border-box',
       }}>
         {selectedMeta && (
           <div style={{
