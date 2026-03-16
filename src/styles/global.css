@@ -953,26 +953,23 @@ input[type="submit"]:active, .interactive:active,
    LOGO MARQUEE
    ============================================================ */
 
-@keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.logo-marquee {
+  width: max-content;
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.logo-marquee {
-  animation: marquee-scroll 30s linear infinite;
-  width: max-content;
+.logo-marquee.is-dragging {
+  cursor: grabbing;
 }
 
 .logo-marquee img {
   flex-shrink: 0;
   object-fit: contain;
   object-position: center;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .logo-marquee {
-    animation: none;
-  }
+  pointer-events: none;
 }
 
 /* ============================================================
@@ -1310,11 +1307,12 @@ input[type="submit"]:active, .interactive:active,
 
 /* Assembly Detail Panel */
 #assembly-detail-panel {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 320px;
-  height: 100%;
+  max-width: 90vw;
+  height: 100vh;
   background: var(--overlay-bg);
   border-left: 1px solid rgba(74, 144, 217, 0.2);
   backdrop-filter: blur(16px);
@@ -1322,7 +1320,7 @@ input[type="submit"]:active, .interactive:active,
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   overflow-y: auto;
-  z-index: 10;
+  z-index: 100;
   padding: 1.5rem;
 }
 
@@ -2437,6 +2435,20 @@ input[type="submit"]:active, .interactive:active,
 [data-theme="light"] #testimonials .cut-label {
   background: var(--surface-3) !important;
 }
+
+/* --- Certification logos: remove white-silhouette filter in light mode --- */
+[data-theme="light"] #certifications img[style*="brightness(0) invert(1)"] {
+  filter: none !important;
+}
+/* NGA logo is already white — invert to dark in light mode */
+[data-theme="light"] #certifications .cert-logo-invert {
+  filter: brightness(0) !important;
+}
+
+/* PPG banner logo: white cutout in dark mode (default), original colors in light mode */
+.ppg-logo-light { display: none; }
+[data-theme="light"] .ppg-logo-light { display: inline; opacity: 0.9 !important; }
+[data-theme="light"] .ppg-logo-dark { display: none; }
 
 /* --- Selection color --- */
 [data-theme="light"] ::selection {

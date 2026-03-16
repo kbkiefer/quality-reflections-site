@@ -10,7 +10,7 @@ import HeroAssembly3D from './react/HeroAssembly3D';
 <section id="hero-section" class="relative bg-[#010E2F] blueprint-grid-hero overflow-x-clip overflow-y-visible">
 
     <!-- Content Layer -->
-    <div class="relative z-[3] flex flex-col justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-20 sm:pb-20 pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto overflow-visible">
+    <div class="relative z-[3] flex flex-col justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-20 sm:pb-20 pointer-events-none [&_a]:pointer-events-auto [&_button]:pointer-events-auto [&_.logo-marquee]:pointer-events-auto overflow-visible">
 
       <!-- 3D Curtain wall assembly — floats right of text on md+ -->
       <div class="absolute top-16 -right-32 xl:-right-48 bottom-32 w-[62%] xl:w-[65%] z-[2] hidden lg:block pointer-events-auto hero-assembly-entrance"
@@ -19,19 +19,20 @@ import HeroAssembly3D from './react/HeroAssembly3D';
       </div>
 
       <!-- Partner logo marquee — full viewport width -->
-      <div class="mb-0 sm:mb-2 overflow-hidden h-[43px] sm:h-[120px]" style="margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;" aria-label="Manufacturing partners">
+      <div class="mb-0 sm:mb-2 overflow-hidden h-[43px] sm:h-[120px] pointer-events-auto" style="margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;" aria-label="Manufacturing partners">
         <div class="flex items-center h-full gap-8 sm:gap-16 logo-marquee">
           <img src="/logos/kawneer.svg" alt="Kawneer" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <img src="/logos/ykk-ap.png" alt="YKK AP" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <img src="/logos/oldcastle.png" alt="Oldcastle" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <img src="/logos/viracon.svg" alt="Viracon" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <img src="/logos/agc.png" alt="AGC Glass" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/tubelite.png" alt="Tubelite" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/efco.svg" alt="EFCO" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/tubelite.png" alt="Tubelite" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/efco.svg" alt="EFCO" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.2] mx-6 sm:mx-12" style="filter:brightness(0) invert(1);" loading="lazy" />
           <img src="/logos/stanley.svg" alt="Stanley" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/ppg.svg" alt="PPG" class="h-[32px] sm:h-[90px] w-auto opacity-50" loading="lazy" />
+          <img src="/logos/ppg.svg" alt="PPG" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-light" loading="lazy" />
+          <img src="/logos/ppg-dark.svg" alt="PPG" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-dark" loading="lazy" />
           <img src="/logos/guardian.png" alt="Guardian" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.5] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/arcadia.png" alt="Arcadia" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" loading="lazy" />
+          <img src="/logos/arcadia.png" alt="Arcadia" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <img src="/logos/atlas.png" alt="Atlas" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
           <!-- Duplicate set for seamless loop -->
           <img src="/logos/kawneer.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
@@ -39,12 +40,13 @@ import HeroAssembly3D from './react/HeroAssembly3D';
           <img src="/logos/oldcastle.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
           <img src="/logos/viracon.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
           <img src="/logos/agc.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/tubelite.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/efco.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/tubelite.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/efco.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.2] mx-6 sm:mx-12" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
           <img src="/logos/stanley.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/ppg.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" aria-hidden="true" loading="lazy" />
+          <img src="/logos/ppg.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-light" aria-hidden="true" loading="lazy" />
+          <img src="/logos/ppg-dark.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-dark" aria-hidden="true" loading="lazy" />
           <img src="/logos/guardian.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.5] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/arcadia.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          <img src="/logos/arcadia.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
           <img src="/logos/atlas.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
         </div>
       </div>
@@ -202,3 +204,85 @@ import HeroAssembly3D from './react/HeroAssembly3D';
     }
   }
 </style>
+
+<script>
+  // ── Interactive logo marquee: auto-scroll + drag to scrub ──
+  const marquee = document.querySelector('.logo-marquee') as HTMLElement | null;
+  const bannerWrap = marquee?.parentElement as HTMLElement | null;
+  if (marquee && bannerWrap) {
+    const speed = 50; // px per second (auto-scroll)
+    let offset = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startOffset = 0;
+    let lastTime = performance.now();
+    let resumeTimer: ReturnType<typeof setTimeout> | null = null;
+    let paused = false;
+
+    // Make the wrapper draggable too
+    bannerWrap.style.cursor = 'grab';
+    bannerWrap.style.userSelect = 'none';
+
+    // Half-width = the point at which we loop (duplicate logos fill second half)
+    function getHalfWidth() {
+      return marquee!.scrollWidth / 2;
+    }
+
+    function update(now: number) {
+      if (!paused && !isDragging) {
+        const dt = (now - lastTime) / 1000;
+        offset -= speed * dt;
+      }
+      lastTime = now;
+
+      const half = getHalfWidth();
+      // Wrap around seamlessly
+      if (half > 0) {
+        offset = ((offset % half) + half) % half;
+        offset = -(((-offset) % half) + half) % half;
+        if (offset <= -half) offset += half;
+        if (offset > 0) offset -= half;
+      }
+
+      marquee!.style.transform = `translateX(${offset}px)`;
+      requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+
+    // ── Pointer (mouse + touch) drag — bound to the full banner area ──
+    function onDown(e: PointerEvent) {
+      isDragging = true;
+      paused = true;
+      startX = e.clientX;
+      startOffset = offset;
+      marquee!.classList.add('is-dragging');
+      bannerWrap!.style.cursor = 'grabbing';
+      bannerWrap!.setPointerCapture(e.pointerId);
+      if (resumeTimer) clearTimeout(resumeTimer);
+    }
+
+    function onMove(e: PointerEvent) {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      offset = startOffset + dx;
+    }
+
+    function onUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      marquee!.classList.remove('is-dragging');
+      bannerWrap!.style.cursor = 'grab';
+      // Pause briefly, then resume auto-scroll
+      resumeTimer = setTimeout(() => { paused = false; }, 800);
+    }
+
+    bannerWrap.addEventListener('pointerdown', onDown);
+    bannerWrap.addEventListener('pointermove', onMove);
+    bannerWrap.addEventListener('pointerup', onUp);
+    bannerWrap.addEventListener('pointercancel', onUp);
+
+    // Prevent default touch scrolling on the banner
+    bannerWrap.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
+  }
+</script>

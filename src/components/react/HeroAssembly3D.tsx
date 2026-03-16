@@ -560,16 +560,17 @@ export default function HeroAssembly3D() {
         )}
       </div>
 
-      {/* Description panel below the 3D model — aligned right */}
+      {/* Description panel below the 3D model — pulled back from parent's negative right offset */}
       <div style={{
         opacity: selectedMeta ? 1 : 0,
         transform: selectedMeta ? 'translateY(0)' : 'translateY(8px)',
         transition: 'opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)',
         pointerEvents: selectedMeta ? 'auto' : 'none',
         padding: '0 4px',
+        paddingRight: '12rem',
         marginLeft: 'auto',
         width: '100%',
-        maxWidth: '480px',
+        maxWidth: '560px',
         boxSizing: 'border-box',
       }}>
         {selectedMeta && (

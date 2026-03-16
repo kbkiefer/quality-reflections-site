@@ -72,10 +72,10 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
     </div>
 
     <!-- Project Header -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
-      <div class="flex items-center gap-2 mb-2">
-        <span class="grid-coord text-sm">{p.coord}</span>
-        <span class="font-mono text-sm uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-8 pt-6 sm:pt-0 relative z-10">
+      <div class="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+        <span class="grid-coord text-[10px] sm:text-sm">{p.coord}</span>
+        <span class="font-mono text-[10px] sm:text-sm uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
       </div>
       <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-3">{p.title}</h1>
       <p class="text-[#A0A7B0] text-sm sm:text-xl leading-relaxed max-w-3xl mb-4 sm:mb-8">{p.desc}</p>
@@ -83,7 +83,7 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
 
     <!-- Specs Grid -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3 sm:mb-6">
-      <div class="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-1 sm:gap-4">
         {[
           { label: 'Location', value: p.location, i18n: 'portfolio.spec.location' },
           { label: 'Year', value: p.year, i18n: 'portfolio.spec.year' },
@@ -92,9 +92,9 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
           { label: 'Duration', value: 'TBD', i18n: 'portfolio.spec.duration' },
           { label: 'Value', value: 'TBD', i18n: 'portfolio.spec.value' },
         ].map((spec) => (
-          <div class="border border-[rgba(74,144,217,0.12)] bg-[rgba(1,42,137,0.06)] p-2 sm:p-4">
-            <div class="font-mono text-[9px] sm:text-[11px] uppercase tracking-widest text-[#8A919A] mb-0.5 sm:mb-1" data-i18n={spec.i18n}>{spec.label}</div>
-            <div class="text-white text-xs sm:text-lg font-medium">{spec.value}</div>
+          <div class="border border-[rgba(74,144,217,0.12)] bg-[rgba(1,42,137,0.06)] px-1.5 py-1 sm:p-4">
+            <div class="font-mono text-[8px] sm:text-[11px] uppercase tracking-widest text-[#8A919A] mb-0 sm:mb-1" data-i18n={spec.i18n}>{spec.label}</div>
+            <div class="text-white text-[11px] sm:text-lg font-medium leading-tight">{spec.value}</div>
           </div>
         ))}
       </div>
@@ -124,12 +124,14 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
         <div class="h-px flex-1 bg-[rgba(74,144,217,0.15)]"></div>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+      <div class="flex gap-2 sm:gap-3 overflow-x-auto pb-2 portfolio-photos-scroll">
         {/* Photo cards */}
         {p.photos.map((photo, photoIdx) => (
-          <button
-            class:list={['viewer-thumb border border-[rgba(74,144,217,0.12)] bg-[rgba(1,27,90,0.3)] hover:border-[rgba(74,144,217,0.35)] transition-all text-left cursor-pointer', { 'is-active': photoIdx === 0 }]}
+          <div
+            class:list={['viewer-thumb border border-[rgba(74,144,217,0.12)] bg-[rgba(1,27,90,0.3)] hover:border-[rgba(74,144,217,0.35)] transition-all text-left cursor-pointer flex-shrink-0 w-[200px] sm:w-[260px] lg:w-[280px]', { 'is-active': photoIdx === 0 }]}
             data-viewer-target={`viewer-${photoIdx}`}
+            role="button"
+            tabindex="0"
           >
             {/* Thumbnail placeholder */}
             <div class="w-full aspect-[16/10] bg-[rgba(1,27,90,0.5)] border-b border-[rgba(74,144,217,0.08)] flex items-center justify-center relative overflow-hidden">
@@ -152,10 +154,8 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
                 ))}
               </div>
             </div>
-          </button>
+          </div>
         ))}
-
-
       </div>
     </div>
 
@@ -207,16 +207,20 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
       </svg>
     </button>
     <div class="lightbox__controls">
-      <button id="lightboxZoomIn" class="lightbox__btn" aria-label="Zoom in">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
-      </button>
-      <span id="lightboxZoomLevel" class="font-mono text-xs text-[#4A90D9]">100%</span>
       <button id="lightboxZoomOut" class="lightbox__btn" aria-label="Zoom out">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
       </button>
+      <span id="lightboxZoomLevel" class="font-mono text-xs text-[#4A90D9]">100%</span>
+      <button id="lightboxZoomIn" class="lightbox__btn" aria-label="Zoom in">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
+      </button>
+      <div class="w-px h-5 bg-[rgba(74,144,217,0.2)]"></div>
+      <button id="lightboxReset" class="lightbox__btn" aria-label="Reset to original size">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 1 1 3.5 7.1" /><polyline points="3 22 3 16 9 16" /></svg>
+      </button>
     </div>
     <div class="lightbox__hint font-mono text-[10px] sm:text-xs text-[rgba(74,144,217,0.5)] uppercase tracking-widest" id="lightboxHint">
-      Scroll or pinch to zoom — drag to pan
+      Scroll or pinch to zoom
     </div>
   </div>
 
@@ -230,6 +234,22 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
   .viewer-slide.is-active {
     display: block;
   }
+  .portfolio-photos-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(74, 144, 217, 0.3) transparent;
+    overscroll-behavior-x: contain;
+  }
+  .portfolio-photos-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+  .portfolio-photos-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .portfolio-photos-scroll::-webkit-scrollbar-thumb {
+    background: rgba(74, 144, 217, 0.3);
+  }
+
   .viewer-thumb.is-active {
     border-color: rgba(74, 144, 217, 0.6);
     background: rgba(1, 42, 137, 0.2);
@@ -376,6 +396,7 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
   const lightboxClose = document.getElementById('lightboxClose')!;
   const lightboxZoomIn = document.getElementById('lightboxZoomIn')!;
   const lightboxZoomOut = document.getElementById('lightboxZoomOut')!;
+  const lightboxReset = document.getElementById('lightboxReset')!;
   const lightboxZoomLevel = document.getElementById('lightboxZoomLevel')!;
   const lightboxHint = document.getElementById('lightboxHint')!;
   const lightboxContainer = lightbox.querySelector('.lightbox__container') as HTMLElement;
@@ -385,47 +406,58 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
   let panY = 0;
   let contentW = 0;
   let contentH = 0;
+  let origPanX = 0;
+  let origPanY = 0;
   const MIN_SCALE = 0.5;
   const MAX_SCALE = 5;
 
   function updateTransform() {
     lightboxContent.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
     lightboxZoomLevel.textContent = `${Math.round(scale * 100)}%`;
+    // Update cursor based on zoom state
+    lightboxContainer.style.cursor = scale > 1 ? 'grab' : 'default';
+  }
+
+  function resetLightbox() {
+    scale = 1;
+    panX = origPanX;
+    panY = origPanY;
+    updateTransform();
   }
 
   function openLightbox() {
     const activeSlide = document.querySelector('.viewer-slide.is-active') as HTMLElement;
     if (!activeSlide) return;
 
-    // Clone the slide content into the lightbox
     const inner = activeSlide.querySelector('div') as HTMLElement;
     if (!inner) return;
 
     const clone = inner.cloneNode(true) as HTMLElement;
-    // Remove fixed height classes so it sizes naturally, then set explicit size
     clone.className = '';
     clone.style.cssText = '';
     lightboxContent.innerHTML = '';
     lightboxContent.appendChild(clone);
 
-    // Show lightbox first so we can measure
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
-    // Wait a frame for layout, then measure and center
     requestAnimationFrame(() => {
       const containerRect = lightboxContainer.getBoundingClientRect();
       const vw = containerRect.width;
       const vh = containerRect.height;
 
-      // Size the content to 90% of viewport width, 16:9 ratio
-      contentW = Math.min(vw * 0.9, 1200);
+      // Use nearly full screen on mobile, capped on desktop
+      const isMobile = vw < 768;
+      const widthRatio = isMobile ? 0.98 : 0.9;
+      const heightRatio = isMobile ? 0.92 : 0.8;
+      const maxW = isMobile ? Infinity : 1200;
+
+      contentW = Math.min(vw * widthRatio, maxW);
       contentH = contentW * (9 / 16);
 
-      // If too tall, constrain by height instead
-      if (contentH > vh * 0.8) {
-        contentH = vh * 0.8;
+      if (contentH > vh * heightRatio) {
+        contentH = vh * heightRatio;
         contentW = contentH * (16 / 9);
       }
 
@@ -440,17 +472,51 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
       clone.style.overflow = 'hidden';
       clone.style.background = 'rgba(1, 27, 90, 0.4)';
 
-      // Center: panX/panY position the top-left corner of content
       scale = 1;
       panX = (vw - contentW) / 2;
       panY = (vh - contentH) / 2;
+      origPanX = panX;
+      origPanY = panY;
       updateTransform();
     });
 
-    // Hide hint after 3s
     lightboxHint.classList.remove('is-hidden');
     setTimeout(() => lightboxHint.classList.add('is-hidden'), 3000);
   }
+
+  function recenterLightbox() {
+    if (!lightbox.classList.contains('is-open')) return;
+    const clone = lightboxContent.firstElementChild as HTMLElement;
+    if (!clone) return;
+
+    const containerRect = lightboxContainer.getBoundingClientRect();
+    const vw = containerRect.width;
+    const vh = containerRect.height;
+
+    const isMobile = vw < 768;
+    const widthRatio = isMobile ? 0.98 : 0.9;
+    const heightRatio = isMobile ? 0.92 : 0.8;
+    const maxW = isMobile ? Infinity : 1200;
+
+    contentW = Math.min(vw * widthRatio, maxW);
+    contentH = contentW * (9 / 16);
+    if (contentH > vh * heightRatio) {
+      contentH = vh * heightRatio;
+      contentW = contentH * (16 / 9);
+    }
+
+    clone.style.width = contentW + 'px';
+    clone.style.height = contentH + 'px';
+
+    scale = 1;
+    panX = (vw - contentW) / 2;
+    panY = (vh - contentH) / 2;
+    origPanX = panX;
+    origPanY = panY;
+    updateTransform();
+  }
+
+  window.addEventListener('resize', recenterLightbox);
 
   function closeLightbox() {
     lightbox.classList.remove('is-open');
@@ -464,6 +530,12 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
     const ratio = scale / oldScale;
     panX = cx - (cx - panX) * ratio;
     panY = cy - (cy - panY) * ratio;
+    // If zoomed back to 1x or less, snap to original centered position
+    if (scale <= 1) {
+      scale = 1;
+      panX = origPanX;
+      panY = origPanY;
+    }
     updateTransform();
   }
 
@@ -502,6 +574,7 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
     const rect = lightboxContainer.getBoundingClientRect();
     zoomAt(-0.3, rect.width / 2, rect.height / 2);
   });
+  lightboxReset.addEventListener('click', resetLightbox);
 
   // Scroll to zoom
   lightboxContainer.addEventListener('wheel', (e) => {
@@ -510,7 +583,7 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
     zoomAt(delta, e.clientX, e.clientY);
   }, { passive: false });
 
-  // Drag to pan
+  // Drag to pan — only when zoomed in
   let dragging = false;
   let dragStartX = 0;
   let dragStartY = 0;
@@ -518,12 +591,13 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
   let panStartY = 0;
 
   lightboxContainer.addEventListener('mousedown', (e) => {
-    if (e.button !== 0) return;
+    if (e.button !== 0 || scale <= 1) return;
     dragging = true;
     dragStartX = e.clientX;
     dragStartY = e.clientY;
     panStartX = panX;
     panStartY = panY;
+    lightboxContainer.style.cursor = 'grabbing';
   });
 
   window.addEventListener('mousemove', (e) => {
@@ -533,16 +607,19 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
     updateTransform();
   });
 
-  window.addEventListener('mouseup', () => { dragging = false; });
+  window.addEventListener('mouseup', () => {
+    dragging = false;
+    if (scale > 1) lightboxContainer.style.cursor = 'grab';
+  });
 
-  // Touch: drag + pinch zoom
+  // Touch: drag (only when zoomed) + pinch zoom
   let touches: Touch[] = [];
   let pinchStartDist = 0;
   let pinchStartScale = 1;
 
   lightboxContainer.addEventListener('touchstart', (e) => {
     touches = Array.from(e.touches);
-    if (touches.length === 1) {
+    if (touches.length === 1 && scale > 1) {
       dragging = true;
       dragStartX = touches[0].clientX;
       dragStartY = touches[0].clientY;
@@ -562,7 +639,7 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
     e.preventDefault();
     const t = Array.from(e.touches);
 
-    if (t.length === 1 && dragging) {
+    if (t.length === 1 && dragging && scale > 1) {
       panX = panStartX + (t[0].clientX - dragStartX);
       panY = panStartY + (t[0].clientY - dragStartY);
       updateTransform();
@@ -571,10 +648,16 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
       const cx = (t[0].clientX + t[1].clientX) / 2;
       const cy = (t[0].clientY + t[1].clientY) / 2;
       const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, pinchStartScale * (dist / pinchStartDist)));
-      const ratio = newScale / scale;
-      scale = newScale;
-      panX = cx - (cx - panX) * ratio;
-      panY = cy - (cy - panY) * ratio;
+      if (newScale <= 1) {
+        scale = 1;
+        panX = origPanX;
+        panY = origPanY;
+      } else {
+        const ratio = newScale / scale;
+        scale = newScale;
+        panX = cx - (cx - panX) * ratio;
+        panY = cy - (cy - panY) * ratio;
+      }
       updateTransform();
     }
   }, { passive: false });

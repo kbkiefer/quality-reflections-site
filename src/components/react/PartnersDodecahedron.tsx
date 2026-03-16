@@ -42,6 +42,35 @@ const ACCENT_RED = '#D31111';
 const RADIUS = 2.4;
 
 /* ═══════════════════════════════════════════════════════
+   Theme detection hook
+   ═══════════════════════════════════════════════════════ */
+
+function useTheme(): 'dark' | 'light' {
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof document === 'undefined') return 'dark';
+    return (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
+  });
+
+  useEffect(() => {
+    const update = () => {
+      const t = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
+      setTheme(t);
+    };
+    // Observe attribute changes on <html>
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.attributeName === 'data-theme') update();
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true });
+    update();
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
+
+/* ═══════════════════════════════════════════════════════
    Extract EXACT face geometry from DodecahedronGeometry
    ═══════════════════════════════════════════════════════ */
 
@@ -123,6 +152,7 @@ function extractFaces(radius: number): FaceData[] {
 function createFaceTexture(
   name: string,
   logoImg: HTMLImageElement | null,
+  theme: 'dark' | 'light' = 'dark',
 ): THREE.CanvasTexture {
   const S = 512;
   const canvas = document.createElement('canvas');
@@ -130,21 +160,29 @@ function createFaceTexture(
   canvas.height = S;
   const ctx = canvas.getContext('2d')!;
 
+  const isDark = theme === 'dark';
+
   // ── Base fill ──
-  ctx.fillStyle = '#010E2F';
+  ctx.fillStyle = isDark ? '#010E2F' : '#C8D8E8';
   ctx.fillRect(0, 0, S, S);
 
   // ── Radial gradient for depth ──
   const grd = ctx.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S * 0.5);
-  grd.addColorStop(0, 'rgba(1, 42, 137, 0.15)');
-  grd.addColorStop(0.6, 'rgba(1, 27, 90, 0.08)');
-  grd.addColorStop(1, 'rgba(1, 14, 47, 0)');
+  if (isDark) {
+    grd.addColorStop(0, 'rgba(1, 42, 137, 0.15)');
+    grd.addColorStop(0.6, 'rgba(1, 27, 90, 0.08)');
+    grd.addColorStop(1, 'rgba(1, 14, 47, 0)');
+  } else {
+    grd.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+    grd.addColorStop(0.6, 'rgba(255, 255, 255, 0.06)');
+    grd.addColorStop(1, 'rgba(200, 216, 232, 0)');
+  }
   ctx.fillStyle = grd;
   ctx.fillRect(0, 0, S, S);
 
   // ── Pentagon outline ──
   const pentR = S * 0.42;
-  ctx.strokeStyle = 'rgba(74, 144, 217, 0.18)';
+  ctx.strokeStyle = isDark ? 'rgba(74, 144, 217, 0.18)' : 'rgba(26, 74, 122, 0.15)';
   ctx.lineWidth = 1;
   ctx.beginPath();
   for (let i = 0; i < 5; i++) {
@@ -157,7 +195,7 @@ function createFaceTexture(
   ctx.stroke();
 
   // ── Inner pentagon (subtle) ──
-  ctx.strokeStyle = 'rgba(74, 144, 217, 0.06)';
+  ctx.strokeStyle = isDark ? 'rgba(74, 144, 217, 0.06)' : 'rgba(26, 74, 122, 0.06)';
   ctx.beginPath();
   for (let i = 0; i < 5; i++) {
     const a = -Math.PI / 2 + (i * 2 * Math.PI) / 5;
@@ -169,15 +207,14 @@ function createFaceTexture(
   ctx.stroke();
 
   if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
-    const maxDim = S * 0.44;
+    const maxDim = S * 0.52;
     const aspect = logoImg.naturalWidth / logoImg.naturalHeight;
     const w = aspect > 1 ? maxDim : maxDim * aspect;
     const h = aspect > 1 ? maxDim / aspect : maxDim;
     const x = (S - w) / 2;
     const y = (S - h) / 2;
 
-    // Convert logo to white on transparent, then composite onto face
-    // Step 1: draw logo to temp canvas
+    // ── Draw logo, removing background ──
     const tmp = document.createElement('canvas');
     tmp.width = S;
     tmp.height = S;
@@ -186,56 +223,76 @@ function createFaceTexture(
     const imageData = tctx.getImageData(0, 0, S, S);
     const d = imageData.data;
 
-    // Step 2: detect background color by sampling corner pixels of the logo area
+    // Detect background: sample corners of the logo area
     const lx = Math.round(x), ly = Math.round(y);
     const lw = Math.round(w), lh = Math.round(h);
     const cornerCoords = [
-      [ly, lx],                   // top-left of logo
-      [ly, lx + lw - 1],          // top-right
-      [ly + lh - 1, lx],          // bottom-left
-      [ly + lh - 1, lx + lw - 1], // bottom-right
-      [ly + 1, lx + 1],           // inset top-left
-      [ly + 1, lx + lw - 2],      // inset top-right
+      [ly, lx], [ly, lx + lw - 1],
+      [ly + lh - 1, lx], [ly + lh - 1, lx + lw - 1],
+      [ly + 1, lx + 1], [ly + 1, lx + lw - 2],
+      [ly + Math.round(lh / 2), lx],
+      [ly + Math.round(lh / 2), lx + lw - 1],
+      [ly, lx + Math.round(lw / 2)],
+      [ly + lh - 1, lx + Math.round(lw / 2)],
     ];
-    const corners = cornerCoords
+    const cornerIndices = cornerCoords
       .map(([row, col]) => (row * S + col) * 4)
-      .filter(i => i >= 0 && i + 3 < d.length && d[i + 3] > 200);
+      .filter(i => i >= 0 && i + 3 < d.length);
 
-    // Sample bg color from corners (fall back to white)
+    // Check if logo has opaque corners (solid bg) or transparent (SVG/PNG with alpha)
+    // PPG's blue rounded rect IS the logo — don't treat it as removable background
+    const opaqueCorners = cornerIndices.filter(i => d[i + 3] > 200);
+    let hasOpaqueBg = name === 'PPG' ? false : opaqueCorners.length >= 3;
+
+
     let bgR = 255, bgG = 255, bgB = 255;
-    if (corners.length > 0) {
+    if (hasOpaqueBg) {
       let sr = 0, sg = 0, sb = 0;
-      for (const ci of corners) { sr += d[ci]; sg += d[ci + 1]; sb += d[ci + 2]; }
-      bgR = Math.round(sr / corners.length);
-      bgG = Math.round(sg / corners.length);
-      bgB = Math.round(sb / corners.length);
+      for (const ci of opaqueCorners) { sr += d[ci]; sg += d[ci + 1]; sb += d[ci + 2]; }
+      bgR = Math.round(sr / opaqueCorners.length);
+      bgG = Math.round(sg / opaqueCorners.length);
+      bgB = Math.round(sb / opaqueCorners.length);
     }
 
-    // Step 3: convert to white silhouette, removing detected background
     for (let pi = 0; pi < d.length; pi += 4) {
       const a = d[pi + 3];
-      if (a < 10) continue; // already transparent
+      if (a < 10) continue;
 
-      const r = d[pi], g = d[pi + 1], b = d[pi + 2];
+      // Only remove background if the image has a solid bg
+      if (hasOpaqueBg) {
+        const r = d[pi], g = d[pi + 1], b = d[pi + 2];
+        const distFromBg = Math.sqrt(
+          ((r - bgR) / 255) ** 2 + ((g - bgG) / 255) ** 2 + ((b - bgB) / 255) ** 2
+        ) / Math.sqrt(3);
+        if (distFromBg < 0.15) {
+          d[pi + 3] = 0;
+          continue;
+        }
+      }
 
-      // Distance from detected background color (0–1 scale)
-      const distFromBg = Math.sqrt(
-        ((r - bgR) / 255) ** 2 + ((g - bgG) / 255) ** 2 + ((b - bgB) / 255) ** 2
-      ) / Math.sqrt(3);
-
-      if (distFromBg < 0.12) {
-        // Close to background color — make transparent
-        d[pi + 3] = 0;
-      } else {
-        // Foreground pixel — make white, use contrast as alpha
-        d[pi] = 255;
-        d[pi + 1] = 255;
-        d[pi + 2] = 255;
-        d[pi + 3] = Math.min(255, Math.round(distFromBg * (a / 255) * 255 * 2.5));
+      if (isDark) {
+        if (name === 'PPG') {
+          // PPG: white rounded rect with letters cut out
+          const r = d[pi], g = d[pi + 1], b = d[pi + 2];
+          const lum = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
+          if (lum > 0.7) {
+            // White letters → make transparent (cut out)
+            d[pi + 3] = 0;
+          } else {
+            // Blue rect → make white
+            d[pi] = 255; d[pi + 1] = 255; d[pi + 2] = 255;
+          }
+        } else {
+          // All other logos: convert foreground to white silhouette
+          d[pi] = 255;
+          d[pi + 1] = 255;
+          d[pi + 2] = 255;
+          d[pi + 3] = a;
+        }
       }
     }
     tctx.putImageData(imageData, 0, 0);
-    ctx.globalAlpha = 0.95;
+    ctx.globalAlpha = isDark ? 0.95 : 1;
     ctx.drawImage(tmp, 0, 0);
     ctx.globalAlpha = 1;
   } else {
@@ -258,7 +315,7 @@ function createFaceTexture(
    Wireframe edges with glow
    ═══════════════════════════════════════════════════════ */
 
-function WireframeEdges() {
+function WireframeEdges({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
   const geo = useMemo(() => {
     const d = new THREE.DodecahedronGeometry(RADIUS, 0);
     const e = new THREE.EdgesGeometry(d, 1);
@@ -269,11 +326,11 @@ function WireframeEdges() {
   return (
     <group>
       <lineSegments geometry={geo}>
-        <lineBasicMaterial color={GLASS_BLUE} transparent opacity={0.8} />
+        <lineBasicMaterial color={theme === 'dark' ? GLASS_BLUE : '#1a4a7a'} transparent opacity={theme === 'dark' ? 0.8 : 0.6} />
       </lineSegments>
       {/* Glow layer */}
       <lineSegments geometry={geo} scale={1.002}>
-        <lineBasicMaterial color="#6AB0FF" transparent opacity={0.2} />
+        <lineBasicMaterial color={theme === 'dark' ? '#6AB0FF' : '#2a6aaa'} transparent opacity={theme === 'dark' ? 0.2 : 0.15} />
       </lineSegments>
     </group>
   );
@@ -283,7 +340,7 @@ function WireframeEdges() {
    Vertex dots
    ═══════════════════════════════════════════════════════ */
 
-function VertexDots() {
+function VertexDots({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
   const verts = useMemo(() => {
     const geo = new THREE.DodecahedronGeometry(RADIUS, 0);
     const pos = geo.getAttribute('position');
@@ -299,8 +356,8 @@ function VertexDots() {
 
   const dotGeo = useMemo(() => new THREE.SphereGeometry(0.035, 8, 8), []);
   const dotMat = useMemo(
-    () => new THREE.MeshBasicMaterial({ color: '#6AB0FF', transparent: true, opacity: 0.9 }),
-    [],
+    () => new THREE.MeshBasicMaterial({ color: theme === 'dark' ? '#6AB0FF' : '#1a4a7a', transparent: true, opacity: 0.9 }),
+    [theme],
   );
 
   return (
@@ -357,10 +414,11 @@ function ConnectionLines() {
    additive blending create a soft bloom-like glow.
    ═══════════════════════════════════════════════════════ */
 
-function FaceGlow({ faces, selectedFace, hoveredFace }: {
+function FaceGlow({ faces, selectedFace, hoveredFace, theme = 'dark' }: {
   faces: FaceData[];
   selectedFace: number | null;
   hoveredFace: number | null;
+  theme?: 'dark' | 'light';
 }) {
   // For each face, create a ring of glow meshes (scaled-up copies of the face)
   // Each layer is slightly larger and more transparent → soft bloom
@@ -423,13 +481,24 @@ function FaceGlow({ faces, selectedFace, hoveredFace }: {
       const isHovered = faceIdx === hoveredFace && selectedFace !== faceIdx;
 
       layers.forEach(({ mat }, layerIdx) => {
-        if (isSelected) {
-          // Bright blue glow, inner layers brighter, outer layers softer
+        if (theme === 'light') {
+          // Light mode: only subtle outline glow, no additive blowout
+          if (isSelected) {
+            const baseOpacity = [0.08, 0.04, 0.02, 0.01, 0.005][layerIdx];
+            mat.color.setHex(0x1a5fa8);
+            mat.opacity = baseOpacity;
+          } else if (isHovered) {
+            const baseOpacity = [0.05, 0.025, 0.01, 0.005, 0.002][layerIdx];
+            mat.color.setHex(0x1a5fa8);
+            mat.opacity = baseOpacity;
+          } else {
+            mat.opacity = 0;
+          }
+        } else if (isSelected) {
           const baseOpacity = [0.35, 0.25, 0.15, 0.08, 0.04][layerIdx];
           mat.color.setHex(layerIdx < 2 ? 0x4A90D9 : 0x6AB0FF);
           mat.opacity = baseOpacity * (0.7 + pulse * 0.3);
         } else if (isHovered) {
-          // Subtle lighter blue glow on hover
           const baseOpacity = [0.2, 0.12, 0.06, 0.03, 0.015][layerIdx];
           mat.color.setHex(layerIdx < 2 ? 0x6AB0FF : 0x8EC8FF);
           mat.opacity = baseOpacity * (0.6 + pulse * 0.4);
@@ -457,11 +526,12 @@ function FaceGlow({ faces, selectedFace, hoveredFace }: {
    Main 3D scene
    ═══════════════════════════════════════════════════════ */
 
-function Scene({ onHover, onSelect, selectedFace, scale = 1 }: {
+function Scene({ onHover, onSelect, selectedFace, scale = 1, theme = 'dark' as 'dark' | 'light' }: {
   onHover: (idx: number | null) => void;
   onSelect: (idx: number | null) => void;
   selectedFace: number | null;
   scale?: number;
+  theme?: 'dark' | 'light';
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const [hoveredFace, setHoveredFace] = useState<number | null>(null);
@@ -480,38 +550,61 @@ function Scene({ onHover, onSelect, selectedFace, scale = 1 }: {
   const faces = useMemo(() => extractFaces(RADIUS), []);
   const [textures, setTextures] = useState<THREE.CanvasTexture[]>([]);
 
+  // Cache loaded images so theme changes don't re-fetch
+  const logoImagesRef = useRef<(HTMLImageElement | null)[]>([]);
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      // Load images if not already cached
+      if (logoImagesRef.current.length === 0) {
+        const imgs: (HTMLImageElement | null)[] = [];
+        for (const partner of PARTNERS) {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          let loaded = false;
+          await new Promise<void>((resolve) => {
+            img.onload = () => { loaded = true; resolve(); };
+            img.onerror = () => resolve();
+            img.src = partner.logo;
+          });
+          if (cancelled) return;
+          imgs.push(loaded ? img : null);
+        }
+        logoImagesRef.current = imgs;
+      }
+      // Generate textures with current theme
       const results: THREE.CanvasTexture[] = [];
-      for (const partner of PARTNERS) {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        let loaded = false;
-        await new Promise<void>((resolve) => {
-          img.onload = () => { loaded = true; resolve(); };
-          img.onerror = () => resolve();
-          img.src = partner.logo;
-        });
-        if (cancelled) return;
-        results.push(createFaceTexture(partner.name, loaded ? img : null));
+      for (let i = 0; i < PARTNERS.length; i++) {
+        results.push(createFaceTexture(PARTNERS[i].name, logoImagesRef.current[i], theme));
       }
       if (!cancelled) setTextures(results);
     })();
     return () => { cancelled = true; };
-  }, []);
+  }, [theme]);
 
-  // Materials per face
+  // Materials per face — MeshBasicMaterial in light mode (unlit, no shine),
+  // MeshStandardMaterial in dark mode (subtle lighting)
   const materials = useMemo(
-    () => faces.map(() => new THREE.MeshStandardMaterial({
-      transparent: true,
-      opacity: 0.88,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-      roughness: 0.4,
-      metalness: 0.1,
-    })),
-    [faces],
+    () => faces.map(() => {
+      if (theme === 'light') {
+        return new THREE.MeshBasicMaterial({
+          transparent: true,
+          opacity: 0.92,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        });
+      }
+      return new THREE.MeshStandardMaterial({
+        transparent: true,
+        opacity: 0.88,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+        roughness: 0.4,
+        metalness: 0.1,
+      });
+    }),
+    [faces, theme],
   );
 
   useEffect(() => {
@@ -522,11 +615,17 @@ function Scene({ onHover, onSelect, selectedFace, scale = 1 }: {
   useEffect(() => {
     materials.forEach((mat, i) => {
       const active = hoveredFace === i || selectedFace === i;
-      mat.opacity = active ? 1 : 0.88;
-      mat.emissive = active ? new THREE.Color(0x4A90D9) : new THREE.Color(0x000000);
-      mat.emissiveIntensity = active ? (selectedFace === i ? 0.25 : 0.15) : 0;
+      if (theme === 'dark') {
+        mat.opacity = active ? 1 : 0.88;
+        if ('emissive' in mat) {
+          (mat as THREE.MeshStandardMaterial).emissive = active ? new THREE.Color(0x4A90D9) : new THREE.Color(0x000000);
+          (mat as THREE.MeshStandardMaterial).emissiveIntensity = active ? (selectedFace === i ? 0.25 : 0.15) : 0;
+        }
+      } else {
+        mat.opacity = active ? 1 : 0.92;
+      }
     });
-  }, [hoveredFace, selectedFace, materials]);
+  }, [hoveredFace, selectedFace, materials, theme]);
 
   // Click a face → compute target quaternion to rotate that face toward camera
   const handleClick = useCallback((i: number) => {
@@ -676,20 +775,20 @@ function Scene({ onHover, onSelect, selectedFace, scale = 1 }: {
         ))}
 
         {/* Glowing edge outline on selected/hovered face */}
-        <FaceGlow faces={faces} selectedFace={selectedFace} hoveredFace={hoveredFace} />
+        <FaceGlow faces={faces} selectedFace={selectedFace} hoveredFace={hoveredFace} theme={theme} />
 
         {/* Glass outer shell — raycast disabled so clicks pass through to faces */}
         <mesh raycast={() => null}>
           <dodecahedronGeometry args={[RADIUS * 1.004, 0]} />
           <meshPhysicalMaterial
-            color="#4A90D9"
+            color={theme === 'dark' ? '#4A90D9' : '#a3c4e8'}
             transparent
-            opacity={0.07}
+            opacity={theme === 'dark' ? 0.07 : 0.04}
             roughness={0.02}
-            metalness={0.15}
+            metalness={theme === 'dark' ? 0.15 : 0.05}
             clearcoat={1}
             clearcoatRoughness={0.03}
-            envMapIntensity={2}
+            envMapIntensity={theme === 'dark' ? 2 : 1.5}
             side={THREE.DoubleSide}
             depthWrite={false}
           />
@@ -699,18 +798,18 @@ function Scene({ onHover, onSelect, selectedFace, scale = 1 }: {
         <mesh raycast={() => null}>
           <dodecahedronGeometry args={[RADIUS * 0.996, 0]} />
           <meshPhysicalMaterial
-            color="#012A89"
+            color={theme === 'dark' ? '#012A89' : '#B0C4DE'}
             transparent
-            opacity={0.04}
+            opacity={theme === 'dark' ? 0.04 : 0.06}
             roughness={0}
-            metalness={0.3}
+            metalness={theme === 'dark' ? 0.3 : 0.1}
             side={THREE.BackSide}
             depthWrite={false}
           />
         </mesh>
 
-        <WireframeEdges />
-        <VertexDots />
+        <WireframeEdges theme={theme} />
+        <VertexDots theme={theme} />
         <ConnectionLines />
       </group>
     </>
@@ -817,6 +916,7 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
   const lang = useLang();
+  const theme = useTheme();
 
   // Hero mode: 3D canvas filling its container with interactive face selection
   if (heroMode) {
@@ -836,16 +936,16 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
             gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
             dpr={[1, 2]}
           >
-            <ambientLight intensity={0.25} />
-            <directionalLight position={[5, 8, 5]} intensity={1} color="#ffffff" />
-            <directionalLight position={[-4, -2, -6]} intensity={0.5} color="#4A90D9" />
-            <pointLight position={[0, 4, 3]} intensity={0.6} color="#ffffff" distance={15} />
-            <pointLight position={[-3, -3, 2]} intensity={0.4} color="#4A90D9" distance={12} />
-            <pointLight position={[3, 0, -3]} intensity={0.3} color="#6AB0FF" distance={10} />
-            <Environment preset="city" environmentIntensity={0.2} />
-            <fog attach="fog" args={['#010E2F', 12, 24]} />
+            <ambientLight intensity={theme === 'dark' ? 0.25 : 0.6} />
+            <directionalLight position={[5, 8, 5]} intensity={theme === 'dark' ? 1 : 1.5} color="#ffffff" />
+            <directionalLight position={[-4, -2, -6]} intensity={theme === 'dark' ? 0.5 : 0.8} color={theme === 'dark' ? '#4A90D9' : '#6AB0FF'} />
+            <pointLight position={[0, 4, 3]} intensity={theme === 'dark' ? 0.6 : 1} color="#ffffff" distance={15} />
+            <pointLight position={[-3, -3, 2]} intensity={theme === 'dark' ? 0.4 : 0.6} color={theme === 'dark' ? '#4A90D9' : '#6AB0FF'} distance={12} />
+            <pointLight position={[3, 0, -3]} intensity={theme === 'dark' ? 0.3 : 0.5} color="#6AB0FF" distance={10} />
+            <Environment preset="city" environmentIntensity={theme === 'dark' ? 0.2 : 0.5} />
+            <fog attach="fog" args={[theme === 'dark' ? '#010E2F' : '#C8D8E8', 12, 24]} />
 
-            <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} scale={modelScale} />
+            <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} scale={modelScale} theme={theme} />
           </Canvas>
         </div>
 
@@ -937,16 +1037,16 @@ export default function PartnersDodecahedron({ heroMode = false, compact = false
           gl={{ alpha: true, antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
           dpr={[1, 2]}
         >
-          <ambientLight intensity={0.25} />
-          <directionalLight position={[5, 8, 5]} intensity={1} color="#ffffff" />
-          <directionalLight position={[-4, -2, -6]} intensity={0.5} color="#4A90D9" />
-          <pointLight position={[0, 4, 3]} intensity={0.6} color="#ffffff" distance={15} />
-          <pointLight position={[-3, -3, 2]} intensity={0.4} color="#4A90D9" distance={12} />
-          <pointLight position={[3, 0, -3]} intensity={0.3} color="#6AB0FF" distance={10} />
-          <Environment preset="city" environmentIntensity={0.2} />
-          <fog attach="fog" args={['#010E2F', 12, 22]} />
+          <ambientLight intensity={theme === 'dark' ? 0.25 : 0.6} />
+          <directionalLight position={[5, 8, 5]} intensity={theme === 'dark' ? 1 : 1.5} color="#ffffff" />
+          <directionalLight position={[-4, -2, -6]} intensity={theme === 'dark' ? 0.5 : 0.8} color={theme === 'dark' ? '#4A90D9' : '#6AB0FF'} />
+          <pointLight position={[0, 4, 3]} intensity={theme === 'dark' ? 0.6 : 1} color="#ffffff" distance={15} />
+          <pointLight position={[-3, -3, 2]} intensity={theme === 'dark' ? 0.4 : 0.6} color={theme === 'dark' ? '#4A90D9' : '#6AB0FF'} distance={12} />
+          <pointLight position={[3, 0, -3]} intensity={theme === 'dark' ? 0.3 : 0.5} color="#6AB0FF" distance={10} />
+          <Environment preset="city" environmentIntensity={theme === 'dark' ? 0.2 : 0.5} />
+          <fog attach="fog" args={[theme === 'dark' ? '#010E2F' : '#C8D8E8', 12, 22]} />
 
-          <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} />
+          <Scene onHover={setHovered} onSelect={setSelected} selectedFace={selected} theme={theme} />
         </Canvas>
 
         {/* Hover label (hidden when detail panel is open) */}
