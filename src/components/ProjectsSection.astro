@@ -93,7 +93,7 @@ const projects = [...cmsMapped, ...hardcodedMapped];
 
       {projects.map((p) => (
         <a
-          href={`/portfolio/${p.slug}`}
+          href={`${base}/portfolio/${p.slug}`}
           class="glass-card-strong corner-brackets card-glow-bg w-[240px] sm:w-[480px] flex-shrink-0 scroll-reveal text-left group"
           data-reveal-delay={p.delay}
           aria-label={`View ${p.title} project details`}
