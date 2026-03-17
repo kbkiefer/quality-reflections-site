@@ -180,7 +180,7 @@ const projects = [...cmsMapped, ...hardcodedMapped];
 </section>
 
 <script>
-  // ── Project marquee: auto-scroll + drag to scrub + click to navigate ──
+  // ── Project marquee: auto-scroll + drag to scrub + double-click to navigate ──
   const marquee = document.getElementById('projectMarquee') as HTMLElement | null;
   const banner = document.getElementById('projectBanner') as HTMLElement | null;
 
@@ -194,6 +194,9 @@ const projects = [...cmsMapped, ...hardcodedMapped];
     let lastTime = performance.now();
     let resumeTimer: ReturnType<typeof setTimeout> | null = null;
     let paused = false;
+
+    // Disable double-tap-to-zoom on mobile so dblclick fires reliably
+    (banner as HTMLElement).style.touchAction = 'manipulation';
 
     function getHalfWidth() {
       return marquee!.scrollWidth / 2;
@@ -218,18 +221,13 @@ const projects = [...cmsMapped, ...hardcodedMapped];
 
     requestAnimationFrame(update);
 
-    // Double-tap detection
-    let lastTapTime = 0;
-    let lastTapHref = '';
-    let downTarget: HTMLElement | null = null;
-
+    // ── Drag to scrub ──
     function onDown(e: PointerEvent) {
       isDragging = true;
       didDrag = false;
       paused = true;
       startX = e.clientX;
       startOffset = offset;
-      downTarget = e.target as HTMLElement;
       banner!.style.cursor = 'grabbing';
       if (resumeTimer) clearTimeout(resumeTimer);
     }
@@ -246,22 +244,6 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       isDragging = false;
       banner!.style.cursor = 'grab';
       resumeTimer = setTimeout(() => { paused = false; }, 1200);
-
-      if (!didDrag && downTarget) {
-        const card = downTarget.closest('a.project-marquee-card') as HTMLAnchorElement | null;
-        if (card) {
-          const now = Date.now();
-          if (card.href === lastTapHref && now - lastTapTime < 600) {
-            window.location.href = card.href;
-            lastTapTime = 0;
-            lastTapHref = '';
-            return;
-          }
-          lastTapTime = now;
-          lastTapHref = card.href;
-        }
-      }
-      downTarget = null;
     }
 
     banner.addEventListener('pointerdown', onDown);
@@ -274,9 +256,18 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       if (isDragging) e.preventDefault();
     }, { passive: false });
 
-    // Block all link clicks — navigation is double-tap only
+    // Block single-click link navigation — double-click only
     banner.addEventListener('click', (e) => {
       e.preventDefault();
     }, true);
+
+    // ── Double-click / double-tap to open project ──
+    banner.addEventListener('dblclick', (e) => {
+      const target = e.target as HTMLElement;
+      const card = target.closest('a.project-marquee-card') as HTMLAnchorElement | null;
+      if (card) {
+        window.location.href = card.href;
+      }
+    });
   }
 </script>

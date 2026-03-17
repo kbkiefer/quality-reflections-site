@@ -462,30 +462,42 @@ input[type="submit"]:active, .interactive:active,
    ============================================================ */
 
 .glass-card {
-  background: var(--card-bg);
+  position: relative;
+  background-color: var(--card-bg);
+  background-image: linear-gradient(to right, rgba(74, 144, 217, 0.06), rgba(74, 144, 217, 0.06));
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
   border: 1px solid var(--card-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-card:hover {
   border-color: var(--card-border-hover);
-  background: var(--card-bg-hover);
+  background-color: var(--card-bg-hover);
+  background-size: 100% 100%;
   transform: translateY(-2px);
 }
 
 .glass-card-strong {
-  background: var(--card-bg-strong);
+  position: relative;
+  background-color: var(--card-bg-strong);
+  background-image: linear-gradient(to right, rgba(74, 144, 217, 0.06), rgba(74, 144, 217, 0.06));
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
   border: 1px solid var(--card-border-strong);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-card-strong:hover {
   border-color: var(--card-border-strong-hover);
-  background: var(--card-bg-strong-hover);
+  background-color: var(--card-bg-strong-hover);
+  background-size: 100% 100%;
   transform: translateY(-2px);
 }
 
