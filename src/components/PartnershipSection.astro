@@ -15,7 +15,9 @@ const defaultBullets = [
   'Access to full product catalog',
   'Factory warranty coverage',
 ];
-const bullets = partnership.bullets ?? defaultBullets;
+const bullets = partnership.bulletPoints ?? partnership.bullets ?? defaultBullets;
+const logoSrc = partnership.logoPath ?? partnership.logoSrc ?? '/logos/kawneer.svg';
+const badgeText = partnership.badgeText ?? partnership.badge ?? 'Authorized Dealer';
 ---
 
 <section id="partnership" class="relative bg-[#010E2F] blueprint-grid py-20 sm:py-28 lg:py-32">
@@ -36,12 +38,12 @@ const bullets = partnership.bullets ?? defaultBullets;
 
         <!-- Partner Logo Area -->
         <div class="w-48 h-20 mx-auto mb-6 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] px-6 py-4">
-          <img src={`${base}${partnership.logoSrc ?? '/logos/kawneer.svg'}`} alt={partnership.partnerName ?? 'Kawneer'} class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.9;" loading="lazy" />
+          <img src={`${base}${logoSrc}`} alt={partnership.partnerName ?? 'Kawneer'} class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.9;" loading="lazy" />
         </div>
 
         <!-- Stencil Text -->
         <div class="stencil-text text-[#4A90D9] text-lg mb-4 opacity-60">
-          {partnership.badge ?? 'Authorized Dealer'}
+          {badgeText}
         </div>
 
         <!-- Dimension Line -->

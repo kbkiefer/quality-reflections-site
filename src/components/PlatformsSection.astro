@@ -16,7 +16,11 @@ const defaultPlatforms = [
   { name: 'Tubelite', systems: 'T14000 Series Storefront', logoSrc: '/logos/tubelite.png', logoType: 'image' },
 ];
 
-const platforms = platformsData.items ?? defaultPlatforms;
+const platforms = (platformsData.items ?? defaultPlatforms).map((p: any) => ({
+  ...p,
+  logoSrc: p.logoSrc ?? p.logoPath ?? '',
+  systems: p.systems ?? p.products ?? '',
+}));
 ---
 
 <section id="platforms" class="relative bg-[#011B5A] blueprint-grid-dense py-20 sm:py-28 lg:py-32">
