@@ -5,6 +5,7 @@
  */
 import contentData from '../data/content.json';
 const platformsData = (contentData as any).platforms || {};
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const defaultPlatforms = [
   { name: 'Kawneer', systems: '1600/1620 Curtain Wall, Trifab VG', logoSrc: '/logos/kawneer.svg', logoType: 'image' },
@@ -51,7 +52,7 @@ const platforms = platformsData.items ?? defaultPlatforms;
                 <div class="hidden lg:block absolute -bottom-6 left-1/2 w-[1px] h-6 bg-[rgba(74,144,217,0.15)] -translate-x-1/2"></div>
                 <div class={`w-20 h-20 mx-auto mb-3 border border-[rgba(74,144,217,0.25)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] ${p.logoSrc ? 'p-3' : ''}`}>
                   {p.logoSrc ? (
-                    <img src={p.logoSrc} alt={p.name} class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.85;" loading="lazy" />
+                    <img src={`${base}${p.logoSrc}`} alt={p.name} class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.85;" loading="lazy" />
                   ) : (
                     <span class="font-mono text-lg font-bold text-[#4A90D9]">{p.name.toUpperCase()}</span>
                   )}

@@ -24,6 +24,7 @@ interface ContentProject {
 }
 
 const cmsProjects: ContentProject[] = (contentData as any).projects || [];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // CMS projects go first, then hardcoded projects fill out the gallery
 const cmsMapped = cmsProjects.map((p, i) => ({
@@ -100,7 +101,7 @@ const projects = [...cmsMapped, ...hardcodedMapped];
           <div class="relative z-10">
             {p.isCms && p.coverImage ? (
               <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] relative overflow-hidden">
-                <img src={p.coverImage} alt={p.title} class="w-full h-full object-cover" loading="lazy" />
+                <img src={`${base}${p.coverImage}`} alt={p.title} class="w-full h-full object-cover" loading="lazy" />
               </div>
             ) : (
               <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-2 relative overflow-hidden">

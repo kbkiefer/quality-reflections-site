@@ -5,6 +5,7 @@
  */
 import contentData from '../data/content.json';
 const settings = (contentData as any).settings || {};
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <footer class="bg-[#010E2F] border-t border-[rgba(74,144,217,0.1)]">
@@ -135,13 +136,13 @@ const settings = (contentData as any).settings || {};
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <a href="/apply-employee" class="btn-blueprint px-4 py-2 text-base">
+          <a href={`${base}/apply-employee`} class="btn-blueprint px-4 py-2 text-base">
             <span data-i18n="footer.careers.fieldPositions">Field Positions</span>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" />
             </svg>
           </a>
-          <a href="/apply-office" class="btn-blueprint px-4 py-2 text-base">
+          <a href={`${base}/apply-office`} class="btn-blueprint px-4 py-2 text-base">
             <span data-i18n="footer.careers.officePositions">Office Positions</span>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" />
