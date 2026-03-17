@@ -17,7 +17,13 @@ const defaultServices = [
   { type: 'skylight', coord: 'C7', title: 'Skylight Systems', desc: 'Ridge, pyramid, and barrel-vault skylights engineered for daylighting and thermal performance.', detail: 'C7.1', delay: '500', i18nTitle: 'services.skylight.title', i18nDesc: 'services.skylight.desc' },
 ];
 
-const services = servicesData.items ?? defaultServices;
+const services = (servicesData.items ?? defaultServices).map((s: any, i: number) => ({
+  ...s,
+  desc: s.desc ?? s.description ?? '',
+  coord: s.coord ?? `C${i + 2}`,
+  detail: s.detail ?? `C${i + 2}.1`,
+  delay: s.delay ?? String(i * 100),
+}));
 ---
 
 <section id="services" class="relative bg-[#011B5A] blueprint-grid-dense py-20 sm:py-28 lg:py-32">
