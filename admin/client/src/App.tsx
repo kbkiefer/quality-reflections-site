@@ -9,6 +9,8 @@ import JobsList from './pages/JobsList';
 import JobEditor from './pages/JobEditor';
 import ApplicationsList from './pages/ApplicationsList';
 import ApplicationDetail from './pages/ApplicationDetail';
+import SiteSettings from './pages/SiteSettings';
+import ContentEditor from './pages/ContentEditor';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -32,6 +34,8 @@ export default function App() {
             <Route path="jobs/:id" element={<JobEditor />} />
             <Route path="applications" element={<ApplicationsList />} />
             <Route path="applications/:id" element={<ApplicationDetail />} />
+            <Route path="settings" element={<SiteSettings />} />
+            <Route path="content/:section" element={<ContentEditor />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

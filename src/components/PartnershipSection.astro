@@ -3,6 +3,18 @@
  * PartnershipSection — Kawneer Authorized Dealer showcase.
  * Section 05/Partnership. Large centered glass card with bullet points.
  */
+import contentData from '../data/content.json';
+const partnership = (contentData as any).partnership || {};
+
+const defaultBullets = [
+  'Direct factory ordering and fulfillment',
+  'Full technical engineering support',
+  'Competitive dealer pricing tiers',
+  'Priority project scheduling',
+  'Access to full product catalog',
+  'Factory warranty coverage',
+];
+const bullets = partnership.bullets ?? defaultBullets;
 ---
 
 <section id="partnership" class="relative bg-[#010E2F] blueprint-grid py-20 sm:py-28 lg:py-32">
@@ -13,7 +25,7 @@
     <div class="mb-14 scroll-reveal">
       <div class="flex items-center gap-3 mb-4">
         <span class="grid-coord text-sm">F1</span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Partnership</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">{partnership.heading ?? 'Partnership'}</h2>
       </div>
     </div>
 
@@ -21,64 +33,43 @@
     <div class="glass-card-strong corner-brackets card-glow-bg p-8 sm:p-12 scroll-reveal">
       <div class="relative z-10 text-center">
 
-        <!-- Kawneer Logo Area -->
+        <!-- Partner Logo Area -->
         <div class="w-48 h-20 mx-auto mb-6 border border-[rgba(74,144,217,0.15)] flex items-center justify-center bg-[rgba(1,42,137,0.1)] px-6 py-4">
-          <img src="/logos/kawneer.svg" alt="Kawneer" class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.9;" loading="lazy" />
+          <img src={partnership.logoSrc ?? '/logos/kawneer.svg'} alt={partnership.partnerName ?? 'Kawneer'} class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.9;" loading="lazy" />
         </div>
 
         <!-- Stencil Text -->
         <div class="stencil-text text-[#4A90D9] text-lg mb-4 opacity-60">
-          Authorized Dealer
+          {partnership.badge ?? 'Authorized Dealer'}
         </div>
 
         <!-- Dimension Line -->
         <div class="dimension-line max-w-xs mx-auto mb-8">
           <span class="dim-cap"></span>
           <span class="dim-line"></span>
-          <span class="dim-label">Kawneer Co.</span>
+          <span class="dim-label">{partnership.partnerName ?? 'Kawneer Co.'}</span>
           <span class="dim-line"></span>
           <span class="dim-cap"></span>
         </div>
 
         <!-- Heading -->
         <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-          Kawneer Authorized Dealer
+          {partnership.cardHeading ?? 'Kawneer Authorized Dealer'}
         </h3>
 
         <!-- Description -->
         <p class="text-[#8A919A] text-xl sm:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
-          As an authorized Kawneer dealer, Quality Reflections provides direct access to one of the
-          world's leading architectural aluminum systems manufacturers. From 1600/1620 curtain wall
-          to Trifab storefront and 350/500 entrances, we deliver the full Kawneer product line with
-          factory-direct support and competitive dealer pricing.
+          {partnership.description ?? "As an authorized Kawneer dealer, Quality Reflections provides direct access to one of the world's leading architectural aluminum systems manufacturers. From 1600/1620 curtain wall to Trifab storefront and 350/500 entrances, we deliver the full Kawneer product line with factory-direct support and competitive dealer pricing."}
         </p>
 
         <!-- Bullet Points Grid -->
         <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 max-w-2xl mx-auto text-left">
-          <div class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
-            <span class="text-[#D1D5DB] text-lg">Direct factory ordering and fulfillment</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
-            <span class="text-[#D1D5DB] text-lg">Full technical engineering support</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
-            <span class="text-[#D1D5DB] text-lg">Competitive dealer pricing tiers</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
-            <span class="text-[#D1D5DB] text-lg">Priority project scheduling</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
-            <span class="text-[#D1D5DB] text-lg">Access to full product catalog</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
-            <span class="text-[#D1D5DB] text-lg">Factory warranty coverage</span>
-          </div>
+          {bullets.map((bullet: string) => (
+            <div class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 bg-[#4A90D9] mt-2 flex-shrink-0"></span>
+              <span class="text-[#D1D5DB] text-lg">{bullet}</span>
+            </div>
+          ))}
         </div>
 
       </div>

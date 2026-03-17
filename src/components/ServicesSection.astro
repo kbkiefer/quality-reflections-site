@@ -5,8 +5,10 @@
  * Section 02/Capabilities.
  */
 import ServiceModel from './react/ServiceModel';
+import contentData from '../data/content.json';
+const servicesData = (contentData as any).services || {};
 
-const services = [
+const defaultServices = [
   { type: 'curtain-wall', coord: 'C2', title: 'Curtain Wall Systems', desc: 'Engineered aluminum and glass curtain wall systems for high-rise and mid-rise commercial construction. Custom profiles, thermal breaks, and structural silicone glazing.', detail: 'C2.1', delay: '0', i18nTitle: 'services.curtainWall.title', i18nDesc: 'services.curtainWall.desc' },
   { type: 'storefront', coord: 'C3', title: 'Storefront Glazing', desc: 'Flush-glazed and captured storefront framing for retail, office, and institutional entries.', detail: 'C3.1', delay: '100', i18nTitle: 'services.storefront.title', i18nDesc: 'services.storefront.desc' },
   { type: 'window', coord: 'C4', title: 'Window Systems', desc: 'Projected, fixed, and operable window systems with high-performance thermal ratings.', detail: 'C4.1', delay: '200', i18nTitle: 'services.window.title', i18nDesc: 'services.window.desc' },
@@ -14,6 +16,8 @@ const services = [
   { type: 'railing', coord: 'C6', title: 'Glass Railings', desc: 'Frameless and post-mounted glass railing systems for balconies, atriums, and interior applications.', detail: 'C6.1', delay: '400', i18nTitle: 'services.railing.title', i18nDesc: 'services.railing.desc' },
   { type: 'skylight', coord: 'C7', title: 'Skylight Systems', desc: 'Ridge, pyramid, and barrel-vault skylights engineered for daylighting and thermal performance.', detail: 'C7.1', delay: '500', i18nTitle: 'services.skylight.title', i18nDesc: 'services.skylight.desc' },
 ];
+
+const services = servicesData.items ?? defaultServices;
 ---
 
 <section id="services" class="relative bg-[#011B5A] blueprint-grid-dense py-20 sm:py-28 lg:py-32">
@@ -24,11 +28,10 @@ const services = [
     <div class="mb-14 scroll-reveal">
       <div class="flex items-center gap-3 mb-4">
         <span class="grid-coord text-sm">C1</span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="services.heading">Our Services</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="services.heading">{servicesData.heading ?? 'Our Services'}</h2>
       </div>
       <p class="text-[#8A919A] max-w-2xl text-xl sm:text-xl leading-relaxed" data-i18n="services.subtext">
-        Full-scope commercial glazing from engineering through installation.
-        Every system precision-fit to architectural specifications.
+        {servicesData.subtext ?? 'Full-scope commercial glazing from engineering through installation. Every system precision-fit to architectural specifications.'}
       </p>
     </div>
 

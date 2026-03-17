@@ -3,6 +3,8 @@
  * Header — Fixed navigation with frosted glass effect.
  * Vanilla JS for mobile menu toggle and scroll-based background darkening.
  */
+import contentData from '../data/content.json';
+const settings = (contentData as any).settings || {};
 ---
 
 <header id="site-header" class="header-glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -21,8 +23,8 @@
           <path d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z" />
         </svg>
         <span class="flex flex-col leading-none">
-          <span class="font-[family-name:var(--font-brand)] text-base sm:text-lg lg:text-xl font-extrabold tracking-[0.15em] text-white uppercase">Quality Reflections</span>
-          <span class="font-[family-name:var(--font-brand)] text-[14px] sm:text-base lg:text-lg font-bold tracking-[0.28em] text-[#D31111] uppercase">Glassworks</span>
+          <span class="font-[family-name:var(--font-brand)] text-base sm:text-lg lg:text-xl font-extrabold tracking-[0.15em] text-white uppercase">{settings.companyNameShort ?? 'Quality Reflections'}</span>
+          <span class="font-[family-name:var(--font-brand)] text-[14px] sm:text-base lg:text-lg font-bold tracking-[0.28em] text-[#D31111] uppercase">{settings.companyNameLine2 ?? 'Glassworks'}</span>
         </span>
       </a>
 

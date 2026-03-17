@@ -1,5 +1,75 @@
 {
-  "projects": [],
+  "projects": [
+    {
+      "id": 1,
+      "slug": "test-1",
+      "title": "test 1",
+      "category": "Commercial",
+      "description": "testing the features projects creator by adding pioctures and selecting systems used for the project. ",
+      "location": "Laredo",
+      "year": "2026",
+      "sqft": "20,000",
+      "duration": "2 months",
+      "value": "$100,000",
+      "services": [
+        "storefront",
+        "curtain-wall",
+        "railing",
+        "entrance"
+      ],
+      "coverImage": "",
+      "gridCoord": "",
+      "displayOrder": 1,
+      "status": "published",
+      "createdAt": "2026-03-16 23:35:07",
+      "updatedAt": "2026-03-16 23:46:30",
+      "photos": [
+        {
+          "id": 1,
+          "projectId": 1,
+          "path": "/uploads/projects/1773704156819-128293082.jpg",
+          "label": "front of the building",
+          "serviceTags": [
+            "curtain-wall",
+            "entrance"
+          ],
+          "displayOrder": 1
+        },
+        {
+          "id": 2,
+          "projectId": 1,
+          "path": "/uploads/projects/1773704161737-878065491.jpg",
+          "label": "side of the building",
+          "serviceTags": [
+            "window"
+          ],
+          "displayOrder": 2
+        },
+        {
+          "id": 3,
+          "projectId": 1,
+          "path": "/uploads/projects/1773704165919-302823848.png",
+          "label": "from far away",
+          "serviceTags": [
+            "curtain-wall",
+            "railing"
+          ],
+          "displayOrder": 3
+        },
+        {
+          "id": 4,
+          "projectId": 1,
+          "path": "/uploads/projects/1773704169595-124203646.png",
+          "label": "the door",
+          "serviceTags": [
+            "entrance",
+            "storefront"
+          ],
+          "displayOrder": 4
+        }
+      ]
+    }
+  ],
   "jobs": [],
-  "exportedAt": "2026-03-16T22:16:55.177Z"
+  "exportedAt": "2026-03-16T23:46:34.394Z"
 }

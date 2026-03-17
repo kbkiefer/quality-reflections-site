@@ -2,23 +2,53 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { projects, SERVICE_LABELS, SERVICE_DESCS } from '../../data/projects';
+import { projects as hardcodedProjects, SERVICE_LABELS, SERVICE_DESCS } from '../../data/projects';
 import ServiceModel from '../../components/react/ServiceModel';
+import contentData from '../../data/content.json';
+
+const cmsRaw = (contentData as any).projects || [];
+const cmsProjects = cmsRaw.map((p: any) => ({
+  id: p.slug,
+  slug: p.slug,
+  coord: p.gridCoord || 'D1',
+  category: p.category,
+  title: p.title,
+  desc: p.description,
+  location: p.location,
+  year: p.year,
+  sqft: p.sqft ? `${p.sqft} sq ft glazing` : '',
+  duration: p.duration || 'TBD',
+  value: p.value || 'TBD',
+  services: p.services || [],
+  coverImage: p.coverImage || (p.photos?.[0]?.path ?? ''),
+  photos: (p.photos || []).map((ph: any) => ({ label: ph.label, services: ph.serviceTags || [], path: ph.path })),
+  isCms: true,
+}));
+
+const allProjects = [...cmsProjects, ...hardcodedProjects.map(p => ({ ...p, isCms: false, coverImage: '', duration: 'TBD', value: 'TBD' }))];
 
 export function getStaticPaths() {
-  return projects.map((p) => ({
-    params: { slug: p.slug },
-    props: { project: p },
+  const cmsRaw = (contentData as any).projects || [];
+  const cms = cmsRaw.map((p: any) => ({
+    id: p.slug, slug: p.slug, coord: p.gridCoord || 'D1', category: p.category,
+    title: p.title, desc: p.description, location: p.location, year: p.year,
+    sqft: p.sqft ? `${p.sqft} sq ft glazing` : '', duration: p.duration || 'TBD', value: p.value || 'TBD',
+    services: p.services || [], coverImage: p.coverImage || (p.photos?.[0]?.path ?? ''),
+    photos: (p.photos || []).map((ph: any) => ({ label: ph.label, services: ph.serviceTags || [], path: ph.path })),
+    isCms: true,
   }));
+  const hc = hardcodedProjects.map(p => ({ ...p, isCms: false, coverImage: '', duration: 'TBD', value: 'TBD' }));
+  const all = [...cms, ...hc];
+  return all.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
 }
 
 const { project } = Astro.props;
 const p = project;
 
 // Prev/next navigation
-const idx = projects.findIndex((pr) => pr.slug === p.slug);
-const prev = idx > 0 ? projects[idx - 1] : null;
-const next = idx < projects.length - 1 ? projects[idx + 1] : null;
+const idx = allProjects.findIndex((pr) => pr.slug === p.slug);
+const prev = idx > 0 ? allProjects[idx - 1] : null;
+const next = idx < allProjects.length - 1 ? allProjects[idx + 1] : null;
 ---
 
 <Layout title={`${p.title} | Quality Reflections Glasswork`}>
@@ -40,30 +70,39 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
 
         {p.photos.map((photo, photoIdx) => (
           <div id={`viewer-${photoIdx}`} class:list={['viewer-slide', { 'is-active': photoIdx === 0 }]}>
-            <div class="w-full h-[180px] sm:h-[400px] lg:h-[500px] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-              <div class="absolute inset-0">
-                <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
-                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
+            {p.isCms && photo.path ? (
+              <div class="w-full bg-[rgba(1,27,90,0.4)] relative overflow-hidden">
+                <img src={photo.path} alt={photo.label} class="w-full h-auto block" />
+                <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[rgba(1,14,47,0.8)] to-transparent">
+                  <span class="font-mono text-sm text-white/80">{photo.label}</span>
+                </div>
               </div>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(74,144,217,0.25)" stroke-width="1" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" />
-                <line x1="3" y1="3" x2="21" y2="21" />
-                <line x1="21" y1="3" x2="3" y2="21" />
-              </svg>
-              <span class="font-mono text-sm sm:text-base text-[rgba(74,144,217,0.4)] uppercase tracking-widest relative z-10 text-center px-4">
-                {photo.label}
-              </span>
-              <div class="flex flex-wrap justify-center gap-1.5 relative z-10 px-4">
-                {photo.services.map((svc) => (
-                  <span class="font-mono text-[10px] sm:text-xs uppercase tracking-wider px-2 py-0.5 border border-[rgba(74,144,217,0.2)] text-[rgba(74,144,217,0.4)]">
-                    {SERVICE_LABELS[svc] || svc}
-                  </span>
-                ))}
+            ) : (
+              <div class="w-full h-[180px] sm:h-[400px] lg:h-[500px] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+                <div class="absolute inset-0">
+                  <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
+                  <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
+                </div>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(74,144,217,0.25)" stroke-width="1" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" />
+                  <line x1="3" y1="3" x2="21" y2="21" />
+                  <line x1="21" y1="3" x2="3" y2="21" />
+                </svg>
+                <span class="font-mono text-sm sm:text-base text-[rgba(74,144,217,0.4)] uppercase tracking-widest relative z-10 text-center px-4">
+                  {photo.label}
+                </span>
+                <div class="flex flex-wrap justify-center gap-1.5 relative z-10 px-4">
+                  {photo.services.map((svc) => (
+                    <span class="font-mono text-[10px] sm:text-xs uppercase tracking-wider px-2 py-0.5 border border-[rgba(74,144,217,0.2)] text-[rgba(74,144,217,0.4)]">
+                      {SERVICE_LABELS[svc] || svc}
+                    </span>
+                  ))}
+                </div>
+                <span class="font-mono text-xs text-[rgba(74,144,217,0.2)] relative z-10">
+                  {p.coord}.{photoIdx + 1}
+                </span>
               </div>
-              <span class="font-mono text-xs text-[rgba(74,144,217,0.2)] relative z-10">
-                {p.coord}.{photoIdx + 1}
-              </span>
-            </div>
+            )}
           </div>
         ))}
 
@@ -89,8 +128,8 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
           { label: 'Year', value: p.year, i18n: 'portfolio.spec.year' },
           { label: 'Scope', value: p.sqft, i18n: 'portfolio.spec.scope' },
           { label: 'Type', value: p.category, i18n: 'portfolio.spec.type' },
-          { label: 'Duration', value: 'TBD', i18n: 'portfolio.spec.duration' },
-          { label: 'Value', value: 'TBD', i18n: 'portfolio.spec.value' },
+          { label: 'Duration', value: p.duration || 'TBD', i18n: 'portfolio.spec.duration' },
+          { label: 'Value', value: p.value || 'TBD', i18n: 'portfolio.spec.value' },
         ].map((spec) => (
           <div class="border border-[rgba(74,144,217,0.12)] bg-[rgba(1,42,137,0.06)] px-1.5 py-1 sm:p-4">
             <div class="font-mono text-[8px] sm:text-[11px] uppercase tracking-widest text-[#8A919A] mb-0 sm:mb-1" data-i18n={spec.i18n}>{spec.label}</div>
@@ -133,16 +172,21 @@ const next = idx < projects.length - 1 ? projects[idx + 1] : null;
             role="button"
             tabindex="0"
           >
-            {/* Thumbnail placeholder */}
-            <div class="w-full aspect-[16/10] bg-[rgba(1,27,90,0.5)] border-b border-[rgba(74,144,217,0.08)] flex items-center justify-center relative overflow-hidden">
-              <div class="absolute inset-0">
-                <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.06)]"></div>
-                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.06)]"></div>
+            {p.isCms && photo.path ? (
+              <div class="w-full aspect-[16/10] bg-[rgba(1,27,90,0.5)] border-b border-[rgba(74,144,217,0.08)] relative overflow-hidden">
+                <img src={photo.path} alt={photo.label} class="w-full h-full object-cover" loading="lazy" />
               </div>
-              <span class="font-mono text-[10px] text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">
-                {p.coord}.{photoIdx + 1}
-              </span>
-            </div>
+            ) : (
+              <div class="w-full aspect-[16/10] bg-[rgba(1,27,90,0.5)] border-b border-[rgba(74,144,217,0.08)] flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0">
+                  <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.06)]"></div>
+                  <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.06)]"></div>
+                </div>
+                <span class="font-mono text-[10px] text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">
+                  {p.coord}.{photoIdx + 1}
+                </span>
+              </div>
+            )}
             {/* Photo info */}
             <div class="p-2 sm:p-3">
               <p class="font-mono text-[10px] sm:text-xs text-[#A0A7B0] leading-snug mb-1.5">{photo.label}</p>

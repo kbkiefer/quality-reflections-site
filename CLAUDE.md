@@ -150,6 +150,24 @@ Most content is **placeholder** — testimonials, project names, phone numbers, 
 See `docs/plans/2026-03-01-ui-ux-cleanup-design.md` for full list.
 Critical: scroll tracker dots render square, cursor crosshair class mismatch, card glow perf (60x/sec DOM queries).
 
+## Admin Panel Sync Rule
+
+**CRITICAL: The admin panel and public site must stay in sync at all times.**
+
+When making ANY change to the public site (src/components/, src/pages/, src/data/):
+1. If you add, remove, or rename a content field in a component → update the matching admin editor page to include that field
+2. If you add a new section to the public site → add a corresponding admin editor page with all its content fields
+3. If you change the structure of content.json → update the export function (admin/server/export.ts) AND the admin editor that writes to it
+4. If you add new hardcoded text to a component → make it editable from admin instead, pulling from content.json with a fallback to the hardcoded value
+
+The admin panel lives in `admin/` and manages all website content via a SQLite database. On publish, it exports to `src/data/content.json` which Astro components read at build time. Every piece of visible text on the public site should be editable from admin.
+
+**Admin structure:**
+- `admin/server/` — Express API, routes, DB, export
+- `admin/client/` — React SPA (Vite + Tailwind)
+- `admin/client/src/pages/` — one editor page per site section
+- `src/data/content.json` — exported content consumed by Astro components
+
 ## Do Not
 
 - Add rounded corners to cards or containers

@@ -113,7 +113,19 @@ export default function ProjectEditor() {
           </label>
           <label className="block mb-4">
             <span className="font-mono text-xs uppercase tracking-wider" style={labelStyle}>Category</span>
-            <input type="text" value={data.category} onChange={e => update('category', e.target.value)} className="block w-full mt-1 px-3 py-2 text-sm" style={inputStyle} />
+            <select value={data.category} onChange={e => update('category', e.target.value)} className="block w-full mt-1 px-3 py-2 text-sm" style={inputStyle}>
+              <option value="">Select category...</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Education">Education</option>
+              <option value="Retail">Retail</option>
+              <option value="Civic">Civic</option>
+              <option value="Hospitality">Hospitality</option>
+              <option value="Industrial">Industrial</option>
+              <option value="Residential">Residential</option>
+              <option value="Mixed-Use">Mixed-Use</option>
+              <option value="Religious">Religious</option>
+            </select>
           </label>
           <label className="block mb-4">
             <span className="font-mono text-xs uppercase tracking-wider" style={labelStyle}>Description</span>
@@ -172,8 +184,9 @@ export default function ProjectEditor() {
               <div key={photo.id} style={{ border: '1px solid var(--border)' }}>
                 <img src={photo.path} alt={photo.label} className="w-full h-32 object-cover" />
                 <div className="p-2">
-                  <input type="text" value={photo.label} onChange={e => { const newLabel = e.target.value; setPhotos(prev => prev.map(p => p.id === photo.id ? { ...p, label: newLabel } : p)); api(`/api/projects/${id}/photos/${photo.id}`, { method: 'PUT', body: JSON.stringify({ label: newLabel }) }); }} placeholder="Label" className="w-full text-xs px-2 py-1 mb-1" style={{ background: 'var(--navy-black)', border: '1px solid var(--border)', color: 'var(--silver)' }} />
-                  <button type="button" onClick={() => handleDeletePhoto(photo.id)} className="text-xs" style={{ color: '#ef4444' }}>Delete</button>
+                  <input type="text" value={photo.label} onChange={e => { const newLabel = e.target.value; setPhotos(prev => prev.map(p => p.id === photo.id ? { ...p, label: newLabel } : p)); api(`/api/projects/${id}/photos/${photo.id}`, { method: 'PUT', body: JSON.stringify({ label: newLabel }) }); }} placeholder="Label" className="w-full text-xs px-2 py-1 mb-2" style={{ background: 'var(--navy-black)', border: '1px solid var(--border)', color: 'var(--silver)' }} />
+                  <ServiceBadges selected={photo.serviceTags} onChange={tags => { setPhotos(prev => prev.map(p => p.id === photo.id ? { ...p, serviceTags: tags } : p)); api(`/api/projects/${id}/photos/${photo.id}`, { method: 'PUT', body: JSON.stringify({ serviceTags: tags }) }); }} />
+                  <button type="button" onClick={() => handleDeletePhoto(photo.id)} className="text-xs mt-2" style={{ color: '#ef4444' }}>Delete</button>
                 </div>
               </div>
             ))}

@@ -5,6 +5,37 @@
  */
 import AnimatedStat from './react/AnimatedStat';
 import HeroAssembly3D from './react/HeroAssembly3D';
+import contentData from '../data/content.json';
+const hero = (contentData as any).hero || {};
+const settings = (contentData as any).settings || {};
+
+const stats = hero.stats ?? [
+  { value: 20, suffix: '+', label: 'Years Experience' },
+  { value: 2000, suffix: '+', label: 'Projects Completed' },
+];
+
+const turnkeyItems = hero.turnkeyItems ?? [
+  'Engineering & Shop Drawings',
+  'Material Procurement',
+  'Certified Installation',
+  'Warranty & Support',
+];
+
+const logoMarquee = hero.logoMarquee ?? [
+  { src: '/logos/kawneer.svg', alt: 'Kawneer', extraClass: '' },
+  { src: '/logos/ykk-ap.png', alt: 'YKK AP', extraClass: '' },
+  { src: '/logos/oldcastle.png', alt: 'Oldcastle', extraClass: '' },
+  { src: '/logos/viracon.svg', alt: 'Viracon', extraClass: '' },
+  { src: '/logos/agc.png', alt: 'AGC Glass', extraClass: 'scale-[1.8] mx-4 sm:mx-8' },
+  { src: '/logos/tubelite.png', alt: 'Tubelite', extraClass: 'scale-[1.8] mx-4 sm:mx-8' },
+  { src: '/logos/efco.svg', alt: 'EFCO', extraClass: 'scale-[2.2] mx-6 sm:mx-12' },
+  { src: '/logos/stanley.svg', alt: 'Stanley', extraClass: '' },
+  { src: '/logos/ppg.svg', alt: 'PPG', extraClass: 'ppg-logo-light' },
+  { src: '/logos/ppg-dark.svg', alt: 'PPG', extraClass: 'ppg-logo-dark' },
+  { src: '/logos/guardian.png', alt: 'Guardian', extraClass: 'scale-[2.5] mx-4 sm:mx-10' },
+  { src: '/logos/arcadia.png', alt: 'Arcadia', extraClass: '' },
+  { src: '/logos/atlas.png', alt: 'Atlas', extraClass: '' },
+];
 ---
 
 <section id="hero-section" class="relative bg-[#010E2F] blueprint-grid-hero overflow-x-clip overflow-y-visible">
@@ -21,33 +52,13 @@ import HeroAssembly3D from './react/HeroAssembly3D';
       <!-- Partner logo marquee — full viewport width -->
       <div class="mb-0 sm:mb-2 overflow-hidden h-[43px] sm:h-[120px] pointer-events-auto" style="margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;" aria-label="Manufacturing partners">
         <div class="flex items-center h-full gap-8 sm:gap-16 logo-marquee">
-          <img src="/logos/kawneer.svg" alt="Kawneer" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/ykk-ap.png" alt="YKK AP" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/oldcastle.png" alt="Oldcastle" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/viracon.svg" alt="Viracon" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/agc.png" alt="AGC Glass" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/tubelite.png" alt="Tubelite" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/efco.svg" alt="EFCO" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.2] mx-6 sm:mx-12" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/stanley.svg" alt="Stanley" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/ppg.svg" alt="PPG" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-light" loading="lazy" />
-          <img src="/logos/ppg-dark.svg" alt="PPG" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-dark" loading="lazy" />
-          <img src="/logos/guardian.png" alt="Guardian" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.5] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/arcadia.png" alt="Arcadia" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
-          <img src="/logos/atlas.png" alt="Atlas" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" loading="lazy" />
+          {logoMarquee.map((logo: any) => (
+            <img src={logo.src} alt={logo.alt} class={`h-[32px] sm:h-[90px] w-auto opacity-50 ${logo.extraClass || ''}`} style={logo.extraClass?.includes('ppg-logo') ? undefined : 'filter:brightness(0) invert(1);'} loading="lazy" />
+          ))}
           <!-- Duplicate set for seamless loop -->
-          <img src="/logos/kawneer.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/ykk-ap.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/oldcastle.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/viracon.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/agc.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/tubelite.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[1.8] mx-4 sm:mx-8" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/efco.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.2] mx-6 sm:mx-12" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/stanley.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/ppg.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-light" aria-hidden="true" loading="lazy" />
-          <img src="/logos/ppg-dark.svg" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 ppg-logo-dark" aria-hidden="true" loading="lazy" />
-          <img src="/logos/guardian.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50 scale-[2.5] mx-4 sm:mx-10" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/arcadia.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
-          <img src="/logos/atlas.png" alt="" class="h-[32px] sm:h-[90px] w-auto opacity-50" style="filter:brightness(0) invert(1);" aria-hidden="true" loading="lazy" />
+          {logoMarquee.map((logo: any) => (
+            <img src={logo.src} alt="" class={`h-[32px] sm:h-[90px] w-auto opacity-50 ${logo.extraClass || ''}`} style={logo.extraClass?.includes('ppg-logo') ? undefined : 'filter:brightness(0) invert(1);'} aria-hidden="true" loading="lazy" />
+          ))}
         </div>
       </div>
 
@@ -78,52 +89,42 @@ import HeroAssembly3D from './react/HeroAssembly3D';
 
       <!-- Headline -->
       <h1 class="text-2xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-5 sm:mb-8 lg:max-w-[50%]">
-        <span class="whitespace-nowrap" data-i18n="hero.headline.line1">Precision-Crafted</span><br />
-        <span class="text-[#D31111] whitespace-nowrap inline-block mt-1 sm:mt-0" data-i18n="hero.headline.line2">Architectural Glass</span>
+        <span class="whitespace-nowrap" data-i18n="hero.headline.line1">{hero.headlineLine1 ?? 'Precision-Crafted'}</span><br />
+        <span class="text-[#D31111] whitespace-nowrap inline-block mt-1 sm:mt-0" data-i18n="hero.headline.line2">{hero.headlineLine2 ?? 'Architectural Glass'}</span>
       </h1>
 
       <!-- Turnkey promise strip -->
       <div class="mb-6 sm:mb-12 lg:max-w-[50%]">
         <div class="flex items-center gap-2 mb-1.5 sm:mb-3">
           <div class="w-1.5 h-1.5 bg-[#D31111]"></div>
-          <span class="font-mono text-[10px] sm:text-[13px] uppercase tracking-[0.15em] text-[#D31111]" data-i18n="hero.turnkey.badge">Full-Service Glazing Partner</span>
+          <span class="font-mono text-[10px] sm:text-[13px] uppercase tracking-[0.15em] text-[#D31111]" data-i18n="hero.turnkey.badge">{hero.badgeText ?? 'Full-Service Glazing Partner'}</span>
         </div>
         <p class="text-base sm:text-xl text-[#8A919A] leading-relaxed font-light" data-i18n="hero.turnkey.text">
-          One call. We handle engineering, procurement, fabrication coordination, installation, and warranty — so you can focus on building.
+          {hero.bodyText ?? 'One call. We handle engineering, procurement, fabrication coordination, installation, and warranty — so you can focus on building.'}
         </p>
         <div class="flex flex-wrap gap-x-5 gap-y-2 mt-3 sm:mt-4">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
-            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item1">Engineering & Shop Drawings</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
-            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item2">Material Procurement</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
-            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item3">Certified Installation</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
-            <span class="font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]" data-i18n="hero.turnkey.item4">Warranty & Support</span>
-          </div>
+          {turnkeyItems.map((item: string, i: number) => (
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#4A90D9] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
+              <span class={`font-mono text-[11px] sm:text-[13px] uppercase tracking-wider text-[#A0A7B0]`} data-i18n={`hero.turnkey.item${i + 1}`}>{item}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       <!-- CTA Buttons -->
       <div class="flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-16">
         <a
-          href="#contact"
+          href={hero.ctaPrimaryLink ?? '#contact'}
           class="btn-blueprint px-5 py-2.5 sm:px-8 sm:py-4 bg-[rgba(211,17,17,0.1)] border-2 border-[#D31111] text-white font-semibold text-sm sm:text-lg"
         >
-          <span data-i18n="hero.cta.primary">Request Consultation</span>
+          <span data-i18n="hero.cta.primary">{hero.ctaPrimaryLabel ?? 'Request Consultation'}</span>
         </a>
         <a
-          href="#projects"
+          href={hero.ctaSecondaryLink ?? '#projects'}
           class="btn-blueprint px-5 py-2.5 sm:px-8 sm:py-4 border border-[rgba(138,145,154,0.3)] text-[#A0A7B0] font-medium text-sm sm:text-lg tracking-wider"
         >
-          <span data-i18n="hero.cta.secondary">View Portfolio</span>
+          <span data-i18n="hero.cta.secondary">{hero.ctaSecondaryLabel ?? 'View Portfolio'}</span>
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="square" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
@@ -143,9 +144,9 @@ import HeroAssembly3D from './react/HeroAssembly3D';
             </div>
             <div>
               <div class="text-xl sm:text-4xl font-extrabold text-white tracking-tight leading-none">
-                <AnimatedStat client:visible value={20} suffix="+" />
+                <AnimatedStat client:visible value={stats[0]?.value ?? 20} suffix={stats[0]?.suffix ?? '+'} />
               </div>
-              <div class="font-mono text-[9px] sm:text-[13px] uppercase tracking-[0.2em] text-[#4A90D9] mt-0.5" data-i18n="hero.stat.years.label">Years Experience</div>
+              <div class="font-mono text-[9px] sm:text-[13px] uppercase tracking-[0.2em] text-[#4A90D9] mt-0.5" data-i18n="hero.stat.years.label">{stats[0]?.label ?? 'Years Experience'}</div>
             </div>
           </div>
           <div class="hero-stat-border-glow"></div>
@@ -161,9 +162,9 @@ import HeroAssembly3D from './react/HeroAssembly3D';
             </div>
             <div>
               <div class="text-xl sm:text-4xl font-extrabold text-white tracking-tight leading-none">
-                <AnimatedStat client:visible value={2000} suffix="+" />
+                <AnimatedStat client:visible value={stats[1]?.value ?? 2000} suffix={stats[1]?.suffix ?? '+'} />
               </div>
-              <div class="font-mono text-[9px] sm:text-[13px] uppercase tracking-[0.2em] text-[#4A90D9] mt-0.5" data-i18n="hero.stat.projects.label">Projects Completed</div>
+              <div class="font-mono text-[9px] sm:text-[13px] uppercase tracking-[0.2em] text-[#4A90D9] mt-0.5" data-i18n="hero.stat.projects.label">{stats[1]?.label ?? 'Projects Completed'}</div>
             </div>
           </div>
           <div class="hero-stat-border-glow"></div>

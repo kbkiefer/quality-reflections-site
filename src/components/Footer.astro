@@ -3,6 +3,8 @@
  * Footer — Links grid and architectural title block.
  * Three-column link sections + drawing information block.
  */
+import contentData from '../data/content.json';
+const settings = (contentData as any).settings || {};
 ---
 
 <footer class="bg-[#010E2F] border-t border-[rgba(74,144,217,0.1)]">
@@ -78,8 +80,8 @@
                 <path d="M195.17,233.99h-26.89l55.66-58.16,55.66,58.16h-26.89c0-.05,0-.11,0-.16,0-15.88-12.89-28.77-28.77-28.77s-28.77,12.89-28.77,28.77c0,.05,0,.11,0,.16ZM166.32,233.99h-53.86l111.48-116.48,111.48,116.48h-53.86c0-.11,0-.22,0-.32,0-31.8-25.82-57.62-57.62-57.62s-57.62,25.82-57.62,57.62c0,.11,0,.22,0,.32ZM108.19,233.99H0L223.95,0l223.95,233.99h-108.19c0-.22,0-.43,0-.65,0-63.89-51.87-115.76-115.76-115.76s-115.76,51.87-115.76,115.76c0,.22,0,.43,0,.65Z" />
               </svg>
               <span class="flex flex-col leading-tight">
-                <span class="font-[family-name:var(--font-brand)] text-[13px] font-extrabold tracking-[0.15em] text-[#D1D5DB] uppercase">Quality Reflections</span>
-                <span class="font-[family-name:var(--font-brand)] text-[13px] font-bold tracking-[0.28em] text-[#D31111] uppercase">Glassworks</span>
+                <span class="font-[family-name:var(--font-brand)] text-[13px] font-extrabold tracking-[0.15em] text-[#D1D5DB] uppercase">{settings.companyNameShort ?? 'Quality Reflections'}</span>
+                <span class="font-[family-name:var(--font-brand)] text-[13px] font-bold tracking-[0.28em] text-[#D31111] uppercase">{settings.companyNameLine2 ?? 'Glassworks'}</span>
               </span>
             </div>
           </div>
@@ -155,7 +157,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="font-mono text-[13px] text-[#8A919A]" data-i18n="footer.copyright">
-          &copy; 2026 Quality Reflections Glasswork. All rights reserved.
+          &copy; {new Date().getFullYear()} {settings.companyNameFull ?? 'Quality Reflections Glasswork'}. All rights reserved.
         </p>
         <div class="flex items-center gap-4">
           <a href="#" class="font-mono text-[13px] text-[#8A919A] hover:text-[#D1D5DB] transition-colors" data-i18n="footer.privacyPolicy">Privacy Policy</a>

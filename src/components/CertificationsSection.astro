@@ -3,6 +3,18 @@
  * CertificationsSection — Timeline row of credentials with connecting line.
  * Section 06/Credentials. Horizontal timeline on desktop, stacked on mobile.
  */
+import contentData from '../data/content.json';
+const certsData = (contentData as any).certifications || {};
+
+const defaultCerts = [
+  { title: 'OSHA 30-Hour', subtitle: 'Safety Certified Crews', logoPath: '/logos/osha.svg', i18nTitle: 'certs.osha.title', i18nSub: 'certs.osha.subtitle', extraClass: '', colSpanClass: '' },
+  { title: 'NGA Member', subtitle: 'National Glass Assoc.', logoPath: '/logos/nga.png', i18nTitle: 'certs.nga.title', i18nSub: 'certs.nga.subtitle', extraClass: 'cert-logo-invert', colSpanClass: '' },
+  { title: 'BBB A+ Rating', subtitle: 'Accredited Business', logoPath: '/logos/bbb.svg', i18nTitle: 'certs.bbb.title', i18nSub: 'certs.bbb.subtitle', extraClass: '', colSpanClass: '' },
+  { title: 'DOT Licensed', subtitle: 'Commercial Carrier', logoPath: '/logos/dot-seal.svg', i18nTitle: 'certs.dot.title', i18nSub: 'certs.dot.subtitle', extraClass: '', colSpanClass: '' },
+  { title: 'Bonded & Insured', subtitle: 'Full Coverage', logoPath: '/logos/bonded-insured.svg', i18nTitle: 'certs.bonded.title', i18nSub: 'certs.bonded.subtitle', extraClass: '', colSpanClass: 'col-span-2 sm:col-span-1 max-w-[50%] sm:max-w-none mx-auto sm:mx-0' },
+];
+
+const certs = certsData.items ?? defaultCerts;
 ---
 
 <section id="certifications" class="relative bg-[#011B5A] blueprint-grid-dense py-20 sm:py-28 lg:py-32">
@@ -13,7 +25,7 @@
     <div class="mb-14 scroll-reveal">
       <div class="flex items-center gap-3 mb-4">
         <span class="grid-coord text-sm">G1</span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="certs.heading">Certifications</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="certs.heading">{certsData.heading ?? 'Certifications'}</h2>
       </div>
     </div>
 
@@ -26,80 +38,21 @@
       <!-- Certification Cards -->
       <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 lg:gap-4">
 
-        <!-- OSHA 30-Hour -->
-        <div class="scroll-reveal" data-reveal-delay="0">
-          <div class="glass-card corner-brackets card-glow-bg p-3 sm:p-5 relative">
-            <div class="relative z-10 flex flex-row items-center gap-3 sm:flex-col sm:text-center">
-              <div class="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex-shrink-0 sm:mx-auto sm:mb-2 flex items-center justify-center">
-                <img src="/logos/osha.svg" alt="OSHA" class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.85;" loading="lazy" />
-              </div>
-              <div class="min-w-0">
-                <h3 class="text-base sm:text-lg font-semibold text-white mb-0.5 sm:mb-1" data-i18n="certs.osha.title">OSHA 30-Hour</h3>
-                <p class="font-mono text-[11px] sm:text-[13px] text-[#8A919A] uppercase tracking-wider" data-i18n="certs.osha.subtitle">Safety Certified Crews</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- NGA Member -->
-        <div class="scroll-reveal" data-reveal-delay="100">
-          <div class="glass-card corner-brackets card-glow-bg p-3 sm:p-5 relative">
-            <div class="relative z-10 flex flex-row items-center gap-3 sm:flex-col sm:text-center">
-              <div class="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex-shrink-0 sm:mx-auto sm:mb-2 flex items-center justify-center">
-                <img src="/logos/nga.png" alt="NGA" class="w-full h-full object-contain cert-logo-invert" style="opacity:0.9;" loading="lazy" />
-              </div>
-              <div class="min-w-0">
-                <h3 class="text-base sm:text-lg font-semibold text-white mb-0.5 sm:mb-1" data-i18n="certs.nga.title">NGA Member</h3>
-                <p class="font-mono text-[11px] sm:text-[13px] text-[#8A919A] uppercase tracking-wider" data-i18n="certs.nga.subtitle">National Glass Assoc.</p>
+        {certs.map((cert: any, i: number) => (
+          <div class={`scroll-reveal ${cert.colSpanClass ?? ''}`} data-reveal-delay={String(i * 100)}>
+            <div class="glass-card corner-brackets card-glow-bg p-3 sm:p-5 relative">
+              <div class="relative z-10 flex flex-row items-center gap-3 sm:flex-col sm:text-center">
+                <div class="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex-shrink-0 sm:mx-auto sm:mb-2 flex items-center justify-center">
+                  <img src={cert.logoPath} alt={cert.title} class={`w-full h-full object-contain ${cert.extraClass ?? ''}`} style={cert.extraClass?.includes('cert-logo-invert') ? 'opacity:0.9;' : 'filter:brightness(0) invert(1);opacity:0.85;'} loading="lazy" />
+                </div>
+                <div class="min-w-0">
+                  <h3 class="text-base sm:text-lg font-semibold text-white mb-0.5 sm:mb-1" data-i18n={cert.i18nTitle}>{cert.title}</h3>
+                  <p class="font-mono text-[11px] sm:text-[13px] text-[#8A919A] uppercase tracking-wider" data-i18n={cert.i18nSub}>{cert.subtitle}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- BBB A+ Rating -->
-        <div class="scroll-reveal" data-reveal-delay="200">
-          <div class="glass-card corner-brackets card-glow-bg p-3 sm:p-5 relative">
-            <div class="relative z-10 flex flex-row items-center gap-3 sm:flex-col sm:text-center">
-              <div class="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex-shrink-0 sm:mx-auto sm:mb-2 flex items-center justify-center">
-                <img src="/logos/bbb.svg" alt="BBB" class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.9;" loading="lazy" />
-              </div>
-              <div class="min-w-0">
-                <h3 class="text-base sm:text-lg font-semibold text-white mb-0.5 sm:mb-1" data-i18n="certs.bbb.title">BBB A+ Rating</h3>
-                <p class="font-mono text-[11px] sm:text-[13px] text-[#8A919A] uppercase tracking-wider" data-i18n="certs.bbb.subtitle">Accredited Business</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DOT Licensed -->
-        <div class="scroll-reveal" data-reveal-delay="300">
-          <div class="glass-card corner-brackets card-glow-bg p-3 sm:p-5 relative">
-            <div class="relative z-10 flex flex-row items-center gap-3 sm:flex-col sm:text-center">
-              <div class="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex-shrink-0 sm:mx-auto sm:mb-2 flex items-center justify-center">
-                <img src="/logos/dot-seal.svg" alt="DOT" class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.85;" loading="lazy" />
-              </div>
-              <div class="min-w-0">
-                <h3 class="text-base sm:text-lg font-semibold text-white mb-0.5 sm:mb-1" data-i18n="certs.dot.title">DOT Licensed</h3>
-                <p class="font-mono text-[11px] sm:text-[13px] text-[#8A919A] uppercase tracking-wider" data-i18n="certs.dot.subtitle">Commercial Carrier</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bonded & Insured -->
-        <div class="scroll-reveal col-span-2 sm:col-span-1 max-w-[50%] sm:max-w-none mx-auto sm:mx-0" data-reveal-delay="400">
-          <div class="glass-card corner-brackets card-glow-bg p-3 sm:p-5 relative">
-            <div class="relative z-10 flex flex-row items-center gap-3 sm:flex-col sm:text-center">
-              <div class="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex-shrink-0 sm:mx-auto sm:mb-2 flex items-center justify-center">
-                <img src="/logos/bonded-insured.svg" alt="Bonded & Insured" class="w-full h-full object-contain" style="filter:brightness(0) invert(1);opacity:0.85;" loading="lazy" />
-              </div>
-              <div class="min-w-0">
-                <h3 class="text-base sm:text-lg font-semibold text-white mb-0.5 sm:mb-1" data-i18n="certs.bonded.title">Bonded & Insured</h3>
-                <p class="font-mono text-[11px] sm:text-[13px] text-[#8A919A] uppercase tracking-wider" data-i18n="certs.bonded.subtitle">Full Coverage</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
 
       </div>
     </div>

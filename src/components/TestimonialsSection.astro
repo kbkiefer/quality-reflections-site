@@ -3,6 +3,17 @@
  * TestimonialsSection — Client testimonial cards with staggered vertical offsets.
  * Section 07/References. Background building outline SVG at very low opacity.
  */
+import contentData from '../data/content.json';
+const testimonialsData = (contentData as any).testimonials || {};
+
+const defaultTestimonials = [
+  { quote: 'Your real client testimonial goes here. A quote from an architect, GC, or project manager about working with Quality Reflections on a commercial glazing project.', name: 'Client Name, Title', company: 'Company Name' },
+  { quote: 'A second real testimonial goes here. Ideally from a different type of client to show range, such as a facilities director, property manager, or developer.', name: 'Client Name, Title', company: 'Company Name' },
+  { quote: 'A third real testimonial goes here. Great for a long-term repeat client or someone who can speak to warranty, service, or post-install support.', name: 'Client Name, Title', company: 'Company Name' },
+];
+
+const testimonials = testimonialsData.items ?? defaultTestimonials;
+const gridCoords = ['H2', 'H3', 'H4'];
 ---
 
 <section id="testimonials" class="relative bg-[#012A89] blueprint-grid py-20 sm:py-28 lg:py-32 overflow-hidden">
@@ -43,72 +54,32 @@
     <div class="mb-14 scroll-reveal">
       <div class="flex items-center gap-3 mb-4">
         <span class="grid-coord text-sm">H1</span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="testimonials.heading">Client Testimonials</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="testimonials.heading">{testimonialsData.heading ?? 'Client Testimonials'}</h2>
       </div>
     </div>
 
     <!-- Testimonial Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
 
-      <!-- Testimonial 1 -->
-      <div class="scroll-reveal" data-reveal-delay="0">
-        <div class="testimonial-note glass-card p-6 pl-8 h-full flex flex-col">
-          <div class="relative z-10 flex flex-col flex-1">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-sm">H2</span>
-              <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]" data-i18n="testimonials.noteLabel">Note</span>
-            </div>
-            <p class="text-[#D1D5DB] text-lg leading-relaxed italic mb-6">
-              "Your real client testimonial goes here. A quote from an architect, GC, or project manager
-              about working with Quality Reflections on a commercial glazing project."
-            </p>
-            <div class="border-t border-[rgba(74,144,217,0.15)] pt-4 mt-auto">
-              <p class="text-white text-lg font-semibold">Client Name, Title</p>
-              <p class="font-mono text-[13px] text-[#8A919A]">Company Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testimonial 2 -->
-      <div class="scroll-reveal" data-reveal-delay="150">
-        <div class="testimonial-note glass-card p-6 pl-8 h-full flex flex-col">
-          <div class="relative z-10 flex flex-col flex-1">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-sm">H3</span>
-              <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]" data-i18n="testimonials.noteLabel">Note</span>
-            </div>
-            <p class="text-[#D1D5DB] text-lg leading-relaxed italic mb-6">
-              "A second real testimonial goes here. Ideally from a different type of client
-              to show range, such as a facilities director, property manager, or developer."
-            </p>
-            <div class="border-t border-[rgba(74,144,217,0.15)] pt-4 mt-auto">
-              <p class="text-white text-lg font-semibold">Client Name, Title</p>
-              <p class="font-mono text-[13px] text-[#8A919A]">Company Name</p>
+      {testimonials.map((t: any, i: number) => (
+        <div class="scroll-reveal" data-reveal-delay={String(i * 150)}>
+          <div class="testimonial-note glass-card p-6 pl-8 h-full flex flex-col">
+            <div class="relative z-10 flex flex-col flex-1">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="grid-coord text-sm">{gridCoords[i] ?? `H${i + 2}`}</span>
+                <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]" data-i18n="testimonials.noteLabel">Note</span>
+              </div>
+              <p class="text-[#D1D5DB] text-lg leading-relaxed italic mb-6">
+                "{t.quote}"
+              </p>
+              <div class="border-t border-[rgba(74,144,217,0.15)] pt-4 mt-auto">
+                <p class="text-white text-lg font-semibold">{t.name}</p>
+                <p class="font-mono text-[13px] text-[#8A919A]">{t.company}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Testimonial 3 -->
-      <div class="scroll-reveal" data-reveal-delay="300">
-        <div class="testimonial-note glass-card p-6 pl-8 h-full flex flex-col">
-          <div class="relative z-10 flex flex-col flex-1">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="grid-coord text-sm">H4</span>
-              <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]" data-i18n="testimonials.noteLabel">Note</span>
-            </div>
-            <p class="text-[#D1D5DB] text-lg leading-relaxed italic mb-6">
-              "A third real testimonial goes here. Great for a long-term repeat client
-              or someone who can speak to warranty, service, or post-install support."
-            </p>
-            <div class="border-t border-[rgba(74,144,217,0.15)] pt-4 mt-auto">
-              <p class="text-white text-lg font-semibold">Client Name, Title</p>
-              <p class="font-mono text-[13px] text-[#8A919A]">Company Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      ))}
 
     </div>
 

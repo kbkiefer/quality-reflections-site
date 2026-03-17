@@ -1,9 +1,56 @@
 ---
 /**
- * ProjectsSection — Horizontal scroll gallery with 5 project cards.
- * Click any card to navigate to its portfolio page.
+ * ProjectsSection — Horizontal scroll gallery with project cards.
+ * Reads from content.json (admin-published). Falls back to hardcoded data.
  */
-import { projects, SERVICE_LABELS } from '../data/projects';
+import { projects as hardcodedProjects, SERVICE_LABELS } from '../data/projects';
+import contentData from '../data/content.json';
+
+interface ContentProject {
+  id: number;
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  location: string;
+  year: string;
+  sqft: string;
+  duration: string;
+  value: string;
+  services: string[];
+  coverImage: string;
+  gridCoord: string;
+  photos: { id: number; path: string; label: string; serviceTags: string[]; }[];
+}
+
+const cmsProjects: ContentProject[] = (contentData as any).projects || [];
+
+// CMS projects go first, then hardcoded projects fill out the gallery
+const cmsMapped = cmsProjects.map((p, i) => ({
+  id: p.slug,
+  slug: p.slug,
+  coord: p.gridCoord || `D${i + 2}`,
+  category: p.category,
+  title: p.title,
+  desc: p.description,
+  location: p.location,
+  year: p.year,
+  sqft: p.sqft ? `${p.sqft} sq ft glazing` : '',
+  services: p.services || [],
+  coverImage: p.coverImage || (p.photos?.[0]?.path ?? ''),
+  photos: (p.photos || []).map(ph => ({ label: ph.label, services: ph.serviceTags || [] })),
+  delay: String(i * 100),
+  isCms: true,
+}));
+
+const hardcodedMapped = hardcodedProjects.map((p, i) => ({
+  ...p,
+  isCms: false,
+  coverImage: '',
+  delay: String((cmsMapped.length + i) * 100),
+}));
+
+const projects = [...cmsMapped, ...hardcodedMapped];
 ---
 
 <section id="projects" class="relative bg-[#012A89] blueprint-grid py-20 sm:py-28 lg:py-32">
@@ -51,25 +98,31 @@ import { projects, SERVICE_LABELS } from '../data/projects';
           aria-label={`View ${p.title} project details`}
         >
           <div class="relative z-10">
-            <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-              <div class="absolute inset-0">
-                <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
-                <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
+            {p.isCms && p.coverImage ? (
+              <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] relative overflow-hidden">
+                <img src={p.coverImage} alt={p.title} class="w-full h-full object-cover" loading="lazy" />
               </div>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(74,144,217,0.25)" stroke-width="1" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" />
-                <line x1="3" y1="3" x2="21" y2="21" />
-                <line x1="21" y1="3" x2="3" y2="21" />
-              </svg>
-              <span class="font-mono text-sm text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">Main Photo</span>
-            </div>
+            ) : (
+              <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                <div class="absolute inset-0">
+                  <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
+                  <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
+                </div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(74,144,217,0.25)" stroke-width="1" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" />
+                  <line x1="3" y1="3" x2="21" y2="21" />
+                  <line x1="21" y1="3" x2="3" y2="21" />
+                </svg>
+                <span class="font-mono text-sm text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">Main Photo</span>
+              </div>
+            )}
             <div class="p-5">
               <div class="flex items-center gap-2 mb-3">
                 <span class="grid-coord text-sm">{p.coord}</span>
-                <span class="font-mono text-base uppercase tracking-widest text-[#4A90D9]" data-i18n={`projects.${p.id === 'office-tower' ? 'officeTower' : p.id === 'medical-center' ? 'medicalCenter' : p.id === 'retail-pavilion' ? 'retailPavilion' : p.id}.category`}>{p.category}</span>
+                <span class="font-mono text-base uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
               </div>
-              <h3 class="text-2xl font-bold text-white mb-2" data-i18n={`projects.${p.id === 'office-tower' ? 'officeTower' : p.id === 'medical-center' ? 'medicalCenter' : p.id === 'retail-pavilion' ? 'retailPavilion' : p.id}.title`}>{p.title}</h3>
-              <p class="hidden sm:block text-[#8A919A] text-xl leading-relaxed mb-3" data-i18n={`projects.${p.id === 'office-tower' ? 'officeTower' : p.id === 'medical-center' ? 'medicalCenter' : p.id === 'retail-pavilion' ? 'retailPavilion' : p.id}.desc`}>{p.desc}</p>
+              <h3 class="text-2xl font-bold text-white mb-2">{p.title}</h3>
+              <p class="hidden sm:block text-[#8A919A] text-xl leading-relaxed mb-3">{p.desc}</p>
               <div class="flex flex-wrap gap-2">
                 {p.services.map((svc) => (
                   <span class="service-badge font-mono text-base uppercase tracking-wider px-3 py-1.5 border border-[rgba(74,144,217,0.25)] text-[#4A90D9]">

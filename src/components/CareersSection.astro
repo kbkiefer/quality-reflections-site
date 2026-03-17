@@ -3,6 +3,27 @@
  * CareersSection — Career opportunity cards for recruiting employees and office staff.
  * Section between Testimonials and Contact. Two-card grid layout.
  */
+import contentData from '../data/content.json';
+const careers = (contentData as any).careers || {};
+
+const defaultCards = [
+  {
+    coord: 'H2', tag: 'Field', title: 'Full-Time Employees',
+    description: 'Join our team as a permanent employee and grow your career in the commercial glass industry.',
+    perks: ['Benefits package', 'Career advancement', 'Training & development'],
+    ctaLabel: 'Apply Now', ctaLink: '/apply-employee',
+    icon: 'people',
+  },
+  {
+    coord: 'H3', tag: 'Office', title: 'Office Positions',
+    description: 'Support our operations with administrative, project management, and customer service roles.',
+    perks: ['Professional environment', 'Growth opportunities', 'Competitive salary'],
+    ctaLabel: 'Apply Now', ctaLink: '/apply-office',
+    icon: 'desktop',
+  },
+];
+
+const cards = careers.cards ?? defaultCards;
 ---
 
 <section id="careers" class="relative bg-[#010E2F] blueprint-grid py-20 sm:py-28 lg:py-32">
@@ -22,126 +43,74 @@
         </div>
       </div>
       <div class="mb-2">
-        <span class="font-mono text-[13px] uppercase tracking-widest text-[#D31111]">Join Our Team</span>
+        <span class="font-mono text-[13px] uppercase tracking-widest text-[#D31111]">{careers.superLabel ?? 'Join Our Team'}</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">BUILD YOUR CAREER WITH US</h2>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">{careers.heading ?? 'BUILD YOUR CAREER WITH US'}</h2>
       <p class="text-[#8A919A] max-w-2xl text-xl sm:text-xl leading-relaxed">
-        Quality Reflections is growing. We are looking for skilled professionals who take pride in precision
-        craftsmanship and want to build a lasting career in the commercial glazing industry.
+        {careers.body ?? 'Quality Reflections is growing. We are looking for skilled professionals who take pride in precision craftsmanship and want to build a lasting career in the commercial glazing industry.'}
       </p>
     </div>
 
     <!-- Opportunity Cards Grid (2 columns) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <!-- Card 1: Full-Time Employees -->
-      <div class="scroll-reveal" data-reveal-delay="0">
-        <div class="glass-card-strong corner-brackets card-glow-bg p-6 sm:p-8 h-full flex flex-col">
-          <div class="relative z-10 flex flex-col h-full">
+      {cards.map((card: any, i: number) => (
+        <div class="scroll-reveal" data-reveal-delay={String(i * 150)}>
+          <div class="glass-card-strong corner-brackets card-glow-bg p-6 sm:p-8 h-full flex flex-col">
+            <div class="relative z-10 flex flex-col h-full">
 
-            <!-- Icon -->
-            <div class="w-14 h-14 border border-[rgba(74,144,217,0.25)] flex items-center justify-center mb-5 bg-[rgba(1,42,137,0.15)]">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
+              <!-- Icon -->
+              <div class="w-14 h-14 border border-[rgba(74,144,217,0.25)] flex items-center justify-center mb-5 bg-[rgba(1,42,137,0.15)]">
+                {(card.icon ?? 'people') === 'people' ? (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                ) : (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                    <rect x="2" y="3" width="20" height="14" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                )}
+              </div>
+
+              <!-- Grid Coord + Title -->
+              <div class="flex items-center gap-2 mb-2">
+                <span class="grid-coord text-sm">{card.coord ?? `H${i + 2}`}</span>
+                <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]">{card.tag ?? ''}</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-3">{card.title}</h3>
+
+              <!-- Description -->
+              <p class="text-[#8A919A] text-lg leading-relaxed mb-6">
+                {card.description}
+              </p>
+
+              <!-- Perks List -->
+              <ul class="space-y-2.5 mb-8 flex-1">
+                {(card.perks ?? []).map((perk: string) => (
+                  <li class="flex items-center gap-3">
+                    <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
+                    <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">{perk}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <!-- CTA Button -->
+              <a href={card.ctaLink ?? '#contact'} class="btn-blueprint self-start">
+                <span>{card.ctaLabel ?? 'Apply Now'}</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
+              </a>
+
             </div>
-
-            <!-- Grid Coord + Title -->
-            <div class="flex items-center gap-2 mb-2">
-              <span class="grid-coord text-sm">H2</span>
-              <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]">Field</span>
-            </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Full-Time Employees</h3>
-
-            <!-- Description -->
-            <p class="text-[#8A919A] text-lg leading-relaxed mb-6">
-              Join our team as a permanent employee and grow your career in the commercial glass industry.
-            </p>
-
-            <!-- Perks List -->
-            <ul class="space-y-2.5 mb-8 flex-1">
-              <li class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
-                <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">Benefits package</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
-                <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">Career advancement</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
-                <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">Training & development</span>
-              </li>
-            </ul>
-
-            <!-- CTA Button -->
-            <a href="/apply-employee" class="btn-blueprint self-start">
-              <span>Apply Now</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
-            </a>
-
           </div>
         </div>
-      </div>
-
-      <!-- Card 2: Office Positions -->
-      <div class="scroll-reveal" data-reveal-delay="150">
-        <div class="glass-card-strong corner-brackets card-glow-bg p-6 sm:p-8 h-full flex flex-col">
-          <div class="relative z-10 flex flex-col h-full">
-
-            <!-- Icon -->
-            <div class="w-14 h-14 border border-[rgba(74,144,217,0.25)] flex items-center justify-center mb-5 bg-[rgba(1,42,137,0.15)]">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                <rect x="2" y="3" width="20" height="14" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-            </div>
-
-            <!-- Grid Coord + Title -->
-            <div class="flex items-center gap-2 mb-2">
-              <span class="grid-coord text-sm">H3</span>
-              <span class="font-mono text-[13px] uppercase tracking-widest text-[rgba(74,144,217,0.5)]">Office</span>
-            </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Office Positions</h3>
-
-            <!-- Description -->
-            <p class="text-[#8A919A] text-lg leading-relaxed mb-6">
-              Support our operations with administrative, project management, and customer service roles.
-            </p>
-
-            <!-- Perks List -->
-            <ul class="space-y-2.5 mb-8 flex-1">
-              <li class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
-                <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">Professional environment</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
-                <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">Growth opportunities</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 bg-[#4A90D9] flex-shrink-0"></span>
-                <span class="font-mono text-base text-[#D1D5DB] uppercase tracking-wider">Competitive salary</span>
-              </li>
-            </ul>
-
-            <!-- CTA Button -->
-            <a href="/apply-office" class="btn-blueprint self-start">
-              <span>Apply Now</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
-            </a>
-
-          </div>
-        </div>
-      </div>
+      ))}
 
     </div>
 

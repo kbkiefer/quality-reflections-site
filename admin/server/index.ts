@@ -16,6 +16,7 @@ import projectRoutes from './routes/projects.js';
 import jobRoutes from './routes/jobs.js';
 import applicationRoutes from './routes/applications.js';
 import publishRoutes from './routes/publish.js';
+import contentRoutes from './routes/content.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -29,6 +30,9 @@ app.use(cookieParser());
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
+// Serve logo files from public/logos/
+app.use('/logos', express.static(path.join(__dirname, '..', '..', 'public', 'logos')));
 
 // Project reorder must come before the /:id catch-all
 app.put('/api/projects/reorder', requireAuth, (req, res) => {
@@ -53,6 +57,7 @@ app.put('/api/jobs/reorder', requireAuth, (req, res) => {
 app.use('/api/jobs', jobRoutes);
 app.use('/api/applications', applicationRoutes);
 app.use('/api/publish', publishRoutes);
+app.use('/api/content', contentRoutes);
 
 // API routes
 app.use('/api/auth', authRoutes);

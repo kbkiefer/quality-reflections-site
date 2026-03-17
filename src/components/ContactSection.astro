@@ -4,6 +4,9 @@
  * Section 08/Contact. CausticLights React island for ambient animation.
  */
 import CausticLights from './react/CausticLights';
+import contentData from '../data/content.json';
+const contact = (contentData as any).contact || {};
+const settings = (contentData as any).settings || {};
 ---
 
 <section id="contact" class="relative bg-[#010E2F] blueprint-grid-hero py-20 sm:py-28 lg:py-32 overflow-hidden">
@@ -34,36 +37,34 @@ import CausticLights from './react/CausticLights';
     <!-- Revision Note Badge -->
     <div class="inline-flex items-center gap-2 mb-8 scroll-reveal">
       <span class="font-mono text-[13px] uppercase tracking-widest text-[#8A919A] border border-[rgba(211,17,17,0.3)] px-3 py-1.5 bg-[rgba(211,17,17,0.05)]" data-i18n="contact.badge">
-        Rev 03 | Request for Quote
+        {contact.badge ?? 'Rev 03 | Request for Quote'}
       </span>
     </div>
 
     <!-- Heading -->
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 scroll-reveal" data-reveal-delay="100">
-      <span data-i18n="contact.heading.line1">Start Your</span> <span class="text-[#D31111]" data-i18n="contact.heading.line2">Next Project</span>
+      <span data-i18n="contact.heading.line1">{contact.headingLine1 ?? 'Start Your'}</span> <span class="text-[#D31111]" data-i18n="contact.heading.line2">{contact.headingLine2 ?? 'Next Project'}</span>
     </h2>
 
     <!-- Description -->
     <p class="text-[#8A919A] text-xl sm:text-xl leading-relaxed max-w-2xl mx-auto mb-10 scroll-reveal" data-reveal-delay="200" data-i18n="contact.body">
-      Whether you need a complete curtain wall system or a storefront replacement,
-      our team delivers precision-engineered glazing solutions on schedule and to specification.
-      Let's discuss your next project.
+      {contact.body ?? "Whether you need a complete curtain wall system or a storefront replacement, our team delivers precision-engineered glazing solutions on schedule and to specification. Let's discuss your next project."}
     </p>
 
     <!-- CTA Buttons -->
     <div class="mb-16 scroll-reveal" data-reveal-delay="300">
       <div class="flex flex-wrap gap-4 justify-center">
         <a
-          href="mailto:info@qualityreflections.com"
+          href={`mailto:${settings.email ?? 'info@qualityreflections.com'}`}
           class="btn-blueprint px-10 py-5 bg-[rgba(211,17,17,0.1)] border-2 border-[#D31111] text-white font-semibold text-lg"
         >
-          <span data-i18n="contact.cta.email">Request a Consultation</span>
+          <span data-i18n="contact.cta.email">{contact.ctaEmailLabel ?? 'Request a Consultation'}</span>
         </a>
         <a
-          href="tel:+19567275000"
+          href={`tel:${settings.phoneRaw ?? '+19567275000'}`}
           class="btn-blueprint px-10 py-5 border border-[rgba(138,145,154,0.3)] text-[#8A919A] font-medium text-lg tracking-wider"
         >
-          <span data-i18n="contact.cta.phone">Call (956) 727-5000</span>
+          <span data-i18n="contact.cta.phone">{contact.ctaPhoneLabel ?? `Call ${settings.phone ?? '(956) 727-5000'}`}</span>
         </a>
       </div>
     </div>
@@ -73,19 +74,19 @@ import CausticLights from './react/CausticLights';
       <div class="title-block max-w-lg mx-auto border border-[rgba(74,144,217,0.2)]">
         <div class="tb-row">
           <div class="tb-cell tb-label">Company</div>
-          <div class="tb-cell tb-value">Quality Reflections Glasswork</div>
+          <div class="tb-cell tb-value">{settings.companyNameFull ?? 'Quality Reflections Glasswork'}</div>
         </div>
         <div class="tb-row">
           <div class="tb-cell tb-label">Phone</div>
-          <div class="tb-cell tb-value">(956) 727-5000</div>
+          <div class="tb-cell tb-value">{settings.phone ?? '(956) 727-5000'}</div>
         </div>
         <div class="tb-row">
           <div class="tb-cell tb-label">Email</div>
-          <div class="tb-cell tb-value">info@qualityreflections.com</div>
+          <div class="tb-cell tb-value">{settings.email ?? 'info@qualityreflections.com'}</div>
         </div>
         <div class="tb-row">
           <div class="tb-cell tb-label">Address</div>
-          <div class="tb-cell tb-value">1200 Industrial Pkwy, Suite 100</div>
+          <div class="tb-cell tb-value">{settings.address ?? '1200 Industrial Pkwy, Suite 100'}</div>
         </div>
       </div>
     </div>
