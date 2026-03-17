@@ -53,13 +53,17 @@ const logoMarquee = hero.logoMarquee ?? [
       <!-- Partner logo marquee — full viewport width -->
       <div class="mb-0 sm:mb-2 overflow-hidden h-[43px] sm:h-[120px] pointer-events-auto" style="margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;" aria-label="Manufacturing partners">
         <div class="flex items-center h-full gap-8 sm:gap-16 logo-marquee">
-          {logoMarquee.map((logo: any) => (
-            <img src={`${base}${logo.src || logo.path}`} alt={logo.alt} class={`h-[32px] sm:h-[90px] w-auto opacity-50 ${logo.extraClass || ''}`} style={logo.extraClass?.includes('ppg-logo') ? undefined : 'filter:brightness(0) invert(1);'} loading="lazy" />
-          ))}
+          {logoMarquee.map((logo: any) => {
+            const logoPath = logo.src || logo.path || '';
+            const skipFilter = logo.extraClass?.includes('ppg-logo') || logoPath.includes('ppg-dark');
+            return <img src={`${base}${logoPath}`} alt={logo.alt} class={`h-[32px] sm:h-[90px] w-auto opacity-50 ${logo.extraClass || ''}`} style={skipFilter ? undefined : 'filter:brightness(0) invert(1);'} loading="lazy" />;
+          })}
           <!-- Duplicate set for seamless loop -->
-          {logoMarquee.map((logo: any) => (
-            <img src={`${base}${logo.src || logo.path}`} alt="" class={`h-[32px] sm:h-[90px] w-auto opacity-50 ${logo.extraClass || ''}`} style={logo.extraClass?.includes('ppg-logo') ? undefined : 'filter:brightness(0) invert(1);'} aria-hidden="true" loading="lazy" />
-          ))}
+          {logoMarquee.map((logo: any) => {
+            const logoPath = logo.src || logo.path || '';
+            const skipFilter = logo.extraClass?.includes('ppg-logo') || logoPath.includes('ppg-dark');
+            return <img src={`${base}${logoPath}`} alt="" class={`h-[32px] sm:h-[90px] w-auto opacity-50 ${logo.extraClass || ''}`} style={skipFilter ? undefined : 'filter:brightness(0) invert(1);'} aria-hidden="true" loading="lazy" />;
+          })}
         </div>
       </div>
 

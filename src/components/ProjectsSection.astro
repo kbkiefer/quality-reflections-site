@@ -254,18 +254,28 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       if (isDragging) e.preventDefault();
     }, { passive: false });
 
-    // Block ALL single clicks — navigation is double-click only
+    // Double-tap/double-click detection
+    let lastTapTime = 0;
+    let lastTapCard: HTMLAnchorElement | null = null;
+
     banner.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-    }, true);
+      if (didDrag) return;
 
-    // Double-click (or double-tap) opens the project
-    banner.addEventListener('dblclick', (e) => {
       const card = (e.target as HTMLElement).closest('a.project-marquee-card') as HTMLAnchorElement | null;
-      if (card) {
+      if (!card) return;
+
+      const now = Date.now();
+      if (lastTapCard === card && now - lastTapTime < 500) {
+        // Double-tap detected — navigate
         window.location.href = card.href;
+        lastTapTime = 0;
+        lastTapCard = null;
+      } else {
+        lastTapTime = now;
+        lastTapCard = card;
       }
-    });
+    }, true);
   }
 </script>
