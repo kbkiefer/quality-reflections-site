@@ -1,6 +1,7 @@
 ---
 /**
- * ProjectsSection — Horizontal scroll gallery with project cards.
+ * ProjectsSection — Auto-scrolling marquee of project cards.
+ * Continuous loop like the logo banner. Drag to scrub, click to open.
  * Reads from content.json (admin-published). Falls back to hardcoded data.
  */
 import { projects as hardcodedProjects, SERVICE_LABELS } from '../data/projects';
@@ -26,7 +27,6 @@ interface ContentProject {
 const cmsProjects: ContentProject[] = (contentData as any).projects || [];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// CMS projects go first, then hardcoded projects fill out the gallery
 const cmsMapped = cmsProjects.map((p, i) => ({
   id: p.slug,
   slug: p.slug,
@@ -40,7 +40,6 @@ const cmsMapped = cmsProjects.map((p, i) => ({
   services: p.services || [],
   coverImage: p.coverImage || (p.photos?.[0]?.path ?? ''),
   photos: (p.photos || []).map(ph => ({ label: ph.label, services: ph.serviceTags || [] })),
-  delay: String(i * 100),
   isCms: true,
 }));
 
@@ -48,7 +47,6 @@ const hardcodedMapped = hardcodedProjects.map((p, i) => ({
   ...p,
   isCms: false,
   coverImage: '',
-  delay: String((cmsMapped.length + i) * 100),
 }));
 
 const projects = [...cmsMapped, ...hardcodedMapped];
@@ -57,54 +55,34 @@ const projects = [...cmsMapped, ...hardcodedMapped];
 <section id="projects" class="relative bg-[#012A89] blueprint-grid py-20 sm:py-28 lg:py-32">
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-    <!-- Section Header with Scroll Arrows -->
-    <div class="flex items-end justify-between mb-10 scroll-reveal">
-      <div>
-        <div class="flex items-center gap-3 mb-4">
-          <span class="grid-coord text-sm">D1</span>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="projects.heading">Featured Projects</h2>
-        </div>
-      </div>
-      <div class="hidden sm:flex items-center gap-2">
-        <button
-          id="scrollLeft"
-          class="w-10 h-10 border border-[rgba(74,144,217,0.25)] text-[#4A90D9] flex items-center justify-center hover:border-[#4A90D9] hover:bg-[rgba(74,144,217,0.1)] transition-all"
-          aria-label="Scroll gallery left"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="square" stroke-width="1.5" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button
-          id="scrollRight"
-          class="w-10 h-10 border border-[rgba(74,144,217,0.25)] text-[#4A90D9] flex items-center justify-center hover:border-[#4A90D9] hover:bg-[rgba(74,144,217,0.1)] transition-all"
-          aria-label="Scroll gallery right"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="square" stroke-width="1.5" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+    <!-- Section Header -->
+    <div class="mb-10 scroll-reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="grid-coord text-sm">D1</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" data-i18n="projects.heading">Featured Projects</h2>
       </div>
     </div>
+  </div>
 
-    <!-- Horizontal Scroll Gallery -->
-    <div id="projectGallery" class="scroll-gallery">
+  <!-- Marquee Container — full width overflow hidden -->
+  <div id="projectBanner" class="overflow-hidden" style="cursor:grab;user-select:none;" aria-label="Featured projects gallery">
+    <div id="projectMarquee" class="flex gap-6 sm:gap-8 will-change-transform">
 
+      {/* First set */}
       {projects.map((p) => (
         <a
           href={`${base}/portfolio/${p.slug}`}
-          class="glass-card-strong corner-brackets card-glow-bg w-[240px] sm:w-[480px] flex-shrink-0 scroll-reveal text-left group"
-          data-reveal-delay={p.delay}
+          class="project-marquee-card glass-card-strong corner-brackets card-glow-bg w-[260px] sm:w-[420px] flex-shrink-0 text-left group block"
           aria-label={`View ${p.title} project details`}
+          draggable="false"
         >
           <div class="relative z-10">
             {p.isCms && p.coverImage ? (
-              <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] relative overflow-hidden">
-                <img src={`${base}${p.coverImage}`} alt={p.title} class="w-full h-full object-cover" loading="lazy" />
+              <div class="h-36 sm:h-60 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] relative overflow-hidden">
+                <img src={`${base}${p.coverImage}`} alt={p.title} class="w-full h-full object-cover" loading="lazy" draggable="false" />
               </div>
             ) : (
-              <div class="h-40 sm:h-72 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+              <div class="h-36 sm:h-60 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-2 relative overflow-hidden">
                 <div class="absolute inset-0">
                   <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
                   <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
@@ -117,16 +95,63 @@ const projects = [...cmsMapped, ...hardcodedMapped];
                 <span class="font-mono text-sm text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">Main Photo</span>
               </div>
             )}
-            <div class="p-5">
-              <div class="flex items-center gap-2 mb-3">
+            <div class="p-4 sm:p-5">
+              <div class="flex items-center gap-2 mb-2">
                 <span class="grid-coord text-sm">{p.coord}</span>
-                <span class="font-mono text-base uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
+                <span class="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
               </div>
-              <h3 class="text-2xl font-bold text-white mb-2">{p.title}</h3>
-              <p class="hidden sm:block text-[#8A919A] text-xl leading-relaxed mb-3">{p.desc}</p>
-              <div class="flex flex-wrap gap-2">
+              <h3 class="text-lg sm:text-xl font-bold text-white mb-1">{p.title}</h3>
+              <p class="hidden sm:block text-[#8A919A] text-sm leading-relaxed mb-3 line-clamp-2">{p.desc}</p>
+              <div class="flex flex-wrap gap-1.5">
                 {p.services.map((svc) => (
-                  <span class="service-badge font-mono text-base uppercase tracking-wider px-3 py-1.5 border border-[rgba(74,144,217,0.25)] text-[#4A90D9]">
+                  <span class="service-badge font-mono text-xs uppercase tracking-wider px-2 py-1 border border-[rgba(74,144,217,0.25)] text-[#4A90D9]">
+                    {SERVICE_LABELS[svc]}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+
+      {/* Duplicate set for seamless loop */}
+      {projects.map((p) => (
+        <a
+          href={`${base}/portfolio/${p.slug}`}
+          class="project-marquee-card glass-card-strong corner-brackets card-glow-bg w-[260px] sm:w-[420px] flex-shrink-0 text-left group block"
+          aria-label={`View ${p.title} project details`}
+          aria-hidden="true"
+          draggable="false"
+        >
+          <div class="relative z-10">
+            {p.isCms && p.coverImage ? (
+              <div class="h-36 sm:h-60 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] relative overflow-hidden">
+                <img src={`${base}${p.coverImage}`} alt="" class="w-full h-full object-cover" loading="lazy" draggable="false" />
+              </div>
+            ) : (
+              <div class="h-36 sm:h-60 border-b border-[rgba(74,144,217,0.1)] bg-[rgba(1,27,90,0.4)] flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                <div class="absolute inset-0">
+                  <div class="absolute top-1/2 left-0 right-0 h-px bg-[rgba(74,144,217,0.08)]"></div>
+                  <div class="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(74,144,217,0.08)]"></div>
+                </div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(74,144,217,0.25)" stroke-width="1" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" />
+                  <line x1="3" y1="3" x2="21" y2="21" />
+                  <line x1="21" y1="3" x2="3" y2="21" />
+                </svg>
+                <span class="font-mono text-sm text-[rgba(74,144,217,0.3)] uppercase tracking-widest relative z-10">Main Photo</span>
+              </div>
+            )}
+            <div class="p-4 sm:p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="grid-coord text-sm">{p.coord}</span>
+                <span class="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#4A90D9]">{p.category}</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold text-white mb-1">{p.title}</h3>
+              <p class="hidden sm:block text-[#8A919A] text-sm leading-relaxed mb-3 line-clamp-2">{p.desc}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {p.services.map((svc) => (
+                  <span class="service-badge font-mono text-xs uppercase tracking-wider px-2 py-1 border border-[rgba(74,144,217,0.25)] text-[#4A90D9]">
                     {SERVICE_LABELS[svc]}
                   </span>
                 ))}
@@ -137,8 +162,6 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       ))}
 
     </div>
-
-
   </div>
 
   <!-- Section Cut -->
@@ -152,18 +175,86 @@ const projects = [...cmsMapped, ...hardcodedMapped];
 </section>
 
 <script>
-  // Gallery scroll buttons
-  const gallery = document.getElementById('projectGallery');
-  const leftBtn = document.getElementById('scrollLeft');
-  const rightBtn = document.getElementById('scrollRight');
+  // ── Project marquee: auto-scroll + drag to scrub + click to navigate ──
+  const marquee = document.getElementById('projectMarquee') as HTMLElement | null;
+  const banner = document.getElementById('projectBanner') as HTMLElement | null;
 
-  if (gallery && leftBtn && rightBtn) {
-    const scrollAmount = 420;
-    leftBtn.addEventListener('click', () => {
-      gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-    rightBtn.addEventListener('click', () => {
-      gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
+  if (marquee && banner) {
+    const speed = 30; // px per second
+    let offset = 0;
+    let isDragging = false;
+    let didDrag = false;
+    let startX = 0;
+    let startOffset = 0;
+    let lastTime = performance.now();
+    let resumeTimer: ReturnType<typeof setTimeout> | null = null;
+    let paused = false;
+
+    function getHalfWidth() {
+      return marquee!.scrollWidth / 2;
+    }
+
+    function update(now: number) {
+      if (!paused && !isDragging) {
+        const dt = (now - lastTime) / 1000;
+        offset -= speed * dt;
+      }
+      lastTime = now;
+
+      const half = getHalfWidth();
+      if (half > 0) {
+        if (offset <= -half) offset += half;
+        if (offset > 0) offset -= half;
+      }
+
+      marquee!.style.transform = `translateX(${offset}px)`;
+      requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+
+    // Pointer drag
+    function onDown(e: PointerEvent) {
+      isDragging = true;
+      didDrag = false;
+      paused = true;
+      startX = e.clientX;
+      startOffset = offset;
+      banner!.style.cursor = 'grabbing';
+      banner!.setPointerCapture(e.pointerId);
+      if (resumeTimer) clearTimeout(resumeTimer);
+    }
+
+    function onMove(e: PointerEvent) {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) didDrag = true;
+      offset = startOffset + dx;
+    }
+
+    function onUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      banner!.style.cursor = 'grab';
+      resumeTimer = setTimeout(() => { paused = false; }, 1200);
+    }
+
+    banner.addEventListener('pointerdown', onDown);
+    banner.addEventListener('pointermove', onMove);
+    banner.addEventListener('pointerup', onUp);
+    banner.addEventListener('pointercancel', onUp);
+
+    // Prevent default touch scrolling on the banner
+    banner.addEventListener('touchmove', (e) => {
+      if (isDragging) e.preventDefault();
+    }, { passive: false });
+
+    // Block click navigation if user was dragging
+    banner.addEventListener('click', (e) => {
+      if (didDrag) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   }
 </script>
