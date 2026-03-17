@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  site: process.env.SITE || undefined,
+  base: process.env.BASE || '/',
   integrations: [
     react(),
   ],
