@@ -70,7 +70,7 @@
         "alt": "Stanley"
       },
       {
-        "path": "/logos/ppg.svg",
+        "path": "/logos/ppg-dark.svg",
         "alt": "PPG"
       },
       {
@@ -284,5 +284,5 @@
   },
   "projects": [],
   "jobs": [],
-  "exportedAt": "2026-03-17T16:11:15.080Z"
+  "exportedAt": "2026-03-17T17:10:16.061Z"
 }

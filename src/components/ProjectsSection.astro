@@ -64,6 +64,11 @@ const projects = [...cmsMapped, ...hardcodedMapped];
     </div>
   </div>
 
+  <!-- Hint -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+    <p class="font-mono text-xs uppercase tracking-widest text-[rgba(74,144,217,0.4)]">Double-click a project to explore</p>
+  </div>
+
   <!-- Marquee Container — full width overflow hidden -->
   <div id="projectBanner" class="overflow-hidden" style="cursor:grab;user-select:none;" aria-label="Featured projects gallery">
     <div id="projectMarquee" class="flex gap-6 sm:gap-8 will-change-transform">
@@ -249,12 +254,18 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       if (isDragging) e.preventDefault();
     }, { passive: false });
 
-    // Block click navigation if user was dragging
+    // Block ALL single clicks — navigation is double-click only
     banner.addEventListener('click', (e) => {
-      if (didDrag) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      e.preventDefault();
+      e.stopPropagation();
     }, true);
+
+    // Double-click (or double-tap) opens the project
+    banner.addEventListener('dblclick', (e) => {
+      const card = (e.target as HTMLElement).closest('a.project-marquee-card') as HTMLAnchorElement | null;
+      if (card) {
+        window.location.href = card.href;
+      }
+    });
   }
 </script>
