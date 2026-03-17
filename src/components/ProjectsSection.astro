@@ -237,11 +237,31 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       offset = startOffset + dx;
     }
 
-    function onUp() {
+    // Double-tap detection
+    let lastTapTime = 0;
+    let lastTapTarget: HTMLAnchorElement | null = null;
+
+    function onUp(e: PointerEvent) {
       if (!isDragging) return;
       isDragging = false;
       banner!.style.cursor = 'grab';
       resumeTimer = setTimeout(() => { paused = false; }, 1200);
+
+      // If it was a tap (not a drag), check for double-tap
+      if (!didDrag) {
+        const card = (e.target as HTMLElement).closest('a.project-marquee-card') as HTMLAnchorElement | null;
+        if (card) {
+          const now = Date.now();
+          if (lastTapTarget === card && now - lastTapTime < 600) {
+            window.location.href = card.href;
+            lastTapTime = 0;
+            lastTapTarget = null;
+            return;
+          }
+          lastTapTime = now;
+          lastTapTarget = card;
+        }
+      }
     }
 
     banner.addEventListener('pointerdown', onDown);
@@ -254,28 +274,9 @@ const projects = [...cmsMapped, ...hardcodedMapped];
       if (isDragging) e.preventDefault();
     }, { passive: false });
 
-    // Double-tap/double-click detection
-    let lastTapTime = 0;
-    let lastTapCard: HTMLAnchorElement | null = null;
-
+    // Block all link clicks — navigation is double-tap only
     banner.addEventListener('click', (e) => {
       e.preventDefault();
-      e.stopPropagation();
-      if (didDrag) return;
-
-      const card = (e.target as HTMLElement).closest('a.project-marquee-card') as HTMLAnchorElement | null;
-      if (!card) return;
-
-      const now = Date.now();
-      if (lastTapCard === card && now - lastTapTime < 500) {
-        // Double-tap detected — navigate
-        window.location.href = card.href;
-        lastTapTime = 0;
-        lastTapCard = null;
-      } else {
-        lastTapTime = now;
-        lastTapCard = card;
-      }
     }, true);
   }
 </script>
